@@ -1,0 +1,27 @@
+---
+- name: Debian key
+  apt_key:
+    url: https://ftp-master.debian.org/keys/release-10.asc
+    state: present
+
+- name: Update list of Debian packages
+  apt: update_cache=yes
+
+- name: Upgrade packages to the newest versions
+  apt: upgrade=dist
+
+- name: install python3-requests
+  apt:
+    state: present
+    pkg:
+      - python3-requests
+- name: install aptitude
+  apt:
+    state: present
+    pkg:
+      - aptitude
+- name: install midnight commander
+  apt:
+    state: present
+    pkg:
+      - mc

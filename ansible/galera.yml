@@ -1,0 +1,7 @@
+---
+
+- hosts: galera_cluster # defines what hosts to install this role one
+  gather_facts: yes
+  #become: yes # use sudo
+  roles:
+    - role: common

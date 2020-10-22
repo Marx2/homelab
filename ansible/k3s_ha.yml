@@ -1,0 +1,19 @@
+---
+
+- hosts: k3s_cluster # defines what hosts to install this role one
+  gather_facts: yes
+  become: yes # use sudo
+  vars:
+    molecule_is_test: true
+    k3s_control_node_address: loadbalancer
+    k3s_datastore_endpoint: "mysql://hybris:SVEW6MabjV78Kzyc@tcp(ydc-k3s-db.yse.fra.hybris.com:3306)/k3stest"
+  pre_tasks:
+    - name: Set each node to be a control node
+      set_fact:
+        k3s_control_node: true
+  #      when: inventory_hostname in ['node2', 'node3']
+  roles:
+    - role: common
+    - role: repository
+    - role: xanmanning.k3s
+    
