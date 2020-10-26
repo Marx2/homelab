@@ -1,0 +1,83 @@
+---
+- include: mysql_root_pw.yml
+
+- name: debian | update package list
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: true
+
+- name: debian | installing pre-reqs
+  apt:
+    name: "{{ mariadb_pre_req_packages }}"
+    state: "present"
+  become: true
+  loop:
+
+- name: debian | Adding MariaDB Repo Keys
+  apt_key:
+    keyserver: "{{ mariadb_debian_repo_keyserver }}"
+    id: "0xcbcb082a1bb943db"
+    state: "present"
+  become: true
+  when: >
+    ansible_distribution == "Debian" or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version <= '14.04')
+
+- name: debian | Adding MariaDB Repo Keys
+  apt_key:
+    keyserver: "{{ mariadb_debian_repo_keyserver }}"
+    id: "0xF1656F24C74CD1D8"
+    state: "present"
+  become: true
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version is version('16.04', '>=')
+
+- name: debian | Pinning MariaDB Repo
+  template:
+    src: "mariadb_repo.j2"
+    dest: "/etc/apt/preferences.d/mariadb"
+  become: true
+  when: galera_enable_mariadb_repo|bool
+
+- name: debian | adding mariadb repo
+  apt_repository:
+    repo: "{{ mariadb_debian_repo }}"
+    state: "present"
+  become: true
+  when: galera_enable_mariadb_repo|bool
+
+- name: redhat | add an overrides file
+  template:
+    src: "etc/mariadb_overrides.cnf.j2"
+    dest: "/etc/my.cnf.d/overrides.cnf"
+  become: true
+  when: mariadb_config_overrides is defined
+
+- name: debian | installing mariadb-galera packages
+  apt:
+    name:
+      - "mariadb-server"
+    state: "present"
+  become: true
+  when: galera_enable_mariadb_repo|bool
+
+- name: debian | configuring root my.cnf
+  template:
+    src: "root/my.cnf.j2"
+    dest: "/root/.my.cnf"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=,o="
+  become: true
+
+- name: debian | adding debian-sys-maintenance permissions to mysql
+  mysql_user:
+    name: "debian-sys-maint"
+    priv: "*.*:ALL,GRANT"
+    state: "present"
+    password: "{{ galera_deb_db_password }}"
+    login_unix_socket: "{{ mariadb_login_unix_socket }}"
+  become: true

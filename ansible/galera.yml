@@ -3,5 +3,21 @@
 - hosts: galera_cluster # defines what hosts to install this role one
   gather_facts: yes
   #become: yes # use sudo
+  vars:
+    galera_cluster_bind_interface: "eth0"
+    galera_cluster_name: "marx-galera"
+    galera_cluster_nodes_group: "galera_cluster"
+    galera_enable_mariadb_repo: false
+    mariadb_mysql_root_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65326434313366383836623537373036633439343233316234646462373930303636313862316339
+          6135373231623461653166353035383835616333323765330a373132353736313232356436623131
+          32653131303931393561393038383261653035303239336436616637613734313538643065386533
+          6335366262616335630a396333303233353038643238303763633735316638353136386362623862
+          3536
+#    galera_reconfigure_galera: true
+    mariadb_pri_domain_name: 'marx.katowice.pl'
+    galera_email_notifications: "mnazarko@gmail.com"
   roles:
     - role: common
+    - role: mrlesmithjr.mariadb-galera-cluster

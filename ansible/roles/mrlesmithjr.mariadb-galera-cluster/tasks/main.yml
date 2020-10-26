@@ -1,0 +1,45 @@
+---
+# tasks file for ansible-mariadb-galera-cluster
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
+- include: unconfigure_cluster.yml
+  when: >
+    galera_reconfigure_galera is defined and
+    galera_reconfigure_galera
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: redhat.yml
+  when: ansible_os_family == "RedHat"
+
+- include: max-open-files.yml
+  when: >
+    ansible_service_mgr == "systemd" and
+    mariadb_max_open_files != 0
+
+- include: oom-score-adjust.yml
+  when: >
+    ansible_service_mgr == "systemd" and
+    mariadb_oom_score_adjust != 0
+
+- include: setup_cluster.yml
+
+- include: mysql_users.yml
+  tags: mysql-users
+  when: mariadb_mysql_users is defined
+
+- include: galera_monitoring.yml
+  tags:
+    - config_galera_monitoring
+  when: galera_enable_galera_monitoring_script
+
+- include: configure_root_access.yml
+
+- include: cacti.yml
+  when: galera_enable_cacti_monitoring
