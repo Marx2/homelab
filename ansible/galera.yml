@@ -5,6 +5,7 @@
   #become: yes # use sudo
   vars:
     galera_cluster_bind_interface: "eth0"
+#    mariadb_bind_address: "0.0.0.0"
     galera_cluster_name: "marx-galera"
     galera_cluster_nodes_group: "galera_cluster"
     galera_enable_mariadb_repo: false
@@ -18,6 +19,18 @@
 #    galera_reconfigure_galera: true
     mariadb_pri_domain_name: 'marx.katowice.pl'
     galera_email_notifications: "mnazarko@gmail.com"
+    mariadb_mysql_users:
+      - name: marx
+        hosts:
+          - "%"
+          - "127.0.0.1"
+          - "::1"
+          - "localhost"
+        password: secret
+        #encrypted: no (default)
+        #priv: *.*:USAGE (default}
+        #state: present (default)
+        #append_privs: no (default)
   roles:
     - role: common
     - role: mrlesmithjr.mariadb-galera-cluster

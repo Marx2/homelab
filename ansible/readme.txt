@@ -26,7 +26,7 @@ Encrypt whole file
 ansible-vault encrypt registries.yaml --vault-password-file ~/.vault_pass_prv.txt
 Encrypt single string, when vault file is in ansible.cfg:
 ansible-vault encrypt_string  'somepassword' --name 'mariadb_mysql_root_password'
-
+Manual restart of galera: https://galeracluster.com/library/training/tutorials/restarting-cluster.html
 
 1. Create VM
 2. copy SSH key
