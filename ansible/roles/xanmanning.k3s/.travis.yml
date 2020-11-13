@@ -39,14 +39,14 @@ env:
       MOLECULE_SCENARIO: highavailability
       MOLECULE_PLAYBOOK: playbook-auto-deploying-manifests.yml
 
-    # Test multiple masters in control plane with DQLite
+    # Test multiple masters in control plane with Etcd
     - MOLECULE_DISTRO: geerlingguy/docker-centos8-ansible:latest
       MOLECULE_SCENARIO: highavailability
-      MOLECULE_PLAYBOOK: playbook-dqlite.yml
+      MOLECULE_PLAYBOOK: playbook-etcd.yml
 
 install:
   # Install test dependencies.
-  - pip install molecule==2.22 docker jmespath
+  - pip install molecule[docker] docker jmespath ansible-lint
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.

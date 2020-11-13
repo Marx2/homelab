@@ -1,6 +1,6 @@
 ---
 
-# k3s cluster state, options: installed, started, stopped, restarted
+# k3s cluster state, options: installed, started, stopped, restarted, uninstalled
 # (default: installed)
 k3s_cluster_state: installed
 
@@ -16,8 +16,14 @@ k3s_build_cluster: true
 # URL for GitHub project
 k3s_github_url: https://github.com/rancher/k3s
 
+# Skip all tasks that validate configuration
+k3s_skip_validation: false
+
 # Installation directory for k3s
 k3s_install_dir: /usr/local/bin
+
+# Install using hard links rather than symbolic links
+k3s_install_hard_links: false
 
 # Path for additional Kubernetes Manifests
 # https://rancher.com/docs/k3s/latest/en/advanced/#auto-deploying-manifests
@@ -50,11 +56,20 @@ k3s_datastore_endpoint: false
 # k3s_datastore_certfile: /path/to/cert.crt
 # k3s_datastore_keyfile: /path/to/key.pem
 
-# Use DQLite for HA Datastore? (EXPERIMENTAL)
-k3s_dqlite_datastore: false
+# Use embedded Etcd for HA Datastore? (EXPERIMENTAL)
+k3s_etcd_datastore: false
 
-# Are control hosts also worker nodes?
-k3s_control_workers: true
+# Disable Etcd snapshots
+k3s_etcd_disable_snapshots: false
+
+# Etcd snapshot cron schedule. Example below is every 12 hours.
+# k3s_etcd_snapshot_schedule_cron: "* */12 * * *"
+
+# Etcd snapshot retention
+# k3s_etcd_snapshot_retention: 5
+
+# Etcd snapshot directory
+# k3s_etcd_snapshot_directory: /server/db/snapshots
 
 # HTTPS Listening port
 k3s_https_port: 6443
@@ -65,7 +80,7 @@ k3s_use_docker: false
 # Disable flannel, you will need to install your own CNI driver.
 k3s_no_flannel: false
 
-# Flannel backend ('none', 'vxlan', 'ipsec', or 'wireguard')
+# Flannel backend ('none', 'vxlan', 'ipsec', 'host-gw' or 'wireguard')
 # k3s_flannel_backend: vxlan
 
 # Disable CoreDNS, you will need to install your own DNS provider.
@@ -101,11 +116,17 @@ k3s_disable_cloud_controller: false
 # Disable k3s network policy controller
 k3s_disable_network_policy: false
 
+# Disable k3s default kube proxy.
+k3s_disable_kube_proxy: false
+
 # Default local storage path for local provisioner storage class, if set to "false" we will use the default
 k3s_default_local_storage_path: false
 
 # Use secret encryption at rest (EXPERIMENTAL)
 k3s_secrets_encryption: false
+
+# Enable SELinux in containerd (EXPERIMENTAL)
+k3s_enable_selinux: false
 
 # with become privileges for
 k3s_become_for_all: false
