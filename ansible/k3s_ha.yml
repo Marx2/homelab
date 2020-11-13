@@ -1,12 +1,21 @@
 ---
 
-- hosts: k3s_cluster # defines what hosts to install this role one
+- hosts: k3s_cluster # defines what hosts to install this role on
   gather_facts: yes
-  become: yes # use sudo
+#  become: yes # use sudo
   vars:
     molecule_is_test: true
     k3s_control_node_address: loadbalancer
-    k3s_datastore_endpoint: "mysql://hybris:SVEW6MabjV78Kzyc@tcp(ydc-k3s-db.yse.fra.hybris.com:3306)/k3stest"
+    k3s_datastore_endpoint: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33393236326534326234376135346639316139356262316532646530386365363530373961303133
+          3431623034653563616663396262616165363964376661300a616433376265323936636632356362
+          39343037613332643633346163616638343163626635386464633362323533386130646635623631
+          3230356136633865640a346161656236373762643334353966383339633137313730633632613665
+          35396466333136306162343034356665313132333063613863346261626439653464323339396235
+          38646562353537663934636634626336346637306630616134346135333539633864646663313638
+          383764386539363633643461656462383532
+#    k3s_datastore_endpoint: "mysql://marx:xxx@tcp(192.168.1.150:3307)/k3s"
   pre_tasks:
     - name: Set each node to be a control node
       set_fact:
@@ -14,6 +23,12 @@
   #      when: inventory_hostname in ['node2', 'node3']
   roles:
     - role: common
-    - role: repository
-    - role: xanmanning.k3s
-    
+    - role: ryankwilliams.ssh_copy_id
+      vars:
+        #hostname: 127.0.0.1
+        username: root
+        password: password
+        ssh_public_key: $HOME/.ssh/id_rsa.pub
+        hetzner_storagebox: false
+        ssh_port: 22
+#    - role: xanmanning.k3s

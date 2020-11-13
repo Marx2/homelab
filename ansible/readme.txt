@@ -1,21 +1,24 @@
-We use predefined role from Ansible Galaxy:
+Instal sshpass
+brew install hudochenkov/sshpass/sshpass
+
+- Use predefined role from Ansible Galaxy:
 https://galaxy.ansible.com/xanmanning/k3s
 https://galaxy.ansible.com/mrlesmithjr/mariadb-galera-cluster
 
-- Install to specified folder roles:
+- Install to specified folder 'roles':
 ansible-galaxy install xanmanning.k3s -p ./roles
-- Install to home
 ansible-galaxy install mrlesmithjr.mariadb-galera-cluster -p ./roles
+ansible-galaxy install ryankwilliams.ssh_copy_id -p ./roles
 
 Run everything on hosts defined in inventory:
 
 - key configuration
 ssh-copy-id root@192.168.1.132
 
-- configuration HA
-ansible-playbook k3s_ha.yml -i inventory/k3s/hosts.yml
+- configure Galera cluster
 ansible-playbook -u root galera.yml -i inventory/galera/hosts.yml
-#ansible-playbook -u root --ask-pass galera.yml -i inventory/galera/hosts.yml
+- configure HA k3s cluster
+ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml
 
 
 
@@ -28,6 +31,7 @@ Encrypt single string, when vault file is in ansible.cfg:
 ansible-vault encrypt_string  'somepassword' --name 'mariadb_mysql_root_password'
 Manual restart of galera: https://galeracluster.com/library/training/tutorials/restarting-cluster.html
 
+GALERA
 1. Create VM
 2. copy SSH key
 3. Install roles
@@ -35,3 +39,11 @@ Manual restart of galera: https://galeracluster.com/library/training/tutorials/r
 - set 'adminer' password
 5. run playbook for galera:
 ansible-playbook -u root galera.yml -i inventory/galera/hosts.yml
+
+K3S
+1. Create VM
+2. ssh to VM and enable root login
+PermitRootLogin yes
+3. Restart sshd
+4 run playbook for k3s
+ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml

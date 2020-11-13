@@ -1,8 +1,8 @@
 ---
-- name: Debian key
-  apt_key:
-    url: https://ftp-master.debian.org/keys/release-10.asc
-    state: present
+#- name: Debian key
+#  apt_key:
+#    url: https://ftp-master.debian.org/keys/release-10.asc
+#    state: present
 
 - name: Update list of Debian packages
   apt: update_cache=yes
@@ -25,3 +25,9 @@
     state: present
     pkg:
       - mc
+- name: unattended upgrades
+  apt:
+    state: present
+    pkg:
+      - unattended-upgrades
+      - apt-listchanges
