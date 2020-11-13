@@ -41,9 +41,6 @@ GALERA
 ansible-playbook -u root galera.yml -i inventory/galera/hosts.yml
 
 K3S
-1. Create VM
-2. ssh to VM and enable root login
-PermitRootLogin yes
-3. Restart sshd
-4 run playbook for k3s
+1. Create VM - with public SSH key
+2 run playbook for k3s
 ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml

@@ -23,12 +23,4 @@
   #      when: inventory_hostname in ['node2', 'node3']
   roles:
     - role: common
-    - role: ryankwilliams.ssh_copy_id
-      vars:
-        #hostname: 127.0.0.1
-        username: root
-        password: password
-        ssh_public_key: $HOME/.ssh/id_rsa.pub
-        hetzner_storagebox: false
-        ssh_port: 22
 #    - role: xanmanning.k3s
