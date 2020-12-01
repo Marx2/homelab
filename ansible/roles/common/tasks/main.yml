@@ -31,3 +31,11 @@
     pkg:
       - unattended-upgrades
       - apt-listchanges
+#- name: pip
+#  apt:
+#    state: present
+#    pkg:
+#      - python3-pip
+#- name: Install jmespath
+#  pip:
+#    name: jmespath
