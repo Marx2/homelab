@@ -44,3 +44,4 @@ K3S
 1. Create VM - with public SSH key
 2 run playbook for k3s
 ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml
+3 config is in /etc/rancher/k3s/k3s.yaml
