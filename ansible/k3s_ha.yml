@@ -1,11 +1,13 @@
 ---
 
 - hosts: k3s_cluster # defines what hosts to install this role on
+  become: true
   vars:
     # installed, started, stopped, downloaded, uninstalled, validated
     k3s_state: installed
     #k3s_state: uninstalled
     k3s_install_hard_links: true
+    k3s_become_for_all: true
     k3s_server:
       docker: false
       # datastore-endpoint: "mysql://marx:xxx@tcp(192.168.1.151:3307)/k3s"
@@ -24,5 +26,5 @@
         k3s_control_node: true
   #      when: inventory_hostname in ['node2', 'node3']
   roles:
-    #- role: common
+    - role: common
     - role: xanmanning.k3s

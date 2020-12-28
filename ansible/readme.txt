@@ -42,6 +42,10 @@ ansible-playbook -u root galera.yml -i inventory/galera/hosts.yml
 
 K3S
 1. Create VM - with public SSH key
+LXC:
 2 run playbook for k3s
 ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml
+VM:
+2 run playbook for k3s
+ansible-playbook -u debian k3s_ha.yml -i inventory/k3s/hosts.yml
 3 config is in /etc/rancher/k3s/k3s.yaml
