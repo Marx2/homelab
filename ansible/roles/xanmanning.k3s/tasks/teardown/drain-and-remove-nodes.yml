@@ -1,7 +1,7 @@
 ---
 
 - name: Check if kubectl exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ k3s_install_dir }}/kubectl"
   register: k3s_check_kubectl
   become: "{{ k3s_become_for_kubectl | ternary(true, false, k3s_become_for_all) }}"
@@ -10,7 +10,7 @@
   block:
 
     - name: Gather a list of nodes
-      command: "{{ k3s_install_dir }}/kubectl get nodes"
+      ansible.builtin.command: "{{ k3s_install_dir }}/kubectl get nodes"
       changed_when: false
       failed_when: false
       delegate_to: "{{ k3s_control_delegate }}"
@@ -19,23 +19,23 @@
       become: "{{ k3s_become_for_kubectl | ternary(true, false, k3s_become_for_all) }}"
 
     - name: Ensure uninstalled nodes are drained
-      command: "{{ k3s_install_dir }}/kubectl drain {{ item }} --ignore-daemonsets --delete-local-data"
+      ansible.builtin.command: "{{ k3s_install_dir }}/kubectl drain {{ item }} --ignore-daemonsets --delete-local-data"
       delegate_to: "{{ k3s_control_delegate }}"
       run_once: true
       when: item in kubectl_get_nodes_result.stdout
-            and hostvars[item].k3s_cluster_state is defined
-            and hostvars[item].k3s_cluster_state == 'uninstalled'
-      loop: "{{ play_hosts }}"
+            and hostvars[item].k3s_state is defined
+            and hostvars[item].k3s_state == 'uninstalled'
+      loop: "{{ ansible_play_hosts_all }}"
       become: "{{ k3s_become_for_kubectl | ternary(true, false, k3s_become_for_all) }}"
 
     - name: Ensure uninstalled nodes are removed
-      command: "{{ k3s_install_dir }}/kubectl delete node {{ item }}"
+      ansible.builtin.command: "{{ k3s_install_dir }}/kubectl delete node {{ item }}"
       delegate_to: "{{ k3s_control_delegate }}"
       run_once: true
       when: item in kubectl_get_nodes_result.stdout
-            and hostvars[item].k3s_cluster_state is defined
-            and hostvars[item].k3s_cluster_state == 'uninstalled'
-      loop: "{{ play_hosts }}"
+            and hostvars[item].k3s_state is defined
+            and hostvars[item].k3s_state == 'uninstalled'
+      loop: "{{ ansible_play_hosts_all }}"
       become: "{{ k3s_become_for_kubectl | ternary(true, false, k3s_become_for_all) }}"
 
   when: k3s_check_kubectl.stat.exists is defined

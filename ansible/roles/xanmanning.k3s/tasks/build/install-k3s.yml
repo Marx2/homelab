@@ -1,22 +1,13 @@
 ---
 
-- name: Ensure config directory exists
-  file:
-    path: "{{ k3s_config_file | dirname }}"
-    state: directory
-    mode: 0755
-  become: "{{ k3s_become_for_install_dir | ternary(true, false, k3s_become_for_all) }}"
-
-- name: Ensure systemd unit file directory exists
-  file:
-    path: "{{ k3s_systemd_unit_directory }}"
-    state: directory
-    mode: 0755
-  become: "{{ k3s_become_for_systemd | ternary(true, false, k3s_become_for_all) }}"
+- include_tasks: install-k3s-directories.yml
+  loop: "{{ k3s_ensure_directories_exist }}"
+  loop_control:
+    loop_var: directory
 
 - include_tasks: install-k3s-node.yml
-  when: ((k3s_control_node and k3s_controller_count | length == 1)
-        or (k3s_primary_control_node and k3s_controller_count | length > 1)) and not ansible_check_mode
+  when: ((k3s_control_node and k3s_controller_list | length == 1)
+        or (k3s_primary_control_node and k3s_controller_list | length > 1)) and not ansible_check_mode
 
 - meta: flush_handlers
 
@@ -24,11 +15,11 @@
   when: k3s_build_cluster
 
 - name: Ensure k3s control plane is started
-  systemd:
+  ansible.builtin.systemd:
     name: k3s
     state: started
     enabled: true
     scope: "{{ k3s_systemd_context }}"
-  when: (k3s_control_node and k3s_controller_count | length == 1)
-        or (k3s_primary_control_node and k3s_controller_count | length > 1)
+  when: (k3s_control_node and k3s_controller_list | length == 1)
+        or (k3s_primary_control_node and k3s_controller_list | length > 1)
   become: "{{ k3s_become_for_systemd | ternary(true, false, k3s_become_for_all) }}"

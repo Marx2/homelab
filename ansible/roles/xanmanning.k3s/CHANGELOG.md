@@ -7,10 +7,124 @@
 
 ### Breaking changes
 
+### Known issues
+
 ### Contributors
 
 ---
 -->
+
+## 2020-12-21, v2.4.0
+
+### Notable changes
+
+  - `k3s_config_dir` derived from `k3s_config_file`, reused throughout the role
+    to allow for easy removal of "Rancher" references #73.
+  - `k3s_token_location` has moved to be in `k3s_config_dir`.
+  - Tasks for creating directories now looped to caputure configuration from
+    `k3s_server` and `k3s_agent` and ensure directories exist before k3s
+    starts, see #75.
+  - Server token collected directly from token file, not symlinked file
+    (node-token).
+  - `k3s_runtime_config` defined in `vars/` for validation and overwritten in
+    tasks for control plane and workers.
+  - Removed unused references to GitHub API.
+  - `set_fact` and `command` tasks now use FQCN.
+  - Check of `ansible_version` in environment check.
+  - Introduction of target environment checks for #72.
+  - Fixed bug with non-default listening port not being passed to workers.
+  - Added ability to put documentation links into validation checks #76.
+  - Removed the requirement for `jmespath` on the Ansible controller.
+  - Fixed bug with issue data collection tasks.
+
+### Breaking changes
+
+  - Ansible minimum version is hard set to v2.10.4
+  - `k3s_token_location` has moved to be in `k3s_config_dir` so re-running the
+    role will create a duplicate file here.
+
+---
+
+## 2020-12-19, v2.3.0
+
+### Notable changes
+
+  - Updated k3s uninstall scripts #74
+  - Started moving Rancher references to `vars/` as per #73
+
+---
+
+## 2020-12-19, v2.2.2
+
+### Notable changes
+
+  - Fixed typos in documentation.
+  - Molecule testing pinned to v3.1 due to tests failing.
+
+---
+
+## 2020-12-16, v2.2.1
+
+### Notable changes
+
+  - Re-working documentation
+  - Updated GitHub link, org changed from Rancher to k3s-io.
+  - Replace deprecated `play_hosts` variable.
+
+### Breaking changes
+
+  - Moving git branch from `master` to `main`.
+
+---
+
+## 2020-12-12, v2.2.0
+
+### Notable changes
+
+  - Use of FQCNs enforced, minimum Ansible version now v2.10
+  - `k3s_etcd_datastore` no longer experimental after K3s version v1.19.5+k3s1
+  - Docker marked as deprecated for K3s > v1.20.0+k3s1
+
+### Breaking changes
+
+  - Use of FQCNs enforced, minimum Ansible version now v2.10
+  - Use of Docker requires `k3s_use_unsupported_config` to be `true` after
+    v1.20.0+k3s1
+
+---
+
+## 2020-12-05, v2.1.1
+
+### Notable changes
+
+  - Fixed link to documentation.
+
+---
+
+## 2020-12-05, v2.1.0
+
+### Notable changes
+
+  - Deprecated configuration check built into validation steps.
+  - Removed duplicated tasks for single node cluster.
+  - Added documentation providing quickstart examples and common operations.
+  - Fixed data-dir configuration.
+  - Some tweaks to rootless.
+  - Fix draining and removing of nodes.
+
+### Breaking changes
+
+  - `k3s_token_location` now points to a file location, not a directory.
+  - `k3s_systemd_unit_directory` renamed to `k3s_systemd_unit_dir`
+  - Removed `k3s_node_data_dir` as this is now configured with `data-dir` in
+    `k3s_server` and/or `k3s_agent`.
+
+### Known issues
+
+  - Rootless is still broken, this is still not supported as a method for
+    running k3s using this role.
+
+---
 
 ## 2020-11-30, v2.0.2
 
