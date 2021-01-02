@@ -3,7 +3,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider
 metadata:
   name: slack
-  namespace: flux
+  namespace: flux-system
 spec:
   type: slack
   channel: general
