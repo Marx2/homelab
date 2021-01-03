@@ -7,10 +7,9 @@
   "rebaseWhen": "conflicted",
   "repositories": ["Marx2/homelab"],
   "baseBranches": ["master"],
+  "ignorePaths": ["ansible/"],
   "kubernetes": {
-    "fileMatch": [
-      "cluster/.+\\.yaml$"
-    ]
+    "fileMatch": ["cluster/.+\\.yaml$"],
   },
   "autodiscover": false,
   "dryRun": false,
