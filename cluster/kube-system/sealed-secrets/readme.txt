@@ -1,0 +1,1 @@
+see https://github.com/bitnami-labs/sealed-secrets#usage
