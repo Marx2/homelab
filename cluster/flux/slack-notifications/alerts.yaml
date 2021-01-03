@@ -32,7 +32,7 @@ spec:
 #      namespace: 'dev'
 #      name: '*'
     - kind: HelmRelease
-      namespace: 'prometheus'
+      namespace: 'monitoring'
       name: '*'
     - kind: HelmRelease
       namespace: 'kube-system'
