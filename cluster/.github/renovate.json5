@@ -1,0 +1,52 @@
+{
+  "enabled": true,
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "commitMessageSuffix": "[ci-skip]",
+  "suppressNotifications": ["prIgnoreNotification"],
+  "rebaseWhen": "conflicted",
+  "repositories": ["Marx2/homelab"],
+  "baseBranches": ["master"],
+  "kubernetes": {
+    "fileMatch": [
+      "cluster/.+\\.yaml$"
+    ]
+  },
+  "autodiscover": false,
+  "dryRun": false,
+  "packageRules": [
+    {
+      "datasources": ["docker"],
+      "groupName": "homelab - major change",
+      "automerge": false,
+      "updateTypes": ["major"],
+      "labels": ["renovate/image-release", "dependency/major"]
+    },
+    {
+      "datasources": ["docker"],
+      "groupName": "homelaab - minor change",
+      "automerge": false,
+      "updateTypes": ["minor"],
+      "labels": [
+        "renovate/image-release",
+        "dependency/minor"
+      ]
+    },
+    {
+      "datasources": ["docker"],
+      "groupName": "homelab - patch change",
+      "automerge": false,
+      "updateTypes": ["patch"],
+      "labels": [
+        "renovate/image-release",
+        "dependency/patch"
+      ]
+    },
+    {
+      "datasources": ["docker"],
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "separateMinorPatch": true
+    }
+  ]
+}
