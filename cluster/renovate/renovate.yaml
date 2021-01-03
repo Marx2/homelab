@@ -34,8 +34,8 @@ spec:
                 - secretRef:
                     name: renovate-env
               volumeMounts:
-                - name: config-volume
-                  mountPath: /opt/renovate/
+#                - name: config-volume
+#                  mountPath: /opt/renovate/
                 - name: work-volume
                   mountPath: /tmp/renovate/
               args: ["Marx2/homelab"]
