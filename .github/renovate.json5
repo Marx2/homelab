@@ -23,7 +23,7 @@
     },
     {
       "datasources": ["docker"],
-      "groupName": "homelaab - minor change",
+      "groupName": "homelab - minor change",
       "automerge": false,
       "updateTypes": ["minor"],
       "labels": [
