@@ -11,9 +11,28 @@
   "kubernetes": {
     "fileMatch": ["cluster/.+\\.yaml$"],
   },
+  "helm-values": {
+    "fileMatch": ["cluster/.+\\.yaml$"]
+  },
+  "regexManagers": [
+    {
+      "fileMatch": ["cluster/.+\\.yaml$"],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
+      ],
+      "datasourceTemplate": "helm"
+    }
+  ],
   "autodiscover": false,
   "dryRun": false,
   "packageRules": [
+    // Setup datasources
+    {
+      "datasources": ["helm"],
+      "commitMessageTopic": "Helm chart {{depName}}",
+      "separateMinorPatch": true
+    },
+    // Add labels according to package and update types
     {
       "datasources": ["docker"],
       "groupName": "homelab - major change",
@@ -46,6 +65,21 @@
       "automergeType": "branch",
       "requiredStatusChecks": null,
       "separateMinorPatch": true
+    },
+    {
+      "datasources": ["helm"],
+      "updateTypes": ["major"],
+      "labels": ["renovate/helm-release", "dependency/major"]
+    },
+    {
+      "datasources": ["helm"],
+      "updateTypes": ["minor"],
+      "labels": ["renovate/helm-release", "dependency/minor"]
+    },
+    {
+      "datasources": ["helm"],
+      "updateTypes": ["patch"],
+      "labels": ["renovate/helm-release", "dependency/patch"]
     }
   ]
 }
