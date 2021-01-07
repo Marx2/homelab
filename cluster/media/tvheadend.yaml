@@ -62,3 +62,6 @@ spec:
         path: /dev/dri
     securityContext:
       privileged: true
+      runAsUser: 100
+      runAsGroup: 1000
+      fsGroup: 1000
