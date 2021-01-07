@@ -23,7 +23,8 @@ spec:
       tag: release-4.2
     env:
       TZ: "Europe/Warsaw"
-    nodeSelector: {"k3s.io/hostname=wezyr"}
+    nodeSelector:
+     k3s.io/hostname: "wezyr"
 #    ingress:
 #      enabled: true
 #      annotations:
