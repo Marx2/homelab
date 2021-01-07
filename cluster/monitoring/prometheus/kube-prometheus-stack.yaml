@@ -18,6 +18,8 @@ spec:
       interval: 5m
   timeout: 20m
   values:
+    env:
+      TZ: "Europe/Warsaw"
     server:
       resources:
         requests:

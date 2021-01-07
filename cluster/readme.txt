@@ -23,3 +23,11 @@ flux bootstrap github \
   --branch=master \
   --path=/cluster \
   --personal
+
+
+
+
+
+
+HELM
+helm get values -n kube-system sealed-secrets-controller -a
