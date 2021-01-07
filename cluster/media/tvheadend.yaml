@@ -37,22 +37,21 @@ spec:
 #      tls:
 #      - hosts:
 #        - "bazarr.holthome.net"
-#    persistence:
-#      config:
-#        enabled: true
+    persistence:
+      config:
+        enabled: true
 #        existingClaim: bazarr-pvc
-#    additionalVolumeMounts:
-#    - name: media-nas
-#      mountPath: "/media"
-#    additionalVolumes:
-#    - name: media-nas
-#      persistentVolumeClaim:
-#        claimName: nfs-tank-share-pvc
+        storageClass: "nfs-client-omv"
+        accessMode: ReadWriteOnce
+        size: "1Gi"
+
     additionalVolumeMounts:
     - name: dvb
       mountPath: /dev/dvb
     - name: dri
       mountPath: /dev/dri
+#    - name: media-omv
+#      mountPath: "/recordings"
     additionalVolumes:
     - name: dvb
       hostPath:
@@ -60,5 +59,8 @@ spec:
     - name: dri
       hostPath:
         path: /dev/dri
+#    - name: media-omv
+#      persistentVolumeClaim:
+#        claimName: nfs-media-omv-pvc
     securityContext:
       privileged: true

@@ -29,5 +29,6 @@ flux bootstrap github \
 
 
 
-HELM
+useful commands:
 helm get values -n kube-system sealed-secrets-controller -a
+flux reconcile hr prometheus -n monitoring
