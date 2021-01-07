@@ -60,4 +60,5 @@ spec:
     - name: dri
       hostPath:
         path: /dev/dri
-
+    securityContext:
+      privileged: true
