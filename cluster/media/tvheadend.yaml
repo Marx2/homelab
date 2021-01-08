@@ -67,6 +67,13 @@ spec:
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.211
+      port:
+        port: 9981
+        targetPort: 80
+      additionalPorts:
+       port:
+         port: 9982
+         name: htsp
     securityContext:
       privileged: true
 #      runAsUser: 1000
