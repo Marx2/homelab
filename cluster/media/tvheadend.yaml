@@ -68,8 +68,8 @@ spec:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.211
       port:
-        port: 9981
-#        targetPort: 80
+        port: 80
+        targetPort: 8891
       additionalPorts:
        port:
          port: 9982
