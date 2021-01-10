@@ -52,8 +52,8 @@ spec:
       mountPath: /dev/dvb
     - name: dri
       mountPath: /dev/dri
-#    - name: media-omv
-#      mountPath: "/recordings"
+    - name: recordings-omv
+      mountPath: "/recordings"
     additionalVolumes:
     - name: dvb
       hostPath:
@@ -61,9 +61,9 @@ spec:
     - name: dri
       hostPath:
         path: /dev/dri
-#    - name: media-omv
-#      persistentVolumeClaim:
-#        claimName: nfs-media-omv-pvc
+    - name: recordings-omv
+      persistentVolumeClaim:
+        claimName: nfs-recordings-omv-pvc
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.211
