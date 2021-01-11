@@ -10,4 +10,4 @@ spec:
   storageClassName: recordings-omv
   resources:
     requests:
-      storage: 1Mi
+      storage: 100Gi
