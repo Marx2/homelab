@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: recordings-omv
   capacity:
-    storage: 1Mi
+    storage: 100Gi
   accessModes:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
