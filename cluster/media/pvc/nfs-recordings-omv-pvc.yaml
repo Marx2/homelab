@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-recordings-omv-pvc
+  name: nfs-recordings2-omv-pvc
   namespace: media
 spec:
   accessModes:
