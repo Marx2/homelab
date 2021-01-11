@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: nfs-recordings-omv-pv
 spec:
-  storageClassName: recordings-omv
+  storageClassName: recordings2-omv
   capacity:
     storage: 100Gi
   accessModes:
