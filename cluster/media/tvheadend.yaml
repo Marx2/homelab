@@ -81,8 +81,8 @@ spec:
 #      fsGroup: 1000
     resources:
       requests:
-        cpu: 100m
+        cpu: 1
         memory: 128Mi
       limits:
-        cpu: 400m
+        cpu: 2
         memory: 1500Mi
