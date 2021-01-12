@@ -31,4 +31,5 @@ flux bootstrap github \
 
 useful commands:
 helm get values -n kube-system sealed-secrets-controller -a
+flux reconcile source helm prometheus-community-charts -n flux-system
 flux reconcile hr prometheus -n monitoring
