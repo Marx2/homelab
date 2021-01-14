@@ -49,15 +49,19 @@ spec:
         - name: buffer
           persistentVolumeClaim:
             claimName: nextpvr-buffer
- 
+      nodeSelector:
+        k3s.io/hostname: "wezyr"
       containers:
         - name: nextpvr
           image: nextpvr/nextpvr_amd64:stable
+          securityContext:
+            privileged: true
           ports:
             - containerPort: 8866
               name: http-api
             - containerPort: 16891
               name: udp-api
+              protocol: UDP
           volumeMounts:
             - mountPath: "/etc/localtime"
               readOnly: true
@@ -72,4 +76,3 @@ spec:
               mountPath: /config
             - name: buffer
               mountPath: /buffer
- 
