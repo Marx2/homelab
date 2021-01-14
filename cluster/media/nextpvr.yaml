@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: nextpvr
+  namespace: media
 spec:
   selector:
     app: nextpvr
@@ -20,6 +21,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextpvr
+  namespace: media
 spec:
   selector:
     matchLabels:
