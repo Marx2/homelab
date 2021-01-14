@@ -1,4 +1,35 @@
 ---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextpvr-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+#  volumeName: nextpvr-config
+  storageClassName: nfs-client-omv
+#  volumeMode: Filesystem
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nextpvr-buffer
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+#  volumeName: nextpvr-config
+  storageClassName: nfs-client-omv
+#  volumeMode: Filesystem
+
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -46,15 +77,11 @@ spec:
           persistentVolumeClaim:
             claimName: nfs-recordings2-omv-pvc
         - name: config
-          storageClass: "nfs-client-omv"
-          accessMode: ReadWriteOnce
-#          persistentVolumeReclaimPolicy: Retain
-          size: "1Gi"
+          persistentVolumeClaim:
+            claimName: nextpvr-config
         - name: buffer
-          storageClass: "nfs-client-omv"
-          accessMode: ReadWriteOnce
-#          persistentVolumeReclaimPolicy: Recycle
-          size: "10Gi"
+          persistentVolumeClaim:
+            claimName: nextpvr-buffer
       nodeSelector:
         k3s.io/hostname: "wezyr"
       containers:
