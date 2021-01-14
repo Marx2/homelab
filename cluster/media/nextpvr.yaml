@@ -33,16 +33,34 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: nextpvr
+  name: nextpvr-http
   namespace: media
+  annotations:
+    metallb.universe.tf/allow-shared-ip: nextpvr-shared-ip
 spec:
   selector:
     app: nextpvr
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.211
   ports:
     - protocol: TCP
       port: 8866
       targetPort: http-api
       name: http
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nextpvr-udp
+  namespace: media
+  annotations:
+    metallb.universe.tf/allow-shared-ip: nextpvr-shared-ip
+spec:
+  selector:
+    app: nextpvr
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.211
+  ports:
     - protocol: UDP
       port: 16891
       targetPort: udp-api
