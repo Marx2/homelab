@@ -46,11 +46,15 @@ spec:
           persistentVolumeClaim:
             claimName: nfs-recordings2-omv-pvc
         - name: config
-          persistentVolumeClaim:
-            claimName: nextpvr-config
+          storageClass: "nfs-client-omv"
+          accessMode: ReadWriteOnce
+#          persistentVolumeReclaimPolicy: Retain
+          size: "1Gi"
         - name: buffer
-          persistentVolumeClaim:
-            claimName: nextpvr-buffer
+          storageClass: "nfs-client-omv"
+          accessMode: ReadWriteOnce
+#          persistentVolumeReclaimPolicy: Recycle
+          size: "10Gi"
       nodeSelector:
         k3s.io/hostname: "wezyr"
       containers:
