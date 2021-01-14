@@ -1,0 +1,75 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nextpvr
+spec:
+  selector:
+    app: nextpvr
+  ports:
+    - protocol: TCP
+      port: 8866
+      targetPort: http-api
+      name: http
+    - protocol: UDP
+      port: 16891
+      targetPort: udp-api
+      name: udp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextpvr
+spec:
+  selector:
+    matchLabels:
+      app: nextpvr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nextpvr
+    spec:
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /etc/localtime
+        - name: dvb
+          hostPath:
+            path: /dev/dvb
+        - name: dri
+          hostPath:
+            path: /dev/dri
+        - name: recordings-omv
+          persistentVolumeClaim:
+            claimName: nfs-recordings2-omv-pvc
+        - name: config
+          persistentVolumeClaim:
+            claimName: nextpvr-config
+        - name: buffer
+          persistentVolumeClaim:
+            claimName: nextpvr-buffer
+ 
+      containers:
+        - name: nextpvr
+          image: nextpvr/nextpvr_amd64:stable
+          ports:
+            - containerPort: 8866
+              name: http-api
+            - containerPort: 16891
+              name: udp-api
+          volumeMounts:
+            - mountPath: "/etc/localtime"
+              readOnly: true
+              name: tz-config
+            - name: dvb
+              mountPath: /dev/dvb
+            - name: dri
+              mountPath: /dev/dri
+            - name: recordings-omv
+              mountPath: "/recordings"
+            - name: config
+              mountPath: /config
+            - name: buffer
+              mountPath: /buffer
+ 
