@@ -10,6 +10,9 @@
   "ignorePaths": ["ansible/"],
   "kubernetes": {
     "fileMatch": ["cluster/.+\\.yaml$"],
+    "ignorePaths": [
+      "cluster/flux-system/"
+    ]
   },
   "helm-values": {
     "fileMatch": ["cluster/.+\\.yaml$"]
