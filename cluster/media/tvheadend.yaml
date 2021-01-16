@@ -83,6 +83,6 @@ spec:
       requests:
         cpu: 1
         memory: 128Mi
-      limits:
-        cpu: 2
-        memory: 1500Mi
+#      limits:
+#        cpu: 2
+#        memory: 1500Mi
