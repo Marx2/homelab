@@ -25,7 +25,7 @@ spec:
       TZ: "Europe/Warsaw"
       PUID: 1000
       PGID: 1000
-      RUN_OPTS: "-d --debug --subsystems --trace --libav --uidebug"
+      RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
     nodeSelector:
      k3s.io/hostname: "wezyr"
 #    ingress:
