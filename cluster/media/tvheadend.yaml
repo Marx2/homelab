@@ -25,6 +25,7 @@ spec:
       TZ: "Europe/Warsaw"
       PUID: 1000
       PGID: 1000
+      RUN_OPTS: "--enable-debugging"
     nodeSelector:
      k3s.io/hostname: "wezyr"
 #    ingress:
