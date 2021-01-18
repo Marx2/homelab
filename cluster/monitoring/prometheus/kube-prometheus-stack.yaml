@@ -49,3 +49,39 @@ spec:
           sourceLabels:
           - node
           targetLabel: instance
+          
+    prometheus:
+#      ingress:
+#        enabled: true
+#        annotations:
+#          kubernetes.io/ingress.class: "internal"
+#        hosts:
+#        - "prometheus.devbu.io"
+#        tls:
+#        - hosts:
+#          - "prometheus.devbu.io"
+      prometheusSpec:
+        replicas: 2
+        replicaExternalLabelName: "replica"
+        podAntiAffinity: "hard"
+        ruleSelector: {}
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
+        retention: 24h
+        enableAdminAPI: true
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "nfs-client-omv"
+              resources:
+                requests:
+                  storage: 10Gi
+          
+          
