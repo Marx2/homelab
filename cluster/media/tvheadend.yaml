@@ -28,7 +28,6 @@ spec:
       RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
     strategy:
       type: Recreate
-XXX
     nodeSelector:
      k3s.io/hostname: "wezyr"
 #    ingress:
