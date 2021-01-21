@@ -1,0 +1,28 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: rook-ceph
+  chart:
+    repository: https://charts.rook.io/release
+    name: rook-ceph
+    version: v1.2.0
+  values:
+    # tolerations: |
+    #   - key: "arm"
+    #     operator: "Exists"
+    csi:
+      kubeletDirPath: /var/lib/kubelet
+      # cephcsi:
+      #   image: carpenike/cephcsi:v2.0-canary
+      # pluginTolerations: |
+      #   - key: "arm"
+      #     operator: "Exists"
+      # provisionerTolerations: |
+      #   - key: "arm"
+      #     operator: "Exists"
