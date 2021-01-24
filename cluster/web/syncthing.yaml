@@ -27,6 +27,8 @@ spec:
       TZ: "Europe/Warsaw"
       PUID: "1000"
       PGID: "1000"
+    strategy:
+      type: Recreate
     persistence:
       config:
         enabled: true
