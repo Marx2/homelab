@@ -38,6 +38,10 @@ spec:
     additionalVolumeMounts:
     - name: pictures-omv
       mountPath: "/pictures"
+    additionalVolumes:
+    - name: pictures-omv
+      persistentVolumeClaim:
+        claimName: nfs-pictures-omv-pvc
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.213
