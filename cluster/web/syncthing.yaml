@@ -41,13 +41,9 @@ spec:
         targetPort: 8384
       additionalPorts:
         port:
-          protocol: TCP
           port: 22000
           targetPort: 22000
-          name: tcp
-        # port:
-        #   protocol: TCP
-        #   port: 21027
-        #   targetPort: 21027
-        #   name: udp
+          name: "22000-tcp"
+    ingress:
+      enabled: false
       
