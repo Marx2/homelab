@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubernetes.github.io/ingress-nginx/
+      chart: ingress-nginx
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx-charts
+        namespace: flux-system
+      version: 3.20.1
+  interval: 1h
+  values:
+    controller:
+      ingressClass: internal
+      kind: DaemonSet
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      hostPort:
+        enabled: true
+      config:
+        proxy-body-size: '0'
+        ssl-protocols: "TLSv1.3 TLSv1.2"
+        use-proxy-protocol: "true"
+        use-forwarded-headers: "true"
+        compute-full-forwarded-for: "true"
+        forwarded-for-header: X-Forwarded-For
+        proxy-real-ip: 192.168.1.209
+        global-auth-url: "https://gate.marx.katowice.pl/api/verify"
+        global-auth-signin: "https://gate.marx.katowice.pl"
+      resources:
+        requests:
+          memory: 250Mi
+          cpu: 25m
+        limits:
+          memory: 500Mi
+      extraEnvs:
+      - name: TZ
+        value: Europe//Warsaw
+      # metrics:
+      #   enabled: true
+      #   serviceMonitor:
+      #     enabled: true
+      #     namespace: ingress-nginx
+    defaultBackend:
+      enabled: false
