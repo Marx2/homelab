@@ -30,7 +30,7 @@ spec:
         use-forwarded-headers: "true"
         compute-full-forwarded-for: "true"
         forwarded-for-header: X-Forwarded-For
-        # proxy-real-ip-cidr: 192.168.1.209
+        # proxy-real-ip-cidr: 192.168.1.210
         global-auth-url: "https://gate.marx.katowice.pl/api/verify"
         global-auth-signin: "https://gate.marx.katowice.pl"
       resources:
@@ -45,7 +45,7 @@ spec:
       service:
         type: LoadBalancer
         externalIPs:
-        - 192.168.1.209
+        - 192.168.1.210
         externalTrafficPolicy: Local
       publishService:
         enabled: true
