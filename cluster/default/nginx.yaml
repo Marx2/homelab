@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
   replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
@@ -20,3 +25,25 @@ spec:
           image: nginx:1.19.6
           ports:
             - containerPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "internal"
+    nginx.ingress.kubernetes.io/enable-global-auth: "false"
+spec:
+  rules:
+  - host: test.marx.katowice.pl
+    http:
+      paths:
+      - backend:
+          serviceName: blog
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - test.marx.katowice.pl
+    secretName: ingress-cert-marx
