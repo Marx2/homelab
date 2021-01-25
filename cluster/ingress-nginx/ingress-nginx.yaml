@@ -21,8 +21,8 @@ spec:
       kind: DaemonSet
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
-      hostPort:
-        enabled: true
+      # hostPort:
+      #   enabled: true
       config:
         proxy-body-size: '0'
         ssl-protocols: "TLSv1.3 TLSv1.2"
@@ -42,6 +42,14 @@ spec:
       extraEnvs:
       - name: TZ
         value: Europe//Warsaw
+      service:
+        type: LoadBalancer
+        externalIPs:
+        - 192.168.1.209
+        externalTrafficPolicy: Local
+      publishService:
+        enabled: true
+
       # metrics:
       #   enabled: true
       #   serviceMonitor:
