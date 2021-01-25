@@ -20,7 +20,7 @@ spec:
   tls:
   - hosts:
     - nginx.marx.katowice.pl
-    secretName: ingress-cert-marx
+    # secretName: ingress-cert-marx
 ---
 apiVersion: v1
 kind: Service
