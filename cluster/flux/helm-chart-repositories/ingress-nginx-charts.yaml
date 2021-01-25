@@ -2,9 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: weaveworks-kured-charts
+  name: ingress-nginx-charts
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://weaveworks.github.io/kured
+  url: https://kubernetes.github.io/ingress-nginx
   timeout: 3m
