@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
 spec:
   rules:
-  - host: nginx.marx.katowice.pl
+  - host: nginx.k.marx.katowice.pl
     http:
       paths:
       - backend:
@@ -19,7 +19,7 @@ spec:
         path: /
   tls:
   - hosts:
-    - nginx.marx.katowice.pl
+    - nginx.k.marx.katowice.pl
     # secretName: ingress-cert-marx
 ---
 apiVersion: v1
