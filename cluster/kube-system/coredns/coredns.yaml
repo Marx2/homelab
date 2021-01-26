@@ -45,7 +45,7 @@ spec:
           fallthrough in-addr.arpa ip6.arpa
           ttl 30
       - name: k8s_external 
-        parameters: k.marx.katoowice.pl          
+        parameters: k.marx.katowice.pl          
       # - name: prometheus
       #   parameters: 0.0.0.0:9153
       - name: forward
