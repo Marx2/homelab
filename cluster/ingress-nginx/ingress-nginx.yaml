@@ -43,7 +43,7 @@ spec:
           memory: 500Mi
       extraEnvs:
       - name: TZ
-        value: Europe//Warsaw
+        value: Europe/Warsaw
       service:
         type: LoadBalancer
         externalIPs:
@@ -51,6 +51,8 @@ spec:
         externalTrafficPolicy: Local
       publishService:
         enabled: true
+      extraArgs:
+        default-ssl-certificate: "kube-system/k-marx-katowice-pl-tls"
 
       # metrics:
       #   enabled: true
