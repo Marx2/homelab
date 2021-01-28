@@ -17,6 +17,7 @@ spec:
   interval: 1h
   values:
     controller:
+      # default name for ingressClass is "nginx"
       # ingressClass: internal
       # kind: DaemonSet
       # hostNetwork: true

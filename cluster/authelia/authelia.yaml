@@ -5,7 +5,7 @@ metadata:
   namespace: authelia
   annotations:
     kubernetes.io/tls-acme: "true"
-    kubernetes.io/ingress.class: "internal"
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
     nginx.ingress.kubernetes.io/configuration-snippet: |    
       # https://www.authelia.com/docs/security/measures.html
@@ -15,7 +15,7 @@ metadata:
       add_header X-XSS-Protection "1; mode=block";
 spec:
   rules:
-  - host: gate.marx.katowice.pl
+  - host: gate.k.marx.katowice.pl
     http:
       paths:
       - backend:
@@ -24,8 +24,8 @@ spec:
         path: /
   tls:
   - hosts:
-    - gate.marx.katowice.pl
-    secretName: ingress-cert-authelia
+    - gate.k.marx.katowice.pl
+    # secretName: ingress-cert-authelia
 ---
 apiVersion: v1
 kind: Service
