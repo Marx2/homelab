@@ -22,7 +22,7 @@ spec:
     webhook:
       enabled: true
     ingressShim:
-      defaultIssuerName: "letsencrypt-staging"
+      defaultIssuerName: "letsencrypt-production"
       defaultIssuerKind: "ClusterIssuer"      
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53

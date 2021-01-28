@@ -11,7 +11,7 @@ metadata:
 spec:
   secretName: k-marx-katowice-pl-tls
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
   commonName: "*.k.marx.katowice.pl"
   dnsNames:
