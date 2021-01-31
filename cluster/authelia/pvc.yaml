@@ -1,14 +1,14 @@
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: authelia
-  namespace: authelia
-  # annotations:
-  #   volume.beta.kubernetes.io/storage-class: "nfs-client"
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Mi
-  storageClassName: nfs-client-omv
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: authelia
+#   namespace: authelia
+#   # annotations:
+#   #   volume.beta.kubernetes.io/storage-class: "nfs-client"
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Mi
+#   storageClassName: nfs-client-omv
