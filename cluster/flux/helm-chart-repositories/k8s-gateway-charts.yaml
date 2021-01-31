@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: k8s-gateway-charts
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/ori-edge/k8s_gateway/tree/master/charts/
+  timeout: 3m
