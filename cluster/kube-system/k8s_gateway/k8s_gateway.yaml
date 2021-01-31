@@ -32,7 +32,8 @@ spec:
     ttl: 300
 
     # Limit what kind of resources to watch, e.g. resources: ["Ingress"]
-    resources: ["Ingress"]
+    resources: 
+      - "Ingress"
 
     serviceAccount:
       create: true
