@@ -8,4 +8,4 @@ spec:
   # url: https://github.com/ori-edge/k8s_gateway
   url: https://github.com/Marx2/k8s_gateway
   ref:
-    branch: helm-chart-is-broken-8
+    branch: marx2/helm-chart-is-broken-8
