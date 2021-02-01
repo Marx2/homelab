@@ -11,7 +11,7 @@ spec:
       chart: charts/k8s-gateway
       sourceRef:
         kind: GitRepository
-        name: k8s-gateway-repo2
+        name: k8s-gateway-repo
         namespace: flux-system
       interval: 5m
   timeout: 20m
