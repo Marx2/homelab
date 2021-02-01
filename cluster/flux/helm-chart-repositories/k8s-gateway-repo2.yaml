@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: k8s-gateway-repo
+  name: k8s-gateway-repo2
   namespace: flux-system
 spec:
   interval: 10m
