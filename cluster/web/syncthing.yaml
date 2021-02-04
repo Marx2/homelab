@@ -47,7 +47,7 @@ spec:
       loadBalancerIP: 192.168.1.213
       port:
         port: 8384
-        targetPort: 8384
+        # targetPort: 8384
       additionalPorts:
         port:
           port: 22000
