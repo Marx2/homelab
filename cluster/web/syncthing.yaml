@@ -36,12 +36,12 @@ spec:
         accessMode: ReadWriteOnce
         size: "1Gi"
     additionalVolumeMounts:
-    - name: pictures-omv
-      mountPath: "/pictures"
+    - name: backup-omv
+      mountPath: "/backup"
     additionalVolumes:
-    - name: pictures-omv
+    - name: backup-omv
       persistentVolumeClaim:
-        claimName: nfs-pictures-omv-pvc
+        claimName: nfs-backup-omv-pvc
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.213
