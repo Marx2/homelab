@@ -25,6 +25,7 @@ spec:
       server: omv
       path: /config
       mountOptions:
+        - nfsvers=3
         - tcp
         - intr
         - hard
