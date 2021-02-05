@@ -8,12 +8,12 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.helm.sh/stable
-      chart: nfs-client-provisioner
+      # renovate: registryUrl=https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+      chart: nfs-subdir-external-provisioner
       version: 1.2.11
       sourceRef:
         kind: HelmRepository
-        name: kubernetes-stable-charts
+        name: nfs-subdir-external-provisioner-charts
         namespace: flux-system
       interval: 5m
   timeout: 20m
