@@ -18,9 +18,9 @@ spec:
       interval: 5m
   timeout: 20m
   values:
-    image:
-      repository: quay.io/external_storage/nfs-client-provisioner
-      tag: v3.1.0-k8s1.11
+    # image:
+    #   repository: quay.io/external_storage/nfs-client-provisioner
+    #   tag: v3.1.0-k8s1.11
     nfs:
       server: omv
       path: /config
