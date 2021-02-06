@@ -15,6 +15,7 @@ spec:
     path: /media/pictures
   mountOptions:
 #  - nfsvers=3
+  - nfsvers=4.2
   - tcp
   - intr
   - hard
