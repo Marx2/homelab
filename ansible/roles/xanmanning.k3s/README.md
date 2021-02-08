@@ -14,7 +14,7 @@ and [CHANGELOG.md](CHANGELOG.md).
 
 The host you're running Ansible from requires the following Python dependencies:
 
-  - `ansible >= 2.10.4`
+  - `ansbile >= 2.9.17` or `ansible-base >= 2.10.4`
 
 You can install dependencies using the requirements.txt file in this repository:
 `pip3 install -r requirements.txt`.
@@ -71,6 +71,7 @@ consistency. These are generally cluster-level configuration.
 | `k3s_github_url`                 | Set the GitHub URL to install k3s from.                                         | https://github.com/k3s-io/k3s  |
 | `k3s_install_dir`                | Installation directory for k3s.                                                 | `/usr/local/bin`               |
 | `k3s_install_hard_links`         | Install using hard links rather than symbolic links.                            | `false`                        |
+| `k3s_start_on_boot`              | Start k3s on boot.                                                              | `true`                         |
 | `k3s_server_manifests_templates` | A list of Auto-Deploying Manifests Templates.                                   | []                             |
 | `k3s_use_experimental`           | Allow the use of experimental features in k3s.                                  | `false`                        |
 | `k3s_use_unsupported_config`     | Allow the use of unsupported configurations in k3s.                             | `false`                        |

@@ -14,6 +14,65 @@
 ---
 -->
 
+## 2021-01-31, v2.5.3
+
+### Notable changes
+
+  - Bugfix, missing update to minimum ansible version var #91.
+
+---
+
+## 2021-01-30, v2.5.2
+
+### Notable changes
+
+  - Bugfix, missing `k3s_start_on_boot` to control `systemd.enabled` added.
+
+---
+
+## 2021-01-30, v2.5.1
+
+### Notable changes
+
+  - Added uninstall task to remove hard-linked files #88
+  - Fixed missing become for `systemd` operations tasks. #89
+  - Added `k3s_start_on_boot` to control `systemd.enabled`.
+
+---
+
+## 2021-01-24, v2.5.0
+
+### Notable changes
+
+  - Added support for Ansible >= 2.9.17 #83
+
+---
+
+## 2021-01-23, v2.4.3
+
+### Notable changes
+
+  - Bufgix: Installation hangs on "Check that all nodes to be ready" #84
+
+---
+
+## 2021-01-10, v2.4.2
+
+### Notable changes
+
+  - Bufgix: Docker check still failing on "false"
+
+---
+
+## 2021-01-02, v2.4.1
+
+### Notable changes
+
+  - Fixed issue with armv6l (Raspberry Pi Zero W)
+  - Added path for private repositories config to directory creation list.
+
+---
+
 ## 2020-12-21, v2.4.0
 
 ### Notable changes
