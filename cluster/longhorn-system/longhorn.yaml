@@ -29,6 +29,7 @@ spec:
       snapshotterReplicaCount: 2
     defaultSettings:
       # backupTarget: nfs://some_ip:/backup/longhorn
+      defaultDataPath: /longhorn
       createDefaultDiskLabeledNodes: true
       defaultDataLocality: best-effort
       defaultReplicaCount: 2
