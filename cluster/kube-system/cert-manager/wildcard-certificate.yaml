@@ -1,18 +1,18 @@
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: k-marx-katowice-pl
-  namespace: kube-system
-  annotations:
-    reflector.v1.k8s.emberstack.com/secret-reflection-allowed: "true"
-    reflector.v1.k8s.emberstack.com/secret-reflection-auto-enabled: "true"
-    reflector.v1.k8s.emberstack.com/secret-reflection-auto-namespaces: "default, media, monitoring, web"
-spec:
-  secretName: k-marx-katowice-pl-tls
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  commonName: "*.k.marx.katowice.pl"
-  dnsNames:
-  - "*.k.marx.katowice.pl"
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: k-marx-katowice-pl
+#   namespace: kube-system
+#   annotations:
+#     reflector.v1.k8s.emberstack.com/secret-reflection-allowed: "true"
+#     reflector.v1.k8s.emberstack.com/secret-reflection-auto-enabled: "true"
+#     reflector.v1.k8s.emberstack.com/secret-reflection-auto-namespaces: "default, media, monitoring, web"
+# spec:
+#   secretName: k-marx-katowice-pl-tls
+#   issuerRef:
+#     name: letsencrypt-production
+#     kind: ClusterIssuer
+#   commonName: "*.k.marx.katowice.pl"
+#   dnsNames:
+#   - "*.k.marx.katowice.pl"
