@@ -42,7 +42,7 @@ ansible-playbook -u root galera.yml -i inventory/galera/hosts.yml
 
 K3S
 1. Create VM - with public SSH key
-LXC/Proxmox:
+LXC/Proxmox(bare metal):
 2 run playbook for k3s
 ansible-playbook -u root k3s_ha.yml -i inventory/k3s/hosts.yml
 VM:
