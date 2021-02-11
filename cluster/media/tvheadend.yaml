@@ -46,7 +46,7 @@ spec:
       config:
         enabled: true
 #        existingClaim: bazarr-pvc
-        storageClass: "nfs-client-omv"
+        storageClass: "longhorn"
         accessMode: ReadWriteOnce
         size: "1Gi"
 
