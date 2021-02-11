@@ -162,11 +162,13 @@ metadata:
     release: "forecastle"
     heritage: "Tiller"
   name: forecastle
+  namespace: web
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: forecastle-cluster-ingress-role
+  namespace: web
   labels:
     app: forecastle
     group: com.stakater.platform
@@ -190,6 +192,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: forecastle-cluster-ingress-role-binding
+  namespace: web
   labels:
     app: forecastle
     group: com.stakater.platform
