@@ -21,6 +21,7 @@ data:
     instanceName: null
     namespaceSelector:
       matchNames:
+        - default
         - web
         - longhorn-system
         - media
