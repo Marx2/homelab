@@ -208,7 +208,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: forecastle
-  namespace: default
+  namespace: web
 
 ---
 # Source: forecastle/templates/route.yaml
