@@ -93,7 +93,7 @@ spec:
             path: /dev/dri
         - name: recordings-omv
           persistentVolumeClaim:
-            claimName: nfs-recordings2-omv-pvc
+            claimName: nfs-recordings-omv-pvc
         - name: config
           persistentVolumeClaim:
             claimName: nextpvr-config
