@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
     forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/icon: "book"
+    forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/book.png"
 spec:
   rules:
   - host: nginx.k.marx.katowice.pl
