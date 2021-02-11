@@ -20,7 +20,7 @@ data:
         ready
         k8s_gateway k.marx.katowice.pl
         {
-          resources Ingress
+          resources Ingress Service
           ttl 10
           apex dns1
         }        
