@@ -66,7 +66,7 @@ spec:
         path: /dev/dri
     - name: recordings-omv
       persistentVolumeClaim:
-        claimName: nfs-recordings2-omv-pvc
+        claimName: nfs-recordings-omv-pvc
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.211
