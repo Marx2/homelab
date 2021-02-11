@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: forecastle
+  namespace: web
+spec:
+  releaseName: forecastle
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://stakater.github.io/stakater-charts/
+      chart: forecastle
+      version: v1.0.62
+      sourceRef:
+        kind: HelmRepository
+        name: stakater-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: stakater/forecastle
+      tag: v1.0.62
+    # env:
+    #   TZ: "Europe/Warsaw"
+    #   PUID: 1000
+    #   PGID: 1000
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.1.216
+      port:
+        port: 80
+        targetPort: 80
