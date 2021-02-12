@@ -28,14 +28,14 @@ spec:
       config:
         proxy-body-size: '0'
         ssl-protocols: "TLSv1.3 TLSv1.2"
-        # use-proxy-protocol: "true"
-        use-proxy-protocol: "false"
+        use-proxy-protocol: "true"
+        # use-proxy-protocol: "false"
         use-forwarded-headers: "true"
-        # compute-full-forwarded-for: "true"
-        # forwarded-for-header: X-Forwarded-For
+        compute-full-forwarded-for: "true"
+        forwarded-for-header: X-Forwarded-For
         # proxy-real-ip-cidr: 192.168.1.210
-        # global-auth-url: "https://gate.marx.katowice.pl/api/verify"
-        # global-auth-signin: "https://gate.marx.katowice.pl"
+        global-auth-url: "https://auth.k.marx.katowice.pl/api/verify"
+        global-auth-signin: "https://auth.k.marx.katowice.pl"
       resources:
         requests:
           memory: 250Mi
