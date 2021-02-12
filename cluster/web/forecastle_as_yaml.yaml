@@ -147,7 +147,30 @@ spec:
 
 ---
 # Source: forecastle/templates/ingress.yaml
-
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: forecastle
+  namespace: web
+  annotations:
+    kubernetes.io/ingress.class: "external"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
+    forecastle.stakater.com/network-restricted: "true"
+spec:
+  rules:
+  - host: nginx.k.marx.katowice.pl
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - nginx.k.marx.katowice.pl
 
 ---
 # Source: forecastle/templates/rbac.yaml
@@ -240,7 +263,7 @@ spec:
     app: forecastle
     group: com.stakater.platform
     provider: stakater
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.216
+  # type: LoadBalancer
+  # loadBalancerIP: 192.168.1.216
 
 
