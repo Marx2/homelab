@@ -34,15 +34,13 @@ spec:
     extraArgs:
       provider: github
       provider-display-name: "GitHub provider"
-      # oidc-issuer-url: https://github.com
       skip-provider-button: "false"
       pass-authorization-header:
       email-domain: "*"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
-      # login-url: "https://github.com/login/oauth/authorize"
-      # redeem-url: "https:/github.com/login/oauth/access_token"
-      # validate-url: "https://api.github.com/user"
+      # github-repo: "Marx2/homelab"
+      github-repo: "onedr0p/home-cluster"
 
   valuesFrom:
   - kind: Secret
