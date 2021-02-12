@@ -32,9 +32,9 @@ spec:
     config:
       clientID: oauth2-proxy
     extraArgs:
-      provider: oidc
-      oidc-issuer-url: https://github.com
-      skip-provider-button:
+      provider: github
+      # oidc-issuer-url: https://github.com
+      skip-provider-button: "false"
       pass-authorization-header:
       email-domain: "*"
       cookie-domain: .k.marx.katowice.pl
