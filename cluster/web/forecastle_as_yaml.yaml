@@ -165,7 +165,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: foecastle
+          serviceName: forecastle
           servicePort: 80
         path: /
   tls:
