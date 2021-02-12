@@ -1,0 +1,14 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: oauth2-proxy-helm-values
+  namespace: kube-system
+spec:
+  encryptedData:
+    values.yaml: AgANlRZL3fGRYL5Zm7rZvlO6OS9URA1vvIGKHFTmGlsuiPQ1ggvXAyRrY/SFzo29tpBWoYVDV+4IzJzYyTUbnCECJVQcwZTbKe8jMRJFpm3bhMEibR5fRMNWGSBguy9azbLVpnftt+5mUmekcVNHUgryf3dit6cHGQ6Kf1tDGCTgQLy4RfV7Ffn/FpXN8Y+rxcnnQlG/0NtuMu0EDpIuk4UNSksISsf90aJqS5x2Maqqrsyvh5IGVHr6sEcjIYI64lkk0j0ldEQ7bZISVenvTZwLQK3UU/UPsmR7t9GLXJRZw5Qf6Lmzcge6t5YPtF0CdAMVtyeiXv4s7dXfnEsG/jxfYX8KMRXMQWvbMsiKyN/wyMXSslUC0M+XHLLCoECd/OVetz7dLHaqlUXdRD+XnRj+/x2EI//jd8jU+wTOJPmMzDoOSqPaenyF2pZQ6ThHE8ir9+XDzM62s3QzbO88hOiEvFIS29jw5k5HIH+q+4h3/23Ppux2UugzllzBwzAuSMqHzm3hWZF6kGkb5oL9yn764JCBviIey8BGekRxq6MuSNE97XZuUQNrkwpdArqP33LpqwCaRiEYmmqPg04tT8DyOLJgDK09HGnuDL4/i/XdNLdkNZiq5AOWl022BTm6hI4frdsWH79AfWuaLJk2Z9N4KIooA1mGqktbchDFTtohxq6FJn20mylaJJvtIQuJVEjihjdIUdBmxPjb6TDsoyYYI7gOJ/tViPBhni8QdV+F0h72j0NwD18xyCv5TxIcG4Zl8VH3ERPhU08fqwD5cTN/BWWXYpqLDIWDz4///WJfy7sFq5GsSdiGQ7nZtFzITrOZPixce2zz8EfO/RU+gA5l/BouWEWJHiC5EBe/HJYiSwAapfGkaU50Ne2Qo0PaBOXgvlvCfQ1B+zG/GMXChpC8Oq8//A==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: oauth2-proxy-helm-values
+      namespace: kube-system
