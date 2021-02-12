@@ -31,8 +31,8 @@ spec:
       tls:
       - hosts:
         - auth.k.marx.katowice.pl
-    config:
-      clientID: oauth2-proxy
+    # config:
+    #   clientID: oauth2-proxy
     extraArgs:
       provider: github
       provider-display-name: "GitHub provider"
@@ -42,9 +42,9 @@ spec:
       email-domain: "*"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
-      login-url: "https://github.com/login/oauth/authorize"
-      redeem-url: "https:/github.com/login/oauth/access_token"
-      validate-url: "https://api.github.com/user"
+      # login-url: "https://github.com/login/oauth/authorize"
+      # redeem-url: "https:/github.com/login/oauth/access_token"
+      # validate-url: "https://api.github.com/user"
 
   valuesFrom:
   - kind: Secret
