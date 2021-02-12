@@ -31,8 +31,6 @@ spec:
       tls:
       - hosts:
         - auth.k.marx.katowice.pl
-    # config:
-    #   clientID: oauth2-proxy
     extraArgs:
       provider: github
       provider-display-name: "GitHub provider"
