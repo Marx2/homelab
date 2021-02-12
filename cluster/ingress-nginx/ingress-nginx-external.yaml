@@ -24,7 +24,7 @@ spec:
       # dnsPolicy: ClusterFirstWithHostNet
       # hostPort:
       #   enabled: true
-      replicaCount: 2
+      replicaCount: 1
       config:
         proxy-body-size: '0'
         ssl-protocols: "TLSv1.3 TLSv1.2"
