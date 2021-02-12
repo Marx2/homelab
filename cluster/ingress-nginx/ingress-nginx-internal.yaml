@@ -28,9 +28,8 @@ spec:
       config:
         proxy-body-size: '0'
         ssl-protocols: "TLSv1.3 TLSv1.2"
-        # use-proxy-protocol: "true"
         use-proxy-protocol: "false"
-        # use-forwarded-headers: "true"
+        use-forwarded-headers: "true"
         # compute-full-forwarded-for: "true"
         # forwarded-for-header: X-Forwarded-For
         # proxy-real-ip-cidr: 192.168.1.210
@@ -48,7 +47,7 @@ spec:
       service:
         type: LoadBalancer
         externalIPs:
-        - 192.168.1.210
+        - 192.168.1.217
         externalTrafficPolicy: Local
       publishService:
         enabled: true
