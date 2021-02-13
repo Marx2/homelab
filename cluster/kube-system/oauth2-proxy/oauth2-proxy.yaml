@@ -36,11 +36,11 @@ spec:
       provider-display-name: "GitHub provider"
       skip-provider-button: "false"
       pass-authorization-header:
-      email-domain: "*"
+      email-domain: "deniedemail@gmail.com"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
       # github-repo: "Marx2/homelab"
-      github-repo: "onedr0p/home-cluster"
+      # github-repo: "onedr0p/home-cluster"
 
   valuesFrom:
   - kind: Secret
