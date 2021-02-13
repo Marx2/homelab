@@ -36,7 +36,7 @@ spec:
       provider-display-name: "GitHub provider"
       skip-provider-button: "false"
       pass-authorization-header:
-      email-domain: "deniedemail@gmail.com"
+      email-domain: "mnazarko@gmail.com"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
       # github-repo: "Marx2/homelab"
