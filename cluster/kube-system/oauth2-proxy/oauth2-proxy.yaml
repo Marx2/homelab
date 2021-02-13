@@ -39,7 +39,7 @@ spec:
       email-domain: "*"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
-      github-user: "carpenike"
+      github-user: "Marx2"
       # github-repo: "Marx2/homelab"
       # github-repo: "onedr0p/home-cluster"
 
