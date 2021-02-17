@@ -31,16 +31,26 @@ spec:
       tls:
       - hosts:
         - auth.k.marx.katowice.pl
+    # extraArgs:
+    #   provider: github
+    #   provider-display-name: "GitHub provider"
+    #   skip-provider-button: "false"
+    #   pass-authorization-header:
+    #   email-domain: "*"
+    #   cookie-domain: ".k.marx.katowice.pl"
+    #   whitelist-domain: ".k.marx.katowice.pl"
+    #   github-user: "Marx2"
     extraArgs:
-      provider: github
-      provider-display-name: "GitHub provider"
-      skip-provider-button: "false"
+      provider: oidc
+      provider-display-name: "Dex provider"
+      oidc-issuer-url: https://dex.k.marx.katowice.pl
+      skip-provider-button:
       pass-authorization-header:
+      pass-access-token: true
       email-domain: "*"
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
-      github-user: "Marx2"
-
+      exclude-logging-path: "/ping"
   valuesFrom:
   - kind: Secret
     name: "oauth2-proxy-helm-values"

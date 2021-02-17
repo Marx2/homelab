@@ -1,0 +1,1 @@
+kubeseal <dex-helm-values-org.yaml >dex-helm-values.yaml --format yaml
