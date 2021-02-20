@@ -11,11 +11,6 @@ except Exception as error:
 # load db
 kp = PyKeePass('marx.kdbx', password)
 
-# find any group by its name
-group = kp.find_groups(name='social', first=True)
-
-# get the entries in a group
-group.entries
-
 # find any entry by its title
-entry = kp.find_entries(title='facebook', first=True)
+entry = kp.find_entries(title='SEALED_TEST_ENTRY', first=True)
+print(entry.password)
