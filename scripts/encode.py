@@ -1,16 +1,32 @@
 #!/usr/bin/env python3
 from pykeepass import PyKeePass
 import getpass
+import re
 
-# ask fo password
+# open YAML file
+filein="test.yaml"
+f = open(filein,'r')
+
+# ask for KeePass password
 try:
     password = getpass.getpass(prompt='Password: ', stream=None)
 except Exception as error:
     print('ERROR', error)
 
-# load db
+# load KeePass db
 kp = PyKeePass('marx.kdbx', password)
 
-# find any entry by its title
-entry = kp.find_entries(title='SEALED_TEST_ENTRY', first=True)
-print(entry.password)
+# define regex: ${VAR_NAME}
+pattern = re.compile('.*?\${(\w+)}.*?')
+# replace
+for line in f:
+    # find in line
+    match = pattern.findall(line)
+    for g in match:
+        # lookup password
+        entry = kp.find_entries(title=g, first=True)
+        line = line.replace(f'${{{g}}}', entry.password)
+        #print(g)
+    print(line)
+f.close()
+

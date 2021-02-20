@@ -1,0 +1,6 @@
+database:
+ name: database_name
+ user: ${SEALED_DB_USER}
+ password: ${SEALED_DB_PASS}
+ host: ${SEALED_DB_HOST}
+ port: 5432
