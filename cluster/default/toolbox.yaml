@@ -1,0 +1,40 @@
+# A special pod which is used to ssh into a node.
+#
+# 1. kubect exec -it <pod>
+# 2. chroot /host
+#
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: fuyecheng-ssh
+spec:
+  nodeName: $NODE
+  containers:
+  - name: ssh-node
+    image: alpine:3.13.2
+    imagePullPolicy: Always
+    args:
+    - bash
+    - -c
+    - "trap 'exit' TERM; while true; do sleep 1; done"
+    tty: true
+    stdin: true
+    stdinOnce: true
+    # securityContext:
+    #   privileged: true
+  #   volumeMounts:
+  #   - name: from
+  #     mountPath: /from
+  #   - name: to
+  #     mountPath: /to
+  # volumes:
+  # - name: from
+  #   persistentVolumeClaim:
+  #     claimName: from-pvc
+  # - name: to
+  #   persistentVolumeClaim:
+  #     claimName: to-pvc
+  hostNetwork: true
+  hostIPC: true
+  hostPID: true
+  restartPolicy: Never
