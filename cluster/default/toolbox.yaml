@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: ssh-node
-    image: alpine:3.13.2
+    image: debian:stretch-20210208
     imagePullPolicy: Always
     args:
     - bash
