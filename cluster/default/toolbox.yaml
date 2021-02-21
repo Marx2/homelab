@@ -6,9 +6,8 @@
 apiVersion: v1
 kind: Pod 
 metadata:
-  name: fuyecheng-ssh
+  name: toolbox
 spec:
-  nodeName: $NODE
   containers:
   - name: ssh-node
     image: alpine:3.13.2
