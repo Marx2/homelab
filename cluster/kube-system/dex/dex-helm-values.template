@@ -57,9 +57,9 @@ stringData:
             clientSecret: ${SEALED_DEX_GITHUB_CLIENT_SECRET}
             redirectURI: https://dex.k.marx.katowice.pl/callback
             # 'orgs' can be used to map groups from Github
-            # https://github.com/coreos/dex/blob/master/Documentation/connectors/github.md
+            # https://dexidp.io/docs/connectors/github/
             orgs:
-              - name: Marx2
+              - name: marx-org
       # The 'name' must match the k8s API server's 'oidc-client-id'
       staticClients:
         - id: oauth2-proxy
