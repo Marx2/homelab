@@ -1,19 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: toolbox
+  namespace: default
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: toolbox-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: toolbox
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: toolbox
+    spec:
+      containers:
+      - name: toolbox
+        image: debian:stretch-20210208
+        # Just sleep forever
+        command: [ "sleep" ]
+        args: [ "infinity" ]
+
+
+
+
+
+
+
+
+
+
 # A special pod which is used to ssh into a node.
 #
 # 1. kubect exec -it <pod>
 # 2. chroot /host
 #
-apiVersion: v1
-kind: Pod 
-metadata:
-  name: toolbox
-spec:
-  containers:
-  - name: ssh-node
-    image: debian:stretch-20210208
-    # Just sleep forever
-    command: [ "sleep" ]
-    args: [ "infinity" ]
     # tty: true
     # stdin: true
     # stdinOnce: true
