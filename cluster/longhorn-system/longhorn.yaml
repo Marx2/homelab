@@ -47,8 +47,8 @@ spec:
         forecastle.stakater.com/properties: "SOME:PROPERTY"
         forecastle.stakater.com/network-restricted: "true"
     service:
-      type: LoadBalancer
-      loadBalancerIP: 192.168.1.215
+      # type: LoadBalancer
+      # loadBalancerIP: 192.168.1.215
       port:
         port: 80
         targetPort: 80
