@@ -3,7 +3,7 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: toolbox-deployment
-  namespace: web
+  namespace: media
 spec:
   selector:
     matchLabels:
@@ -31,4 +31,4 @@ spec:
       #     claimName: from-pvc
       - name: to
         persistentVolumeClaim:
-          claimName: config-syncthing-pvc
+          claimName: config-tvheadend-pvc
