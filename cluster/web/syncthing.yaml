@@ -29,6 +29,7 @@ spec:
       PGID: "1000"
     strategy:
       type: Recreate
+    replicas: 0  
     persistence:
       config:
         enabled: true
