@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-syncthing-pvc
+  namespace: web
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: xxxx
+  resources:
+    requests:
+      storage: 1Mi
