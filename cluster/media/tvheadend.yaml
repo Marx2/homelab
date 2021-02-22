@@ -51,11 +51,7 @@ spec:
     persistence:
       config:
         enabled: true
-#        existingClaim: bazarr-pvc
-        storageClass: "longhorn"
-        accessMode: ReadWriteOnce
-        size: "1Gi"
-
+        existingClaim: config-tvheadend-pvc
     additionalVolumeMounts:
     - name: dvb
       mountPath: /dev/dvb
