@@ -11,14 +11,12 @@ spec:
   containers:
   - name: ssh-node
     image: debian:stretch-20210208
-    imagePullPolicy: Always
-    args:
-    - bash
-    - -c
-    - "trap 'exit' TERM; while true; do sleep 1; done"
-    tty: true
-    stdin: true
-    stdinOnce: true
+    # Just sleep forever
+    command: [ "sleep" ]
+    args: [ "infinity" ]
+    # tty: true
+    # stdin: true
+    # stdinOnce: true
     # securityContext:
     #   privileged: true
   #   volumeMounts:
@@ -33,7 +31,7 @@ spec:
   # - name: to
   #   persistentVolumeClaim:
   #     claimName: to-pvc
-  hostNetwork: true
-  hostIPC: true
-  hostPID: true
-  restartPolicy: Never
+  # hostNetwork: true
+  # hostIPC: true
+  # hostPID: true
+  # restartPolicy: Never
