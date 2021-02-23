@@ -1,0 +1,61 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: scrutiny
+  namespace: web
+spec:
+  selector:
+    app: scrutiny
+  # type: LoadBalancer
+  # loadBalancerIP: 192.168.1.211
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http-api
+      name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrutiny
+  namespace: web
+spec:
+  selector:
+    matchLabels:
+      app: scrutiny
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: scrutiny
+    spec:
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /etc/localtime
+        - name: udev
+          hostPath:
+            path: /run/udev
+        - name: sda
+          hostPath:
+            path: /dev/sda
+      containers:
+        - name: nextpvr
+          image: analogj/scrutiny:v0.3.5-omnibus
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_RAWIO
+          ports:
+            - containerPort: 80
+              name: http-api
+          volumeMounts:
+            - mountPath: "/etc/localtime"
+              readOnly: true
+              name: tz-config
+            - name: udev
+              mountPath: /run/udev:ro
+            - name: sda
+              mountPath: /dev/sda
