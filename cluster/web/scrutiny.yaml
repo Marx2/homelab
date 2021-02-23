@@ -41,7 +41,7 @@ spec:
           hostPath:
             path: /dev/sda
       containers:
-        - name: nextpvr
+        - name: scrutiny
           image: analogj/scrutiny:v0.3.5-omnibus
           securityContext:
             privileged: true
