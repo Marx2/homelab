@@ -25,25 +25,6 @@ spec:
     name: slack
   eventSeverity: error
   eventSources:
-#    - kind: HelmRelease
-#      namespace: 'cert-manager'
-#      name: '*'
-#    - kind: HelmRelease
-#      namespace: 'dev'
-#      name: '*'
     - kind: HelmRelease
-      namespace: 'monitoring'
       name: '*'
-    - kind: HelmRelease
-      namespace: 'kube-system'
-      name: '*'
-#    - kind: HelmRelease
-#      namespace: 'media'
-#      name: '*'
-#    - kind: HelmRelease
-#      namespace: 'rook-ceph'
-#      name: '*'
-#    - kind: HelmRelease
-#      namespace: 'testing'
-#      name: '*'
   suspend: false
