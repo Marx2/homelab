@@ -36,7 +36,7 @@ spec:
     targetPort: 8080
   selector:
     app: code-server
-  type: LoadBalancer
+  # type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
