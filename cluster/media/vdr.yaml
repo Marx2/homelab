@@ -66,17 +66,17 @@ spec:
             privileged: true
           ports:
             - containerPort: 8008
-              name: http-api
+              name: http1
             - containerPort: 37890
-              name: http-api
+              name: http2
             - containerPort: 6419
-              name: http-api
+              name: http3
             - containerPort: 3000
-              name: http-api
+              name: http4
             - containerPort: 34890
-              name: http-api
+              name: http5
             - containerPort: 2270
-              name: http-api
+              name: http6
           volumeMounts:
             - mountPath: "/etc/localtime"
               readOnly: true
