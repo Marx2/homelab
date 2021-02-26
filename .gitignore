@@ -1,3 +1,5 @@
 bin/
 .local
 .vscode
+.bash_history
+.gitconfig
