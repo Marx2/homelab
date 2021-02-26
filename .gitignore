@@ -3,3 +3,4 @@ bin/
 .vscode
 .bash_history
 .gitconfig
+.config/code-server/config.yaml
