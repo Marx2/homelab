@@ -20,15 +20,15 @@ spec:
         # Just sleep forever
         command: [ "sleep" ]
         args: [ "infinity" ]
-        volumeMounts:
+        # volumeMounts:
         # - name: from
         #   mountPath: /from
-        - name: to
-          mountPath: /to
-      volumes:
+        # - name: to
+        #   mountPath: /to
+      # volumes:
       # - name: from
       #   persistentVolumeClaim:
       #     claimName: from-pvc
-      - name: to
-        persistentVolumeClaim:
-          claimName: config-tvheadend-pvc
+      # - name: to
+      #   persistentVolumeClaim:
+      #     claimName: config-tvheadend-pvc
