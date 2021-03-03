@@ -44,7 +44,7 @@ spec:
   selector:
     matchLabels:
       app: vdr
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
