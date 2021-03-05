@@ -7,5 +7,5 @@ metadata:
 stringData:
   values.yaml: |-
     admin-user: "admin"
-    adminPassword: "${SEALED_GRAFANA_PASS}"
+    admin-password: "${SEALED_GRAFANA_PASS}"
       
