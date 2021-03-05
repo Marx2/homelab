@@ -87,7 +87,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "nfs-client-omv" #TODO
+              storageClassName: "nfs-client-omv"
               resources:
                 requests:
                   storage: 50Gi
