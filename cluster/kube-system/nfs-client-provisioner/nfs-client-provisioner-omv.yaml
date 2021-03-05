@@ -24,16 +24,16 @@ spec:
     nfs:
       server: omv
       path: /kubernetes
-      mountOptions:
-        # - nfsvers=3
-        - nfsvers=4.2
-        - tcp
-        - intr
-        - hard
-        - noatime
-        - nodiratime
-        - rsize=1048576
-        - wsize=1048576
+      # mountOptions:
+      #   # - nfsvers=3
+      #   - nfsvers=4.2
+      #   - tcp
+      #   - intr
+      #   - hard
+      #   - noatime
+      #   - nodiratime
+      #   - rsize=1048576
+      #   - wsize=1048576
     storageClass:
       name: nfs-client-omv
       reclaimPolicy: Retain
