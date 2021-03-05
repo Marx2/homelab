@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 12.11.3
+      version: 13.13.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -38,6 +38,8 @@ spec:
           sourceLabels:
           - __meta_kubernetes_pod_node_name
           targetLabel: kubernetes_node
+    grafana:
+      enabled: false          
     kubeEtcd:
       enabled: false
     kubeProxy:
@@ -51,19 +53,25 @@ spec:
           targetLabel: instance
           
     prometheus:
-#      ingress:
-#        enabled: true
-#        annotations:
-#          kubernetes.io/ingress.class: "internal"
-#        hosts:
-#        - "prometheus.devbu.io"
-#        tls:
-#        - hosts:
-#          - "prometheus.devbu.io"
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "external"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/book.png"
+          forecastle.stakater.com/properties: "SOME:PROPERTY"
+          forecastle.stakater.com/network-restricted: "false"
+        hosts:
+          - "prometheus.k.marx.katowice.pl"
+        tls:
+          - hosts:
+            - "prometheus.k.marx.katowice.pl"
       prometheusSpec:
-        replicas: 2
-        replicaExternalLabelName: "replica"
-        podAntiAffinity: "hard"
+        # replicas: 2
+        # replicaExternalLabelName: "replica"
+        # podAntiAffinity: "hard"
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
@@ -73,15 +81,15 @@ spec:
         podMonitorSelector: {}
         podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
-        retention: 24h
+        retention: 672h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "nfs-client-omv"
+              storageClassName: "nfs-client-omv" #TODO
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 50Gi
           
           
