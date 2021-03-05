@@ -161,6 +161,6 @@ spec:
       - ReadWriteOnce
     podAnnotations:
       configmap.reloader.stakater.com/reload: "grafana"
-  # valuesFrom:
-  # - kind: Secret
-  #   name: "grafana-helm-values"
+  valuesFrom:
+  - kind: Secret
+    name: "grafana-helm-values"
