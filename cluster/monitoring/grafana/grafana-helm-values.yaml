@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: grafana-helm-values
+  namespace: monitoring
+spec:
+  encryptedData:
+    values.yaml: AgDXAGilNIiSn1XhgE49Sl8ymE2MkG92AJXF6L1S4vaWo2koKwr43TlDcdVOGAgrQ/sLBg8IIIaVkN5EptJ1pjt1mIgy56nma5MtJSl6xtT9gpwBnK9Gq8Z/qn4382rHrN8EPevWezRROxPmTpT5mKf1L+8iCEGBVtrQkUK+c8VYD1vthL1rr9y95y+c0QGmPEbYhHFfEuMcCHGo9Osw6faV8/Trc1jlx0ZZi5XhsgnpA6muxcerv87kKUAru/p7RBGq5GNsdUwMIQ6Ln5OiAKoZn/J1FJMCV9iyg0Tw/Htkl3zHy9l8i6Z2rxACQHvApBIubyOXsx/omnSqlz+N+T6l58EItpvigPMXdDkDfyrA5mh4ciwfFpqGWFzfxuazxyk87jeFFa0cZ8qzKW0rdzLUSaDYoJFKHReMXMhOa64V01RquY+ZiEDGb4p/bT9qvEwjvIxIyyqcTpzutKRnvTQ23fFPh93V8q2fT6AyYWAEKir3TDqqumwJ+rb+XKWkfhyb0jPix1KkNmnYcfeiddM77XYYNOt3UD2SPdolwN2UbeQBVi8fd5xQ34bL7DcnY4EBzDVvc0JqCgNq0LXkCyvXD9PTxSBQQk9xaGe8zSsD22Ec/40+uZWPy1PcxVn485Z5B/PCz65dejnn36bGc+z8K/DkGeuM4upOPtAQOThAr/Td55bXJZZW6exJ6eDhBRn3L6LoW3sIcgn1QJpmscSaWH/U+AwzM0RdpgYhLyXxjb4IUvMmQPVDPv84pIVpnn7oTi+Q+xFu2+2/J8SaKQ==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: grafana-helm-values
+      namespace: monitoring
+
