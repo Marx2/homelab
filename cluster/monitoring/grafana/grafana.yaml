@@ -36,6 +36,8 @@ spec:
         check_for_updates: false
       log:
         mode: console
+        # TODO disable later
+        level: debug
       grafana_net:
         url: https://grafana.net
       auth.basic:
