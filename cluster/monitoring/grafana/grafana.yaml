@@ -126,12 +126,6 @@ spec:
         # blocky:
         #   url: https://raw.githubusercontent.com/0xERR0R/blocky/master/docs/blocky-grafana.json
         #   datasource: Prometheus
-        toolkit-cluster:
-          url: https://raw.githubusercontent.com/fluxcd/toolkit/main/manifests/monitoring/grafana/dashboards/cluster.json
-          datasource: Prometheus
-        toolkit-control-plane:
-          url: https://raw.githubusercontent.com/fluxcd/toolkit/main/manifests/monitoring/grafana/dashboards/control-plane.json
-          datasource: Prometheus          
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
           datasource: Prometheus
