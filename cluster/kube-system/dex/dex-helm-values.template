@@ -60,7 +60,6 @@ stringData:
             # https://dexidp.io/docs/connectors/github/
             orgs:
               - name: marx-org
-            teamNameField: admin
       # The 'name' must match the k8s API server's 'oidc-client-id'
       staticClients:
         - id: oauth2-proxy
