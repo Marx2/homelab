@@ -40,6 +40,19 @@ spec:
         url: https://grafana.net
       auth.basic:
         disable_login_form: true
+      auth.generic_oauth:
+          enabled: true
+          allow_sign_up: true
+          name: Dex
+          client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+          client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+          scopes: openid profile email groups
+          auth_url: https://dex.k.marx.katowice.pl/auth
+          token_url: https://dex.k.marx.katowice.pl/token
+          api_url: https://dex.k.marx.katowice.pl/userinfo
+        auth.generic_oauth.group_mapping:
+          role_attribute_path: "contains(groups[*], 'Marx2:marx-org') && 'Admin' || 'Viewer'"
+          org_id: 1
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
