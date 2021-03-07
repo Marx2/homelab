@@ -67,8 +67,8 @@ stringData:
           secret: ${SEALED_OAUTH2_PROXY_SECRET}
           redirectURIs:
             - https://auth.k.marx.katowice.pl/oauth2/callback
-    #    - id: grafana
-    #      name: 'grafana'
-    #      secret: 'REDACTED'
-    #      redirectURIs:
-    #        - https://grafana.raspbernetes.com/login/generic_oauth
+        - id: grafana
+          name: 'grafana'
+          secret: '${SEALED_GENERIC_OAUTH_SECRET}'
+          redirectURIs:
+            - https://grafana.k.marx.katowice.pl/login/generic_oauth
