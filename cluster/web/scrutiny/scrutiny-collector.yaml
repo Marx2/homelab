@@ -1,0 +1,57 @@
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: scrutiny-collector
+#   namespace: web
+# spec:
+#   selector:
+#     app: scrutiny-collector
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 8080
+#       name: http
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: scrutiny-collector
+  namespace: web
+spec:
+  selector:
+    matchLabels:
+      app: scrutiny-collector
+  # replicas: 1
+  template:
+    metadata:
+      labels:
+        app: scrutiny-collector
+    spec:
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /etc/localtime
+        - name: udev
+          hostPath:
+            path: /run/udev
+      containers:
+        - env:
+          - name: SCRUTINY_API_ENDPOINT
+            value: http://scrutiny:80
+        - name: scrutiny-collector
+          image: analogj/scrutiny:v0.3.5-collector
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_RAWIO
+          ports:
+            - containerPort: 8080
+              name: http-api
+          volumeMounts:
+            - mountPath: "/etc/localtime"
+              readOnly: true
+              name: tz-config
+            - name: udev
+              mountPath: /run/udev:ro

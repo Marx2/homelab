@@ -32,8 +32,6 @@ metadata:
 spec:
   selector:
     app: scrutiny
-  # type: LoadBalancer
-  # loadBalancerIP: 192.168.1.211
   ports:
     - protocol: TCP
       port: 80
@@ -59,20 +57,9 @@ spec:
         - name: tz-config
           hostPath:
             path: /etc/localtime
-        - name: udev
-          hostPath:
-            path: /run/udev
-        # - name: sda
-        #   hostPath:
-        #     path: /dev/sda
       containers:
         - name: scrutiny
-          image: analogj/scrutiny:v0.3.5-omnibus
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - SYS_RAWIO
+          image: analogj/scrutiny:v0.3.5-web
           ports:
             - containerPort: 8080
               name: http-api
@@ -80,7 +67,3 @@ spec:
             - mountPath: "/etc/localtime"
               readOnly: true
               name: tz-config
-            - name: udev
-              mountPath: /run/udev:ro
-            # - name: sda
-            #   mountPath: /dev/sda
