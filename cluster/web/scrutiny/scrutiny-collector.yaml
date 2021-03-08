@@ -36,9 +36,6 @@ spec:
           hostPath:
             path: /run/udev
       containers:
-        - env:
-          - name: SCRUTINY_API_ENDPOINT
-            value: http://scrutiny:80
         - name: scrutiny-collector
           image: analogj/scrutiny:v0.3.5-collector
           securityContext:
@@ -55,3 +52,6 @@ spec:
               name: tz-config
             - name: udev
               mountPath: /run/udev:ro
+          - env:
+            - name: SCRUTINY_API_ENDPOINT
+              value: "http://scrutiny:80"
