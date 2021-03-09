@@ -183,6 +183,13 @@ spec:
         defaultMode: 0440
         mountPath: /etc/secrets/auth_generic_oauth
         readOnly: true    
+    resources:
+      limits:
+        cpu: 2
+        memory: 512Mi
+      requests:
+        cpu: 1
+        memory: 256Mi
   valuesFrom:
   - kind: Secret
     name: "grafana-helm-values"
