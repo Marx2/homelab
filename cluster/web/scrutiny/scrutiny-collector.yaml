@@ -1,7 +1,7 @@
 ---
 apiVersion: apps/v1
-# kind: DaemonSet
-kind: Deployment
+kind: DaemonSet
+# kind: Deployment
 metadata:
   name: scrutiny-collector
   namespace: web
@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: scrutiny-collector
-  replicas: 3
+  # replicas: 3
   template:
     metadata:
       labels:
@@ -42,13 +42,13 @@ spec:
               name: tz-config
             - name: udev
               mountPath: /run/udev:ro
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - scrutiny-collector
-              topologyKey: "kubernetes.io/hostname"
+      # affinity:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       - labelSelector:
+      #           matchExpressions:
+      #             - key: "app"
+      #               operator: In
+      #               values:
+      #               - scrutiny-collector
+      #         topologyKey: "kubernetes.io/hostname"
