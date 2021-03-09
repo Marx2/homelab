@@ -1,6 +1,7 @@
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+# kind: DaemonSet
+kind: Deployment
 metadata:
   name: scrutiny-collector
   namespace: web
@@ -8,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: scrutiny-collector
+  replicas: 3
   template:
     metadata:
       labels:
