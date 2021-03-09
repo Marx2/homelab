@@ -57,6 +57,9 @@ spec:
         - name: tz-config
           hostPath:
             path: /etc/localtime
+        - name: scrutiny-config
+          persistentVolumeClaim:
+            claimName: scrutiny-config-pvc
       containers:
         - name: scrutiny
           image: analogj/scrutiny:v0.3.5-web
@@ -67,3 +70,5 @@ spec:
             - mountPath: "/etc/localtime"
               readOnly: true
               name: tz-config
+            - name: scrutiny-config
+              mountPath: /scrutiny/config
