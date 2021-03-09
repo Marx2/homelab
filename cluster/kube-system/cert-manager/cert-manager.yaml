@@ -34,8 +34,15 @@ spec:
       nameservers:
         - "1.1.1.1"
         - "8.8.8.8"
-    # prometheus:
-    #   enabled: true
-    #   servicemonitor:
-    #     enabled: true
-    #     prometheusInstance: monitoring        
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
+        prometheusInstance: monitoring
+    resources:
+      limits:
+        cpu: 15m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 50Mi
