@@ -123,3 +123,11 @@ spec:
             items:
             - key: Corefile
               path: Corefile
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "50Mi"
+          limits:
+            cpu: "15m"              
+            memory: "100Mi"
+  
