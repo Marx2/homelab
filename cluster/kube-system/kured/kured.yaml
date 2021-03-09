@@ -42,3 +42,10 @@ spec:
       endTime: "7:00"
       rebootDays: [su]
       timeZone: "Europe/Warsaw"
+    resources:
+      limits:
+        cpu: 15m
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 50Mi
