@@ -51,6 +51,13 @@ spec:
       cookie-domain: ".k.marx.katowice.pl"
       whitelist-domain: ".k.marx.katowice.pl"
       exclude-logging-path: "/ping"
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "128Mi"
+      limits:
+        cpu: "200m"              
+        memory: "128Mi"      
   valuesFrom:
   - kind: Secret
     name: "oauth2-proxy-helm-values"
