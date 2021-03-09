@@ -27,7 +27,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: scrutiny
+  name: scrutiny-web
   namespace: web
 spec:
   selector:

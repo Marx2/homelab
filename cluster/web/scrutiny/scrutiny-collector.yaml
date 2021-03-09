@@ -25,7 +25,7 @@ spec:
           image: analogj/scrutiny:v0.3.5-collector
           env:
             - name: SCRUTINY_API_ENDPOINT
-              value: "http://scrutiny:80"
+              value: "http://scrutiny-web:80"
           securityContext:
             privileged: true
             capabilities:
