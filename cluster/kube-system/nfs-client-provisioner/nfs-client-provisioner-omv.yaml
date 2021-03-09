@@ -38,3 +38,10 @@ spec:
       name: nfs-client-omv
       reclaimPolicy: Retain
       defaultClass: false
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "100m"              
+        memory: "128Mi"
