@@ -4,3 +4,4 @@ bin/
 .bash_history
 .gitconfig
 .config/code-server/config.yaml
+vdr-container/
