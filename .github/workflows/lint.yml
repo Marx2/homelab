@@ -20,6 +20,7 @@ jobs:
       with:
         file_or_dir: "./cluster"
         config_file: "./.github/yamllint.config.yaml"
+        format: parsable
 
   lint-shell:
     runs-on:
