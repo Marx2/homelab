@@ -39,7 +39,7 @@ spec:
           - __meta_kubernetes_pod_node_name
           targetLabel: kubernetes_node
     grafana:
-      enabled: false          
+      enabled: false
     kubeEtcd:
       enabled: false
     kubeProxy:
@@ -51,7 +51,7 @@ spec:
           sourceLabels:
           - node
           targetLabel: instance
-          
+
     prometheus:
       ingress:
         enabled: true
@@ -90,5 +90,3 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
-          
-          

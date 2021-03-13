@@ -182,7 +182,7 @@ spec:
         secretName: auth-generic-oauth-secret
         defaultMode: 0440
         mountPath: /etc/secrets/auth_generic_oauth
-        readOnly: true    
+        readOnly: true
     resources:
       limits:
         cpu: 2

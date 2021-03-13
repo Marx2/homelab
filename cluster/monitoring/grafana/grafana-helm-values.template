@@ -8,4 +8,3 @@ stringData:
   values.yaml: |-
     admin-user: "admin"
     admin-password: "${SEALED_GRAFANA_PASS}"
-      

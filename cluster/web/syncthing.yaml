@@ -29,7 +29,7 @@ spec:
       PGID: "1000"
     strategy:
       type: Recreate
-    replicas: 1  
+    replicas: 1
     persistence:
       config:
         enabled: true
@@ -69,4 +69,3 @@ spec:
       tls:
       - hosts:
         - "syncthing.k.marx.katowice.pl"
-      

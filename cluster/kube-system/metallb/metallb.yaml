@@ -18,11 +18,11 @@ spec:
       interval: 5m
   values:
     configInline:
-        address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-          - 192.168.1.210-192.168.1.254
+      address-pools:
+      - name: default
+        protocol: layer2
+        addresses:
+        - 192.168.1.210-192.168.1.254
     prometheusRule:
       enabled: true
     prometheus:

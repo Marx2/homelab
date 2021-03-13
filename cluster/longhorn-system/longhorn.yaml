@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -37,7 +38,6 @@ spec:
       enabled: true
       host: longhorn.k.marx.katowice.pl
       tls: true
-    #   tlsSecret: ""
       annotations:
         kubernetes.io/ingress.class: "external"
         # nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
@@ -60,3 +60,4 @@ spec:
       limits:
         cpu: "100m"              
         memory: "128Mi"
+ 

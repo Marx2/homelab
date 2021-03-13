@@ -14,7 +14,7 @@ spec:
     server: omv
     path: /media
   mountOptions:
-#  - nfsvers=3
+  #  - nfsvers=3
   - nfsvers=4.2
   - tcp
   - intr

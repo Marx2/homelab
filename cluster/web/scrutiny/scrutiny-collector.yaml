@@ -42,13 +42,3 @@ spec:
               name: tz-config
             - name: udev
               mountPath: /run/udev:ro
-      # affinity:
-      #   podAntiAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       - labelSelector:
-      #           matchExpressions:
-      #             - key: "app"
-      #               operator: In
-      #               values:
-      #               - scrutiny-collector
-      #         topologyKey: "kubernetes.io/hostname"

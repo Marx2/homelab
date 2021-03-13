@@ -10,3 +10,4 @@ stringData:
       clientSecret: "${SEALED_OAUTH2_PROXY_SECRET}"
       cookieSecret: "${SEALED_OAUTH2_PROXY_COOKIE_SECRET}"
       clientID: "oauth2-proxy"
+

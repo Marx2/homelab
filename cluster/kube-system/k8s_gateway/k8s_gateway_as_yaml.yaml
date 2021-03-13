@@ -23,7 +23,7 @@ data:
           resources Ingress Service
           ttl 10
           apex dns1
-        }        
+        }
         forward . /etc/resolv.conf
         cache 30
         loop
@@ -102,7 +102,7 @@ spec:
       - name: "coredns"
         image: "quay.io/oriedge/k8s_gateway"
         imagePullPolicy: IfNotPresent
-        args: [ "-conf", "/etc/coredns/Corefile" ]
+        args: ["-conf", "/etc/coredns/Corefile"]
         volumeMounts:
         - name: config-volume
           mountPath: /etc/coredns
@@ -117,11 +117,9 @@ spec:
         - {containerPort: 53, protocol: UDP, name: udp-53}
         - {containerPort: 53, protocol: TCP, name: tcp-53}
       volumes:
-        - name: config-volume
-          configMap:
-            name: excoredns
-            items:
-            - key: Corefile
-              path: Corefile
-
-  
+      - name: config-volume
+        configMap:
+          name: excoredns
+          items:
+          - key: Corefile
+            path: Corefile

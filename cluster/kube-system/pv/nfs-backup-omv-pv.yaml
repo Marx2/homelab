@@ -15,7 +15,7 @@ spec:
     path: /backup
   mountOptions:
   # - nfsvers=3
-  - nfsvers=4.2  
+  - nfsvers=4.2
   - tcp
   - intr
   - hard

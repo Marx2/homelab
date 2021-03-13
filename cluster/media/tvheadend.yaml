@@ -29,7 +29,7 @@ spec:
     strategy:
       type: Recreate
     nodeSelector:
-     k3s.io/hostname: "wezyr"
+      k3s.io/hostname: "wezyr"
     # ingress:
     #   enabled: true
     #   annotations:
@@ -81,9 +81,9 @@ spec:
           name: htsp
     securityContext:
       privileged: true
-#      runAsUser: 1000
-#      runAsGroup: 1000
-#      fsGroup: 1000
+      #  runAsUser: 1000
+      #  runAsGroup: 1000
+      #  fsGroup: 1000
     resources:
       requests:
         cpu: 1
