@@ -8,6 +8,7 @@ ignore: |
   scripts/
   vdr-container/
   *-crds.yaml
+  cluster/flux-system/
 extends: default
 rules:
   truthy:

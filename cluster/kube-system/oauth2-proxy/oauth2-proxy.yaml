@@ -30,7 +30,7 @@ spec:
         - auth.k.marx.katowice.pl
       tls:
         - hosts:
-          - auth.k.marx.katowice.pl
+            - auth.k.marx.katowice.pl
     # extraArgs:
     #   provider: github
     #   provider-display-name: "GitHub provider"
@@ -59,6 +59,6 @@ spec:
         cpu: "200m"
         memory: "128Mi"
   valuesFrom:
-  - kind: Secret
-    name: "oauth2-proxy-helm-values"
-    optional: false
+    - kind: Secret
+      name: "oauth2-proxy-helm-values"
+      optional: false
