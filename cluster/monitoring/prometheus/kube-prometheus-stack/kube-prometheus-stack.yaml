@@ -63,10 +63,10 @@ spec:
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/stakater/ForecastleIcons/master/prometheus.png"
           forecastle.stakater.com/network-restricted: "true"
         hosts:
-          - "prometheus.k.marx.katowice.pl"
-        tls:
-          - hosts:
             - "prometheus.k.marx.katowice.pl"
+        tls:
+            - hosts:
+              - "prometheus.k.marx.katowice.pl"
       prometheusSpec:
         # replicas: 2
         # replicaExternalLabelName: "replica"

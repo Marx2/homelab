@@ -178,11 +178,11 @@ spec:
     podAnnotations:
       configmap.reloader.stakater.com/reload: "grafana"
     extraSecretMounts:
-      - name: auth-generic-oauth-secret-mount
-        secretName: auth-generic-oauth-secret
-        defaultMode: 0440
-        mountPath: /etc/secrets/auth_generic_oauth
-        readOnly: true
+    - name: auth-generic-oauth-secret-mount
+      secretName: auth-generic-oauth-secret
+      defaultMode: 0440
+      mountPath: /etc/secrets/auth_generic_oauth
+      readOnly: true
     resources:
       limits:
         cpu: 2
