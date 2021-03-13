@@ -33,10 +33,10 @@ spec:
   selector:
     app: scrutiny
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-      name: http
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    name: http
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,14 +61,14 @@ spec:
           persistentVolumeClaim:
             claimName: scrutiny-config-pvc
       containers:
-        - name: scrutiny
-          image: analogj/scrutiny:v0.3.5-web
-          ports:
-            - containerPort: 8080
-              name: http-api
-          volumeMounts:
-            - mountPath: "/etc/localtime"
-              readOnly: true
-              name: tz-config
-            - name: scrutiny-config
-              mountPath: /scrutiny/config
+      - name: scrutiny
+        image: analogj/scrutiny:v0.3.5-web
+        ports:
+          - containerPort: 8080
+            name: http-api
+        volumeMounts:
+          - mountPath: "/etc/localtime"
+            readOnly: true
+            name: tz-config
+          - name: scrutiny-config
+            mountPath: /scrutiny/config
