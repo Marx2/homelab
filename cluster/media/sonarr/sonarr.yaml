@@ -35,15 +35,6 @@ spec:
     env:
       TZ: "Europe/Warsaw"
 
-    persistence:
-      config:
-        enabled: true
-        existingClaim: config-sonarr-pvc
-      media:
-        enabled: true
-        existingClaim: nfs-media-omv-pvc
-        mountPath: /data/nas-media
-
     ingress:
       enabled: true
       annotations:
@@ -54,14 +45,27 @@ spec:
         forecastle.stakater.com/icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png"
         forecastle.stakater.com/network-restricted: "true"
       hosts:
+      - host: sonarr.k.marx.katowice.pl
+        paths:
+        - path: /
+          pathType: Prefix
+      additionalIngresses:
+      - enabled: true
+        nameSuffix: "api"
         hosts:
         - host: sonarr.k.marx.katowice.pl
           paths:
-          - path: /
+          - path: /api
             pathType: Prefix
-        tls:
-        - hosts:
-          - "sonarr.k.marx.katowice.pl"
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-sonarr-pvc
+      media:
+        enabled: true
+        existingClaim: nfs-media-omv-pvc
+        mountPath: /data/nas-media
 
     resources:
       requests:
