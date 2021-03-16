@@ -49,14 +49,14 @@ spec:
         paths:
         - path: /
           pathType: Prefix
-      additionalIngresses:
-      - enabled: true
-        nameSuffix: "api"
-        hosts:
-        - host: sonarr.k.marx.katowice.pl
-          paths:
-          - path: /api
-            pathType: Prefix
+      # additionalIngresses:
+      # - enabled: true
+      #   nameSuffix: "api"
+      #   hosts:
+      #   - host: sonarr.k.marx.katowice.pl
+      #     paths:
+      #     - path: /api
+      #       pathType: Prefix
 
     persistence:
       config:
