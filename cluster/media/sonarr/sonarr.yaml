@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: sonarr
-  namespace: downloads
+  namespace: media
 spec:
   interval: 5m
   chart:
@@ -21,7 +21,7 @@ spec:
       repository: ghcr.io/k8s-at-home/sonarr
       tag: v3.0.5.1143
       pullPolicy: Always
-    
+
       podAnnotations:
       replicas-max: "1"
 
@@ -54,14 +54,14 @@ spec:
         forecastle.stakater.com/icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png"
         forecastle.stakater.com/network-restricted: "true"
     hosts:
-        hosts:
+      hosts:
         - host: sonarr.k.marx.katowice.pl
           paths:
-            - path: /
-              pathType: Prefix
+          - path: /
+            pathType: Prefix
         tls:
-          - hosts:
-            - "sonarr.k.marx.katowice.pl"
+        - hosts:
+          - "sonarr.k.marx.katowice.pl"
 
     resources:
       requests:
