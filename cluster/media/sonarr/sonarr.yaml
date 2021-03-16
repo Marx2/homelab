@@ -1,0 +1,71 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: downloads
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: sonarr
+      version: 9.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: system-flux
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/sonarr
+      tag: v3.0.5.1143
+      pullPolicy: Always
+    
+      podAnnotations:
+      replicas-max: "1"
+
+    controllerType: deployment
+
+    podSecurityContext:
+      runAsUser: 1031
+      runAsGroup: 100
+      fsGroup: 100
+
+    env:
+      TZ: "Europe/Warsaw"
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-sonarr-pvc
+      media:
+        enabled: true
+        existingClaim: nfs-media-omv-pvc
+        mountPath: /data/nas-media
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: external
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png"
+        forecastle.stakater.com/network-restricted: "true"
+    hosts:
+        hosts:
+        - host: sonarr.k.marx.katowice.pl
+          paths:
+            - path: /
+              pathType: Prefix
+        tls:
+          - hosts:
+            - "sonarr.k.marx.katowice.pl"
+
+    resources:
+      requests:
+        cpu: "0.04"
+        memory: "256M"
+      limits:
+        memory: "512M"
