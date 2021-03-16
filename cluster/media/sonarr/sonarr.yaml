@@ -54,11 +54,11 @@ spec:
         forecastle.stakater.com/icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png"
         forecastle.stakater.com/network-restricted: "true"
     hosts:
-      hosts:
+        hosts:
         - host: sonarr.k.marx.katowice.pl
           paths:
-          - path: /
-            pathType: Prefix
+            - path: /
+              pathType: Prefix
         tls:
         - hosts:
           - "sonarr.k.marx.katowice.pl"
