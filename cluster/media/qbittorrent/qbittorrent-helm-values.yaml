@@ -1,0 +1,22 @@
+---
+addons:
+  vpn:
+    # The wireguard configuration file provided by your VPN provider goes here.
+    #
+    # Set AllowedIPs to 0.0.0.0/0 to route all traffic through the VPN.
+    #
+    # Pay close attention to the PostUp and PreDown lines. They must be added if you wish to run a script when the connection
+    # is opened / closed.
+    configFile: |-
+      [Interface]
+      PrivateKey = ${SEALED_WIREGUARD_PRIVATE_KEY}
+      Address = ${SEALED_WIREGUARD_ADDRESS}
+      DNS = ${SEALED_WIREGUARD_DNS}
+      PostUp = /config/up.sh %i
+      PreDown = /config/down.sh %i
+
+      [Peer]
+      PublicKey = ${SEALED_WIREGUARD_PUBLIC_KEY}
+      AllowedIPs = 0.0.0.0/0
+      Endpoint = ${SEALED_WIREGUARD_ENDPOINT}
+
