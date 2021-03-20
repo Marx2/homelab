@@ -5,7 +5,7 @@ metadata:
   name: qbittorrent-helm-values
   namespace: media
 stringData:  
-  values:
+  values.yaml: |-
     addons:
       vpn:
         # The wireguard configuration file provided by your VPN provider goes here.
