@@ -77,15 +77,6 @@ stringData:
           TZ: "Europe/Warsaw"
           IPTABLES_BACKEND: legacy
 
-        additionalVolumeMounts:
-        - name: qbittorrent-helm-values
-          mountPath: /etc/wireguard/wg0.conf
-          subPath: vpnConfigfile
-        additionalVolumes:
-        - name: qbittorrent-helm-values
-          secret:
-            secretName: qbittorrent-helm-values
-
         configFile: |-
           [Interface]
           PrivateKey = ${SEALED_WIREGUARD_PRIVATE_KEY}
