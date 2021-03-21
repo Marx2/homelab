@@ -112,17 +112,13 @@ spec:
           down: |-
             #!/bin/bash
             echo "disconnected" > /shared/vpnstatusaddons:
-
-    # additionalVolumeMounts:
-    # - name: nfs-media-omv-pvc
-    #   mountPath: "/media"
-    # additionalVolumes:
-    # - name: media-nas
-    #   persistentVolumeClaim:
-    #     claimName: nfs-media-omv-pvc
     resources:
       requests:
         memory: 128Mi
         cpu: "0.001"
       limits:
         memory: 512Mi
+  valuesFrom:
+    - kind: Secret
+      name: qbittorrent-helm-values
+      valuesKey: values.yaml
