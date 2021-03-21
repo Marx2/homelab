@@ -92,6 +92,11 @@ spec:
           TZ: "Europe/Warsaw"
           IPTABLES_BACKEND: legacy
 
+        additionalVolumeMounts:
+          - name: qbittorrent-helm-values
+            mountPath: /etc/wireguard/wg0.conf
+            subPath: vpnConfigfile
+
         # The scripts that get run when the VPN connection opens/closes are defined here.
         # The default scripts will write a string to represent the current connection state to a file.
         # Our qBittorrent image has a feature that can wait for this file to contain the word 'connected' before actually starting the application.
@@ -117,7 +122,7 @@ spec:
         cpu: "0.001"
       limits:
         memory: 512Mi
-  valuesFrom:
-    - kind: Secret
-      name: qbittorrent-helm-values
-      valuesKey: values.yaml
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: qbittorrent-helm-values
+  #     valuesKey: values.yaml
