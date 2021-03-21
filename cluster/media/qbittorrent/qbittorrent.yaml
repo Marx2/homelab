@@ -96,6 +96,10 @@ spec:
           - name: qbittorrent-helm-values
             mountPath: /etc/wireguard/wg0.conf
             subPath: vpnConfigfile
+        additionalVolumes:
+        - name: qbittorrent-helm-values
+          secret:
+            secretName: qbittorrent-helm-values
 
         # The scripts that get run when the VPN connection opens/closes are defined here.
         # The default scripts will write a string to represent the current connection state to a file.
