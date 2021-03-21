@@ -93,9 +93,9 @@ spec:
           IPTABLES_BACKEND: legacy
 
         additionalVolumeMounts:
-          - name: qbittorrent-helm-values
-            mountPath: /etc/wireguard/wg0.conf
-            subPath: vpnConfigfile
+        - name: qbittorrent-helm-values
+          mountPath: /etc/wireguard/wg0.conf
+          subPath: vpnConfigfile
         additionalVolumes:
         - name: qbittorrent-helm-values
           secret:
@@ -126,7 +126,3 @@ spec:
         cpu: "0.001"
       limits:
         memory: 512Mi
-  # valuesFrom:
-  #   - kind: Secret
-  #     name: qbittorrent-helm-values
-  #     valuesKey: values.yaml
