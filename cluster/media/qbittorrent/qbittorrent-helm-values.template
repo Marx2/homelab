@@ -6,9 +6,6 @@ metadata:
   namespace: media
 stringData:
   values.yaml: |-
-    image:
-      repository: ghcr.io/k8s-at-home/qbittorrent
-      tag: v4.3.3
     podAnnotations:
       # configmap.reloader.stakater.com/reload: "qbittorrent-vpn"
       replicas-max: "1"
