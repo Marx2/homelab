@@ -18,6 +18,7 @@ spec:
       interval: 5m
   timeout: 20m
   values:
+    fullnameOverride: x    
     env:
       TZ: "Europe/Warsaw"
     server:
