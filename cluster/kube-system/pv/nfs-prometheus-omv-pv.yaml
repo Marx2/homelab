@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: omv
-    path: /prometheus
+    path: /kubernetes/prometheus
   mountOptions:
 #  - nfsvers=3
   - nfsvers=4.2
