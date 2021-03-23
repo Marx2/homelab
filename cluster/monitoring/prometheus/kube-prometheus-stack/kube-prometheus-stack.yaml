@@ -87,6 +87,8 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
+              storageClassName: prometheus-omv
+              accessModes: ["ReadWriteOnce"]
               selector:
                 matchLabels:
                   app: nfs-prometheus-omv-pv
