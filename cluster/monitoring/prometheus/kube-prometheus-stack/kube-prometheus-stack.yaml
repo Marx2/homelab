@@ -87,7 +87,9 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "nfs-client-omv"
+              selector:
+                matchLabels:
+                  app: nfs-prometheus-omv-pv
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 1Mi
