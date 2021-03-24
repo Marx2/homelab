@@ -53,7 +53,8 @@ stringData:
       # It will be used to communicate between the two containers.
       shared:
         enabled: true
-        emptyDir: true
+        emptyDir: 
+          enabled: true
         mountPath: /shared
       media:
         enabled: true
