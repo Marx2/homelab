@@ -29,9 +29,9 @@ spec:
             repository: ghcr.io/k8s-at-home/wireguard
             tag: v1.0.20210315
             pullPolicy: IfNotPresent
-    podAnnotations:
-      # configmap.reloader.stakater.com/reload: "qbittorrent-vpn"
-      replicas-max: "1"
+    # podAnnotations:
+      # configmap.reloader.stakater.com/reload: "qbittorrent-helm-values"
+      # replicas-max: "1"
     env:
       TZ: "Europe/Warsaw"
       WAIT_FOR_VPN: "true"
@@ -96,7 +96,7 @@ spec:
 
         env:
           # Enable a killswitch that kills all trafic when the VPN is not connected
-          KILLSWITCH: "false"
+          KILLSWITCH: "true"
           KILLSWITCH_EXCLUDEDNETWORKS_IPV4: 10.42.0.0/16;10.43.0.0/16;192.168.1.0/24
           TZ: "Europe/Warsaw"
           IPTABLES_BACKEND: legacy
@@ -115,7 +115,7 @@ spec:
     resources:
       requests:
         memory: 128Mi
-        cpu: "0.001"
+        cpu: "0.3"
       limits:
         memory: 512Mi
 
