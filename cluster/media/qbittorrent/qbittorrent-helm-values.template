@@ -37,13 +37,13 @@ stringData:
         forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
         forecastle.stakater.com/network-restricted: "true"
       hosts:
-      - host: qb.k.marx.katowice.pl
+      - host: qbittorrent.k.marx.katowice.pl
         paths:
         - path: /
           pathType: Prefix
       tls:
       - hosts:
-        - "qb.k.marx.katowice.pl"
+        - "qbittorrent.k.marx.katowice.pl"
 
     persistence:
       config:
