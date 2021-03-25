@@ -16,7 +16,7 @@ spec:
     server: omv
     path: /kubernetes/prometheus
   mountOptions:
-#  - nfsvers=3
+  # - nfsvers=3
   - nfsvers=4.2
   - tcp
   - intr

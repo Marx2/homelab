@@ -41,7 +41,7 @@ spec:
       # It will be used to communicate between the two containers.
       shared:
         enabled: true
-        emptyDir: 
+        emptyDir:
           enabled: true
       media:
         enabled: true
@@ -85,13 +85,13 @@ spec:
         memory: 512Mi
 
     additionalVolumes:
-      - name: qbittorrent-scripts
-        configMap:
-          name: qbittorrent-scripts
-          defaultMode: 511
-    additionalVolumeMounts:
-      - mountPath: /config/custom-cont-init.d
+    - name: qbittorrent-scripts
+      configMap:
         name: qbittorrent-scripts
+        defaultMode: 511
+    additionalVolumeMounts:
+    - mountPath: /config/custom-cont-init.d
+      name: qbittorrent-scripts
 
     addons:
       vpn:
@@ -139,6 +139,6 @@ spec:
             memory: 512Mi
 
   valuesFrom:
-    - kind: Secret
-      name: qbittorrent-helm-values
-      valuesKey: values.yaml
+  - kind: Secret
+    name: qbittorrent-helm-values
+    valuesKey: values.yaml
