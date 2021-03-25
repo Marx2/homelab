@@ -92,52 +92,52 @@ spec:
       - mountPath: /config/custom-cont-init.d
         name: qbittorrent-scripts
 
-    addons:
-      vpn:
-        enabled: true
-        # This Should be set to `wireguard`. This will set the add-on to use the default settings for Wireguard based connections.
-        type: wireguard
-        wireguard:
-          image:
-            repository: ghcr.io/k8s-at-home/wireguard
-            tag: v1.0.20210315
-            pullPolicy: IfNotPresent
+  #   addons:
+  #     vpn:
+  #       enabled: true
+  #       # This Should be set to `wireguard`. This will set the add-on to use the default settings for Wireguard based connections.
+  #       type: wireguard
+  #       wireguard:
+  #         image:
+  #           repository: ghcr.io/k8s-at-home/wireguard
+  #           tag: v1.0.20210315
+  #           pullPolicy: IfNotPresent
 
-        # If the podSecurityContext is set to run as a different user, make sure to run the Wireguard container as UID/GID 568.
-        # This is required for it to be able to read certain configuration files.
-        securityContext:
-          runAsUser: 568
-          runAsGroup: 568
-          # privileged: true
+  #       # If the podSecurityContext is set to run as a different user, make sure to run the Wireguard container as UID/GID 568.
+  #       # This is required for it to be able to read certain configuration files.
+  #       securityContext:
+  #         runAsUser: 568
+  #         runAsGroup: 568
+  #         # privileged: true
 
-        env:
-          # Enable a killswitch that kills all trafic when the VPN is not connected
-          KILLSWITCH: "false"
-          KILLSWITCH_EXCLUDEDNETWORKS_IPV4: 10.43.0.0/16;192.168.1.0/24
-          # 10.42.0.0/16;
-          TZ: "Europe/Warsaw"
-          IPTABLES_BACKEND: legacy
+  #       env:
+  #         # Enable a killswitch that kills all trafic when the VPN is not connected
+  #         KILLSWITCH: "false"
+  #         KILLSWITCH_EXCLUDEDNETWORKS_IPV4: 10.43.0.0/16;192.168.1.0/24
+  #         # 10.42.0.0/16;
+  #         TZ: "Europe/Warsaw"
+  #         IPTABLES_BACKEND: legacy
 
-        # The scripts that get run when the VPN connection opens/closes are defined here.
-        # The default scripts will write a string to represent the current connection state to a file.
-        # Our qBittorrent image has a feature that can wait for this file to contain the word 'connected' before actually starting the application.
-        scripts:
-          up: |-
-            #!/bin/bash
-            echo "connected" > /shared/vpnstatus
+  #       # The scripts that get run when the VPN connection opens/closes are defined here.
+  #       # The default scripts will write a string to represent the current connection state to a file.
+  #       # Our qBittorrent image has a feature that can wait for this file to contain the word 'connected' before actually starting the application.
+  #       scripts:
+  #         up: |-
+  #           #!/bin/bash
+  #           echo "connected" > /shared/vpnstatus
 
-          down: |-
-            #!/bin/bash
-            echo "disconnected" > /shared/vpnstatusaddons:
+  #         down: |-
+  #           #!/bin/bash
+  #           echo "disconnected" > /shared/vpnstatusaddons:
 
-        resources:
-          requests:
-            cpu: "0.001"
-            memory: 128Mi
-          limits:
-            memory: 512Mi
+  #       resources:
+  #         requests:
+  #           cpu: "0.001"
+  #           memory: 128Mi
+  #         limits:
+  #           memory: 512Mi
 
-  valuesFrom:
-    - kind: Secret
-      name: qbittorrent-helm-values
-      valuesKey: values.yaml
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: qbittorrent-helm-values
+  #     valuesKey: values.yaml
