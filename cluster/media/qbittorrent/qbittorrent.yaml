@@ -29,7 +29,7 @@ spec:
 
     env:
       TZ: "Europe/Warsaw"
-      WAIT_FOR_VPN: "true"
+      # WAIT_FOR_VPN: "true"
       UMASK: "022"
 
     persistence:
