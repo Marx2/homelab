@@ -22,16 +22,6 @@ spec:
       repository: ghcr.io/k8s-at-home/qbittorrent
       tag: v4.3.4
       pullPolicy: Always
-    addons:
-      vpn:
-        wireguard:
-          image:
-            repository: ghcr.io/k8s-at-home/wireguard
-            tag: v1.0.20210315
-            pullPolicy: IfNotPresent
-    # podAnnotations:
-      # configmap.reloader.stakater.com/reload: "qbittorrent-helm-values"
-      # replicas-max: "1"
     env:
       TZ: "Europe/Warsaw"
       WAIT_FOR_VPN: "true"
@@ -90,17 +80,30 @@ spec:
     additionalVolumeMounts:
       - mountPath: /config/custom-cont-init.d
         name: qbittorrent-scripts
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: "0.3"
+      limits:
+        memory: 512Mi
+
     addons:
       vpn:
         enabled: true
         # This Should be set to `wireguard`. This will set the add-on to use the default settings for Wireguard based connections.
         type: wireguard
+        wireguard:
+          image:
+            repository: ghcr.io/k8s-at-home/wireguard
+            tag: v1.0.20210315
+            pullPolicy: IfNotPresent
 
         # If the podSecurityContext is set to run as a different user, make sure to run the Wireguard container as UID/GID 568.
         # This is required for it to be able to read certain configuration files.
         securityContext:
           runAsUser: 568
           runAsGroup: 568
+          privileged: true
 
         env:
           # Enable a killswitch that kills all trafic when the VPN is not connected
@@ -120,12 +123,6 @@ spec:
           down: |-
             #!/bin/bash
             echo "disconnected" > /shared/vpnstatusaddons:
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: "0.3"
-      limits:
-        memory: 512Mi
 
   valuesFrom:
     - kind: Secret
