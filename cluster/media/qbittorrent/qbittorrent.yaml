@@ -22,13 +22,31 @@ spec:
       repository: ghcr.io/k8s-at-home/qbittorrent
       tag: v4.3.4
       pullPolicy: Always
+
+    podSecurityContext:
+      supplementalGroups:
+      - 1000
+
     env:
       TZ: "Europe/Warsaw"
       WAIT_FOR_VPN: "true"
       UMASK: "022"
-    podSecurityContext:
-      supplementalGroups:
-      - 1000
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-qb-pvc
+      # This should be enabled so that both the qBittorrent and Wireguard container have access to a shared volume mounted to /shared.
+      # It will be used to communicate between the two containers.
+      shared:
+        enabled: true
+        emptyDir: 
+          enabled: true
+      media:
+        enabled: true
+        existingClaim: nfs-media-omv-pvc
+        mountPath: /data/nas-media
+
     service:
       additionalServices:
       - enabled: true
@@ -39,6 +57,7 @@ spec:
           name: bittorrent
           protocol: TCP
           targetPort: 24589
+
     ingress:
       enabled: true
       annotations:
@@ -56,21 +75,14 @@ spec:
       tls:
       - hosts:
         - "qbittorrent.k.marx.katowice.pl"
-    persistence:
-      config:
-        enabled: true
-        existingClaim: config-qb-pvc
-      # This should be enabled so that both the qBittorrent and Wireguard container have access to a shared volume mounted to /shared.
-      # It will be used to communicate between the two containers.
-      shared:
-        enabled: true
-        emptyDir: 
-          enabled: true
-        mountPath: /shared
-      media:
-        enabled: true
-        existingClaim: nfs-media-omv-pvc
-        mountPath: /data/nas-media
+
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: "0.3"
+      limits:
+        memory: 512Mi
+
     additionalVolumes:
       - name: qbittorrent-scripts
         configMap:
@@ -79,12 +91,6 @@ spec:
     additionalVolumeMounts:
       - mountPath: /config/custom-cont-init.d
         name: qbittorrent-scripts
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: "0.3"
-      limits:
-        memory: 512Mi
 
     addons:
       vpn:
@@ -123,6 +129,13 @@ spec:
           down: |-
             #!/bin/bash
             echo "disconnected" > /shared/vpnstatusaddons:
+
+        resources:
+          requests:
+            cpu: "0.001"
+            memory: 128Mi
+          limits:
+            memory: 512Mi
 
   valuesFrom:
     - kind: Secret
