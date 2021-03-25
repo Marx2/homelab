@@ -58,23 +58,23 @@ spec:
           protocol: TCP
           targetPort: 24589
 
-    ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: external
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
-        forecastle.stakater.com/network-restricted: "true"
-      hosts:
-      - host: qbittorrent.k.marx.katowice.pl
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "qbittorrent.k.marx.katowice.pl"
+    # ingress:
+    #   enabled: true
+    #   annotations:
+    #     kubernetes.io/ingress.class: external
+    #     nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
+    #     nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+    #     forecastle.stakater.com/expose: "true"
+    #     forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
+    #     forecastle.stakater.com/network-restricted: "true"
+    #   hosts:
+    #   - host: qbittorrent.k.marx.katowice.pl
+    #     paths:
+    #     - path: /
+    #       pathType: Prefix
+    #   tls:
+    #   - hosts:
+    #     - "qbittorrent.k.marx.katowice.pl"
 
     resources:
       requests:
