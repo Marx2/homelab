@@ -103,7 +103,7 @@ spec:
         securityContext:
           runAsUser: 568
           runAsGroup: 568
-          privileged: true
+          # privileged: true
 
         env:
           # Enable a killswitch that kills all trafic when the VPN is not connected
