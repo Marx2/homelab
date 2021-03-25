@@ -82,6 +82,14 @@ spec:
         enabled: true
         existingClaim: nfs-media-omv-pvc
         mountPath: /data/nas-media
+    additionalVolumes:
+      - name: qbittorrent-scripts
+        configMap:
+          name: qbittorrent-scripts
+          defaultMode: 511
+    additionalVolumeMounts:
+      - mountPath: /config/custom-cont-init.d
+        name: qbittorrent-scripts
     addons:
       vpn:
         enabled: true
