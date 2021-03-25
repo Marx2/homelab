@@ -27,9 +27,8 @@ spec:
       WAIT_FOR_VPN: "true"
       UMASK: "022"
     podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
+      supplementalGroups:
+      - 1000
     service:
       additionalServices:
       - enabled: true
