@@ -67,7 +67,7 @@ spec:
             claimName: config-podsync-pvc
       containers:
         - name: podsync
-          image: mxpv/podsync:v2.4
+          image: tdeutsch/podsync:2.4.0
           args: ["/app/podsync", "--config", "/var/config/config.toml"]
           ports:
             - containerPort: 8080
