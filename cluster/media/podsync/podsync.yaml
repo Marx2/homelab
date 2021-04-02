@@ -57,7 +57,7 @@ spec:
           hostPath:
             path: /etc/localtime
         - name: config-volume
-          configMap:
+          secret:
             name: podsync-config
         - name: podcasts-omv
           persistentVolumeClaim:
