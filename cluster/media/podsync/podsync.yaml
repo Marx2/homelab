@@ -82,7 +82,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - cp /var/config/config.toml /app/data/config.toml
+                  - ln -s /var/config/config.toml /app/data/config.toml
           resources:
             requests:
               memory: 128Mi
