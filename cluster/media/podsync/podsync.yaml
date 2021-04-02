@@ -75,11 +75,9 @@ spec:
             - mountPath: "/etc/localtime"
               readOnly: true
               name: tz-config
-            - name: config-volume
-              mountPath: /etc/coredns
             - name: podcasts-omv
               mountPath: "/app/data"
-            - name: podsync-config
+            - name: config-volume
               mountPath: "/app"
           resources:
             requests:
