@@ -78,11 +78,10 @@ spec:
               mountPath: "/app/config.toml"
           resources:
             requests:
-              cpu: 1
               memory: 128Mi
+              cpu: "0.3"
             limits:
-              cpu: 2
-              memory: 1500Mi
+              memory: 512Mi
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
