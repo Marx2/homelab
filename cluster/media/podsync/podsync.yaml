@@ -65,7 +65,7 @@ spec:
       containers:
         - name: podsync
           image: mxpv/podsync:v2.4
-          args: ["/app/podsync", "-config", "/var/config/config.toml"]
+          args: ["/app/podsync", "--config", "/var/config/config.toml"]
           ports:
             - containerPort: 8080
               name: http-api
