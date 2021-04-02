@@ -61,7 +61,7 @@ spec:
             name: podsync-config
             items:
             - key: config.toml
-              path: /app/config.toml
+              path: config.toml
         - name: podcasts-omv
           persistentVolumeClaim:
             claimName: nfs-podcasts-omv-pvc
@@ -79,6 +79,8 @@ spec:
               mountPath: /etc/coredns
             - name: podcasts-omv
               mountPath: "/app/data"
+            - name: podsync-config
+              mountPath: "/app"
           resources:
             requests:
               cpu: 1
