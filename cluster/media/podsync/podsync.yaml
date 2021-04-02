@@ -47,6 +47,8 @@ spec:
     matchLabels:
       app: podsync
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
