@@ -65,6 +65,7 @@ spec:
       containers:
         - name: podsync
           image: mxpv/podsync:v2.4
+          args: ["/app/podsync", "-config", "/var/config/config.toml"]
           ports:
             - containerPort: 8080
               name: http-api
@@ -76,13 +77,6 @@ spec:
               mountPath: "/app/data"
             - name: config-volume
               mountPath: "/var/config"
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - ln -s /var/config/config.toml /app/data/config.toml
           resources:
             requests:
               memory: 128Mi
