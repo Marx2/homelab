@@ -59,9 +59,6 @@ spec:
         - name: config-volume
           configMap:
             name: podsync-config
-            items:
-            - key: config.toml
-              path: config.toml
         - name: podcasts-omv
           persistentVolumeClaim:
             claimName: nfs-podcasts-omv-pvc
