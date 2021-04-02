@@ -62,6 +62,9 @@ spec:
         - name: podcasts-omv
           persistentVolumeClaim:
             claimName: nfs-podcasts-omv-pvc
+        - name: podsync-db
+          persistentVolumeClaim:
+            claimName: config-podsync-pvc
       containers:
         - name: podsync
           image: mxpv/podsync:v2.4
@@ -77,6 +80,8 @@ spec:
               mountPath: "/app/data"
             - name: config-volume
               mountPath: "/var/config"
+            - name: podsync-db
+              mountPath: /var/config/db
           resources:
             requests:
               memory: 128Mi
