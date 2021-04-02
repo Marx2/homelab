@@ -75,7 +75,14 @@ spec:
             - name: podcasts-omv
               mountPath: "/app/data"
             - name: config-volume
-              mountPath: "/app/config.toml"
+              mountPath: "/var/config"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - cp /var/config/config.toml /app/data/config.toml
           resources:
             requests:
               memory: 128Mi
