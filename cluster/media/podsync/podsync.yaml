@@ -58,7 +58,7 @@ spec:
             path: /etc/localtime
         - name: config-volume
           secret:
-            name: podsync-config
+            secretName: podsync-config
         - name: podcasts-omv
           persistentVolumeClaim:
             claimName: nfs-podcasts-omv-pvc
