@@ -35,7 +35,7 @@ spec:
       port: 80
       targetPort: 8080
   selector:
-    app: code-server
+    app: podsync
 ---
 apiVersion: apps/v1
 kind: Deployment
