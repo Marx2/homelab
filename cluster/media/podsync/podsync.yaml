@@ -13,16 +13,16 @@ metadata:
     forecastle.stakater.com/network-restricted: "true"
 spec:
   rules:
-    - host: podsync.k.marx.katowice.pl
-      http:
-        paths:
-          - backend:
-              serviceName: podsync
-              servicePort: 8080
-            path: /
+  - host: podsync.k.marx.katowice.pl
+    http:
+      paths:
+      - backend:
+          serviceName: podsync-web
+          servicePort: 80
+        path: /
   tls:
-    - hosts:
-        - podsync.k.marx.katowice.pl
+  - hosts:
+    - podsync.k.marx.katowice.pl
 ---
 kind: Service
 apiVersion: v1
@@ -32,7 +32,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 8080
   selector:
     app: code-server
