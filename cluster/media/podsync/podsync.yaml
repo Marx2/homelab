@@ -17,7 +17,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: podsync-web
+          serviceName: podsync-http
           servicePort: 80
         path: /
   tls:
