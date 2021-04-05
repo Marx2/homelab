@@ -26,7 +26,7 @@ stringData:
 
     [feeds]
       [feeds.BBF1]
-      url = "https://www.youtube.com/c/BudnikiPokrzywi%C5%84skioF1" # URL address of a channel, group, user, or playlist. 
+      url = "https://www.youtube.com/channel/UCYpD4da-ipib5LDzxw4r26w" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
       quality = "low" # "high" or "low"
@@ -40,7 +40,7 @@ stringData:
       # clean = { keep_last = 10 } # Keep last 10 episodes (order desc by PubDate)
       # youtube_dl_args = [ "--write-sub", "--embed-subs", "--sub-lang", "en,en-US,en-GB" ] # Optional extra arguments passed to youtube-dl when downloading videos from this feed. This example would embed available English closed captions in the videos. Note that setting '--audio-format' for audio format feeds, or '--format' or '--output' for any format may cause unexpected behaviour. You should only use this if you know what you are doing, and have read up on youtube-dl's options!
       [feeds.CG]
-      url = "https://www.youtube.com/c/CezaryGutowski"
+      url = "https://www.youtube.com/channel/UCFNv1Kwrbo31D-fM-IIYcbw"
       page_size = 10
       update_period = "2h"
       quality = "low"
