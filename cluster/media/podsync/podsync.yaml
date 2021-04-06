@@ -74,7 +74,7 @@ spec:
       containers:
         - name: podsync
           # image: tdeutsch/podsync:2.4.0
-          image: marx2/podsync:0.3
+          image: marx2/podsync:0.4
           args: ["/app/podsync", "--config", "/var/config/config.toml", "--debug"]
           ports:
             - containerPort: 8080
