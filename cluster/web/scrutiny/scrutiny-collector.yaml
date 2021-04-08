@@ -25,6 +25,13 @@ spec:
       containers:
         - name: scrutiny-collector
           image: analogj/scrutiny:v0.3.5-collector
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           env:
             - name: SCRUTINY_API_ENDPOINT
               value: "http://scrutiny-web:80"

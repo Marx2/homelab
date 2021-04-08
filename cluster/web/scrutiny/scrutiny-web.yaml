@@ -63,6 +63,13 @@ spec:
       containers:
       - name: scrutiny
         image: analogj/scrutiny:v0.3.5-web
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         ports:
         - containerPort: 8080
           name: http-api
