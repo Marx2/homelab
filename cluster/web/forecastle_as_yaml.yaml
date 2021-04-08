@@ -138,10 +138,10 @@ spec:
         name: forecastle
         resources:
           limits:
-            cpu: 10m
+            cpu: 100m
             memory: 128Mi
           requests:
-            cpu: 100m
+            cpu: 10m
             memory: 128Mi
 
         volumeMounts:
