@@ -30,7 +30,7 @@ spec:
               cpu: 100m
               memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 10m
               memory: 128Mi
           env:
             - name: SCRUTINY_API_ENDPOINT
