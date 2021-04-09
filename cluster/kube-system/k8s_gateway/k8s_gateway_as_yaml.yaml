@@ -18,6 +18,15 @@ data:
         errors
         log
         ready
+
+        marx.katowice.pl {
+        hosts {
+            192.168.1.93 omv omv.marx.katowice.pl
+            fallthrough
+          }
+          whoami
+        }
+
         k8s_gateway k.marx.katowice.pl
         {
           resources Ingress Service
