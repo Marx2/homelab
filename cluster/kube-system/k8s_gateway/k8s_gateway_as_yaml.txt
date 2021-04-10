@@ -14,31 +14,31 @@ metadata:
   namespace: kube-system
 data:
   Corefile: |-
-    .:53 {
-        errors
-        log
-        ready
-
-        marx.katowice.pl {
-        hosts {
-            192.168.1.93 omv omv.marx.katowice.pl
-            fallthrough
-          }
-          whoami
-        }
-
-        k8s_gateway k.marx.katowice.pl
+    marx.katowice.pl:53 {
+        hosts 
         {
-          resources Ingress Service
-          ttl 10
-          apex dns1
+          192.168.1.93 omv omv.marx.katowice.pl
+          fallthrough
         }
-        forward . /etc/resolv.conf
-        cache 30
-        loop
-        reload
-        loadbalance
+        whoami
     }
+#    .:53 {
+#        errors
+#        log
+#        ready
+#        k8s_gateway k.marx.katowice.pl
+#        {
+#          resources Ingress Service
+#          ttl 10
+#          apex dns1
+#        }
+#
+#        forward . /etc/resolv.conf
+#        cache 30
+#        loop
+#        reload
+#        loadbalance
+#    }
 ---
 # Source: coredns/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
