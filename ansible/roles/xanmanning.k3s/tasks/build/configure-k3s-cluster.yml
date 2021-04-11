@@ -1,11 +1,13 @@
 ---
 
-- name: Ensure cluster token is captured from control node
+- name: "Ensure cluster token is captured from {{ k3s_control_delegate }}"
   ansible.builtin.slurp:
     path: "{{ k3s_runtime_config['data-dir'] | default(k3s_data_dir) }}/server/token"
   register: k3s_slurped_cluster_token
   delegate_to: "{{ k3s_control_delegate }}"
-  when: k3s_control_token is not defined and not ansible_check_mode
+  when:
+    - k3s_control_token is not defined
+    - not ansible_check_mode
   become: "{{ k3s_become_for_kubectl | ternary(true, false, k3s_become_for_all) }}"
 
 - name: Ensure cluster token is formatted correctly for use in templates
@@ -63,16 +65,22 @@
     state: started
     enabled: "{{ k3s_start_on_boot }}"
   register: ensure_secondary_controllers_started
+  failed_when:
+    - ensure_secondary_controllers_started is not succeeded
+    - not ansible_check_mode
   until: ensure_secondary_controllers_started is succeeded
   retries: "{{ ansible_play_hosts_all | length }}"
   delay: 5
-  when: k3s_control_node and not k3s_primary_control_node
+  when:
+    - k3s_control_node
+    - not k3s_primary_control_node
   become: "{{ k3s_become_for_systemd | ternary(true, false, k3s_become_for_all) }}"
 
 - import_tasks: ../validate/state/control-plane.yml
   when: not k3s_skip_validation
 
-- meta: flush_handlers
+- name: Flush Handlers
+  meta: flush_handlers
 
 - import_tasks: ../validate/state/nodes.yml
   when: not k3s_skip_validation

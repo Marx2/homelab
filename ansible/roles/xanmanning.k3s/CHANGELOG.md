@@ -14,6 +14,89 @@
 ---
 -->
 
+## 2021-04-10, v2.8.2
+
+### Notable changes
+
+ - #105 - Added Ansible v2.9.16 support
+ - #102 - Pre-check for cgroup status
+
+### Known issues
+
+ - As per README.md, you require `ansible` >= 2.9.16
+   or `ansible-base` >= 2.10.4. See [#105(comment)](https://github.com/PyratLabs/ansible-role-k3s/issues/105#issuecomment-817182233)
+
+---
+
+## 2021-03-22, v2.8.1
+
+### Notable changes
+
+ - #100 - Fixed typo in README.md
+
+### Contributors
+
+ - [@mbwmbw1337](https://github.com/mbwmbw1337)
+
+---
+
+## 2021-03-14, v2.8.0
+
+Happy π day!
+
+### Notable changes
+
+  - Updated GitHub Actions, resolved linting errors.
+  - Renamed `k3s_control_node_address` -> `k3s_registration_address`
+
+### Breaking changes
+
+  - A task has been added to rename `k3s_control_node_address` to
+    `k3s_registration_address` for any users still using this variable name,
+    however this might still break something.
+
+---
+
+## 2021-02-28, v2.7.1
+
+### Notable changes
+
+  - Bugfix, missing become on cluster token check.
+
+---
+
+## 2021-02-27, v2.7.0
+
+### Notable changes
+
+  - Cluster init checks added.
+  - Tidy up of tasks, failed checks.
+  - Possible fix for #93 - force draining of nodes added.
+
+---
+
+## 2021-02-27, v2.6.1
+
+### Notable changes
+
+  - Bugfix: Templating error for single control plane nodes using Etcd.
+  - Bugfix: a number of typos fixed.
+
+---
+
+## 2021-02-16, v2.6.0
+
+### Notable changes
+
+  - Tidy up of `when` params and `assert` tasks to be more readable.
+  - Added feature to tweak K3S service dependencies.
+  - Updated documentation:
+    - Node labels and component arguments
+    - systemd config
+    - Use alternate CNI (Calico example)
+
+---
+
 ## 2021-01-31, v2.5.3
 
 ### Notable changes

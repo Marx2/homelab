@@ -1,7 +1,8 @@
 ---
 
 - name: Check if newuidmap is available
-  ansible.builtin.command: which newuidmap
+  ansible.builtin.command:
+    cmd: which newuidmap
   failed_when: false
   changed_when: false
   register: k3s_check_newuidmap_installed
@@ -57,5 +58,6 @@
       - ansible_env['XDG_RUNTIME_DIR'] is defined
       - k3s_check_newuidmap_installed.rc == 0
     success_msg: All kernel parameters passed
-    fail_msg: Kernel parameters are not set correctly, please check
-              https://github.com/rootless-containers/rootlesskit
+    fail_msg: >-
+      Kernel parameters are not set correctly, please check
+      https://github.com/rootless-containers/rootlesskit
