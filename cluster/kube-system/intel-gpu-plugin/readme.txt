@@ -1,0 +1,1 @@
+kubectl label nodes wezyr feature.node.kubernetes.io/custom-intel-gpu=true
