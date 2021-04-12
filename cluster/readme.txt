@@ -22,12 +22,15 @@ flux bootstrap github \
   --repository=${GITHUB_REPO} \
   --branch=master \
   --path=/cluster \
-  --personal
+  --personal \
+  --private=false
+
+backup existing Fllux secret:
+kubectl  -n flux-system get secret flux-system -o yaml > flux_identity.yaml
 
 Flux ressurection (install Flux on new cluster, when repo already contains Flux):
 kubectl create namespace flux-system
-kubectl create secret generic flux-system --from-literal=username=Marx2 --from-literal=password=<GITHUB_TOKEN> -n flux-system
-
+kubectl apply -f flux_identity.yaml
 
 
 useful commands:
