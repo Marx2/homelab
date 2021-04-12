@@ -11,7 +11,7 @@ spec:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: omv
+    server: 192.168.1.230
     path: /recordings
   mountOptions:
   #  - nfsvers=3

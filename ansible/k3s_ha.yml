@@ -26,5 +26,5 @@
         k3s_control_node: true
   #      when: inventory_hostname in ['node2', 'node3']
   roles:
-#    - role: common
+    - role: common
     - role: xanmanning.k3s

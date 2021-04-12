@@ -13,7 +13,7 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: omv
+    server: 192.168.1.230
     path: /kubernetes/prometheus
   mountOptions:
   # - nfsvers=3
