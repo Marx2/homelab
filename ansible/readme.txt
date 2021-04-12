@@ -49,3 +49,26 @@ VM:
 2 run playbook for k3s
 ansible-playbook -u debian k3s_ha.yml -i inventory/k3s/hosts.yml
 3 config is in /etc/rancher/k3s/k3s.yaml
+
+###################################
+Calico install:
+From node:
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+apply yaml:
+
+# This section includes base Calico installation configuration.
+# For more information, see: https://docs.projectcalico.org/v3.17/reference/installation/api#operator.tigera.io/v1.Installation
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  # Configures Calico networking.
+  calicoNetwork:
+    # Note: The ipPools section cannot be modified post-install.
+    ipPools:
+    - blockSize: 26
+      cidr: 10.43.0.0/16
+      encapsulation: VXLANCrossSubnet
+      natOutgoing: Enabled
+      nodeSelector: all()
