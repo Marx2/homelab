@@ -24,8 +24,9 @@ flux bootstrap github \
   --path=/cluster \
   --personal
 
-
-
+Flux ressurection (install Flux on new cluster, when repo already contains Flux):
+kubectl create namespace flux-system
+kubectl create secret generic flux-system --from-literal=username=Marx2 --from-literal=password=<GITHUB_TOKEN> -n flux-system
 
 
 
