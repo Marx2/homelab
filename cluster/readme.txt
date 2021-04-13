@@ -41,3 +41,5 @@ flux reconcile hr prometheus -n monitoring
 
 Toolbox image:
 https://github.com/nicolaka/netshoot
+example:
+kubectl run tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
