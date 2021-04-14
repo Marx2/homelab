@@ -3,9 +3,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: cert-manager
-  namespace: kube-system
+  namespace: cert-manager
 spec:
-  targetNamespace: kube-system
+  targetNamespace: cert-manager
   interval: 5m
   chart:
     spec:
