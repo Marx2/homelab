@@ -11,7 +11,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    - dns01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      dns01:
         cloudflare:
           email: mnazarko@gmail.com
           apiTokenSecretRef:
@@ -30,7 +32,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
-    - dns01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      dns01:
         cloudflare:
           email: mnazarko@gmail.com
           apiTokenSecretRef:
