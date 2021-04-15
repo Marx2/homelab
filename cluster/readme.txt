@@ -43,3 +43,6 @@ Toolbox image:
 https://github.com/nicolaka/netshoot
 example:
 kubectl run tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
+
+reconnect:
+kubectl attach tmp-shell -c tmp-shell -i -t

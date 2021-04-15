@@ -31,11 +31,11 @@
     pkg:
       - unattended-upgrades
       - apt-listchanges
-- name: omv in /etc/hosts
-  lineinfile:
-    dest: /etc/hosts
-    line: 192.168.1.230 omv.marx.katowice.pl omv
-    state: present
+#- name: omv in /etc/hosts
+#  lineinfile:
+#    dest: /etc/hosts
+#    line: 192.168.1.230 omv.marx.katowice.pl omv
+#    state: present
 #- name: pip
 #  apt:
 #    state: present
