@@ -4,9 +4,13 @@ bin/
 .bash_history
 .gitconfig
 .config/code-server/config.yaml
-vdr-container/
-.vs-kubernetes/tools/helm/linux-amd64/helm
-.vs-kubernetes/tools/helm/linux-amd64/LICENSE
-.vs-kubernetes/tools/helm/linux-amd64/README.md
-.vs-kubernetes/tools/kubectl/kubectl
-.vs-kubernetes/tools/minikube/linux-amd64/minikube
+
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# k8s
+kubeconfig
+# vscode-sops
+.decrypted~*.yaml

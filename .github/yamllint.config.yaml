@@ -1,14 +1,6 @@
 ignore: |
-  .yamllint.yml
   .github/
-  ansible/
-  nas/
-  router/
-  ignore/
-  scripts/
-  vdr-container/
-  *-crds.yaml
-  cluster/flux-system/
+  crds.yaml
 extends: default
 rules:
   truthy:
