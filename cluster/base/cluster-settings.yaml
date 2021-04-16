@@ -7,3 +7,4 @@ metadata:
 data:
   METALLB_LB_RANGE: 192.168.1.210-192.168.1.254
   INGRESS_NGINX_LB: 192.168.1.210
+  TZ: Europe/Warsaw
