@@ -30,9 +30,9 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "nginx"
         hosts:
-        - host: "home.${CLUSTER_DOMAIN}"
+        - host: "home.${SECRET_DOMAIN}"
           paths:
           - /
         tls:
         - hosts:
-          - "home.${CLUSTER_DOMAIN}"
+          - "home.${SECRET_DOMAIN}"
