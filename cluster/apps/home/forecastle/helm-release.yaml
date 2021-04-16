@@ -31,9 +31,9 @@ spec:
         annotations:
           kubernetes.io/ingress.class: "nginx"
         hosts:
-        - host: "home.${SECRET_DOMAIN}"
+        - host: "forecastle.${SECRET_DOMAIN}"
           paths:
           - /
         tls:
         - hosts:
-          - "home.${SECRET_DOMAIN}"
+          - "forecastle.${SECRET_DOMAIN}"
