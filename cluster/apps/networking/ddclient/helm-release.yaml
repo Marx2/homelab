@@ -34,4 +34,4 @@ spec:
        login=${SECRET_CLOUDFLARE_EMAIL}
        password=${SECRET_CLOUDFLARE_API_KEY}
        zone=marx.katowice.pl
-       marxhome.marx.katowice.pl"
+       marxhome"
