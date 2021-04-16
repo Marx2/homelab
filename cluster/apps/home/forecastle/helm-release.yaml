@@ -22,9 +22,10 @@ spec:
         title: "Marx's Apps"
         namespaceSelector:
           matchNames:
-          - media
+          # - media
           - home
-          - web
+          # - web
+          - networking
       ingress:
         enabled: true
         annotations:
