@@ -4,3 +4,4 @@ resources:
 - ingress-nginx
 - wildcard-certificate
 - ddclient
+- k8s-gateway
