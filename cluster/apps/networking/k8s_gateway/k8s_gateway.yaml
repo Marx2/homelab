@@ -38,4 +38,5 @@ spec:
       create: true
       name: "excoredns"
     service:
+      type: LoadBalancer
       loadBalancerIP: 192.168.1.214
