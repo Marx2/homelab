@@ -10,8 +10,8 @@ spec:
     spec:
       chart: charts/k8s-gateway
       sourceRef:
-        kind: GitRepository
-        name: k8s-gateway-repo
+        kind: HelmRepository
+        name: k8s-gateway-charts
         namespace: flux-system
       interval: 5m
   timeout: 20m
