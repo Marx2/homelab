@@ -5,4 +5,5 @@ resources:
 - metallb-system.yaml
 - networking.yaml
 - home.yaml
-- media
+- media.yaml
+- longhorn.yaml
