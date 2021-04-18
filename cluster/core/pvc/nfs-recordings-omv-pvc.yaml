@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-recordings-omv-pvc
+  namespace: media
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: recordings-omv
+  resources:
+    requests:
+      storage: 100Gi
