@@ -7,3 +7,4 @@ resources:
 - k8s-at-home-charts.yaml
 - stakater-charts.yaml
 - k8s-gateway-charts.yaml
+- longhorn-charts.yaml
