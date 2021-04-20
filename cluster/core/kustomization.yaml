@@ -4,6 +4,7 @@ resources:
 - namespaces
 - metallb-system
 - cert-manager
+- system-upgrade
 - longhorn
 - pv
 - pvc
