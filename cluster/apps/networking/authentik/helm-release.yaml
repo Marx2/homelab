@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       # renovate: https://docker.beryju.org/chartrepo/authentik
-      chart: authentik
+      chart: authentik/authentik
       version: 2021.4.2
       sourceRef:
         kind: HelmRepository
