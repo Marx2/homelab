@@ -8,7 +8,7 @@ stringData:
   config.toml: |-
     [server]
     port = 8080
-    hostname = "http://podsync.k.marx.katowice.pl"
+    hostname = "https://podsync.k.marx.katowice.pl"
     # Bind a specific IP addresses for server ,"*": bind all IP addresses which is default option, localhost or 127.0.0.1  bind a single IPv4 address
     # bind_address = "*" 
     # Specify path for reverse proxy and only [A-Za-z0-9]
