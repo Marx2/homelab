@@ -19,7 +19,7 @@ data:
     dns_record="marxhome"
     dns_domain="marx.katowice.pl"
 
-    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record$dns_domain" \
+    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json")
     if [[ $dns_record_info == *"\"success\":false"* ]]; then
