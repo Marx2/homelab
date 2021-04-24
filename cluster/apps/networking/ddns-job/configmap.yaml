@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: dyndns-updater
-  namespace: default
+  namespace: networking
   labels:
     app.kubernetes.io/name: dyndns-updater
     app.kubernetes.io/instance: dyndns-updater
@@ -19,9 +19,7 @@ data:
     dns_record="marxhome"
     dns_domain="marx.katowice.pl"
 
-    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json")
+    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
     echo $dns_record_info
     if [[ $dns_record_info == *"\"success\":false"* ]]; then
       echo "Failed to read CF data:" $dns_record_info
@@ -43,10 +41,7 @@ data:
     fi
 
     ##### updates the dns record
-    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$dns_record_id" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json" \
-      --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$IP4NEW\",\"ttl\":120,\"proxied\":false}")
+    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$dns_record_id" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$IP4NEW\",\"ttl\":120,\"proxied\":false}")
 
     if [[ $update == *"\"success\":false"* ]]; then
       echo -e "==> FAILED:\n$update"
