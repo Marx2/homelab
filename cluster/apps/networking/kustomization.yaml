@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ingress-nginx
 - wildcard-certificate
-- ddclient
+- ddns-job
+# - ddclient
 # - k8s_gateway
 # - authentik

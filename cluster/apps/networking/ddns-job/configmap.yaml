@@ -1,0 +1,55 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dyndns-updater
+  namespace: default
+  labels:
+    app.kubernetes.io/name: dyndns-updater
+    app.kubernetes.io/instance: dyndns-updater
+data:
+  dyndns-updater.sh: |
+    #!/bin/sh
+    # Get your WAN IP
+    # IP4NEW=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
+    IP4NEW=$(dig +short @1.1.1.1 whoami.cloudflare ch txt | sed "s/\"//g")
+    echo "new IP:" $IP4NEW
+    #IP4CUR=$(dig @1.1.1.1 +short marxhome.marx.katowice.pl A)
+    zone_id="e24e4482459427c92358a4906ee5a2c8"
+    dns_record="marxhome"
+    dns_domain="marx.katowice.pl"
+
+    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record$dns_domain" \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-Type: application/json")
+    if [[ $dns_record_info == *"\"success\":false"* ]]; then
+      echo "Failed to read CF data:" $dns_record_info
+      exit
+    else
+      echo "DNS Record in CF found"
+    fi
+
+    dns_record_id=$(echo ${dns_record_info} | grep -o '"id":"[^"]*' | cut -d'"' -f4)
+    echo "record_id:" $dns_record_id
+    IP4CUR=$(echo ${dns_record_info} | grep -o '"content":"[^"]*' | cut -d'"' -f4)
+    echo "IP in CF DNS Record:" $IP4CUR
+
+    if [ ${IP4CUR} == ${IP4NEW} ]; then
+      echo "==> No changes needed! DNS Record currently is set to $IP4CUR"
+      exit
+    else
+      echo "==> DNS Record currently is set to $IP4CUR". Updating!!!
+    fi
+
+    ##### updates the dns record
+    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$dns_record_id" \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-Type: application/json" \
+      --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$IP4NEW\",\"ttl\":120,\"proxied\":false}")
+
+    if [[ $update == *"\"success\":false"* ]]; then
+      echo -e "==> FAILED:\n$update"
+      exit 1
+    else
+      echo "==> $dns_record DNS Record Updated To: $IP4NEW"
+    fi
