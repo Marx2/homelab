@@ -22,6 +22,7 @@ data:
     dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json")
+    echo $dns_record_info
     if [[ $dns_record_info == *"\"success\":false"* ]]; then
       echo "Failed to read CF data:" $dns_record_info
       exit
