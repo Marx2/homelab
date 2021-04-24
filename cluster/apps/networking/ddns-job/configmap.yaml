@@ -11,8 +11,8 @@ data:
   dyndns-updater.sh: |
     #!/bin/sh
     # Get your WAN IP
-    # IP4NEW=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
-    IP4NEW=$(dig +short @1.1.1.1 whoami.cloudflare ch txt | sed "s/\"//g")
+    IP4NEW=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
+    # IP4NEW=$(dig +short @1.1.1.1 whoami.cloudflare ch txt | sed "s/\"//g")
     echo "new IP:" $IP4NEW
     #IP4CUR=$(dig @1.1.1.1 +short marxhome.marx.katowice.pl A)
     zone_id="e24e4482459427c92358a4906ee5a2c8"
