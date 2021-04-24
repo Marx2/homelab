@@ -37,7 +37,7 @@ data:
     IP4CUR=$(echo $dns_record_info | grep -o '"content":"[^"]*' | cut -d'"' -f4)
     echo "IP in CF DNS Record:" $IP4CUR
 
-    if [ ${IP4CUR} == ${IP4NEW} ]; then
+    if [ ${IP4CUR} != ${IP4NEW} ]; then
       echo "==> No changes needed! DNS Record currently is set to $IP4CUR"
       exit
     else
