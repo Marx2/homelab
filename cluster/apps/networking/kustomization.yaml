@@ -4,5 +4,5 @@ resources:
 - ingress-nginx
 - wildcard-certificate
 - ddns-job
-# - k8s_gateway
+- k8s_gateway
 # - authentik
