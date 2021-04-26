@@ -10,4 +10,4 @@ resources:
 - longhorn-charts.yaml
 - authentik-charts.yaml
 - kubernetes-stable-charts.yaml
-- mintel-dex-charts.yaml
+- dex-charts.yaml
