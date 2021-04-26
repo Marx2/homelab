@@ -49,8 +49,7 @@ spec:
         - path: /
           pathType: ImplementationSpecific
       tls:
-      - secretName: dex-cert
-        hosts:
+      - hosts:
         - dex.k.marx.katowice.pl
     resources:
       requests:
