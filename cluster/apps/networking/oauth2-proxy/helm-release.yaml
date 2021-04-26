@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: oauth2-proxy
+      version: 5.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: "quay.io/oauth2-proxy/oauth2-proxy"
+      tag: "v6.1.1"
+    replicaCount: 1
+    ingress:
+      enabled: true
+      path: /oauth2
+      annotations:
+        kubernetes.io/ingress.class: "external"
+      hosts:
+        - auth.k.marx.katowice.pl
+      tls:
+        - hosts:
+            - auth.k.marx.katowice.pl
+    # extraArgs:
+    #   provider: github
+    #   provider-display-name: "GitHub provider"
+    #   skip-provider-button: "false"
+    #   pass-authorization-header:
+    #   email-domain: "*"
+    #   cookie-domain: ".k.marx.katowice.pl"
+    #   whitelist-domain: ".k.marx.katowice.pl"
+    #   github-user: "Marx2"
+    extraArgs:
+      provider: oidc
+      provider-display-name: "Dex provider"
+      oidc-issuer-url: https://dex.k.marx.katowice.pl
+      skip-provider-button:
+      pass-authorization-header:
+      pass-access-token: true
+      email-domain: "*"
+      cookie-domain: ".k.marx.katowice.pl"
+      whitelist-domain: ".k.marx.katowice.pl"
+      exclude-logging-path: "/ping"
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "128Mi"
+      limits:
+        cpu: "200m"
+        memory: "128Mi"
+  valuesFrom:
+    - kind: Secret
+      name: "oauth2-proxy-helm-values"
+      optional: false
