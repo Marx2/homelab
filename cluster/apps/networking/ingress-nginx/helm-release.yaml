@@ -27,6 +27,12 @@ spec:
         ssl-protocols: "TLSv1.3 TLSv1.2"
         proxy-body-size: "100m"
         use-forwarded-headers: "true"
+        use-proxy-protocol: "false"
+        compute-full-forwarded-for: "true"
+        forwarded-for-header: X-Forwarded-For
+        # proxy-real-ip-cidr: 192.168.1.210
+        # global-auth-url: "https://auth.k.marx.katowice.pl/api/verify"
+        # global-auth-signin: "https://auth.k.marx.katowice.pl"
       metrics:
         enabled: false
         serviceMonitor:
