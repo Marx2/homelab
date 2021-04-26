@@ -116,6 +116,7 @@ spec:
       tls:
       - hosts:
         - dex.k.marx.katowice.pl
+        secretName: dex-cert
     resources:
       requests:
         memory: 250Mi
