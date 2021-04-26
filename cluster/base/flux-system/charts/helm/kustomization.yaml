@@ -9,3 +9,5 @@ resources:
 - k8s-gateway-charts.yaml
 - longhorn-charts.yaml
 - authentik-charts.yaml
+- kubernetes-stable-charts.yaml
+- mintel-dex-charts.yaml
