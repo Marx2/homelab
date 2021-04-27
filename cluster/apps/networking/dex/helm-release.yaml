@@ -110,9 +110,9 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
       - host: dex.k.marx.katowice.pl
-        #paths:
-        #- path: /
-        #  pathType: ImplementationSpecific
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
       tls:
       - secretName: dex-cert
         hosts:
