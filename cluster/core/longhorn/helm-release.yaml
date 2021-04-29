@@ -19,9 +19,9 @@ spec:
     persistence:
       defaultClassReplicaCount: 2
       reclaimPolicy: Retain
-      # recurringJobs:
-      #   enable: true
-      #   jobList: '[{"name":"daily", "task":"backup", "cron":"0 6 * * ?", "retain":2,"labels": {"interval":"daily"}}]'
+       recurringJobs:
+         enable: true
+         jobList: '[{"name":"daily", "task":"backup", "cron":"0 6 * * ?", "retain":2,"labels": {"interval":"daily"}}]'
 
     csi:
       attacherReplicaCount: 2
