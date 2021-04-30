@@ -7,3 +7,4 @@ resources:
 - home.yaml
 - media.yaml
 - longhorn.yaml
+- system.yaml
