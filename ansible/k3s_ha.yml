@@ -3,7 +3,7 @@
 - hosts: k3s_cluster # defines what hosts to install this role on
   #become: true
   vars:
-#    k3s_release_version: v1.19 #by default it's: stable
+    k3s_release_version: v1.20 #by default it's: stable
     # installed, started, stopped, downloaded, uninstalled, validated
     k3s_state: installed
 #    k3s_state: uninstalled
@@ -23,9 +23,9 @@
 #        - "feature-gates=RemoveSelfLink=false"
   pre_tasks:
     - name: Set each node to be a control node
-      set_fact:
+      ansible.builtin.set_fact:
         k3s_control_node: true
-  #      when: inventory_hostname in ['node2', 'node3']
+      when: inventory_hostname in ['wezyr', 'wuwek', 'cobra']
   roles:
     - role: common
     - role: xanmanning.k3s

@@ -10,6 +10,7 @@ Adding new node:
 - add DHCP entry in router
 - add Pi-hole Local DNS entry
 - install Proxmox
+- remove search... from /etc/resolv.conf 
 - add SSH keys: 
   ssh-copy-id root@<new host>
 - add packages:
