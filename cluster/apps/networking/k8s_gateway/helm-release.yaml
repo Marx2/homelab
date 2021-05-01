@@ -25,7 +25,7 @@ spec:
 #      pullPolicy: IfNotPresent
 
     # Delegated domain
-    domain: "k.marx.katowice.pl"
+    domain: "${SECRET_DOMAIN}"
 
     # Name to use for apex records
     # apex: "dns1"

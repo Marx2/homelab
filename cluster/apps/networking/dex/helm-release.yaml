@@ -38,7 +38,7 @@ spec:
     env:
       KUBERNETES_POD_NAMESPACE: networking
     config:
-      issuer: https://dex.k.marx.katowice.pl
+      issuer: https://dex.${SECRET_DOMAIN}
 
       storage:
         type: kubernetes
@@ -60,7 +60,7 @@ spec:
       frontend:
         theme: "coreos"
         issuer: "marx"
-        issuerUrl: "https://k.marx.katowice.pl"
+        issuerUrl: "https://${SECRET_DOMAIN}"
         logoUrl: http://icons.iconarchive.com/icons/icons-land/metro-halloween/512/Cool-icon.png
 
       expiry:
@@ -85,7 +85,7 @@ spec:
           config:
             clientID: ${SECRET_DEX_GITHUB_CLIENT_ID}
             clientSecret: ${SECRET_DEX_GITHUB_CLIENT_SECRET}
-            redirectURI: https://dex.k.marx.katowice.pl/callback
+            redirectURI: https://dex.${SECRET_DOMAIN}/callback
             # 'orgs' can be used to map groups from Github
             # https://dexidp.io/docs/connectors/github/
             orgs:
@@ -95,7 +95,7 @@ spec:
           name: Google
           config:
             issuer: https://accounts.google.com
-            redirectUri: https://dex.k.marx.katowice.pl/callback
+            redirectUri: https://dex.${SECRET_DOMAIN}/callback
             clientID: ${SECRET_DEX_GOOGLE_CLIENT_ID}
             clientSecret: ${SECRET_DEX_GOOGLE_CLIENT_SECRET}
       # The 'name' must match the k8s API server's 'oidc-client-id'
@@ -104,12 +104,12 @@ spec:
           name: 'oauth2-proxy'
           secret: ${SECRET_OAUTH2_PROXY_SECRET}
           redirectURIs:
-            - https://auth.k.marx.katowice.pl/oauth2/callback
+            - https://auth.${SECRET_DOMAIN}/oauth2/callback
         - id: grafana
           name: 'grafana'
           secret: '${SECRET_GENERIC_OAUTH_SECRET}'
           redirectURIs:
-            - https://grafana.k.marx.katowice.pl/login/generic_oauth
+            - https://grafana.${SECRET_DOMAIN}/login/generic_oauth
     ingress:
       enabled: true
       annotations:
@@ -117,14 +117,14 @@ spec:
         kubernetes.io/tls-acme: "true"
         cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
-      - host: dex.k.marx.katowice.pl
+      - host: dex.${SECRET_DOMAIN}
         paths:
         - path: /
           pathType: ImplementationSpecific
       tls:
       - secretName: dex-cert
         hosts:
-        - dex.k.marx.katowice.pl
+        - dex.${SECRET_DOMAIN}
     resources:
       requests:
         memory: 250Mi
