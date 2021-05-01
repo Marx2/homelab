@@ -38,7 +38,7 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         forecastle.stakater.com/expose: "true"
         forecastle.stakater.com/icon: "https://features.jellyfin.org/images/logos/a7Lx9nYDzWuDR94Az8Yum7neWMvNMndkm9qr4QVtmjaMrOHDLisS5K7LJctTRzK9-icon-transparent.png?size=200"
