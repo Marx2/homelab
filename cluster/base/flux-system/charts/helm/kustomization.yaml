@@ -11,3 +11,4 @@ resources:
 - authentik-charts.yaml
 - kubernetes-stable-charts.yaml
 - dex-charts.yaml
+- nicholaswilde.yaml
