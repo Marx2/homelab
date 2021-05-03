@@ -3,6 +3,3 @@ kind: Kustomization
 resources:
 - forecastle
 - syncthing
-- jackett
-- sonarr
-- radarr

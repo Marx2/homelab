@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
 - podsync
 - jellyfin
-
+- jackett
+- sonarr
+- radarr
