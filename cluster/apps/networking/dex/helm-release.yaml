@@ -90,14 +90,14 @@ spec:
             # https://dexidp.io/docs/connectors/github/
             orgs:
               - name: marx-org
-        - type: oidc
-          id: google
-          name: Google
-          config:
-            issuer: https://accounts.google.com
-            redirectUri: https://dex.${SECRET_DOMAIN}/callback
-            clientID: ${SECRET_DEX_GOOGLE_CLIENT_ID}
-            clientSecret: ${SECRET_DEX_GOOGLE_CLIENT_SECRET}
+#        - type: oidc
+#          id: google
+#          name: Google
+#          config:
+#            issuer: https://accounts.google.com
+#            redirectUri: https://dex.${SECRET_DOMAIN}/callback
+#            clientID: ${SECRET_DEX_GOOGLE_CLIENT_ID}
+#            clientSecret: ${SECRET_DEX_GOOGLE_CLIENT_SECRET}
       # The 'name' must match the k8s API server's 'oidc-client-id'
       staticClients:
         - id: oauth2-proxy
