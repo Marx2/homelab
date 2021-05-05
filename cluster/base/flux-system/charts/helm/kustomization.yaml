@@ -12,3 +12,4 @@ resources:
 - kubernetes-stable-charts.yaml
 - dex-charts.yaml
 - nicholaswilde.yaml
+- authelia-charts.yaml
