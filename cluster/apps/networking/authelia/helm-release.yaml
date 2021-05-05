@@ -10,13 +10,13 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.authelia.com
       chart: authelia
-      version: 0.3.22
+      version: 0.3.23
       sourceRef:
         kind: HelmRepository
         name: authelia-charts
         namespace: flux-system
       interval: 5m
-    
+
   values:
     ## This values file is designed for a StatefulSet deployment with a single pod. It is not intended for production environments
     ## It uses the following providers:
@@ -92,7 +92,7 @@ spec:
       rewriteTarget: true
 
       ## The Ingress Class Name.
-      className: ingress-nginx
+      #className: ingress-nginx
 
       ## Subdomain is the only thing required since we specify the domain as part of the root values of the chart.
       ## Example: To get Authelia to listen on https://auth.example.com specify 'auth' for ingress.subdomain,
