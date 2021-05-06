@@ -3,7 +3,7 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: toolbox-deployment
-  namespace: default
+  namespace: networking
 spec:
   selector:
     matchLabels:
@@ -20,9 +20,9 @@ spec:
         # Just sleep forever
         command: [ "sleep" ]
         args: [ "infinity" ]
-        # volumeMounts:
-        # - name: from
-        #   mountPath: /from
+        volumeMounts:
+         - name: from
+           mountPath: /from
         # - name: to
         #   mountPath: /to
       # volumes:
@@ -32,3 +32,7 @@ spec:
       # - name: to
       #   persistentVolumeClaim:
       #     claimName: config-tvheadend-pvc
+      volumes:
+      - name: from
+        persistentVolumeClaim:
+          claimName: config-authelia-pvc
