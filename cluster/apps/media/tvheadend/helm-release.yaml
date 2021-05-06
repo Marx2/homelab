@@ -84,7 +84,8 @@ spec:
         claimName: nfs-recordings-omv-pvc
     service:
       type: LoadBalancer
-      loadBalancerIP: 192.168.1.211
+      loadBalancerIPs:
+      - 192.168.1.211
       port:
         port: 80
         targetPort: 9981
