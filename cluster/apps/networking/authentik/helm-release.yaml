@@ -50,4 +50,4 @@ spec:
         password: "authentik" #TODO
       redis:
         host: "redis"
-        password: "authentik" #TODO
+        password: ""
