@@ -61,7 +61,7 @@ spec:
     ## For example if you have apps app1.example.com and app2.example.com it should be example.com
     ## This affects the ingress (partially sets the domain used) and configMap.
     ## Authelia must be served from the domain or a subdomain under it.
-    domain: k.marx.katowice.pl
+    domain: ${SECRET_DOMAIN}
 
     service:
       annotations: {}
