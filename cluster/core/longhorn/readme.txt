@@ -5,6 +5,9 @@ Longhorn does leverage iSCSI, so extra configuration of the node may be required
 - label all nodes:
 kubectl label nodes wuwek node.longhorn.io/create-default-disk=true
 
+- removing label:
+kubectl label node cobra node.longhorn.io/create-default-disk-
+
 
 - Prepare disks:
 gdisk /dev/sdb
