@@ -50,8 +50,8 @@ spec:
         ###
 
         #Authentik
-        nginx.ingress.kubernetes.io/auth-url: http://authentik.${SECRET_DOMAIN}:4180/akprox/auth?nginx
-        nginx.ingress.kubernetes.io/auth-signin: http://authentik.${SECRET_DOMAIN}:4180/akprox/start?rd=$escaped_request_uri
+        nginx.ingress.kubernetes.io/auth-url: http://authentik.networking:4180/akprox/auth?nginx
+        nginx.ingress.kubernetes.io/auth-signin: http://authentik.networking:4180/akprox/start?rd=$escaped_request_uri
         nginx.ingress.kubernetes.io/auth-snippet: |
           proxy_set_header X-Forwarded-Host $http_host;
         ###
