@@ -50,7 +50,7 @@ spec:
         ###
 
         #Authentik
-        nginx.ingress.kubernetes.io/auth-url: http://ak-outpostt-outpost.networking:4180/akprox/auth?nginx
+        nginx.ingress.kubernetes.io/auth-url: http://ak-outpost-outpost.networking:4180/akprox/auth?nginx
         nginx.ingress.kubernetes.io/auth-signin: http://ak-outpost-outpost.networking:4180/akprox/start?rd=$escaped_request_uri
         nginx.ingress.kubernetes.io/auth-snippet: |
           proxy_set_header X-Forwarded-Host $http_host;
