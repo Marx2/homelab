@@ -27,7 +27,9 @@ spec:
       ingressClassName: "nginx"
       annotations:
         #cert-manager.io/cluster-issuer: letsencrypt-production
-
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/icon: "https://camo.githubusercontent.com/4745974518b69f22b6297c1fc33a7faac798f04bed3b1d582e9f7a82b70727ce/68747470733a2f2f676f61757468656e74696b2e696f2f696d672f69636f6e5f746f705f6272616e645f636f6c6f75722e737667"
+        forecastle.stakater.com/network-restricted: "true"
       hosts:
       - host: authentik.${SECRET_DOMAIN}
         paths:
