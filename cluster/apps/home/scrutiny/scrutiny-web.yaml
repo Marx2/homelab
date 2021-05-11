@@ -5,7 +5,7 @@ metadata:
   name: scrutiny
   namespace: home
   annotations:
-    kubernetes.io/ingress.class: "external"
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
     forecastle.stakater.com/expose: "true"
