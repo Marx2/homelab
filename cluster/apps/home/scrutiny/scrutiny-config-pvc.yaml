@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: scrutiny-config-pvc
-  namespace: web
+  namespace: home
 spec:
   accessModes:
   - ReadWriteOnce
