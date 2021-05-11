@@ -51,7 +51,7 @@ spec:
 
         #Authentik
         nginx.ingress.kubernetes.io/auth-url: https://jellyfin.k.marx.katowice.pl/akprox/auth?nginx
-        nginx.ingress.kubernetes.io/auth-signin: https://jellyfin.k.marx.katowice.pl/akprox/start?rd=$escaped_request_uri
+        nginx.ingress.kubernetes.io/auth-signin: https://jellyfin.k.marx.katowice.pl/akprox/start?rd=$scheme://$host
         nginx.ingress.kubernetes.io/auth-snippet: |
           proxy_set_header X-Forwarded-Host $http_host;
         ###
