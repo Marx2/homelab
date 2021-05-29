@@ -64,7 +64,7 @@ spec:
           - name: "zigbee"
             matchOn:
             - usbId:
-                class: ["ff"]
+                class: ["02"]
                 vendor: ["1cf1"]
                 device: ["0030"]
       annotations:
