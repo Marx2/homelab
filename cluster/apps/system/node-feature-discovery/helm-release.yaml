@@ -43,7 +43,6 @@ spec:
             deviceClassWhitelist:
             - "02"
             - "03"
-            - "04"
             - "0e"
             - "ef"
             - "fe"
@@ -52,6 +51,10 @@ spec:
             - "class"
             - "vendor"
             - "device"
+          pci:
+            deviceClassWhitelist:
+            - "0300"
+            - "0400"
           custom:
           - name: "intel-gpu"
             matchOn:
