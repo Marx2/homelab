@@ -26,3 +26,13 @@ Adding new node:
   echo "wireguard" >> /etc/modules-load.d/modules.conf
 - reboot
 - add to Proxmox cluster
+
+- swap only if no free RAM:
+add to /etc/sysctl.conf:
+vm.swappiness=0
+
+switch off swap:
+- identify:
+swapon -s
+- disable
+swapoff /dev/dm-0

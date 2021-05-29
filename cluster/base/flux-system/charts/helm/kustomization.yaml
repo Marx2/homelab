@@ -13,3 +13,4 @@ resources:
 - dex-charts.yaml
 - nicholaswilde.yaml
 - authelia-charts.yaml
+- node-feature-discovery-charts.yaml
