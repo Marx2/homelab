@@ -74,7 +74,7 @@ spec:
           - name: "dvb"
             matchOn:
             - pciId:
-                class: ["04"]
+                class: ["0400"]
                 vendor: ["14f1"]
                 device: ["8880"]
       annotations:
