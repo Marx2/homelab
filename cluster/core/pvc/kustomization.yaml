@@ -5,3 +5,4 @@ resources:
 - nfs-podcasts-omv-pvc.yaml
 - nfs-recordings-omv-pvc.yaml
 - nfs-backup-omv-pvc.yaml
+- nfs-backup-ro-omv-pvc.yaml

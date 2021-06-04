@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - nfs-backup-omv-pv.yaml
+- nfs-backup-ro-omv-pv.yaml
 - nfs-media-omv-pv.yaml
 - nfs-podcasts-omv-pv.yaml
 - nfs-prometheus-omv-pv.yaml
