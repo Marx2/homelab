@@ -1,0 +1,50 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  namespace: system
+  name: cloud-backup
+  # to check: b2-hard-delete
+spec:
+  schedule: "0 */12 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: rclone
+            image: rclone/rclone:1.55
+            env:
+            - name: TZ
+              value: "${TZ}"
+            command:
+            - "rclone"
+            args:
+            - "-v"
+            - "--config"
+            - "/config/rclone.conf"
+            - "sync"
+            - "--ignore-errors"
+            - "--fast-list"
+            - "--transfers"
+            - "24"
+            - "--checkers"
+            - "24"
+            - "--bwlimit"
+            - "25M"
+            - "/backup/test"
+            - "marxnas:marxnas/test/"
+            volumeMounts:
+            - name: rclone-config
+              mountPath: "/config"
+            - name: nfs-backup-ro
+              mountPath: /backup
+          volumes:
+          - name: rclone-config
+            secret:
+              secretName: rclone-config-secret
+          - name: nfs-backup-ro
+            persistentVolumeClaim:
+              claimName: nfs-backup-ro-omv-pvc
