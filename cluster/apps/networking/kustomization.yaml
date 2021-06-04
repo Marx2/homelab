@@ -8,4 +8,4 @@ resources:
 - oauth2-proxy
 - dex
 - authelia
-- authentik
+#- authentik
