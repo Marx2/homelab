@@ -34,8 +34,8 @@ spec:
             - "24"
             - "--bwlimit"
             - "25M"
-            - "/backup/test"
-            - "marxnas:marxnas/test/"
+            - "/backup"
+            - "marxnas:marxnas/"
             volumeMounts:
             - name: rclone-config
               mountPath: "/config"
