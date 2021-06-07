@@ -14,3 +14,4 @@ resources:
 - nicholaswilde.yaml
 - authelia-charts.yaml
 - node-feature-discovery-charts.yaml
+- vernemq-charts.yaml
