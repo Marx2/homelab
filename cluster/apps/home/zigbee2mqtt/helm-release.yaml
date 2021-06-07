@@ -85,7 +85,7 @@ spec:
       enabled: true
       ingressClassName: "nginx"
       annotations:
-        kubernetes.io/ingress.class: "nginx"
+        # kubernetes.io/ingress.class: "nginx"
         forecastle.stakater.com/expose: "true"
         forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
         forecastle.stakater.com/network-restricted: "true"
