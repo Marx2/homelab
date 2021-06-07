@@ -3,7 +3,7 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: toolbox-deployment
-  namespace: networking
+  namespace: home
 spec:
   selector:
     matchLabels:
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: from
         persistentVolumeClaim:
-          claimName: config-authelia-pvc
+          claimName: zigbee2mqtt-config-pvc
