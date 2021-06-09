@@ -23,7 +23,7 @@ spec:
     env:
       TZ: ${TZ}
       ZIGBEE2MQTT_DATA: /data
-      DEBUG: "zigbee-herdsman*"
+      # DEBUG: "zigbee-herdsman*"
     probes:
       startup:
         enabled: true
