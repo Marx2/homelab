@@ -47,7 +47,7 @@ spec:
           paths:
           - path: /
         tls:
-        - secretName: tls.home-assistant-frontend
+        # - secretName: tls.home-assistant-frontend
           hosts:
           - hass.${SECRET_DOMAIN}
 
@@ -83,45 +83,47 @@ spec:
 
     addons:
       codeserver:
-        enabled: false
+        enabled: true
 
         # git:
         #   deployKeySecret: home-assistant-deploykey
 
-        # ingress:
-        #   enabled: true
-        #   ingressClassName: "traefik"
-        #   annotations:
-        #     cert-manager.io/cluster-issuer: letsencrypt-production
-        #     external-dns.alpha.kubernetes.io/target: ingress.${DOMAIN_1}
-        #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        #     traefik.ingress.kubernetes.io/router.middlewares: system-ingress-rfc1918-ips@kubernetescrd
-        #   hosts:
-        #   - host: code-domo.${DOMAIN_1}
-        #     paths:
-        #     - path: /
-        #   tls:
-        #   - secretName: tls.home-assistant-code
-        #     hosts:
-        #     - code-domo.${DOMAIN_1}
+        ingress:
+          enabled: true
+          ingressClassName: "traefik"
+          annotations:
+            kubernetes.io/ingress.class: "nginx"
+            nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+            nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+            forecastle.stakater.com/expose: "true"
+            forecastle.stakater.com/icon: "https://www.home-assistant.io/images/home-assistant-logo.svg"
+            forecastle.stakater.com/network-restricted: "true"
+          hosts:
+          - host: vss.${SECRET_DOMAIN}
+            paths:
+            - path: /
+          tls:
+          # - secretName: tls.home-assistant-code
+            hosts:
+            - vss.${SECRET_DOMAIN}
 
-        # args:
-        # - --auth
-        # - none
-        # - --user-data-dir
-        # - "/config/.vscode"
-        # - --extensions-dir
-        # - "/config/.vscode"
+        args:
+        - --auth
+        - none
+        - --user-data-dir
+        - "/config/.vscode"
+        - --extensions-dir
+        - "/config/.vscode"
 
-        # workingDir: "/config"
+        workingDir: "/config"
 
-        # volumeMounts:
-        # - name: config
-        #   mountPath: /config
+        volumeMounts:
+        - name: config
+          mountPath: /config
 
-        # resources:
-        #   requests:
-        #     cpu: 35m
-        #     memory: 128Mi
-        #   limits:
-        #     memory: 512Mi
+        resources:
+          requests:
+            cpu: 35m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
