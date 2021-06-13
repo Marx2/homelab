@@ -6,3 +6,4 @@ resources:
 - scrutiny
 - vernemq
 - zigbee2mqtt
+- home-assistant
