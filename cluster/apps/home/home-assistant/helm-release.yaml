@@ -1,0 +1,127 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-automation
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: home-assistant
+      version: 9.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/home-assistant/home-assistant
+      tag: 2021.6.4
+
+    # podAnnotations:
+    #   secret.reloader.stakater.com/reload: home-assistant-secrets
+
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://www.home-assistant.io/images/home-assistant-logo.svg"
+          forecastle.stakater.com/network-restricted: "true"
+        hosts:
+        - host: hass.${SECRET_DOMAIN}
+          paths:
+          - path: /
+        tls:
+        - secretName: tls.home-assistant-frontend
+          hosts:
+          - hass.${SECRET_DOMAIN}
+
+    env:
+      TZ: ${TZ}
+
+    # envFrom:
+    # - secretRef:
+    #     name: home-assistant-secrets
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config-pvc
+
+    resources:
+      requests:
+        cpu: 75m
+        memory: 512Mi
+      limits:
+        memory: 2000Mi
+
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        existingClaim: home-assistant-data-pvc
+
+      postgresqlUsername: home-assistant
+      postgresqlDatabase: home-assistant
+      # postgresqlPassword: ${HASS_POSTGRES_PASSWORD}
+      postgresqlPassword: testpassword
+
+    addons:
+      codeserver:
+        enabled: false
+
+        # git:
+        #   deployKeySecret: home-assistant-deploykey
+
+        # ingress:
+        #   enabled: true
+        #   ingressClassName: "traefik"
+        #   annotations:
+        #     cert-manager.io/cluster-issuer: letsencrypt-production
+        #     external-dns.alpha.kubernetes.io/target: ingress.${DOMAIN_1}
+        #     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        #     traefik.ingress.kubernetes.io/router.middlewares: system-ingress-rfc1918-ips@kubernetescrd
+        #   hosts:
+        #   - host: code-domo.${DOMAIN_1}
+        #     paths:
+        #     - path: /
+        #   tls:
+        #   - secretName: tls.home-assistant-code
+        #     hosts:
+        #     - code-domo.${DOMAIN_1}
+
+        # args:
+        # - --auth
+        # - none
+        # - --user-data-dir
+        # - "/config/.vscode"
+        # - --extensions-dir
+        # - "/config/.vscode"
+
+        # workingDir: "/config"
+
+        # volumeMounts:
+        # - name: config
+        #   mountPath: /config
+
+        # resources:
+        #   requests:
+        #     cpu: 35m
+        #     memory: 128Mi
+        #   limits:
+        #     memory: 512Mi
