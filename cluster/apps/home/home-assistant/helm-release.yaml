@@ -48,7 +48,7 @@ spec:
           - path: /
         tls:
         # - secretName: tls.home-assistant-frontend
-          hosts:
+        - hosts:
           - hass.${SECRET_DOMAIN}
 
     env:
@@ -103,7 +103,7 @@ spec:
             - path: /
           tls:
           # - secretName: tls.home-assistant-code
-            hosts:
+          - hosts:
             - vsc.${SECRET_DOMAIN}
 
         args:
