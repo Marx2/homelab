@@ -35,8 +35,6 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          #nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
         hosts:
@@ -47,21 +45,6 @@ spec:
         tls:
         - hosts:
           - "tvheadend.${SECRET_DOMAIN}"
-        #additionalIngresses:
-          #- nameSuffix: stream
-            #enabled: true
-            #annotations:
-              #kubernetes.io/ingress.class: "nginx"
-            #hosts:
-            #- host: tvheadend.${SECRET_DOMAIN}
-              #paths:
-              #- path: /
-                #pathType: Prefix
-                #serviceName: tvheadend
-                #servicePort: 9982
-            #tls:
-            #- hosts:
-              #- "tvheadend.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true
@@ -84,20 +67,17 @@ spec:
       persistentVolumeClaim:
         claimName: nfs-recordings-omv-pvc
     service:
-      type: LoadBalancer
-      loadBalancerIP: 192.168.1.211
-      port:
-        port: 80
-        targetPort: 9981
-      additionalPorts:
-        port:
-          port: 9982
-          name: htsp
+      main:
+        type: LoadBalancer
+        externalIPs: 192.168.1.211
+        ports:
+          http:
+            port: 80
+            targetPort: 9981
+          htsp:
+            port: 9982
     securityContext:
       privileged: true
-      #  runAsUser: 1000
-      #  runAsGroup: 1000
-      #  fsGroup: 1000
     resources:
       requests:
         cpu: 1
