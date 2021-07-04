@@ -33,8 +33,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        # ingressClassName: "nginx"
         annotations:
+          kubernetes.io/ingress.class: "nginx"
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
         hosts:
@@ -76,6 +77,8 @@ spec:
             port: 80
             targetPort: 9981
           htsp:
+            enabled: true
+            protocol: TCP
             port: 9982
     securityContext:
       privileged: true
