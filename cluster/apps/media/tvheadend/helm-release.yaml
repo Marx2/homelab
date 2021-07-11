@@ -27,8 +27,7 @@ spec:
       PGID: 1000
       RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
     controller:
-      strategy:
-        type: Recreate
+      strategy: Recreate
     nodeSelector:
       k3s.io/hostname: "wezyr"
     ingress:
