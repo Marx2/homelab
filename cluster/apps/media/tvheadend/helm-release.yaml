@@ -26,8 +26,9 @@ spec:
       PUID: 1000
       PGID: 1000
       RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
-    strategy:
-      type: Recreate
+    controller:
+      strategy:
+        type: Recreate
     nodeSelector:
       k3s.io/hostname: "wezyr"
     ingress:
@@ -50,23 +51,16 @@ spec:
       config:
         enabled: true
         existingClaim: config-tvheadend-pvc
-    additionalVolumeMounts:
-    - name: dvb
-      mountPath: /dev/dvb
-    - name: dri
-      mountPath: /dev/dri
-    - name: recordings-omv
-      mountPath: "/recordings"
-    additionalVolumes:
-    - name: dvb
-      hostPath:
-        path: /dev/dvb
-    - name: dri
-      hostPath:
-        path: /dev/dri
-    - name: recordings-omv
-      persistentVolumeClaim:
-        claimName: nfs-recordings-omv-pvc
+      recordings-omv:
+        enabled: true
+        existingClaim: nfs-recordings-omv-pvc
+        mountPath: "/recordings"
+      dvb:
+        enabled: true
+        hostPath: /dev/dvb
+      dri:
+        enabled: true
+        hostPath: /dev/dri
     service:
       main:
         type: LoadBalancer
