@@ -74,6 +74,7 @@ spec:
         - 192.168.1.211
         ports:
           http:
+            enabled: true
             port: 80
             targetPort: 9981
           htsp:
