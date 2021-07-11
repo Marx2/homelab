@@ -57,10 +57,14 @@ spec:
         mountPath: "/recordings"
       dvb:
         enabled: true
+        type: hostPath
         hostPath: /dev/dvb
+        mountPath: "/dev/dvb"
       dri:
         enabled: true
+        type: hostPath
         hostPath: /dev/dri
+        mountPath: "/dev/dri"
     service:
       main:
         type: LoadBalancer
