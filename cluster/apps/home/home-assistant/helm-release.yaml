@@ -81,8 +81,8 @@ spec:
       # postgresqlPassword: ${HASS_POSTGRES_PASSWORD}
       postgresqlPassword: testpassword
 
-    # service:
-    #   portName: http-api
+    service:
+      portName: http-api
     addons:
       codeserver:
         enabled: true
