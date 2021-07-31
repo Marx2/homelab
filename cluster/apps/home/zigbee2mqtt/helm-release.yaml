@@ -30,16 +30,6 @@ spec:
     # Privileged is required if USB controller is accessed directly through the host machine
     securityContext:
       privileged: true
-    # Path to your zigbee device in the container
-    additionalVolumeMounts:
-    - name: usb
-      mountPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
-    # Path to your zigbee device on the host
-    additionalVolumes:
-    - name: usb
-      hostPath:
-        path: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
-        type: CharDevice
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -105,3 +95,10 @@ spec:
         enabled: true
         existingClaim: zigbee2mqtt-config-pvc
         mountPath: "/data"
+      usb:
+        enabled: true
+        type: CharDevice
+        # Path to your zigbee device on the host
+        hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
+        # Path to your zigbee device in the container
+        mountPath: "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00"
