@@ -97,8 +97,7 @@ spec:
         mountPath: "/data"
       usb:
         enabled: true
-        type: CharDevice
+        type: hostPath
         # Path to your zigbee device on the host
         hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
-        # Path to your zigbee device in the container
-        mountPath: "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00"
+        hostPathType: CharDevice        
