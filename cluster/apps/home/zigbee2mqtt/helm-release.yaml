@@ -84,21 +84,22 @@ spec:
       experimental:
         new_api: true
     ingress:
-      enabled: true
-      ingressClassName: "nginx"
-      annotations:
-        # kubernetes.io/ingress.class: "nginx"
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
-        forecastle.stakater.com/network-restricted: "true"
-      hosts:
-      - host: "zigbee2mqtt.${SECRET_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "zigbee2mqtt.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          # kubernetes.io/ingress.class: "nginx"
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
+          forecastle.stakater.com/network-restricted: "true"
+        hosts:
+        - host: "zigbee2mqtt.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "zigbee2mqtt.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true
