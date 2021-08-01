@@ -79,10 +79,11 @@ spec:
         enabled: true
         type: emptyDir
         accessMode: ReadWriteOnce
+        mountPath: /config/transcodes
         emptyDir:
           enabled: true
-          #medium: "Memory"
-          sizeLimit: 10Gi
+          medium: "Memory"
+          sizeLimit: 2Gi
       nfs-media-omv:
         enabled: true
         existingClaim: nfs-media-omv-pvc
