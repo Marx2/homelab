@@ -49,15 +49,19 @@ spec:
         mountPath: /data/nas-media
 
     service:
-      additionalServices:
-      - enabled: true
-        nameSuffix: bittorrent
+      main:
+        ports:
+          http:
+            port: 8080
+      bittorrent:
+        enabled: true
         type: ClusterIP
-        port:
-          port: 24589
-          name: bittorrent
-          protocol: TCP
-          targetPort: 24589
+        ports:
+          bittorrent:
+            enabled: true
+            port: 24589
+            protocol: TCP
+            targetPort: 24589
 
     ingress:
       main:
