@@ -11,7 +11,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: qbittorrent
-      version: 10.1.0
+      version: 11.3.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/qbittorrent
-      tag: v4.3.4.1
+      tag: v4.3.7
       pullPolicy: Always
 
     podSecurityContext:
@@ -29,7 +29,7 @@ spec:
       fsGroup: 1000
 
     env:
-      TZ: "Europe/Warsaw"
+      TZ: ${TZ}
       WAIT_FOR_VPN: "true"
       UMASK: "022"
 
@@ -60,22 +60,23 @@ spec:
           targetPort: 24589
 
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
-        forecastle.stakater.com/network-restricted: "true"
-      hosts:
-      - host: qbittorrent.${SECRET_DOMAIN}
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "qbittorrent.${SECRET_DOMAIN}"
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
+          forecastle.stakater.com/network-restricted: "true"
+        hosts:
+        - host: qbittorrent.${SECRET_DOMAIN}
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "qbittorrent.${SECRET_DOMAIN}"
 
     resources:
       requests:
