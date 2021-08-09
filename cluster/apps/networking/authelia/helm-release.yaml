@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.authelia.com
       chart: authelia
-      version: 0.4.11
+      version: 0.5.3
       sourceRef:
         kind: HelmRepository
         name: authelia-charts
@@ -31,7 +31,7 @@ spec:
     image:
       registry: docker.io
       repository: authelia/authelia
-      tag: 4.29.4
+      tag: 4.30.2
       pullPolicy: IfNotPresent
       pullSecrets: []
 
