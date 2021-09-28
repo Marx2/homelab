@@ -67,6 +67,13 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
+      [feeds.BARTEKSZYMA]
+      url = "https://www.youtube.com/channel/UCBucv0pGB0lawhM15pCb5vQ"
+      page_size = 10
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
 
     [database]
       badger = { truncate = true, file_io = true } # See https://github.com/dgraph-io/badger#memory-usage
