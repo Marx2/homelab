@@ -74,6 +74,13 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
+      [feeds.SYSTEMTRADER]
+      url = "https://www.youtube.com/channel/UC53oqQ6MSo5GUCW5_4AtwOA"
+      page_size = 10
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
 
     [database]
       badger = { truncate = true, file_io = true } # See https://github.com/dgraph-io/badger#memory-usage
