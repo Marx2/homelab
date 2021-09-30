@@ -83,7 +83,7 @@ stringData:
       opml = true
       [feeds.DORADCATV]
       url = "https://www.youtube.com/channel/UChseY2p3PZTVVg9SrQPRHog"
-      page_size = 10
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
