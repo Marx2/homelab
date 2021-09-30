@@ -90,7 +90,7 @@ stringData:
       opml = true
       [feeds.PWOJEWODA]
       url = "https://www.youtube.com/channel/UCmh_UrGAvg7bsJddKKaFQCg"
-      page_size = 10
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
