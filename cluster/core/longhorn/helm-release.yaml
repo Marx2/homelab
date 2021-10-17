@@ -17,6 +17,8 @@ spec:
         namespace: flux-system
   values:
     persistence:
+      # workaround for https://github.com/longhorn/longhorn/issues/2964
+      defaultFsType: ext4
       defaultClassReplicaCount: 2
       reclaimPolicy: Retain
       recurringJobs:
