@@ -103,7 +103,21 @@ stringData:
       format = "audio"
       opml = true
       [feeds.GIEINWTRAD]
-      url = "https://www.youtube.com/c/GiełdaInwestycjeTrading"
+      url = "https://www.youtube.com/channel/UCh9IhKUDYhf0-IyJII0VClg"
+      page_size = 30
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
+      [feeds.TRADING_FOR_LIVING]
+      url = "https://www.youtube.com/channel/UCMh0w6OpVi085p81jK5TnzQ"
+      page_size = 30
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
+      [feeds.STREFA_INWESTOROW]
+      url = "https://www.youtube.com/user/StrefaInwestorow"
       page_size = 30
       update_period = "2h"
       quality = "low"
