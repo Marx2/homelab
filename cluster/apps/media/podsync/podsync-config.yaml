@@ -83,7 +83,7 @@ stringData:
       opml = true
       [feeds.DORADCATV]
       url = "https://www.youtube.com/channel/UChseY2p3PZTVVg9SrQPRHog"
-      page_size = 30
+      page_size = 300
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -97,7 +97,7 @@ stringData:
       opml = true
       [feeds.FINANSOWATV]
       url = "https://www.youtube.com/channel/UCcJq-5bSAMp2ZCOR8kacfmA"
-      page_size = 30
+      page_size = 50
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -111,14 +111,14 @@ stringData:
 #       opml = true
       [feeds.TRADING_FOR_LIVING]
       url = "https://www.youtube.com/channel/UCMh0w6OpVi085p81jK5TnzQ"
-      page_size = 30
+      page_size = 50
       update_period = "2h"
       quality = "low"
       format = "audio"
       opml = true
       [feeds.STREFA_INWESTOROW]
       url = "https://www.youtube.com/user/StrefaInwestorow"
-      page_size = 30
+      page_size = 300
       update_period = "2h"
       quality = "low"
       format = "audio"
