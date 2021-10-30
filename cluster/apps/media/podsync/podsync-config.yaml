@@ -102,13 +102,13 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-#       [feeds.GIEINWTRAD]
-#       url = "https://www.youtube.com/channel/UCh9IhKUDYhf0-IyJII0VClg"
-#       page_size = 30
-#       update_period = "2h"
-#       quality = "low"
-#       format = "audio"
-#       opml = true
+      [feeds.GIEINWTRAD]
+      url = "https://www.youtube.com/channel/UCh9IhKUDYhf0-IyJII0VClg"
+      page_size = 30
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
       [feeds.TRADING_FOR_LIVING]
       url = "https://www.youtube.com/channel/UCMh0w6OpVi085p81jK5TnzQ"
       page_size = 50
@@ -123,7 +123,6 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-      
 
     [database]
       badger = { truncate = true, file_io = true } # See https://github.com/dgraph-io/badger#memory-usage
