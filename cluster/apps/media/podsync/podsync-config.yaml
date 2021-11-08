@@ -118,7 +118,7 @@ stringData:
       opml = true
       [feeds.STREFA_INWESTOROW]
       url = "https://www.youtube.com/user/StrefaInwestorow"
-      page_size = 300
+      page_size = 100
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -133,6 +133,13 @@ stringData:
       [feeds.MOJE_IKE]
       url = "https://www.youtube.com/channel/UC6ZuH6K2eblzhSNhLgzAAwA"
       page_size = 300
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
+      [feeds.XTB]
+      url = "https://www.youtube.com/c/xtbpl"
+      page_size = 100
       update_period = "2h"
       quality = "low"
       format = "audio"

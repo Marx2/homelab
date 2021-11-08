@@ -93,7 +93,7 @@ spec:
             memory: 128Mi
             cpu: "0.3"
           limits:
-            memory: 512Mi
+            memory: 1024Mi
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
