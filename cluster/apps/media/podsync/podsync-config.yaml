@@ -111,7 +111,7 @@ stringData:
       opml = true
       [feeds.TRADING_FOR_LIVING]
       url = "https://www.youtube.com/channel/UCMh0w6OpVi085p81jK5TnzQ"
-      page_size = 50
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -138,7 +138,7 @@ stringData:
       format = "audio"
       opml = true
       [feeds.XTB]
-      url = "https://www.youtube.com/c/xtbpl"
+      url = "https://www.youtube.com/channel/UCILwajCs145hxNvB4nckALg"
       page_size = 100
       update_period = "2h"
       quality = "low"
