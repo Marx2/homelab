@@ -144,7 +144,7 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-      [feeds.XTB]
+      [feeds.WOLNY_ARYSTOKRATA]
       url = "https://www.youtube.com/channel/UCn1iWF60wWpCiEAzyaKioDQ"
       page_size = 20
       update_period = "2h"
