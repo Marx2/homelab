@@ -152,12 +152,13 @@ stringData:
       format = "audio"
       opml = true
       [feeds.GPWNOTOWANIA]
-      url = "https://www.youtube.com/c/GPWnotowania"
+      url = "https://www.youtube.com/channel/UCAH85XhPoXCxSXUKdwsm0Ig"
       page_size = 20
       update_period = "2h"
       quality = "low"
       format = "audio"
       opml = true
+
 
     [database]
       badger = { truncate = true, file_io = true } # See https://github.com/dgraph-io/badger#memory-usage
