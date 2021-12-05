@@ -11,7 +11,7 @@ spec:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: DS418J
+    server: 192.168.1.49
     path: /media/podcasts
   mountOptions:
   #  - nfsvers=3
