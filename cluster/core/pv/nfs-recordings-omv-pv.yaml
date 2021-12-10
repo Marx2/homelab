@@ -15,7 +15,7 @@ spec:
     path: /volume1/recordings
   mountOptions:
   #  - nfsvers=3
-  - nfsvers=4.2
+  - nfsvers=4.1
   - tcp
   - intr
   - hard
