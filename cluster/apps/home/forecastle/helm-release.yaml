@@ -41,9 +41,10 @@ spec:
           forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
           forecastle.stakater.com/network-restricted: "true"
         hosts:
-        - host: "forecastle.${SECRET_DOMAIN}"
+        - host: forecastle.${SECRET_DOMAIN}
           paths:
-          - /
+          - path: /
+            pathType: Prefix          
         tls:
         - hosts:
           - "forecastle.${SECRET_DOMAIN}"
