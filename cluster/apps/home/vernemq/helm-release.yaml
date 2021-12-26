@@ -46,3 +46,6 @@ spec:
     podAntiAffinity: hard
     # nodeSelector:
     #   node-role.kubernetes.io/worker: "true"
+
+    #FIX https://github.com/vernemq/docker-vernemq/issues/300
+    envFrom: []
