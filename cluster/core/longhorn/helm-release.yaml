@@ -16,6 +16,7 @@ spec:
         name: longhorn-charts
         namespace: flux-system
   values:
+    namespaceOverride: "longhorn"
     persistence:
       # workaround for https://github.com/longhorn/longhorn/issues/2964
       defaultFsType: ext4
