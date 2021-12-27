@@ -71,7 +71,7 @@ spec:
               version: v1
               kind: Service 
               name: longhorn-engine-manager
-            patch: |-
+            patch:
               - op: replace
                 path: /metadata/namespace
                 value: longhorn
@@ -79,7 +79,7 @@ spec:
               version: v1
               kind: Service 
               name: longhorn-replica-manager
-            patch: |-
+            patch:
               - op: replace
                 path: /metadata/namespace
                 value: longhorn
