@@ -8,3 +8,4 @@ resources:
 - media.yaml
 - longhorn.yaml
 - system.yaml
+- longhorn-system.yaml
