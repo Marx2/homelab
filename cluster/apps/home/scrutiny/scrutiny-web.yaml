@@ -19,7 +19,8 @@ spec:
       - backend:
           service: 
             name: scrutiny-web
-            port: 80
+            port: 
+              number: 80
         path: /
   tls:
   - hosts:
