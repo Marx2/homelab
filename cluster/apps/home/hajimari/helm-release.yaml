@@ -28,6 +28,26 @@ spec:
           - media
           - networking
       name: "Marx"
+      customApps:
+        - name: PiHole
+          url: "http://192.168.1.201/admin/"
+          icon: "dns"
+        - name: Router
+          url: "192.168.1.1/webpages/login.html"
+          icon: "router-wireless"
+        - name: Proxmox Wezyr
+          url: "https://192.168.1.39:8006/"
+          icon: "server"
+        - name: Proxmox Wuwek
+          url: "https://192.168.1.13:8006/"
+          icon: "server"
+        - name: Proxmox Cobra
+          url: "https://192.168.1.40:8006/"
+          icon: "server"
+        - name: Nas
+          url: "https://192.168.1.49:5001/"
+          icon: "nas"
+      
     ingress:
       main:
         enabled: true
