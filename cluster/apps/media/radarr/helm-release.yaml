@@ -51,6 +51,7 @@ spec:
           #forecastle.stakater.com/icon: "https://i1.wp.com/www.mindthevirt.com/wp-content/uploads/2018/09/text256.png?w=695"
           hajimari.io/enable: "true"
           hajimari.io/icon: "filmstrip"
+          hajimari.io/group: "media"
         hosts:
         - host: radarr.${SECRET_DOMAIN}
           paths:

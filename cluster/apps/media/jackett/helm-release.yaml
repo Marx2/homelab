@@ -35,6 +35,7 @@ spec:
           hajimari.io/enable: "true"
           # hajimari.io/icon: "https://www.htpcguides.com/wp-content/uploads/2015/07/jackett.png"
           hajimari.io/icon: "account-circle"
+          hajimari.io/group: "media"
         hosts:
         - host: "jackett.${SECRET_DOMAIN}"
           paths:

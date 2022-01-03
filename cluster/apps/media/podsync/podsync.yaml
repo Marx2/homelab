@@ -15,6 +15,7 @@ metadata:
     #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/mxpv/podsync/master/docs/img/logo.png"
     hajimari.io/enable: "true"
     hajimari.io/icon: "podcast"
+    hajimari.io/group: "media"
 spec:
   rules:
   - host: podsync.${SECRET_DOMAIN}

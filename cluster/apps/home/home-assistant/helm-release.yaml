@@ -108,6 +108,7 @@ spec:
               #forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
               hajimari.io/enable: "true"
               hajimari.io/icon: "code-braces-box"
+              hajimari.io/group: "home"
             hosts:
             - host: vsc.${SECRET_DOMAIN}
               paths:

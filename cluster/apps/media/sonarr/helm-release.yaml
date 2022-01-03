@@ -45,6 +45,7 @@ spec:
           #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png"
           hajimari.io/enable: "true"
           hajimari.io/icon: "filmstrip"
+          hajimari.io/group: "media"
         hosts:
         - host: sonarr.${SECRET_DOMAIN}
           paths:

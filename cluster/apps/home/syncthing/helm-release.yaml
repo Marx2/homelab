@@ -61,6 +61,7 @@ spec:
         # forecastle.stakater.com/icon: "https://raw.githubusercontent.com/syncthing/syncthing/main/assets/logo-text-128.png"
         hajimari.io/enable: "true"
         hajimari.io/icon: "cloud-sync-outline"
+        hajimari.io/group: "home"
       hosts:
       - host: syncthing.${SECRET_DOMAIN}
         paths:

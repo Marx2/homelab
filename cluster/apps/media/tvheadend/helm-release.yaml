@@ -39,6 +39,7 @@ spec:
           #forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
           hajimari.io/enable: "true"
           hajimari.io/icon: "record-rec"
+          hajimari.io/group: "media"
         hosts:
         - host: "tvheadend.${SECRET_DOMAIN}"
           paths:

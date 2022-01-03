@@ -82,6 +82,7 @@ spec:
           # forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
           hajimari.io/enable: "true"
           hajimari.io/icon: "arrow-right-circle-outline"
+          hajimari.io/group: "home"
         hosts:
         - host: "zigbee2mqtt.${SECRET_DOMAIN}"
           paths:

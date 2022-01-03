@@ -118,6 +118,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-production
         hajimari.io/enable: "true"
         hajimari.io/icon: "lock"
+        hajimari.io/group: "infra"
       hosts:
       - host: dex.${SECRET_DOMAIN}
         paths:

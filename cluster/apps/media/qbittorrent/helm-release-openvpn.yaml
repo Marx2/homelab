@@ -73,6 +73,7 @@ spec:
           # forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/2131270?s=400&v=4"
           hajimari.io/enable: "true"
           hajimari.io/icon: "pirate"
+          hajimari.io/group: "media"
         hosts:
         - host: qbittorrent.${SECRET_DOMAIN}
           paths:

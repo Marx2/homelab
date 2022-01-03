@@ -11,6 +11,7 @@ metadata:
     #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/AnalogJ/scrutiny/master/webapp/frontend/src/assets/images/logo/scrutiny-logo-dark.png"
     hajimari.io/enable: "true"
     hajimari.io/icon: "harddisk"
+    hajimari.io/group: "infra"
 spec:
   rules:
   - host: scrutiny.${SECRET_DOMAIN}
