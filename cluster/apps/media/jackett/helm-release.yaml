@@ -33,7 +33,8 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: "true"
-          hajimari.io/icon: "https://www.htpcguides.com/wp-content/uploads/2015/07/jackett.png"
+          # hajimari.io/icon: "https://www.htpcguides.com/wp-content/uploads/2015/07/jackett.png"
+          hajimari.io/icon: "account-circle"
         hosts:
         - host: "jackett.${SECRET_DOMAIN}"
           paths:
