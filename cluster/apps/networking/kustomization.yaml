@@ -7,5 +7,5 @@ resources:
 - k8s_gateway
 - oauth2-proxy
 - dex
-- authelia
+#- authelia
 #- authentik

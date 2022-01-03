@@ -48,9 +48,9 @@ spec:
           kubernetes.io/ingress.class: nginx
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://i1.wp.com/www.mindthevirt.com/wp-content/uploads/2018/09/text256.png?w=695"
-          forecastle.stakater.com/network-restricted: "true"
+          #forecastle.stakater.com/icon: "https://i1.wp.com/www.mindthevirt.com/wp-content/uploads/2018/09/text256.png?w=695"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "filmstrip"
         hosts:
         - host: radarr.${SECRET_DOMAIN}
           paths:

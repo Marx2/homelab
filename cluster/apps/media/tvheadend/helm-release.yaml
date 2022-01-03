@@ -36,8 +36,9 @@ spec:
         # ingressClassName: "nginx"
         annotations:
           kubernetes.io/ingress.class: "nginx"
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
+          #forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "record-rec"
         hosts:
         - host: "tvheadend.${SECRET_DOMAIN}"
           paths:

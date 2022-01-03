@@ -12,9 +12,9 @@ metadata:
     # nginx.ingress.kubernetes.io/auth-secret: podsync-basic-auth
     # message to display with an appropriate context why the authentication is required
     # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
-    forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/icon: "https://raw.githubusercontent.com/mxpv/podsync/master/docs/img/logo.png"
-    forecastle.stakater.com/network-restricted: "true"
+    #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/mxpv/podsync/master/docs/img/logo.png"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "podcast"
 spec:
   rules:
   - host: podsync.${SECRET_DOMAIN}

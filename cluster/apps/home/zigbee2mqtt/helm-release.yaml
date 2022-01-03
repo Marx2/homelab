@@ -79,9 +79,9 @@ spec:
         ingressClassName: "nginx"
         annotations:
           # kubernetes.io/ingress.class: "nginx"
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
-          forecastle.stakater.com/network-restricted: "true"
+          # forecastle.stakater.com/icon: "https://www.zigbee2mqtt.io/images/logo.png"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "arrow-right-circle-outline"
         hosts:
         - host: "zigbee2mqtt.${SECRET_DOMAIN}"
           paths:
@@ -100,4 +100,4 @@ spec:
         type: hostPath
         # Path to your zigbee device on the host
         hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
-        hostPathType: CharDevice        
+        hostPathType: CharDevice

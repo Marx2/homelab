@@ -24,7 +24,7 @@ spec:
       repository: syncthing/syncthing
       tag: 1.18.5
     env:
-      TZ: "Europe/Warsaw"
+      TZ: ${TZ}
       PUID: "1000"
       PGID: "1000"
     strategy:
@@ -58,9 +58,9 @@ spec:
         kubernetes.io/ingress.class: "nginx"
         nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-        forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/icon: "https://raw.githubusercontent.com/syncthing/syncthing/main/assets/logo-text-128.png"
-        forecastle.stakater.com/network-restricted: "true"
+        # forecastle.stakater.com/icon: "https://raw.githubusercontent.com/syncthing/syncthing/main/assets/logo-text-128.png"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "cloud-sync-outline"
       hosts:
       - host: syncthing.${SECRET_DOMAIN}
         paths:

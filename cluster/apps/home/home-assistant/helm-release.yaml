@@ -49,9 +49,9 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           # nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           # nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-          forecastle.stakater.com/expose: "true"
-          forecastle.stakater.com/icon: "https://www.home-assistant.io/images/home-assistant-logo.svg"
-          forecastle.stakater.com/network-restricted: "true"
+          # forecastle.stakater.com/icon: "https://www.home-assistant.io/images/home-assistant-logo.svg"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "home-lightning-bolt-outline"
         hosts:
         - host: hass.${SECRET_DOMAIN}
           paths:
@@ -105,9 +105,9 @@ spec:
               kubernetes.io/ingress.class: "nginx"
               nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
               nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-              forecastle.stakater.com/expose: "true"
-              forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
-              forecastle.stakater.com/network-restricted: "true"
+              #forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
+              hajimari.io/enable: "true"
+              hajimari.io/icon: "code-braces-box"
             hosts:
             - host: vsc.${SECRET_DOMAIN}
               paths:
