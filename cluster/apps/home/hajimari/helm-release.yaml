@@ -23,8 +23,8 @@ spec:
     hajimari:
       defaultEnable: true
         namespaceSelector:
-        matchNames:
-          - ALL
+          matchNames:
+            - ALL
         #  - home
         #  - media
         #  - networking
