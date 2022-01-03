@@ -15,3 +15,4 @@ resources:
 - authelia-charts.yaml
 - node-feature-discovery-charts.yaml
 - vernemq-charts.yaml
+- hajimari-charts.yaml
