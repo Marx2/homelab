@@ -24,10 +24,9 @@ spec:
       defaultEnable: true
       namespaceSelector:
         matchNames:
-          - ALL
-        #  - home
-        #  - media
-        #  - networking
+          - home
+          - media
+          - networking
       name: "Marx"
     ingress:
       main:
