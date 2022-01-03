@@ -27,6 +27,7 @@ spec:
           - home
           - media
           - networking
+          - longhorn
       name: "Marx"
       customApps:
         - name: PiHole
