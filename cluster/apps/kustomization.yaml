@@ -7,3 +7,4 @@ resources:
 - home
 - media
 - default
+- kube-system
