@@ -87,7 +87,7 @@ spec:
         existingClaim: home-assistant-data-pvc
 
       postgresqlUsername: home-assistant
-      postgresqlDatabase: home-assistant
+      postgresqlDatabase: haas
       # postgresqlPassword: ${HASS_POSTGRES_PASSWORD}
       postgresqlPassword: testpassword
 
