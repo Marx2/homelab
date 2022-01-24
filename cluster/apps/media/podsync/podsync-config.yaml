@@ -138,7 +138,7 @@ stringData:
       format = "audio"
       opml = true
       [feeds.PPCG]
-      url = "https://www.youtube.com/c/PPCGStock"
+      url = "https://www.youtube.com/channel/UCYl1XCVu6G-OKPETji4c_Cg"
       page_size = 20
       update_period = "2h"
       quality = "low"
@@ -159,7 +159,7 @@ stringData:
       format = "audio"
       opml = true
       [feeds.WAPNIAK]
-      url = "https://www.youtube.com/c/Wapniak"
+      url = "https://www.youtube.com/channel/UCR_Deywzf9vfBxdbVNX4Bqg"
       page_size = 20
       update_period = "2h"
       quality = "low"
