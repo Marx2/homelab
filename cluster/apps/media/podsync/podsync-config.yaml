@@ -137,9 +137,9 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-      [feeds.XTB]
-      url = "https://www.youtube.com/channel/UCILwajCs145hxNvB4nckALg"
-      page_size = 100
+      [feeds.PPCG]
+      url = "https://www.youtube.com/c/PPCGStock"
+      page_size = 20
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -153,6 +153,13 @@ stringData:
       opml = true
       [feeds.GPWNOTOWANIA]
       url = "https://www.youtube.com/channel/UCAH85XhPoXCxSXUKdwsm0Ig"
+      page_size = 20
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
+      [feeds.WAPNIAK]
+      url = "https://www.youtube.com/c/Wapniak"
       page_size = 20
       update_period = "2h"
       quality = "low"
