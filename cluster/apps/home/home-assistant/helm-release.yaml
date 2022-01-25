@@ -109,48 +109,48 @@ spec:
 
     addons:
       codeserver:
-        enabled: true
+        enabled: false
 
         # git:
         #   deployKeySecret: home-assistant-deploykey
 
-        ingress:
-          main:
-            enabled: true
-            annotations:
-              kubernetes.io/ingress.class: "nginx"
-              nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-              #forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
-              hajimari.io/enable: "true"
-              hajimari.io/icon: "code-braces-box"
-              hajimari.io/group: "home"
-            hosts:
-            - host: vsc.${SECRET_DOMAIN}
-              paths:
-              - path: /
-            tls:
-            # - secretName: tls.home-assistant-code
-            - hosts:
-              - vsc.${SECRET_DOMAIN}
+        #ingress:
+        #  main:
+        #    enabled: true
+        #    annotations:
+        #      kubernetes.io/ingress.class: "nginx"
+        #      nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        #      nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+        #      #forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
+        #      hajimari.io/enable: "true"
+        #      hajimari.io/icon: "code-braces-box"
+        #      hajimari.io/group: "home"
+        #    hosts:
+        #    - host: vsc.${SECRET_DOMAIN}
+        #      paths:
+        #      - path: /
+        #    tls:
+        #    # - secretName: tls.home-assistant-code
+        #    - hosts:
+        #      - vsc.${SECRET_DOMAIN}
 
-        args:
-        - --auth
-        - none
-        - --user-data-dir
-        - "/config/.vscode"
-        - --extensions-dir
-        - "/config/.vscode"
+        # args:
+        # - --auth
+        # - none
+        # - --user-data-dir
+        # - "/config/.vscode"
+        # - --extensions-dir
+        # - "/config/.vscode"
 
-        workingDir: "/config"
+        # workingDir: "/config"
 
-        volumeMounts:
-        - name: config
-          mountPath: /config
+        # volumeMounts:
+        # - name: config
+        #   mountPath: /config
 
-        resources:
-          requests:
-            cpu: 35m
-            memory: 128Mi
-          limits:
-            memory: 512Mi
+        # resources:
+        #  requests:
+        #     cpu: 35m
+        #     memory: 128Mi
+        #   limits:
+        #     memory: 512Mi
