@@ -41,7 +41,7 @@ spec:
           - custom
           - pci
           - usb
-        sources:
+        labelSources:
           usb:
             deviceClassWhitelist:
             - "02"
