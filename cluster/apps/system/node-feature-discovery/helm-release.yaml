@@ -35,12 +35,15 @@ spec:
 #                operator: In
 #                values: [""]
     worker:
-      config: |-
+      annotations:
+        configmap.reloader.stakater.com/reload: "nfd-worker-conf"
+      config:
         core:
           labelSources:
           - custom
           - pci
           - usb
+        
         sources:
           usb:
             deviceClassWhitelist:
@@ -54,10 +57,12 @@ spec:
             - "class"
             - "vendor"
             - "device"
+         
           pci:
             deviceClassWhitelist:
             - "0300"
             - "0400"
+          
           custom:
           - name: "intel-gpu"
             matchOn:
@@ -80,8 +85,6 @@ spec:
                 class: ["0400"]
                 vendor: ["14f1"]
                 device: ["8880"]
-      annotations:
-        configmap.reloader.stakater.com/reload: "nfd-worker-conf"
 #      tolerations:
 #      - effect: "NoExecute"
 #        operator: "Exists"
