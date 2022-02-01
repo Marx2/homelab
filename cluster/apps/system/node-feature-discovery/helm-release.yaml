@@ -37,11 +37,11 @@ spec:
     worker:
       config: |-
         core:
-          sources:
+          labelSources:
           - custom
           - pci
           - usb
-        labelSources:
+        sources:
           usb:
             deviceClassWhitelist:
             - "02"
