@@ -16,3 +16,4 @@ resources:
 - node-feature-discovery-charts.yaml
 - vernemq-charts.yaml
 - hajimari-charts.yaml
+- metrics-server-charts.yaml
