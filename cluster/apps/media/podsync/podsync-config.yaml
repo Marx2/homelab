@@ -165,6 +165,13 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
+      [feeds.USSTOCKS]
+      url = "https://www.youtube.com/channel/UCw7jctKpQUr2wPYViy_nneQ"
+      page_size = 50
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
 
 
     [database]
