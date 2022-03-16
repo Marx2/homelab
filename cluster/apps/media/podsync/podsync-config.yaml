@@ -83,7 +83,7 @@ stringData:
       opml = true
       [feeds.DORADCATV]
       url = "https://www.youtube.com/channel/UChseY2p3PZTVVg9SrQPRHog"
-      page_size = 300
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -97,7 +97,7 @@ stringData:
       opml = true
       [feeds.FINANSOWATV]
       url = "https://www.youtube.com/channel/UCcJq-5bSAMp2ZCOR8kacfmA"
-      page_size = 50
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -118,21 +118,21 @@ stringData:
       opml = true
       [feeds.STREFA_INWESTOROW]
       url = "https://www.youtube.com/user/StrefaInwestorow"
-      page_size = 100
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
       opml = true
       [feeds.PROCENT]
       url = "https://www.youtube.com/channel/UCcPuUNlUF4DWQ5e0hrE4cug"
-      page_size = 300
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
       opml = true
       [feeds.MOJE_IKE]
       url = "https://www.youtube.com/channel/UC6ZuH6K2eblzhSNhLgzAAwA"
-      page_size = 300
+      page_size = 30
       update_period = "2h"
       quality = "low"
       format = "audio"
@@ -172,7 +172,13 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-
+      [feeds.USSPLAY]
+      url = "https://www.youtube.com/playlist?list=PLmjbxQ3gprnan48PTteCpkdV7kQq7apxI"
+      page_size = 50
+      update_period = "2h"
+      quality = "low"
+      format = "audio"
+      opml = true
 
     [database]
       badger = { truncate = true, file_io = true } # See https://github.com/dgraph-io/badger#memory-usage
