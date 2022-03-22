@@ -1,0 +1,1 @@
+based on: https://fabianlee.org/2022/01/16/kubernetes-running-a-mail-container-for-testing-email-during-development/
