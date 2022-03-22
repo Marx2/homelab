@@ -17,3 +17,4 @@ resources:
 - vernemq-charts.yaml
 - hajimari-charts.yaml
 - metrics-server-charts.yaml
+- codecentric-charts.yaml
