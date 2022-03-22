@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mailhog
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://codecentric.github.io/helm-charts
+      chart: mailhog
+      version: 5.0.5
+      sourceRef:
+        kind: HelmRepository
+        name: codecentric-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: mailhog/mailhog
+      tag: 1.0.1
+
+    service:
+      loadBalancerIP: "192.168.1.219"
+      type: LoadBalancer
+      port:
+        http: 8025
+        smtp: 1025
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/10258541?s=200&v=4"
+        forecastle.stakater.com/network-restricted: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "cloud-sync-outline"
+        hajimari.io/group: "networking"
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      hosts:
+        - host: mailhog.${SECRET_DOMAIN}
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        - hosts:
+          - "mailhog.${SECRET_DOMAIN}"
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
