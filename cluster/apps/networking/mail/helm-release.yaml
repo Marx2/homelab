@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: mailhog/mailhog
-      tag: 1.0.1
+      tag: v1.0.1
 
     service:
       loadBalancerIP: "192.168.1.219"
