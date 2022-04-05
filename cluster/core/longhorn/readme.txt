@@ -23,3 +23,6 @@ mkdir /longhorn
 UUID=xxx   /longhorn  ext4   defaults    0   0
 - mount
 mount /longhorn
+
+- make sure iscsi package is installed
+apt-get install open-iscsi
