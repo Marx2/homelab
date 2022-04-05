@@ -14,6 +14,259 @@
 ---
 -->
 
+## 2022-02-18, v3.1.1
+
+### Notable changes
+
+  - fix: support nftables for debian 11
+
+### Contributors
+
+  - [eaglesemanation](https://github.com/eaglesemanation)
+
+---
+
+## 2022-01-30, v3.1.0
+
+### Notable changes
+
+  - feat: use basename of url for items in `k3s_server_manifests_urls` and
+    `k3s_server_pod_manifests_urls` if filename is not provided #177
+
+### Contributors
+
+  - [kossmac](https://github.com/kossmac)
+
+---
+
+## 2022-01-06, v3.0.1
+
+### Notable changes
+
+  - fix: adding become to pre checks packages #173
+
+### Contributors
+
+  - [xlejo](https://github.com/xlejo)
+
+---
+
+## 2022-01-02, v3.0.0
+
+### Notable changes
+
+  - feat: Flattened task filesystem
+  - feat: Moved some tasks into `vars/` as templated variables
+  - feat: Airgap installation method added #165
+
+### Breaking changes
+
+  - Minimum `python` version on targets is 3.6
+  - `k3s_become_for_all` renamed to `k3s_become`
+  - `k3s_become_for_*` removed.
+
+### Contributors
+
+  - [crutonjohn](https://github.com/crutonjohn)
+
+---
+
+## 2021-12-23, v2.12.1
+
+### Notable changes
+
+  - Fix typo in systemd unit file
+
+### Contributors
+
+  - [andrewchen5678](https://github.com/andrewchen5678)
+
+---
+
+## 2021-12-20, v2.12.0
+
+### Notable changes
+
+  - Fix RockyLinux HA etcd tests
+  - add Debian 11 test
+  - Fix Snapshotter in Molecule tests
+  - Added missing documentation for `k3s_api_url`
+  - Added option to change K3s updates API url
+  - Custom environment variables in systemd unit files
+  - Debian Bullseye support
+  - Fix HA etcd cluster startup
+  - Fix rootless for Debian
+
+### Contributors
+
+  - [janar153](https://github.com/janar153)
+
+---
+
+## 2021-10-10, v2.11.1
+
+### Notable changes
+
+ - docs: fixed references to `write-kubeconfig-mode` to set correct permissions #157
+ - fix:  Flag --delete-local-data has been deprecated #159
+
+---
+
+## 2021-09-08, v2.11.0
+
+### Notable changes
+
+ - docs: example of IPv6 configuration
+ - feat: checks for s3 backup configuration
+ - feat: implement config.yaml.d
+
+### Contributors
+
+ - [onedr0p](https://github.com/onedr0p)
+
+---
+
+## 2021-08-18, v2.10.6
+
+### Notable changes
+
+ -  Fix: Define registration address from node-ip #142
+
+---
+
+## 2021-08-14, v2.10.5
+
+### Notable changes
+
+ - Add advertised address #139
+
+### Contributors
+
+- [@abelfodil](https://github.com/abelfodil)
+
+---
+
+## 2021-07-24, v2.10.4
+
+### Notable changes
+
+- Updated systemd template to use token when joining a cluster #138
+
+---
+
+## 2021-07-21, v2.10.3
+
+### Notable changes
+
+- fix: typo #133
+- fix: restore clustering and avoid failure with jinja2_native=true #135
+- fix: do ignore etcd member count when uninstalling #136
+
+### Contributors
+
+- [@Yaro](https://github.com/Yajo)
+
+---
+
+## 2021-06-22, v2.10.2
+
+### Notable changes
+
+- Role is now tested against RockyLinux
+
+---
+
+## 2021-05-30, v2.10.1
+
+### Notable changes
+
+- Case insensitive control node lookup #126
+
+### Contributors
+
+- [@mrobinsn](https://github.com/mrobinsn)
+
+---
+
+## 2021-05-27, v2.10.0
+
+### Notable changes
+
+- Only deploy templates on primary controller #119
+- Allow control plane static pods #120
+- Add support for specifying URLs in templates #124
+
+### Contributors
+
+- [@bjw-s](https://github.com/bjw-s)
+- [@onedr0p](https://github.com/onedr0p)
+
+---
+
+## 2021-05-14, v2.9.1
+
+<!-- Today was a better day... <3 -->
+
+### Notable changes
+
+ - Documentation, remove references to deprecated configuration techniques #115
+ - Bugfix: Templating issue.
+
+---
+
+## 2021-05-13, v2.9.0
+
+<!-- a shit day... -->
+
+### Notable changes
+
+ - Feature: Support k3s private registry configuration #114
+
+### Contributors
+
+ - [@anjia0532](https://github.com/anjia0532)
+
+---
+
+## 2021-05-06, v2.8.5
+
+### Notable changes
+
+ - Bugfix: Unmount CSI plugin folder to avoid data lost on uninstall #113
+
+### Contributors
+
+ - [@angelnu](https://github.com/angelnu)
+
+---
+
+## 2021-05-01, v2.8.4
+
+### Notable changes
+
+ - Fixed issue with draining nodes #112
+
+### Contributors
+
+ - [@anjia0532](https://github.com/anjia0532)
+
+---
+
+## 2021-04-18, v2.8.3
+
+### Notable changes
+
+ - Typo fix in README.md #110
+ - Fixed check mode for cgroup test #111
+ - Added check mode into molecule test sequence
+ - `inventory.yml` is now `blockinfile`
+
+### Contributors
+
+ - [@bdronneau](https://github.com/bdronneau)
+
+---
+
 ## 2021-04-10, v2.8.2
 
 ### Notable changes
