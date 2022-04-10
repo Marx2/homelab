@@ -48,6 +48,11 @@ spec:
             service:
               name: tvheadend
               port: 80
+          - path: /stream
+            pathType: Prefix
+            service:
+              name: tvheadend
+              port: 9982
         - host: "tvheadend-ip.${SECRET_DOMAIN}"
           paths:
           - path: /
