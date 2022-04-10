@@ -80,6 +80,10 @@ spec:
             enabled: true
             protocol: TCP
             port: 9982
+          http2:
+            enabled: true
+            port: 9983
+            targetPort: 9983
     securityContext:
       privileged: true
     resources:
