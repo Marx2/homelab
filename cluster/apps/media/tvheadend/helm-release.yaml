@@ -25,7 +25,7 @@ spec:
       TZ: ${TZ}
       PUID: 1000
       PGID: 1000
-      RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug --udp-services-configmap=networking/udp-services --tcp-services-configmap=networking/tcp-services"
+      RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
     controller:
       strategy: Recreate
     nodeSelector:

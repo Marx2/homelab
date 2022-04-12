@@ -33,6 +33,10 @@ spec:
         # proxy-real-ip-cidr: 192.168.1.210
         # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
         # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
+      tcp:
+        configMapNamespace: "networking"
+      udp:
+        configMapNamespace: "networking"
       metrics:
         enabled: false
         serviceMonitor:
