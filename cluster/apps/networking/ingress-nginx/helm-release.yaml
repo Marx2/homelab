@@ -35,10 +35,6 @@ spec:
         # proxy-real-ip-cidr: 192.168.1.210
         # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
         # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
-      tcp:
-        9983: "media/tvheadend:9983"
-#      udp:
-#        configMapNamespace: "networking"
       metrics:
         enabled: false
         serviceMonitor:
@@ -51,3 +47,5 @@ spec:
           cpu: 100m
         limits:
           memory: 500Mi
+    tcp:
+      9983: "media/tvheadend:9983"
