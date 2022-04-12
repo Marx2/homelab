@@ -15,6 +15,8 @@ spec:
         kind: HelmRepository
         name: ingress-nginx-charts
         namespace: flux-system
+      containers:
+        args:
   values:
     controller:
       ingressClass: nginx
@@ -34,9 +36,9 @@ spec:
         # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
         # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
       tcp:
-        configMapNamespace: "networking"
-      udp:
-        configMapNamespace: "networking"
+        9983: "media/tvheadend:9983"
+#      udp:
+#        configMapNamespace: "networking"
       metrics:
         enabled: false
         serviceMonitor:
