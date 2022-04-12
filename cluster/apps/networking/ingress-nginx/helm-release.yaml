@@ -15,8 +15,6 @@ spec:
         kind: HelmRepository
         name: ingress-nginx-charts
         namespace: flux-system
-      containers:
-        args:
   values:
     controller:
       ingressClass: nginx
@@ -48,5 +46,5 @@ spec:
         limits:
           memory: 500Mi
     # Ingress for non standard ports
-    #tcp:
-    #  - 9983: "media/tvheadend:9983"
+    tcp:
+      9983: "media/tvheadend:9983"
