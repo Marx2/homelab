@@ -48,5 +48,5 @@ spec:
         limits:
           memory: 500Mi
     # Ingress for non standard ports
-    tcp:
-      - 9983: "media/tvheadend:9983"
+    #tcp:
+    #  - 9983: "media/tvheadend:9983"
