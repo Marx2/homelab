@@ -16,6 +16,11 @@ spec:
         name: ingress-nginx-charts
         namespace: flux-system
   values:
+    # Ingress for non standard ports
+    tcp:
+      9982: media/tvheadend:9982
+    # tcp: {}
+    #  8080: "default/example-tcp-svc:9000"
     controller:
       ingressClass: nginx
       replicaCount: 1
@@ -23,6 +28,14 @@ spec:
         type: LoadBalancer
         loadBalancerIP: "${INGRESS_NGINX_LB}"
         externalTrafficPolicy: Local
+        ports:
+          http: 80
+          https: 443
+          htsp: 9982
+        targetPorts:
+          http: http
+          https: https
+          htsp: htsp
       config:
         ssl-protocols: "TLSv1.3 TLSv1.2"
         proxy-body-size: "100m"
@@ -45,8 +58,3 @@ spec:
           cpu: 100m
         limits:
           memory: 500Mi
-    # Ingress for non standard ports
-    tcp:
-    - 9982: "media/tvheadend:9982"
-    # tcp: {}
-    #  8080: "default/example-tcp-svc:9000"
