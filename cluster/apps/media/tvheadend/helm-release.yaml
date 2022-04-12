@@ -48,22 +48,22 @@ spec:
             service:
               name: tvheadend
               port: 80
-          - path: /stream
-            pathType: Prefix
-            service:
-              name: tvheadend
-              port: 9982
-        - host: "tvheadend-ip.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
-            service:
-              name: tvheadend
-              port: 9983
+        #  - path: /stream
+        #    pathType: Prefix
+        #    service:
+        #      name: tvheadend
+        #      port: 9982
+        #- host: "tvheadend-ip.${SECRET_DOMAIN}"
+        #  paths:
+        #  - path: /
+        #    pathType: Prefix
+        #    service:
+        #      name: tvheadend
+        #      port: 9983
         tls:
         - hosts:
           - "tvheadend.${SECRET_DOMAIN}"
-          - "tvheadend-ip.${SECRET_DOMAIN}"
+         # - "tvheadend-ip.${SECRET_DOMAIN}"
     persistence:
       config:
         enabled: true
