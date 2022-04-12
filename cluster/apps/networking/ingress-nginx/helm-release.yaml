@@ -19,7 +19,7 @@ spec:
     # Ingress for non standard ports
     #tcp:
     #  9982: "media/tvheadend:9982"
-     tcp: {}
+    # tcp: {}
     #  8080: "default/example-tcp-svc:9000"
     controller:
       ingressClass: nginx
