@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - podsync
 - jellyfin
-- jackett
-- sonarr
-- radarr
-- qbittorrent
+#- jackett
+#- sonarr
+#- radarr
+#- qbittorrent
 - tvheadend
