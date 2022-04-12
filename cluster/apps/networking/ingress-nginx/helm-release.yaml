@@ -47,5 +47,6 @@ spec:
           cpu: 100m
         limits:
           memory: 500Mi
+    # Ingress for non standard ports
     tcp:
-      9983: "media/tvheadend:9983"
+      - 9983: "media/tvheadend:9983"
