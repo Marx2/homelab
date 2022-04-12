@@ -48,3 +48,5 @@ spec:
     # Ingress for non standard ports
     # tcp:
     #  9983: "media/tvheadend:9983"
+    tcp: {}
+    #  8080: "default/example-tcp-svc:9000"
