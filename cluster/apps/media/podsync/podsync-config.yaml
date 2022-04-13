@@ -179,8 +179,8 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-      [feeds.EUROPPEAN_DGI]
-      url = "https://www.youtube.com/c/EuropeanDividendGrowthInvestor"
+      [feeds.EUROPEAN_DGI]
+      url = "https://www.youtube.com/channel/UCfkUVLWyjGsHC4UqTRwWa8w"
       page_size = 50
       update_period = "2h"
       quality = "low"
