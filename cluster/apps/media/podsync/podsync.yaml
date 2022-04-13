@@ -50,6 +50,8 @@ kind: Deployment
 metadata:
   name: podsync
   namespace: media
+  annotations:
+    secret.reloader.stakater.com/reload: "podsync-config"
 spec:
   selector:
     matchLabels:
