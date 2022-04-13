@@ -101,5 +101,6 @@ spec:
         enabled: true
         type: hostPath
         # Path to your zigbee device on the host
-        hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
+        #hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
+        hostPath: /dev/ttyACM0
         hostPathType: CharDevice
