@@ -35,5 +35,5 @@ spec:
       volumes:
       - name: from
         persistentVolumeClaim:
-          # claimName: zigbee2mqtt-config-pvc
-          claimName: config-syncthing-pvc
+          claimName: zigbee2mqtt-config-pvc
+          #claimName: config-syncthing-pvc
