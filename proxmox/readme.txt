@@ -31,3 +31,6 @@ swapoff /dev/dm-0
 
 Fix Longhorn problem:
 update-alternatives --set iptables /usr/sbin/iptables-legacy
+
+on plain Debian add missing NFS package:
+nfs-common
