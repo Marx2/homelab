@@ -194,7 +194,7 @@ stringData:
       format = "audio"
       opml = true
       [feeds.DIVBULL]
-      url = "https://www.youtube.com/c/DividendBull"
+      url = "https://www.youtube.com/channel/UCLxMEPUoHpKq4PEk85RZn9A"
       page_size = 50
       update_period = "2h"
       quality = "low"
