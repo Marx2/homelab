@@ -201,7 +201,7 @@ stringData:
       format = "audio"
       opml = true
       [feeds.SVEN]
-      url = "https://www.youtube.com/c/InvestwithSvenCarlinPhD"
+      url = "https://www.youtube.com/channel/UCrTTBSUr0zhPU56UQljag5A"
       page_size = 50
       update_period = "2h"
       quality = "low"
