@@ -8,3 +8,4 @@ resources:
 - media
 - default
 - kube-system
+- pfire
