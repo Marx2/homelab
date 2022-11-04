@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: postgresql
+  name: hasura
   namespace: pfire
 spec:
   interval: 10m
