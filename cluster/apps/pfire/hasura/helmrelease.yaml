@@ -8,6 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
+      # renovate: registryUrl=https://hasura-extra.github.io/hasura-extra
       chart: hasura
       version: 2.8.0
       sourceRef:
