@@ -27,13 +27,13 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "weather-sunset"
         hajimari.io/group: "personal-fire"
-    hosts:
-    - host: hasura.${SECRET_DOMAIN}
-      paths:
-      - path: /
-        pathType: Prefix
-    tls:
-    - hosts:
-      - "hasura.${SECRET_DOMAIN}"
+      hosts:
+      - host: hasura.${SECRET_DOMAIN}
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - hosts:
+        - "hasura.${SECRET_DOMAIN}"
     adminSecret: '${SECRET_HASURA_PASSWORD}'
     dbUrl: 'postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/mydb'
