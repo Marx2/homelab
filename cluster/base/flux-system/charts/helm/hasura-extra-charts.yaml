@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://hasura-extra.github.io/hasura-extra/hasura-extra
+  url: https://hasura-extra.github.io/hasura-extra
   timeout: 3m
