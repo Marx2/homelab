@@ -8,7 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: hasura-extra
+      chart: hasura
       version: 2.8.0
       sourceRef:
         kind: HelmRepository
