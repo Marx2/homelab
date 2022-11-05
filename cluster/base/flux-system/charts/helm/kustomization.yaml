@@ -18,3 +18,4 @@ resources:
 - hajimari-charts.yaml
 - metrics-server-charts.yaml
 - codecentric-charts.yaml
+- hasura-extra-charts.yaml
