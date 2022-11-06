@@ -1,12 +1,14 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ingress-nginx
-- wildcard-certificate
-- ddns-job
-- k8s_gateway
-- oauth2-proxy
-- dex
-#- authelia
-#- authentik
-- mail
+  - namespace.yaml
+  - ingress-nginx
+  - wildcard-certificate
+  - ddns-job
+  - k8s_gateway
+  - oauth2-proxy
+  - dex
+  #- authelia
+  #- authentik
+  - mail

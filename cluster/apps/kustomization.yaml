@@ -1,11 +1,16 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- networking
-- system-upgrade
-- system
-- home
-- media
-- default
-- kube-system
-- pfire
+  - flux-system
+  - networking
+  - kube-system
+  - longhorn
+  - system
+  - cert-manager
+  - metallb-system
+  - system-upgrade
+  - home
+  - media
+  - default
+  - pfire

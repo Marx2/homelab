@@ -1,10 +1,12 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- forecastle
-- syncthing
-- scrutiny
-- vernemq
-- zigbee2mqtt
-- home-assistant
-- hajimari
+  - namespace.yaml
+  - forecastle
+  - syncthing
+  - scrutiny
+  - vernemq
+  - zigbee2mqtt
+  - home-assistant
+  - hajimari

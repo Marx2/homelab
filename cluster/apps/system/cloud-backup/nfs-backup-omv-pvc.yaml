@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-backup-omv-pvc
+  namespace: home
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: backup-omv
+  resources:
+    requests:
+      storage: 1Mi
