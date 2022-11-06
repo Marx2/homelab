@@ -14,4 +14,4 @@ spec:
   decryption:
     provider: sops
     secretRef:
-      name: sops-age
+      name: sops-gpg
