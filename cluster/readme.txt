@@ -15,3 +15,11 @@ kubectl create secret generic sops-gpg \
 kubectl label nodes wuwek wezyr silver node.longhorn.io/create-default-disk=true
 - install Flux:
 kubectl apply --kustomize=./cluster/base/flux-system
+
+
+
+new steps:
+brew install go-task/tap/go-task
+task init
+task precommit:init
+task precommit:update
