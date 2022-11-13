@@ -1,0 +1,56 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: budibase
+  namespace: pfire
+spec:
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://budibase.github.io/budibase/
+      chart: budibase
+      version: 0.2.11
+      sourceRef:
+        kind: HelmRepository
+        name: budibase-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: budibase/budi-release
+      tag: 1.0.214
+    ingress:
+      enabled: true
+      className: nginx
+      nginx: false
+      annotations:
+        nginx.ingress.kubernetes.io/client-max-body-size: 150M
+        nginx.ingress.kubernetes.io/proxy-body-size: 50m
+        #nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "weather-sunset"
+        hajimari.io/group: "personal-fire"
+      hosts:
+        - host: budibase.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: proxy-service
+                  port:
+                    number: 10000
+      #tls:
+      #- hosts:
+      # - "hasura.${SECRET_DOMAIN}"
+    globals:
+      enableAnalytics: "0"
+      selfHosted: "1" # set to 0 for budibase cloud environment, set to 1 for self-hosted setup
+      multiTenancy: "0" # set to 0 to disable multiple orgs, set to 1 to enable multiple orgs
+    services:
+      objectStore:
+        minio: false
+
+    #adminSecret: '${SECRET_HASURA_PASSWORD}'
+    #dbUrl: 'postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/mydb'

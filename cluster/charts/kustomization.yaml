@@ -20,3 +20,4 @@ resources:
   - metrics-server-charts.yaml
   - codecentric-charts.yaml
   - hasura-extra-charts.yaml
+  - budibase-charts.yaml
