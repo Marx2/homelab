@@ -34,8 +34,12 @@ spec:
           url: "http://192.168.1.201/admin/"
           icon: "dns"
           group: "infra"
-        - name: Router
-          url: "192.168.1.1/webpages/login.html"
+        - name: Router Main
+          url: "192.168.1.1"
+          icon: "router-wireless"
+          group: "infra"
+        - name: Router AP
+          url: "192.168.1.2"
           icon: "router-wireless"
           group: "infra"
         - name: Proxmox Wezyr
@@ -44,10 +48,6 @@ spec:
           group: "infra"
         - name: Proxmox Wuwek
           url: "https://192.168.1.13:8006/"
-          icon: "server"
-          group: "infra"
-        - name: Proxmox Cobra
-          url: "https://192.168.1.40:8006/"
           icon: "server"
           group: "infra"
         - name: Nas
