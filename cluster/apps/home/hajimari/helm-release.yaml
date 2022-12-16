@@ -35,11 +35,11 @@ spec:
           icon: "dns"
           group: "infra"
         - name: Router Main
-          url: "192.168.1.1"
+          url: "http://192.168.1.1"
           icon: "router-wireless"
           group: "infra"
         - name: Router AP
-          url: "192.168.1.2"
+          url: "http://192.168.1.2"
           icon: "router-wireless"
           group: "infra"
         - name: Proxmox Wezyr
