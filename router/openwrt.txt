@@ -1,0 +1,17 @@
+tailscale
+https://eko.one.pl/forum/viewtopic.php?pid=260170#p260170
+
+simple adblock
+https://docs.openwrt.melmac.net/simple-adblock/
+
+prometheus exporter
+https://openwrt.org/packages/pkgdata/prometheus-node-exporter-lua
+
+
+System->System->Timezone
+
+Network->Interfaces->LAN->DHCP Server: 
+- Start: 3
+- Limit: 125
+
+Network->DHCP and DNS->Static Leases
