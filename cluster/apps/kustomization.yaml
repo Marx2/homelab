@@ -8,7 +8,6 @@ resources:
   - longhorn
   - system
   - cert-manager
-  - metallb-system
   - system-upgrade
   - home
   - media
