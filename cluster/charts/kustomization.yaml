@@ -20,3 +20,5 @@ resources:
   - metrics-server-charts.yaml
   - codecentric-charts.yaml
   - hasura-extra-charts.yaml
+  - dysnix-charts.yaml
+  - metallb-charts.yaml
