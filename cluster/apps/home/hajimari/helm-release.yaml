@@ -28,32 +28,27 @@ spec:
           - media
           - networking
           - longhorn
+          - pfire
       name: "Marx"
       customApps:
         - name: PiHole
           url: "http://192.168.1.201/admin/"
           icon: "dns"
-          group: "infra"
         - name: Router Main
           url: "http://192.168.1.1"
           icon: "router-wireless"
-          group: "infra"
         - name: Router AP
           url: "http://192.168.1.2"
           icon: "router-wireless"
-          group: "infra"
         - name: Proxmox Wezyr
           url: "https://192.168.1.39:8006/"
           icon: "server"
-          group: "infra"
         - name: Proxmox Wuwek
           url: "https://192.168.1.13:8006/"
           icon: "server"
-          group: "infra"
         - name: Nas
           url: "https://192.168.1.49:5001/"
           icon: "nas"
-          group: "infra"
 
     ingress:
       main:
