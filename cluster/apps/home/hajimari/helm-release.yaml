@@ -30,7 +30,9 @@ spec:
           - longhorn
           - pfire
       name: "Marx"
-      customApps:
+      AppGroup:
+        group: name
+        apps:
         - name: PiHole
           url: "http://192.168.1.201/admin/"
           icon: "dns"
