@@ -23,12 +23,18 @@ spec:
     hajimari:
       defaultEnable: true
       namespaceSelector:
-        matchNames:
-          - home
-          - media
-          - networking
-          - longhorn
-          - pfire
+        any: true
+        #matchNames:
+        #  - home
+        #  - media
+        #  - networking
+        #  - longhorn
+        #  - pfire
+      alwaysTargetBlank: true
+      showAppGroups: true
+      showAppUrls: false
+      showAppInfo: true
+      showGlobalBookmarks: false
       name: "Marx"
       customApps:
         - group: tools
