@@ -22,3 +22,4 @@ resources:
   - hasura-extra-charts.yaml
   - dysnix-charts.yaml
   - metallb-charts.yaml
+  - oauth2-proxy.yaml
