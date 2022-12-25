@@ -1,6 +1,8 @@
 Adding new node:
 - add DHCP entry in router
-? add Pi-hole Local DNS entry
+- add Pi-hole Local DNS entry
+- set /etc/resolv.conf content to:
+nameserver 192.168.1.201
 - add SSH keys: 
   ssh-copy-id root@<new host>
 - remove search... from /etc/resolv.conf 
@@ -30,8 +32,16 @@ apt install iptables
 update-alternatives --set iptables /usr/sbin/iptables-legacy
 
 
-
-
+Fix: "failed to create fsnotify watcher: too many open files"
+checking: 
+    sysctl fs.inotify
+fixing temporarily:
+    sysctl -w fs.inotify.max_user_watches=100000
+    sysctl -w fs.inotify.max_user_instances=100000
+fixing permanently:
+add to /etc/sysctl.conf:
+fs.inotify.max_user_watches=100000
+fs.inotify.max_user_instances=100000
 
 
 on plain Debian add missing NFS package:
