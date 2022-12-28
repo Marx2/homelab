@@ -37,4 +37,4 @@ spec:
       - hosts:
         - "hasura.${SECRET_DOMAIN}"
     adminSecret: '${SECRET_HASURA_PASSWORD}'
-    dbUrl: 'postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/mydb'
+    dbUrl: 'postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/postgres'
