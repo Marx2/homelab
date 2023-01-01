@@ -23,6 +23,7 @@ spec:
       retries: 3
   values:
     replicas: 1
+    namespaceOverride: pfire
     rbac:
       pspEnabled: false
     testFramework:
@@ -80,10 +81,11 @@ spec:
       annotations:
         hajimari.io/icon: simple-icons:grafana
       hosts:
-        - &host grafana.${SECRET_DOMAIN}
+      - host: grafana.${SECRET_DOMAIN}
       tls:
-        - hosts:
-            - *host
+      - hosts:
+        - "grafana.${SECRET_DOMAIN}"
+
     imageRenderer:
       enabled: true
       replicas: 3
