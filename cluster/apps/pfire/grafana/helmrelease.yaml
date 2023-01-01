@@ -28,8 +28,8 @@ spec:
       pspEnabled: false
     testFramework:
       enabled: false
-#    admin:
-#      existingSecret: grafana-secrets
+    admin:
+      existingSecret: grafana-secrets
 #      userKey: adminUser
 #      passwordKey: adminPass
     grafana.ini:

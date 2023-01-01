@@ -42,13 +42,13 @@ def main(argv):
 
   print('templating')
   myinput = open('./tmpl/cluster-secrets.yaml')
-  myoutput = open('./cluster/base/cluster-secrets.yaml', 'w')
+  myoutput = open('./cluster/config/cluster-secrets.yaml', 'w')
   subprocess.run(["envsubst"], stdin=myinput, stdout=myoutput)
   myinput.close()
   myoutput.close()
 
   print('encoding')
-  subprocess.run(["sops","--encrypt","--in-place", "./cluster/base/cluster-secrets.yaml"])
+  subprocess.run(["sops","--encrypt","--in-place", "./cluster/config/cluster-secrets.yaml"])
 
   print('finished succesfully')
 

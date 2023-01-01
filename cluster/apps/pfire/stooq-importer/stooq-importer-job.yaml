@@ -1,0 +1,89 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stooq-importer-pgloader-config
+  namespace: pfire
+data:
+  csv.load: |-
+    LOAD ARCHIVE
+      FROM /home/stooq/d_us_txt.zip
+      INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}:5432/postgres
+
+      LOAD CSV
+        FROM ALL FILENAMES MATCHING ~/./
+          /* HAVING FIELDS
+          (
+            TICKER,PER,DATE,TIME,OPEN,HIGH,LOW,CLOSE,VOL,OPENINT
+          ) */
+        INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}:5432/postgres
+          TARGET TABLE daily
+          TARGET COLUMNS
+          (
+            ticker,period,date,time,open,high,low,close,volume,openint
+          )
+        WITH truncate,
+          skip header = 1,
+          fields terminated by ',',
+          fields not enclosed,
+          /*batch rows = 1000,*/
+          batch concurrency = 1,
+          workers = 2,
+          concurrency = 1,
+          disable triggers,
+          drop indexes
+
+        SET work_mem to '512 MB', maintenance_work_mem to '1024 MB'
+
+        BEFORE LOAD DO
+          $$ drop table if exists daily; $$,
+          $$ create table daily (
+          ticker text,
+          period char(1),
+          date date,
+          time bigint,
+          open numeric,
+          high numeric,
+          low numeric,
+          close numeric,
+          volume numeric,
+          openint integer
+          );
+        $$;
+
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stooq-importer
+  namespace: pfire
+spec:
+#Cron Time is set according to server time, ensure server time zone and set accordingly.
+  schedule: "@yearly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pgloader
+            #image: dimitri/pgloader:v3.6.7
+            image: dimitri/pgloader:ccl.latest
+            volumeMounts:
+            - name: pgloader-config
+              mountPath: /home
+            - name: stooq-data
+              mountPath: /home/stooq
+            imagePullPolicy: Always
+            command: ["/bin/sh"]
+            args: ["-c","cd home && ls -al && ls -al /home/stooq && cat /home/csv.load && pgloader --debug csv.load"]
+          volumes:
+          - name: pgloader-config
+            configMap:
+              name: stooq-importer-pgloader-config
+          - name: stooq-data
+            persistentVolumeClaim:
+              claimName: nfs-pfire-stooq-pvc
+          restartPolicy: Never
+
+      backoffLimit: 3
