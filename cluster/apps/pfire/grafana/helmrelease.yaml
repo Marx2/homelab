@@ -81,10 +81,10 @@ spec:
       annotations:
         hajimari.io/icon: simple-icons:grafana
       hosts:
-      - host: grafana.${SECRET_DOMAIN}
+        - &host grafana.${SECRET_DOMAIN}
       tls:
-      - hosts:
-        - "grafana.${SECRET_DOMAIN}"
+        - hosts:
+          - "grafana.${SECRET_DOMAIN}"
 
     imageRenderer:
       enabled: true
