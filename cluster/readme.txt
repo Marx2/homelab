@@ -26,3 +26,8 @@ brew install go-task/tap/go-task
 task init
 task precommit:init
 task precommit:update
+
+
+
+Longhorn correct backup path:
+nfs://192.168.1.49/volume1/backup/longhorn

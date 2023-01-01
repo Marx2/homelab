@@ -1,0 +1,91 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: pfire
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: grafana
+      version: 6.48.2
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  install:
+    createNamespace: false
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    replicas: 1
+    rbac:
+      pspEnabled: false
+    testFramework:
+      enabled: false
+#    admin:
+#      existingSecret: grafana-secrets
+#      userKey: adminUser
+#      passwordKey: adminPass
+    grafana.ini:
+      auth.basic:
+        disable_login_form: false
+
+#    dashboardProviders:
+#      dashboardproviders.yaml:
+#        apiVersion: 1
+#        providers:
+#          - name: "default"
+#            orgId: 1
+#            folder: ""
+#            type: file
+#            disableDeletion: false
+#            editable: true
+#            options:
+#              path: /var/lib/grafana/dashboards/default
+
+
+#    datasources:
+#      datasources.yaml:
+#        apiVersion: 1
+#        datasources:
+#          - name: Prometheus
+#            type: prometheus
+#            access: proxy
+#            url: http://kube-prometheus-stack-prometheus:9090/
+#            isDefault: true
+#    sidecar:
+#      dashboards:
+#        enabled: true
+#        searchNamespace: ALL
+#      datasources:
+#        enabled: true
+#        searchNamespace: ALL
+#    plugins:
+#      - natel-discrete-panel
+#      - pr0ps-trackmap-panel
+#      - grafana-piechart-panel
+#      - vonage-status-panel
+#      - grafana-worldmap-panel
+#      - grafana-clock-panel
+#    serviceMonitor:
+#      enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        hajimari.io/icon: simple-icons:grafana
+      hosts:
+        - &host grafana.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host
+    imageRenderer:
+      enabled: true
+      replicas: 3
+    persistence:
+      enabled: false
