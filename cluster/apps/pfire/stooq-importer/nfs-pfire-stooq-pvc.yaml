@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pfire-stooq-pvc
+  namespace: pfire
+spec:
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: pfire-stooq-ro
+  resources:
+    requests:
+      storage: 100Gi
