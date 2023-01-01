@@ -23,4 +23,4 @@ resources:
   - dysnix-charts.yaml
   - metallb-charts.yaml
   - oauth2-proxy.yaml
-  - grafana
+  - grafana.yaml
