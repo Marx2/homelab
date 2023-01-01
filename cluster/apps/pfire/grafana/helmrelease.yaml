@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     replicas: 1
-    namespaceOverride: pfire
+#    namespaceOverride: pfire
     rbac:
       pspEnabled: false
     testFramework:
