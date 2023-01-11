@@ -1,0 +1,43 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tooljet
+  namespace: pfire
+spec:
+  selector:
+    app: tooljet
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+    name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tooljet
+  namespace: pfire
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+    #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/AnalogJ/scrutiny/master/webapp/frontend/src/assets/images/logo/scrutiny-logo-dark.png"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "harddisk"
+    hajimari.io/group: "infra"
+spec:
+  rules:
+  - host: tooljet.${SECRET_DOMAIN}
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:.
+              name: tooljet
+              port:.
+                number: 80
+  tls:
+  - hosts:
+    - tooljet.${SECRET_DOMAIN}
