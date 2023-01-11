@@ -85,7 +85,6 @@ spec:
             # - name: PGRST_JWT_SECRET
             #   value: "replace_jwt_secret_here"
 ---
----
 kind: Service
 apiVersion: v1
 metadata:
