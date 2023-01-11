@@ -44,7 +44,7 @@ spec:
             failureThreshold: 6
           env:
             - name: PG_HOST
-              value: postgresql:5432
+              value: postgresql
             - name: PG_USER
               value: postgres
             - name: PG_PASS
