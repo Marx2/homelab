@@ -48,10 +48,10 @@ spec:
             - name: PG_USER
               value: postgres
             - name: PG_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: server
-                  key: pg_password
+              value: ${SECRET_POSTGRESQL_PASS}
+#                secretKeyRef:
+#                  name: server
+#                  key: pg_password
             - name: PG_DB
               value: tooljet
             - name: LOCKBOX_MASTER_KEY
