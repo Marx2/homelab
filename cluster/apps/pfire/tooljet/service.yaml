@@ -34,9 +34,9 @@ spec:
         - path: /
           pathType: Prefix
           backend:
-            service:.
+            service:
               name: tooljet
-              port:.
+              port:
                 number: 80
   tls:
   - hosts:
