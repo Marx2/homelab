@@ -9,7 +9,7 @@ spec:
     app: tooljet
   ports:
   - protocol: TCP
-    port: 80
+    port: 8080
     targetPort: 3000
     name: http
 ---
@@ -37,7 +37,7 @@ spec:
             service:
               name: tooljet
               port:
-                number: 80
+                number: 8080
   tls:
   - hosts:
     - tooljet.${SECRET_DOMAIN}
