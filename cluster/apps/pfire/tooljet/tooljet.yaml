@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tooljet-deployment
+  name: tooljet
   namespace: pfire
 spec:
   replicas: 2
@@ -22,7 +22,7 @@ spec:
 #      imagePullSecrets:
 #        - name: docker-secret
       containers:
-        - name: container
+        - name: tooljet
           image: tooljet/tooljet-ce:v2.0.0
           imagePullPolicy: Always
           args: ["npm", "run", "start:prod"]

@@ -6,7 +6,7 @@ metadata:
   namespace: pfire
 spec:
   selector:
-    app: tooljet-deployment
+    app: tooljet
   ports:
   - protocol: TCP
     port: 8080
