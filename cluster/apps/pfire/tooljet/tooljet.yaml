@@ -44,25 +44,16 @@ spec:
             failureThreshold: 6
           env:
             - name: PG_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: server
-                  key: pg_host
+              value: postgresql:5432
             - name: PG_USER
-              valueFrom:
-                secretKeyRef:
-                  name: server
-                  key: pg_user
+              value: postgres
             - name: PG_PASS
               valueFrom:
                 secretKeyRef:
                   name: server
                   key: pg_password
             - name: PG_DB
-              valueFrom:
-                secretKeyRef:
-                  name: server
-                  key: pg_db
+              value: tooljet
             - name: LOCKBOX_MASTER_KEY
               valueFrom:
                 secretKeyRef:
@@ -74,10 +65,7 @@ spec:
                   name: server
                   key: secret_key_base
             - name: TOOLJET_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: server
-                  key: tj_host
+              value: "tooljet.${SECRET_DOMAIN}"
             - name: DEPLOYMENT_PLATFORM
               value: "k8s"
             # Set the env values below for Tooljet Database
