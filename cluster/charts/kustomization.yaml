@@ -24,3 +24,4 @@ resources:
   - metallb-charts.yaml
   - oauth2-proxy.yaml
   - grafana.yaml
+  - appwrite.yaml
