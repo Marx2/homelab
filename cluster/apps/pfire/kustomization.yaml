@@ -7,4 +7,4 @@ resources:
   - hasura
   - grafana
   - tooljet
-  - appwrite
+#  - appwrite

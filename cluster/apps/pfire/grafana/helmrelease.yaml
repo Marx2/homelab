@@ -80,6 +80,7 @@ spec:
       ingressClassName: nginx
       annotations:
         hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "pfire"
       hosts:
         - &host grafana.${SECRET_DOMAIN}
       tls:
