@@ -7,8 +7,8 @@ metadata:
 spec:
   interval: 30m
   url: https://github.com/k3env/appwrite-helm
-#  ref:
-#    tag: 1.0.0
+  ref:
+    branch: main
 #  ignore: |
 #    # exclude all
 #    /*
