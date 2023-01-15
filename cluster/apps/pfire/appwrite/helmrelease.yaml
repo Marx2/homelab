@@ -12,7 +12,8 @@ spec:
       chart: appwrite
       version: 1.0.0
       sourceRef:
-        kind: HelmRepository
+        #kind: HelmRepository
+        kind: GitRepository
         name: appwrite-charts
         namespace: flux-system
   values:
