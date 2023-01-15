@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/k3env/appwrite-helm
+  url: https://github.com/k3env/appwrite-helm/appwrite-helm
 #  ref:
 #    tag: 1.0.0
 #  ignore: |
