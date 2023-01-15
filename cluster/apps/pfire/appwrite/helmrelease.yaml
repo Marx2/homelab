@@ -8,7 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: appwrite
+      chart: ./
       version: 1.0.0
       sourceRef:
         #kind: HelmRepository
