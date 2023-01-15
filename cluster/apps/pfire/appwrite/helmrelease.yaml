@@ -26,8 +26,6 @@ spec:
       appwrite:
         enabled: true
         annotations:
-          #nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
           hajimari.io/group: "personal-fire"
@@ -66,3 +64,6 @@ spec:
 #      tls:
 #      - hosts:
 #        - "hasura.${SECRET_DOMAIN}"
+
+          #nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
