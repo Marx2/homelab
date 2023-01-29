@@ -32,7 +32,7 @@ spec:
       resizerReplicaCount: 2
       snapshotterReplicaCount: 2
     defaultSettings:
-      backupTarget: nfs://omv:/backup/longhorn
+      backupTarget: nfs://192.168.1.49://volume1/backup/longhorn
       defaultDataPath: /longhorn
       createDefaultDiskLabeledNodes: true
       defaultDataLocality: best-effort
