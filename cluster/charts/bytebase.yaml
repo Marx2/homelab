@@ -6,6 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://bytebase.github.io/helm-charts
+  url: https://bytebase.github.io/bytebase
   ref:
     branch: main
