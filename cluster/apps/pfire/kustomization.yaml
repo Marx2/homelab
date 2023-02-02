@@ -8,3 +8,4 @@ resources:
   - grafana
   - tooljet
 #  - appwrite
+  - bytebase
