@@ -1,11 +1,10 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: GitRepository
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
 metadata:
   name: bytebase-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 1h
   url: https://bytebase.github.io/bytebase
-  ref:
-    branch: main
+  timeout: 3m
