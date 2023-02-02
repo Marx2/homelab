@@ -21,7 +21,7 @@ spec:
               "--data",
               "/var/opt/bytebase",
               "--external-url",
-              "bytebase.${SECRET_DOMAIN}",
+              "https://bytebase.${SECRET_DOMAIN}",
               "--port",
               "8080",
               "--pg",
