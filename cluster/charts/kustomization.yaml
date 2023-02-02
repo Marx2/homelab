@@ -25,3 +25,4 @@ resources:
   - oauth2-proxy.yaml
   - grafana.yaml
 #  - appwrite.yaml
+  - bytebase.yaml

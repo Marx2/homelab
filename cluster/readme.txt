@@ -31,3 +31,17 @@ task precommit:update
 
 Longhorn correct backup path:
 nfs://192.168.1.49/volume1/backup/longhorn
+
+
+Error:
+"orphaned pod found, but volume paths are still present on disk
+but error not a directory occurred when trying to remove the volumes dir"
+
+k3s kubectl get pods --all-namespaces # lists all namespaces in use
+cd /var/lib/kubelet/pods
+cat <pod UUID logs say is orphaned>/etc-hosts
+# note the last line, the app name is in the entry after the IP address
+k3s kubectl get pod -n <appname>
+# if nothing comes back, it is orphaned
+rm -rf <pod UUID logs say is orphaned>
+systemctl restart k3s
