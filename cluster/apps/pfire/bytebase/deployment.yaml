@@ -25,7 +25,7 @@ spec:
               "--port",
               "8080",
               "--pg",
-              "postgresql://postgres:${SECRET_POSTGRESQL_PASS}@host:5432/postgres",
+              "postgresql://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/postgres",
             ]
           ports:
             - containerPort: 8080
