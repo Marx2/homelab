@@ -249,7 +249,7 @@ stringData:
       quality = "low" # "high" or "low"
       format = "audio" # "video" or "audio"
       opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.DIVIN]
+      [feeds.DIVGRI]
       url = "https://www.youtube.com/channel/UCL2uoFD7Gv2nflxgCYkcHRw" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
