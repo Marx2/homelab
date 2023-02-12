@@ -60,7 +60,7 @@ spec:
           Username: "postgres"
           Host: "postgresql"
           #SSLMode: "prefer"
-          #MaintenanceDB: "postgres"
+          MaintenanceDB: "postgres"
 
     ## Ingress
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
