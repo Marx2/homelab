@@ -5,7 +5,5 @@ metadata:
   name: pgadmin-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 1h
   url: https://helm.runix.net
-  ref:
-    branch: main
