@@ -8,7 +8,6 @@ spec:
   interval: 10m
   chart:
     spec:
-      # renovate: registryUrl=https://hasura-extra.github.io/hasura-extra
       chart: pgadmin4
       version: 1.14.4
       sourceRef:
