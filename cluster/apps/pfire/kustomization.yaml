@@ -9,3 +9,4 @@ resources:
   - tooljet
 #  - appwrite
   - bytebase
+  - pgadmin
