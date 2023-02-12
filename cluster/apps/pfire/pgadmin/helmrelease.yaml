@@ -78,3 +78,8 @@ spec:
       tls:
       - hosts:
         - "pgadmin.${SECRET_DOMAIN}"
+    persistentVolume:
+      ## If true, pgAdmin4 will create/use a Persistent Volume Claim
+      ## If false, use emptyDir
+      ##
+      enabled: false
