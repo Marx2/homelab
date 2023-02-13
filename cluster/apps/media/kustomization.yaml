@@ -5,7 +5,6 @@ resources:
   - namespace.yaml
   - nfs-media-omv-pv.yaml
   - nfs-podcasts-omv-pv.yaml
-  - nfs-prometheus-omv-pv.yaml
   - nfs-recordings-omv-pv.yaml
   - nfs-media-omv-pvc.yaml
   - nfs-podcasts-omv-pvc.yaml
