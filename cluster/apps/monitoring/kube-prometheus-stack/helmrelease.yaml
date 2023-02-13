@@ -73,14 +73,15 @@ spec:
       enabled: true
     kubeProxy:
       enabled: false
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: prometheus-omv
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 50Gi
-        selector:
-          matchLabels:
-            app: nfs-prometheus-pv
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: prometheus-omv
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 50Gi
+          selector:
+            matchLabels:
+              app: nfs-prometheus-pv
