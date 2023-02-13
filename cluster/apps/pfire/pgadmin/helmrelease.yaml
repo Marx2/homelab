@@ -85,7 +85,7 @@ spec:
       enabled: false
     env:
       # can be email or nickname
-      email: marx
+      email: mnazarko.nospam@gmail.com
       password: ${SECRET_POSTGRESQL_PASS}
       ## If True, allows pgAdmin4 to create session cookies based on IP address
       ## Ref: https://www.pgadmin.org/docs/pgadmin4/latest/config_py.html
