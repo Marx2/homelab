@@ -27,3 +27,4 @@ resources:
 #  - appwrite.yaml
   - bytebase.yaml
   - pgadmin.yaml
+  - prometheus-community-charts.yaml
