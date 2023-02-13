@@ -5,7 +5,7 @@ resources:
   - namespace.yaml
   - postgresql
   - hasura
-  - grafana
+#  - grafana
   - tooljet
 #  - appwrite
   - bytebase
