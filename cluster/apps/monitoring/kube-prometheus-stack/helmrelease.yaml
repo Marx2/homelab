@@ -83,9 +83,9 @@ spec:
           spec:
             storageClassName: prometheus-omv
             accessModes: ["ReadWriteOnce"]
-            selector:
-              matchLabels:
-                app: nfs-prometheus-pv
             resources:
               requests:
-                storage: 1Mi
+                storage: 50Gi
+            selector:
+              matchLabels:
+                app.kubernetes.io/name: nfs-prometheus-pv
