@@ -79,7 +79,7 @@ spec:
           claimName: config-podsync-pvc
       containers:
       - name: podsync
-        image: ghcr.io/k8s-at-home/podsync:v2.4.2
+        image: mxpv/podsync:v2.5
         args: ["/app/podsync", "--config", "/config/config.toml", "--debug"]
         ports:
         - containerPort: 8080
