@@ -27,10 +27,10 @@ spec:
         hajimari.io/icon: "weather-sunset"
         hajimari.io/group: "pfire"
       hosts:
-      - host: hasura.${SECRET_DOMAIN}
-        paths:
-          - path: /
-            pathType: Prefix
+        - host: hasura.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
         - hosts:
           - "hasura.${SECRET_DOMAIN}"
