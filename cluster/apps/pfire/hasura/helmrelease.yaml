@@ -18,23 +18,21 @@ spec:
   values:
     image:
       repository: hasura/graphql-engine
-      tag: v2.19.0-ce
+      tag: v2.20.0-ce
     ingress:
       enabled: true
       className: nginx
       annotations:
-        #nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hajimari.io/enable: "true"
         hajimari.io/icon: "weather-sunset"
         hajimari.io/group: "pfire"
       hosts:
-      - host: hasura.${SECRET_DOMAIN}
-        paths:
-        - path: /
-          pathType: Prefix
+        - host: hasura.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
-      - hosts:
-        - "hasura.${SECRET_DOMAIN}"
+        - hosts:
+          - "hasura.${SECRET_DOMAIN}"
     adminSecret: '${SECRET_HASURA_PASSWORD}'
     dbUrl: 'postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/postgres'
