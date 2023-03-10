@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -57,7 +58,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: nginx
-        annotations: 
+        annotations:
           hajimari.io/icon: simple-icons:grafana
           hajimari.io/group: "monitoring"
         hosts:

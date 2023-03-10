@@ -53,13 +53,13 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "home-lightning-bolt-outline"
         hosts:
-        - host: hass.${SECRET_DOMAIN}
-          paths:
-          - path: /
+          - host: hass.${SECRET_DOMAIN}
+            paths:
+              - path: /
         tls:
-        # - secretName: tls.home-assistant-frontend
-        - hosts:
-          - hass.${SECRET_DOMAIN}
+          # - secretName: tls.home-assistant-frontend
+          - hosts:
+            - hass.${SECRET_DOMAIN}
 
     env:
       TZ: ${TZ}
@@ -80,17 +80,6 @@ spec:
       limits:
         memory: 2000Mi
 
-#    postgresql:
-#      enabled: true
-#      persistence:
-#        enabled: true
-#        existingClaim: home-assistant-data-pvc
-#
-#      postgresqlUsername: home-assistant
-#      postgresqlDatabase: haas
-#      # postgresqlPassword: ${HASS_POSTGRES_PASSWORD}
-#      postgresqlPassword: testpassword
-
     mariadb:
       enabled: true
       architecture: standalone
@@ -105,52 +94,6 @@ spec:
         existingClaim: home-assistant-data-pvc
       # storageClass: ""
 
-
-
     addons:
       codeserver:
         enabled: false
-
-        # git:
-        #   deployKeySecret: home-assistant-deploykey
-
-        #ingress:
-        #  main:
-        #    enabled: true
-        #    annotations:
-        #      kubernetes.io/ingress.class: "nginx"
-        #      nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-        #      nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-        #      #forecastle.stakater.com/icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/300px-Visual_Studio_Code_1.35_icon.svg.png"
-        #      hajimari.io/enable: "true"
-        #      hajimari.io/icon: "code-braces-box"
-        #      hajimari.io/group: "home"
-        #    hosts:
-        #    - host: vsc.${SECRET_DOMAIN}
-        #      paths:
-        #      - path: /
-        #    tls:
-        #    # - secretName: tls.home-assistant-code
-        #    - hosts:
-        #      - vsc.${SECRET_DOMAIN}
-
-        # args:
-        # - --auth
-        # - none
-        # - --user-data-dir
-        # - "/config/.vscode"
-        # - --extensions-dir
-        # - "/config/.vscode"
-
-        # workingDir: "/config"
-
-        # volumeMounts:
-        # - name: config
-        #   mountPath: /config
-
-        # resources:
-        #  requests:
-        #     cpu: 35m
-        #     memory: 128Mi
-        #   limits:
-        #     memory: 512Mi
