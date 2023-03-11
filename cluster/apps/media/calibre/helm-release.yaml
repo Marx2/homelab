@@ -28,8 +28,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: emptyDir
-        #existingClaim: calibre-config-pvc
+        existingClaim: nfs-media-ebook-pvc
       nfs-nas-media:
         enabled: true
         type: emptyDir
