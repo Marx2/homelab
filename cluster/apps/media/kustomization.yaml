@@ -16,3 +16,4 @@ resources:
   #- radarr
   #- qbittorrent
   - tvheadend
+  - calibre-web
