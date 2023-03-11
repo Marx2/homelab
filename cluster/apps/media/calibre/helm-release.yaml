@@ -23,7 +23,7 @@ spec:
 
     env:
       TZ: ${TZ}
-      PGID: 65539
+      #PGID: 65539
 
     persistence:
       config:
