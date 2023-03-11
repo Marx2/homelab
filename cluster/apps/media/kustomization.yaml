@@ -9,6 +9,8 @@ resources:
   - nfs-media-omv-pvc.yaml
   - nfs-podcasts-omv-pvc.yaml
   - nfs-recordings-omv-pvc.yaml
+  - nfs-media-ebook-pv.yaml
+  - nfs-media-ebook-pvc.yaml
   - podsync
   - jellyfin
   #- jackett
