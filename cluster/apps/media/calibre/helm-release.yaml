@@ -24,7 +24,8 @@ spec:
     env:
       TZ: ${TZ}
       #PGID: 65539
-
+      PUID: 1000
+      PGID: 1000
     persistence:
       config:
         enabled: true
