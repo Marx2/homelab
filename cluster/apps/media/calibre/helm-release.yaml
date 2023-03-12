@@ -24,8 +24,8 @@ spec:
     env:
       TZ: ${TZ}
       #PGID: 65539
-      PUID: 1000
-      PGID: 1000
+      PUID: 1027
+      PGID: 100
     persistence:
       config:
         enabled: true
@@ -45,10 +45,10 @@ spec:
       #       path: /mnt/tank/share
       #   mountPath: /data
 
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
+    #podSecurityContext:
+    #  runAsUser: 1000
+    #  runAsGroup: 1000
+    #  fsGroup: 1000
 
     service:
       webserver:
