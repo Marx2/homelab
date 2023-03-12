@@ -29,7 +29,8 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: nfs-media-ebook-pvc
+        type: emptyDir
+        #existingClaim: nfs-media-ebook-pvc
       nfs-nas-media:
         enabled: true
         type: emptyDir
