@@ -45,6 +45,10 @@ spec:
       #       path: /mnt/tank/share
       #   mountPath: /data
 
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
 
     service:
       webserver:
