@@ -9,6 +9,6 @@ data:
       - name: postgres
         handler:
           postgraphile:
-            connectionString: postgres://{env.POSTGRES_USER}:{env.POSTGRES_PASSWORD}@postgres:5432/postgres
+            connectionString: postgres://{env.POSTGRES_USER}:{env.POSTGRES_PASSWORD}@postgresql:5432/postgres
     serve:
       hostname: 0.0.0.0
