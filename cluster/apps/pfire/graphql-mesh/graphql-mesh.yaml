@@ -60,6 +60,10 @@ spec:
       - name: tz-config
         hostPath:
           path: /etc/localtime
+      - name: graphql-mesh-meshrc
+        configMap:
+          name: graphql-mesh-meshrc
+          defaultMode: 420
       containers:
       - name: graphql-mesh-docker
         image: ghcr.io/marx2/graphql-mesh-docker:sha-20be5ae
@@ -77,3 +81,6 @@ spec:
         - mountPath: "/etc/localtime"
           readOnly: true
           name: tz-config
+        - name: graphql-mesh-meshrc
+          mountPath: /home/node/app/.meshrc.yaml
+          subPath: .meshrc.yaml

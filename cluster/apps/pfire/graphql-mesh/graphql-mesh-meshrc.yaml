@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphql-mesh-meshrc
+  namespace: pfire
+data:
+  .meshrc.yaml: |-
+    sources:
+      - name: Covid
+        handler:
+          graphql:
+            endpoint: https://covid-19-two-rust.vercel.app/api/graphql
+    serve:
+      hostname: 0.0.0.0
