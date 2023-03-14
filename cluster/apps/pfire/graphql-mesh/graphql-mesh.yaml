@@ -63,15 +63,15 @@ spec:
       containers:
       - name: graphql-mesh-docker
         image: ghcr.io/marx2/graphql-mesh-docker:sha-20be5ae
-        resources:
-          limits:
-            cpu: 100m
-            memory: 128Mi
-          requests:
-            cpu: 10m
-            memory: 128Mi
+        # resources:
+          # limits:
+            # cpu: 100m
+            # memory: 128Mi
+          # requests:
+            # cpu: 10m
+            # memory: 128Mi
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           name: http-api
         volumeMounts:
         - mountPath: "/etc/localtime"
