@@ -6,9 +6,9 @@ metadata:
 data:
   .meshrc.yaml: |-
     sources:
-      - name: Covid
+      - name: postgres
         handler:
-          graphql:
-            endpoint: https://covid-19-two-rust.vercel.app/api/graphql
+          postgraphile:
+            connectionString: postgres://{env.POSTGRES_USER}:{env.POSTGRES_PASSWORD}@postgres:5432/postgres
     serve:
       hostname: 0.0.0.0
