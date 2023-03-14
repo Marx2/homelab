@@ -10,3 +10,4 @@ resources:
 #  - appwrite
   - bytebase
   - pgadmin
+  - graphql-mesh

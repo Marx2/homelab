@@ -1,0 +1,79 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: graphql-mesh
+  namespace: pfire
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "harddisk"
+    hajimari.io/group: "pfire"
+spec:
+  rules:
+    - host: graphql-mesh.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: graphql-mesh
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+      - graphql-mesh.${SECRET_DOMAIN}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: graphql-mesh
+  namespace: pfire
+spec:
+  selector:
+    app: graphql-mesh
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 4000
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-mesh
+  namespace: pfire
+spec:
+  selector:
+    matchLabels:
+      app: graphql-mesh
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: graphql-mesh
+    spec:
+      volumes:
+      - name: tz-config
+        hostPath:
+          path: /etc/localtime
+      containers:
+      - name: graphql-mesh-docker
+        image: ghcr.io/marx2/graphql-mesh-docker:sha-20be5ae
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+          name: http-api
+        volumeMounts:
+        - mountPath: "/etc/localtime"
+          readOnly: true
+          name: tz-config
