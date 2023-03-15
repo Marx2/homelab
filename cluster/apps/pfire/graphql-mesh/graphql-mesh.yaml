@@ -74,11 +74,11 @@ spec:
           requests:
             cpu: 10m
             memory: 128Mi
-        env:
-          - name: POSTGRES_USER
-            value: "postgres"
-          - name: POSTGRES_PASSWORD
-            value: "${SECRET_POSTGRESQL_PASS}"
+        #env:
+        #  - name: POSTGRES_USER
+        #    value: "postgres"
+        #  - name: POSTGRES_PASSWORD
+        #    value: "${SECRET_POSTGRESQL_PASS}"
         ports:
         - containerPort: 80
           name: http-api

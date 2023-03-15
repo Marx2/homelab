@@ -9,6 +9,6 @@ data:
       - name: postgres
         handler:
           postgraphile:
-            connectionString: postgres://{env.POSTGRES_USER}:{env.POSTGRES_PASSWORD}@postgresql:5432/stooq
+            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
     serve:
       hostname: 0.0.0.0
