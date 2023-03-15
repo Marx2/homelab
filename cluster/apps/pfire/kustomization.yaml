@@ -11,3 +11,4 @@ resources:
   - bytebase
   - pgadmin
   - graphql-mesh
+  - stooq-importer-job.yaml
