@@ -12,10 +12,6 @@ data:
 
       LOAD CSV
         FROM ALL FILENAMES MATCHING ~/./
-          /* HAVING FIELDS
-          (
-            TICKER,PER,DATE,TIME,OPEN,HIGH,LOW,CLOSE,VOL,OPENINT
-          ) */
         INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}:5432/stooq
           TARGET TABLE daily
           TARGET COLUMNS
@@ -26,7 +22,6 @@ data:
           skip header = 1,
           fields terminated by ',',
           fields not enclosed,
-          /*batch rows = 1000,*/
           batch concurrency = 1,
           workers = 2,
           concurrency = 1,
