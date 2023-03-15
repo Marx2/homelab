@@ -35,20 +35,6 @@ data:
 
         SET work_mem to '512 MB', maintenance_work_mem to '1024 MB'
 
-        BEFORE LOAD DO
-          $$ drop table if exists daily; $$,
-          $$ create table daily (
-          ticker text,
-          period char(1),
-          date date,
-          time bigint,
-          open numeric,
-          high numeric,
-          low numeric,
-          close numeric,
-          volume numeric,
-          openint integer
-          );
         $$;
 
 
