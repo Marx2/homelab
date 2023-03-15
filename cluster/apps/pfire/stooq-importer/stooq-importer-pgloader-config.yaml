@@ -25,7 +25,7 @@ data:
           batch concurrency = 1,
           workers = 2,
           concurrency = 1,
-          disable triggers,
-          drop indexes
+          disable triggers
 
-        SET work_mem to '512 MB', maintenance_work_mem to '1024 MB'
+        SET work_mem to '512 MB',
+            maintenance_work_mem to '1024 MB';
