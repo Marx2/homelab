@@ -34,5 +34,3 @@ data:
           drop indexes
 
         SET work_mem to '512 MB', maintenance_work_mem to '1024 MB'
-      ;
-    ;
