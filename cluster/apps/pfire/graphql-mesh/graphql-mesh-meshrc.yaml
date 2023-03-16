@@ -14,5 +14,7 @@ data:
           - prefix:
               mode: wrap
               value: stooq_
+              includeRootOperations: true
+              includeTypes: false
     serve:
       hostname: 0.0.0.0
