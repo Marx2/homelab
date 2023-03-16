@@ -47,7 +47,7 @@ metadata:
   name: graphql-mesh
   namespace: pfire
   annotations:
-    secret.reloader.stakater.com/reload: "graphql-mesh-meshrc"
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
