@@ -10,5 +10,9 @@ data:
         handler:
           postgraphile:
             connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
+        transforms:
+          - prefix:
+              mode: wrap
+              value: stooq_
     serve:
       hostname: 0.0.0.0
