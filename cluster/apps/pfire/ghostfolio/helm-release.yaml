@@ -35,6 +35,8 @@ spec:
       REDIS_HOST: redis
       REDIS_PASSWORD: ${SECRET_REDIS_PASS}
       REDIS_PORT: 6379
+      ACCESS_TOKEN_SALT: ${GHOSTFOLIO_ACCESS_TOKEN_SALT}
+      JWT_SECRET_KEY: ${GHOSTFOLIO_JWT_SECRET_KEY}
     #envFrom:
     #  - secretRef:
     #      name: *app
