@@ -13,4 +13,4 @@ resources:
   - graphql-mesh
   - stooq-importer
   - redis
-  # - ghostfolio
+  - ghostfolio
