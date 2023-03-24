@@ -5,10 +5,12 @@ resources:
   - namespace.yaml
   - postgresql
   - hasura
-#  - grafana
+  #  - grafana
   - tooljet
-#  - appwrite
+  #  - appwrite
   - bytebase
   - pgadmin
   - graphql-mesh
   - stooq-importer
+  - redis
+  # - ghostfolio

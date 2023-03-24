@@ -5,7 +5,7 @@ metadata:
   name: appwrite-charts
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 1h
   url: https://github.com/Marx2/appwrite-helm
   ref:
     branch: main

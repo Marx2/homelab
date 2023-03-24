@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis
+  namespace: pfire
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controller:
+      strategy: RollingUpdate
+    image:
+      repository: docker.io/library/redis
+      tag: "7"
+    command: ["redis-server", "--requirepass", "${SECRET_REDIS_PASS}"]
+    env:
+      REDIS_REPLICATION_MODE: master
+      REDIS_PASSWORD: ${SECRET_REDIS_PASS}
+    persistence:
+      data:
+        enabled: true
+        path: /data
+        existingClaim: redis-pvc
+        subPath: ghostfolio_redis
+    service:
+      main:
+        ports:
+          http:
+            port: 6379
+    podAnnotations:
+      secret.reloader.stakater.com/reload: ghostfolio

@@ -24,7 +24,8 @@ resources:
   - metallb-charts.yaml
   - oauth2-proxy.yaml
   - grafana.yaml
-#  - appwrite.yaml
+  #  - appwrite.yaml
   - bytebase.yaml
   - pgadmin.yaml
   - prometheus-community-charts.yaml
+  - bjw-s.yaml
