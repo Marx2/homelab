@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: docker.io/ghostfolio/ghostfolio
-      tag: latest
+      tag: 1.248.0
     env:
       DATABASE_URL: postgresql://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/ghostfolio
       NODE_ENV: production
