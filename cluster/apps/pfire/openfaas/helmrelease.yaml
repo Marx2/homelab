@@ -54,3 +54,19 @@ spec:
       replicas: 1
     ingressOperator:
       create: false
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "pfire"
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+      hosts:
+        - &host openfaas.${SECRET_DOMAIN}
+          serviceName: gateway
+          servicePort: 8080
+          path: /
+      tls:
+        - hosts:
+          - "openfaas.${SECRET_DOMAIN}"
