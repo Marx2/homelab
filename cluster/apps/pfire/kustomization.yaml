@@ -14,3 +14,4 @@ resources:
   - stooq-importer
   - redis
   - ghostfolio
+  - openfaas
