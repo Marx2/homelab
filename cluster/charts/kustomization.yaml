@@ -29,3 +29,4 @@ resources:
   - pgadmin.yaml
   - prometheus-community-charts.yaml
   - bjw-s.yaml
+  - openfaas-charts.yaml
