@@ -45,11 +45,11 @@ spec:
     oauth2Plugin:
       enabled: false
     operator:
-      create: true
+      create: false
     prometheus:
-      create: false
+      create: true
     alertmanager:
-      create: false
+      create: true
     basicAuthPlugin:
       replicas: 1
     ingressOperator:
