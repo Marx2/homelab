@@ -15,4 +15,4 @@ resources:
   - redis
   - ghostfolio
   - openfaas
-  - fission
+  #  - fission
