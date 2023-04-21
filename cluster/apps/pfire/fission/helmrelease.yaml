@@ -20,5 +20,6 @@ spec:
     builderNamespace: pfire
     functionNamespace: pfire
     createNamespace: false
+    crds: CreateReplace
     serviceType: NodePort
     routerServiceType: NodePort
