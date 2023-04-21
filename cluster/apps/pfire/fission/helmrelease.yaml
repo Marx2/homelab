@@ -1,0 +1,47 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: fission
+  namespace: pfire
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: fission-all
+      version: 1.18.0
+      sourceRef:
+        kind: HelmRepository
+        name: fission-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    createNamespace: false
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+    cleanupOnFail: true
+    crds: CreateReplace
+  test:
+    enable: true
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+  uninstall:
+    keepHistory: false
+  maxHistory: 3
+  values:
+    defaultNamespace: pfire
+    builderNamespace: pfire
+    functionNamespace: pfire
+    createNamespace: false
+    serviceType: NodePort
+    routerServiceType: NodePort
