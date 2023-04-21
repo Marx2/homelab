@@ -30,3 +30,4 @@ resources:
   - prometheus-community-charts.yaml
   - bjw-s.yaml
   - openfaas-charts.yaml
+  - fission-charts.yaml
