@@ -39,7 +39,8 @@ spec:
     keepHistory: false
   maxHistory: 3
   values:
-    basic_auth: false
+    basic_auth: true
+    generateBasicAuth: false
     gateway:
       directFunctions: true
     oauth2Plugin:
