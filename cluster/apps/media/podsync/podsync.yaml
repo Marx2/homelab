@@ -53,7 +53,7 @@ metadata:
   annotations:
     secret.reloader.stakater.com/reload: "podsync-config"
 spec:
-  selector:
+  select3or:
     matchLabels:
       app: podsync
   replicas: 1
@@ -79,8 +79,8 @@ spec:
           claimName: config-podsync-pvc
       containers:
       - name: podsync
-        image: ghcr.io/mxpv/podsync:v2.6.1
-        # image: tdeutsch/podsync:v2.5
+        # image: ghcr.io/mxpv/podsync:v2.6.1
+        image: tdeutsch/podsync:v2.6.1
         args: ["/app/podsync", "--config", "/config/config.toml", "--debug"]
         ports:
         - containerPort: 8080
