@@ -10,8 +10,13 @@ spec:
   ref:
     branch: main
   url: https://github.com/Marx2/homelab
+  ignore: |
+    # exclude all
+    /*
+    # include kubernetes directory
+    !/cluster
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-system
@@ -20,6 +25,7 @@ spec:
   interval: 10m0s
   path: ./cluster/flux
   prune: true
+  wait: false
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -28,3 +34,9 @@ spec:
     provider: sops
     secretRef:
       name: sops-gpg
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets
