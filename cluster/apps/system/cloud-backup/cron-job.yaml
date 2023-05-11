@@ -15,7 +15,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: rclone
-            image: rclone/rclone:1.61
+            image: rclone/rclone:1.62
             env:
             - name: TZ
               value: "${TZ}"
