@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://kubernetes-sigs.github.io/node-feature-discovery/charts
       chart: node-feature-discovery
       version: "0.13.1"
       sourceRef:
@@ -19,21 +18,6 @@ spec:
     image:
       repository: registry\.k8s\.io/nfd/node-feature-discovery
       tag: "v0.13.0"
-#    master:
-#      tolerations:
-#      - key: "node-role.kubernetes.io/master"
-#        operator: "Equal"
-#        value: ""
-#        effect: "NoSchedule"
-#      affinity:
-#        nodeAffinity:
-#          preferredDuringSchedulingIgnoredDuringExecution:
-#          - weight: 1
-#            preference:
-#              matchExpressions:
-#              - key: "node-role.kubernetes.io/master"
-#                operator: In
-#                values: [""]
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: "nfd-worker-conf"
@@ -85,8 +69,3 @@ spec:
                 class: ["0400"]
                 vendor: ["14f1"]
                 device: ["8880"]
-#      tolerations:
-#      - effect: "NoExecute"
-#        operator: "Exists"
-#      - effect: "NoSchedule"
-#        operator: "Exists"
