@@ -5,7 +5,7 @@ metadata:
   name: hasura
   namespace: pfire
 spec:
-  interval: 10m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://hasura-extra.github.io/hasura-extra

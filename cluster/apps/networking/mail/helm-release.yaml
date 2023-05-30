@@ -5,7 +5,7 @@ metadata:
   name: mailhog
   namespace: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://codecentric.github.io/helm-charts
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: codecentric-charts
         namespace: flux-system
-      interval: 5m
   values:
     image:
       repository: mailhog/mailhog

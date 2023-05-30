@@ -5,7 +5,7 @@ metadata:
   name: k8s-gateway
   namespace: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: https://ori-edge.github.io/k8s_gateway/
@@ -16,7 +16,6 @@ spec:
         kind: HelmRepository
         name: k8s-gateway-charts
         namespace: flux-system
-      interval: 5m
   timeout: 20m
   values:
     fullnameOverride: k8s-gateway

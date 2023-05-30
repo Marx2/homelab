@@ -5,7 +5,7 @@ metadata:
   name: oauth2-proxy
   namespace: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
@@ -15,7 +15,6 @@ spec:
         kind: HelmRepository
         name: oauth2-proxy
         namespace: flux-system
-      interval: 5m
   values:
     image:
       repository: "quay.io/oauth2-proxy/oauth2-proxy"

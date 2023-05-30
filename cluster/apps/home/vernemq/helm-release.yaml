@@ -5,7 +5,7 @@ metadata:
   name: vernemq
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   releaseName: vernemq
   chart:
     spec:
@@ -16,7 +16,6 @@ spec:
         kind: HelmRepository
         name: vernemq-charts
         namespace: flux-system
-      interval: 5m
   values:
     image:
       repository: vernemq/vernemq
