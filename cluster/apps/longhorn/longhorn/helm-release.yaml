@@ -58,11 +58,11 @@ spec:
         targetPort: 80
     resources:
       requests:
-        cpu: "100m"
-        memory: "128Mi"
+        cpu: "50m"
+        memory: "50Mi"
       limits:
-        cpu: "100m"
-        memory: "128Mi"
+        cpu: "2500m"
+        memory: "512Mi"
   # workaround for a bug: https://github.com/longhorn/charts/pull/49
   postRenderers:
     - kustomize:
