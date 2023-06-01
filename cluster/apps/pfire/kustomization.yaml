@@ -16,3 +16,4 @@ resources:
   - ghostfolio
   - openfaas
   #  - fission
+  - stooq
