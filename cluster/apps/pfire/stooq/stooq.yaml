@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stooq
+  namespace: pfire
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      component: stooq
+  template:
+    metadata:
+      labels:
+        component: stooq
+        app: stooq
+    spec:
+      containers:
+        - name: stooq
+          image: ghcr.io/marx2/stooq-daily:v.0.0.4
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "500Mi"
+              cpu: "2000m"
+          ports:
+            - containerPort: 84
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: /api/health
+            successThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 6
+          env:
+            - name: 2CAPTCHA_API_KEY
+              value: "${2CAPTCHA_API_KEY}"

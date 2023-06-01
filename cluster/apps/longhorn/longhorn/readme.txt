@@ -26,3 +26,7 @@ mount /longhorn
 
 - make sure iscsi package is installed
 apt-get install open-iscsi
+
+
+good description about manual fixing
+https://infinytum.co/longhorn-metadata-restoration/
