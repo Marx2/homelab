@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: stooq
-          image: ghcr.io/marx2/stooq-daily:v.0.0.4
+          image: ghcr.io/marx2/stooq-daily:v.0.0.5
           imagePullPolicy: Always
           resources:
             requests:
