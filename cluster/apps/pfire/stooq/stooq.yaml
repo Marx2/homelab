@@ -42,5 +42,5 @@ spec:
             periodSeconds: 5
             failureThreshold: 6
           env:
-            - name: 2CAPTCHA_API_KEY
-              value: "${2CAPTCHA_API_KEY}"
+            - name: TWO_CAPTCHA_API_KEY
+              value: "${TWO_CAPTCHA_API_KEY}"
