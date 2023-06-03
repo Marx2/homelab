@@ -45,9 +45,9 @@ spec:
         # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
         # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
       metrics:
-        enabled: false
+        enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-tls"
       resources:
