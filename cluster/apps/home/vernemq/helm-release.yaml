@@ -21,8 +21,8 @@ spec:
       repository: vernemq/vernemq
       tag: 1.12.3-alpine
     replicaCount: 1
-    # serviceMonitor:
-    #   create: true
+    serviceMonitor:
+      create: true
     service:
       type: LoadBalancer
       externalIPs:

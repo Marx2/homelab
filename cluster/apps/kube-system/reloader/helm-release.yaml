@@ -18,3 +18,5 @@ spec:
   values:
     nameOverride: reloader
     fullnameOverride: reloader
+    serviceMonitor:
+      enabled: true

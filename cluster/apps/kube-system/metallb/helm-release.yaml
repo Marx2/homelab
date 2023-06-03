@@ -26,3 +26,5 @@ spec:
       enabled: true
     psp:
       create: false
+    prometheus:
+      enabled: true

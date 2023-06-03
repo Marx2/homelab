@@ -96,3 +96,5 @@ spec:
     addons:
       codeserver:
         enabled: false
+    metrics:
+      enabled: true
