@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+  namespace: pfire
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: ${GITHUB_API_TOKEN_IMAGE_REGISTRY_READ_ENCODED}
