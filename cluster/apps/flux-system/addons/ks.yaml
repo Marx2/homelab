@@ -6,8 +6,6 @@ metadata:
   name: cluster-apps-flux-addons
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-apps-external-secrets-stores
   path: ./cluster/apps/flux-system/addons/app
   prune: true
   sourceRef:
