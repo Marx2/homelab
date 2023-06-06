@@ -20,6 +20,8 @@ spec:
         component: stooq
         app: stooq
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: stooq
           image: ghcr.io/marx2/stooq-daily:v.0.0.5
