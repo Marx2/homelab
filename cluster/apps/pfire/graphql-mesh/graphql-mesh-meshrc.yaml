@@ -16,5 +16,9 @@ data:
               value: stooq_
               includeRootOperations: true
               includeTypes: false
+    additionalTypeDefs: |
+      extend type Query {
+        nodeId: ID! # It might be String
+      }
     serve:
       hostname: 0.0.0.0
