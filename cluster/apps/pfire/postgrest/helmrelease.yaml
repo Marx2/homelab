@@ -9,14 +9,14 @@ spec:
   chart:
     spec:
       chart: postgrest
-      version: 11.1.0
+      version: 0.2.0
       sourceRef:
         kind: HelmRepository
-        name: bitnami-charts
+        name: cloudstark-charts
         namespace: flux-system
   values:
     image:
-      repository: postgrest/postgrest
+      repository: bitnami/postgrest
       tag: v11.1.0
       pullPolicy: IfNotPresent
 

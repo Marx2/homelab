@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: cloudstark-charts
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://raw.githubusercontent.com/cloudstark/helm-charts/master/charts/
+  timeout: 2m

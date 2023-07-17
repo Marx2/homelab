@@ -30,3 +30,4 @@ resources:
   - bjw-s.yaml
   - openfaas-charts.yaml
   - fission-charts.yaml
+  - cloudstark-charts.yaml
