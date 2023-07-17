@@ -18,3 +18,4 @@ resources:
   - openfaas
   #  - fission
   - stooq
+  - postgrest
