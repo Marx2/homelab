@@ -15,3 +15,14 @@ Network->Interfaces->LAN->DHCP Server:
 - Limit: 125
 
 Network->DHCP and DNS->Static Leases
+
+
+Tailscale NOT USED
+https://eko.one.pl/forum/viewtopic.php?pid=260170#p260170
+https://openwrt.org/docs/guide-user/services/vpn/tailscale/start
+
+1. Install tailscale and tailscaled
+2. run with:
+tailscale up --netfilter-mode=off --advertise-routes=192.168.1.0/24
+(be router into internal network)
+3. create a new managed interface and firewall zone for tailscale

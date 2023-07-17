@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgrest
+  namespace: pfire
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: postgrest
+      version: 11.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: postgrest/postgrest
+      tag: v11.1.0
+      pullPolicy: IfNotPresent
+
+    service:
+      type: ClusterIP
+      port: 80
+
+    ingress:
+      enabled: true
+      annotations:
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "weather-sunset"
+        hajimari.io/group: "pfire"
+        kubernetes.io/ingress.class: nginx
+      hosts:
+        - host: postgrest.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - "postgrest.${SECRET_DOMAIN}"
+    # http://postgrest.org/en/v4.3/install.html#configuration
+    postgrest:
+      db_uri: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
+      db_schema: public
+      db_anon_role:
+      db_pool: 100
+      server_host: '*4'
+      server_port: 3000
+      server_proxy_uri:
+      jwt_secret:
+      secret_is_base64: false
+      jwt_aud:
+      max_rows:
+      pre_request:
+      role_claim_key: '.role'
+
+    # PostgreSQL subchart configs
+    postgresql:
+      enabled: false

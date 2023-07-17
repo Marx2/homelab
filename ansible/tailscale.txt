@@ -1,0 +1,2 @@
+Tailscale installation on Debian:
+https://tailscale.com/kb/1038/install-debian-bullseye/
