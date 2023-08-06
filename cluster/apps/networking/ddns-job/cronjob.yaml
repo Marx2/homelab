@@ -16,7 +16,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: dyndns-updater
-            image: curlimages/curl:8.1.2
+            image: curlimages/curl:8.2.1
             imagePullPolicy: IfNotPresent
             envFrom:
             - secretRef:
