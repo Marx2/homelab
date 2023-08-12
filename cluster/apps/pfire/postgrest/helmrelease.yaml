@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: bitnami/postgrest
-      tag: v11.1.0
+      tag: 11.2.0
       pullPolicy: IfNotPresent
 
     service:
