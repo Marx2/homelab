@@ -28,11 +28,9 @@ spec:
       config:
         enabled: true
         type: emptyDir
-      nfs-nas-media:
+      media:
         enabled: true
         existingClaim: nfs-media-ebook-pvc
-        mountPath: /data
-        readOnly: false
 
     service:
       main:
