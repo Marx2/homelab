@@ -22,8 +22,6 @@ spec:
     podSecurityContext:
       runAsUser: 1027
       runAsGroup: 100
-      fsGroup: 1000
-      supplementalGroups: [1000]
     
     env:
       TZ: ${TZ}
