@@ -33,23 +33,12 @@ spec:
         existingClaim: nfs-media-ebook-pvc
         mountPath: /data
         readOnly: false
-      #config:
-      #    enabled: true
-      #    existingClaim: config-calibre-pvc
-      #nfs-nas-media:
-      #    enabled: true
-      #      existingClaim: nfs-media-ebook-pvc
-      #    mountPath: /data
-      #    readOnly: false
 
-      # nfs-nas-media:
-      #   enabled: true
-      #   type: custom
-      #   volumeSpec:
-      #     nfs:
-      #       server: "nas.${SECRET_DOMAIN}"
-      #       path: /mnt/tank/share
-      #   mountPath: /data
+    service:
+      main:
+        ports:
+          http:
+            port: 8083
 
     ingress:
       main:
