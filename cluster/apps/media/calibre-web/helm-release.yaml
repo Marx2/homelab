@@ -13,12 +13,12 @@ spec:
       version: 8.4.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
   values:
     image:
-      repository: ghcr.io/linuxserver/calibre-web
-      tag: version-0.6.18
+      repository: ghcr.io/bjw-s/calibre-web
+      tag: 0.6.20@sha256:adafa63a6f91499da854b1ba7b7e427b4539e0254d3a7acf3898d738576a5136
 
     env:
       TZ: ${TZ}
@@ -31,7 +31,7 @@ spec:
         type: emptyDir
       nfs-nas-media:
         enabled: true
-        type: emptyDir
+        existingClaim: nfs-media-ebook-pvc
         mountPath: /data
         readOnly: false
       #config:
