@@ -36,21 +36,21 @@ spec:
           ports:
             - name: http-api
               containerPort: 8000
-          livenessProbe:
-            httpGet:
-              path: /healthz/live
-              port: http-api
-              scheme: HTTP
-            timeoutSeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-          startupProbe:
-            httpGet:
-              path: /healthz/live
-              port: http-api
-              scheme: HTTP
-            timeoutSeconds: 1
-            periodSeconds: 20
-            successThreshold: 1
-            failureThreshold: 30
+##          livenessProbe:
+##            httpGet:
+##              path: /healthz/live
+##              port: http-api
+##              scheme: HTTP
+##            timeoutSeconds: 1
+##            periodSeconds: 5
+##            successThreshold: 1
+##            failureThreshold: 3
+##          startupProbe:
+##            httpGet:
+##              path: /healthz/live
+##              port: http-api
+##              scheme: HTTP
+#            timeoutSeconds: 1
+#            periodSeconds: 20
+#            successThreshold: 1
+#            failureThreshold: 30
