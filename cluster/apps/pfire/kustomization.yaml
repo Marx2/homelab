@@ -19,4 +19,4 @@ resources:
   #  - fission
   - stooq
   - postgrest
-  - captcha
+  - captchasolver

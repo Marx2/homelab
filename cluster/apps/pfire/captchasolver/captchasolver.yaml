@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: captcha
+  name: captchasolver
   namespace: pfire
 spec:
   replicas: 1
@@ -13,18 +13,18 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      component: captcha
+      component: captchasolver
   template:
     metadata:
       labels:
-        component: captcha
-        app: captcha
+        component: captchasolver
+        app: captchasolver
     spec:
       imagePullSecrets:
         - name: regcred
       containers:
         - name: stooq
-          image: ghcr.io/marx2/captchasolver:1.0.0
+          image: ghcr.io/marx2/captchasolversolver:1.0.0
           imagePullPolicy: Always
           resources:
             requests:

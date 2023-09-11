@@ -2,11 +2,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: captcha
+  name: captchasolver
   namespace: pfire
 spec:
   selector:
-    app: captcha
+    app: captchasolver
   ports:
     - protocol: TCP
       port: 8080
@@ -16,7 +16,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: captcha
+  name: captchasolver
   namespace: pfire
   annotations:
     kubernetes.io/ingress.class: "nginx"
@@ -27,16 +27,16 @@ metadata:
     hajimari.io/group: "pfire"
 spec:
   rules:
-    - host: captcha.${SECRET_DOMAIN}
+    - host: captchasolver.${SECRET_DOMAIN}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: captcha
+                name: captchasolver
                 port:
                   number: 8080
   tls:
     - hosts:
-        - captcha.${SECRET_DOMAIN}
+        - captchasolver.${SECRET_DOMAIN}
