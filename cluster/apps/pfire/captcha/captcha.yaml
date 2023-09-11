@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stooq
+  name: captcha
   namespace: pfire
 spec:
   replicas: 1
@@ -13,18 +13,18 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      component: stooq
+      component: captcha
   template:
     metadata:
       labels:
-        component: stooq
-        app: stooq
+        component: captcha
+        app: captcha
     spec:
       imagePullSecrets:
         - name: regcred
       containers:
         - name: stooq
-          image: ghcr.io/marx2/stooq-daily:v.1.0.0
+          image: ghcr.io/marx2/captchasolver:1.0.0
           imagePullPolicy: Always
           resources:
             requests:
@@ -35,19 +35,10 @@ spec:
               cpu: "2000m"
           ports:
             - name: http-api
-              containerPort: 84
+              containerPort: 8000
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
-              port: http-api
-              scheme: HTTP
-            timeoutSeconds: 1
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
+              path: /healthz/live
               port: http-api
               scheme: HTTP
             timeoutSeconds: 1
@@ -56,13 +47,10 @@ spec:
             failureThreshold: 3
           startupProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /healthz/live
               port: http-api
               scheme: HTTP
             timeoutSeconds: 1
             periodSeconds: 20
             successThreshold: 1
             failureThreshold: 30
-          env:
-            - name: TWO_CAPTCHA_API_KEY
-              value: "${TWO_CAPTCHA_API_KEY}"
