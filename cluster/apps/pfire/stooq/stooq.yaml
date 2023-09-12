@@ -24,7 +24,7 @@ spec:
         - name: regcred
       containers:
         - name: stooq
-          image: ghcr.io/marx2/stooq-daily:v.1.0.1
+          image: ghcr.io/marx2/stooq-daily:v.1.0.2
           imagePullPolicy: Always
           resources:
             requests:
