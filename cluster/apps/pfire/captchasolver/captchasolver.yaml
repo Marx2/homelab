@@ -24,7 +24,7 @@ spec:
         - name: regcred
       containers:
         - name: stooq
-          image: ghcr.io/marx2/captchasolver:1.0.3
+          image: ghcr.io/marx2/captchasolver:1.0.4
           imagePullPolicy: Always
           resources:
             requests:
