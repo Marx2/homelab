@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: swagger-ui
+      chart: swaggerui
       version: 0.3.6
       sourceRef:
         kind: HelmRepository
