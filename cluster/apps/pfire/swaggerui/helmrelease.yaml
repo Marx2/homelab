@@ -22,7 +22,12 @@ spec:
 
     swaggerui:
       jsonUrl: "http://postgrest/"
-
+      server:
+        url: "http://postgrest/"
+    deployment:
+      extraEnv:
+        - name: BASE_URL
+          value: http://postgrest/
     service:
       type: ClusterIP
       port: 8080
