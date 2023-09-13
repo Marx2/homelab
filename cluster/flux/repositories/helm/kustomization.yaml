@@ -31,3 +31,4 @@ resources:
   - openfaas-charts.yaml
   - fission-charts.yaml
   - postgrest-charts.yaml
+  - cetic-charts.yaml
