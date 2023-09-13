@@ -44,3 +44,5 @@ spec:
       tls:
         - hosts:
             - "swagger-ui.${SECRET_DOMAIN}"
+    autoscaling:
+      enabled: false
