@@ -5,7 +5,8 @@ metadata:
   namespace: pfire
   name: stooq
 spec:
-  schedule: "0 * * * *"
+  #   The cron expression to run a job twice a day, once at 6 PM and once at 10 PM
+  schedule: "0 18,22 * * *"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
