@@ -9,21 +9,16 @@ spec:
   chart:
     spec:
       chart: postgrest
-      version: 0.2.0
+      version: 0.3.5
       sourceRef:
         kind: HelmRepository
-        name: cloudstark-charts
+        name: postgrest-charts
         namespace: flux-system
   values:
     image:
-      repository: bitnami/postgrest
-      tag: 11.2.0
+      repository: postgrest/postgrest
+      #      tag: 11.2.0
       pullPolicy: IfNotPresent
-
-    service:
-      type: ClusterIP
-      port: 80
-
     ingress:
       enabled: true
       annotations:
@@ -39,22 +34,12 @@ spec:
       tls:
         - hosts:
             - "postgrest.${SECRET_DOMAIN}"
-    # http://postgrest.org/en/v4.3/install.html#configuration
-    postgrest:
-      db_uri: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
-      db_schema: public
-      db_anon_role:
-      db_pool: 100
-      server_host: '*4'
-      server_port: 3000
-      server_proxy_uri:
-      jwt_secret:
-      secret_is_base64: false
-      jwt_aud:
-      max_rows:
-      pre_request:
-      role_claim_key: '.role'
 
-    # PostgreSQL subchart configs
-    postgresql:
-      enabled: false
+    # http://postgrest.org/en/v4.3/install.html#configuration
+    # https://github.com/colearendt/helm/blob/main/charts/postgrest/values.yaml
+    postgrest:
+      # -- The dbUri for connecting to the database. Required
+      dbUri: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq"
+      dbSchema: "public"
+      # -- The JWT Secret used for constructing JWTs. Required
+      jwtSecret: "mrt3g309vhfdsvrebgredfwgwf4gff4t5ytg6h5g"
