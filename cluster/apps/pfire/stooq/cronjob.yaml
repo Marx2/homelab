@@ -1,0 +1,22 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: networking
+  name: stooq
+spec:
+  schedule: "0 * * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: regcred
+          restartPolicy: Never
+          containers:
+            - name: stooq
+              image: ghcr.io/marx2/stooq-daily:v.2.0.0
+              imagePullPolicy: IfNotPresent
