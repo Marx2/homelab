@@ -21,4 +21,4 @@ resources:
   - stooq
   - postgrest
   - captchasolver
-  - swagger-ui
+  - swaggerui

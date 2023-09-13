@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: swagger-ui
+  name: swaggerui
   namespace: pfire
 spec:
   interval: 15m
@@ -37,12 +37,12 @@ spec:
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         kubernetes.io/ingress.class: nginx
       hosts:
-        - host: swagger-ui.${SECRET_DOMAIN}
+        - host: swaggerui.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
-            - "swagger-ui.${SECRET_DOMAIN}"
+            - "swaggerui.${SECRET_DOMAIN}"
     autoscaling:
       enabled: false
