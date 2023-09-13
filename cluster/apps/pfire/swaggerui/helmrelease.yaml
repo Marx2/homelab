@@ -21,14 +21,14 @@ spec:
       pullPolicy: IfNotPresent
 
     swaggerui:
-      jsonUrl: "http://petstore.swagger.io/v2/swagger.json"
+      jsonUrl: "http://postgrest/"
 
     service:
       type: ClusterIP
       port: 8080
 
     ingress:
-      enabled: true
+      enabled: false
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: "weather-sunset"
