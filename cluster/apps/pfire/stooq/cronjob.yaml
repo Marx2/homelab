@@ -19,5 +19,5 @@ spec:
           restartPolicy: Never
           containers:
             - name: stooq
-              image: ghcr.io/marx2/stooq-daily:v.2.0.1
+              image: ghcr.io/marx2/stooq-daily:v.2.0.3
               imagePullPolicy: IfNotPresent
