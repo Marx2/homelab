@@ -6,7 +6,7 @@ metadata:
   name: stooq
 spec:
   #   The cron expression to run a job twice a day, once at 6 PM and once at 10 PM
-  schedule: "0 18,22 * * *"
+  schedule: "0 */2 * * *"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
