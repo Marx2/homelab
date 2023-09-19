@@ -31,7 +31,7 @@ spec:
         # name of the secret that contains the user/password definitions
         nginx.ingress.kubernetes.io/auth-secret: postgrest-basic-auth
         # message to display with an appropriate context why the authentication is required
-        nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - postgrest
+        nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - postgrest'
       hosts:
         - host: postgrest.${SECRET_DOMAIN}
           paths:
