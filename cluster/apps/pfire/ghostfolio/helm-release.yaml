@@ -38,7 +38,14 @@ spec:
               REDIS_PORT: 6379
               ACCESS_TOKEN_SALT: ${GHOSTFOLIO_ACCESS_TOKEN_SALT}
               JWT_SECRET_KEY: ${GHOSTFOLIO_JWT_SECRET_KEY}
-
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                cpu: 2000m
+                memory: 2Gi
+              
     service:
       main:
         ports:
@@ -64,10 +71,3 @@ spec:
         tls:
           - hosts:
               - "ghostfolio.${SECRET_DOMAIN}"
-    resources:
-      requests:
-        cpu: 100m
-        memory: 256Mi
-      limits:
-        cpu: 2000m
-        memory: 2Gi
