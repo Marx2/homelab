@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://hasura-extra.github.io/hasura-extra
       chart: hasura
-      version: 2.11.1
+      version: 3.0.0
       sourceRef:
         kind: HelmRepository
         name: hasura-extra-charts
