@@ -70,6 +70,10 @@ spec:
               value: "https://tooljet.${SECRET_DOMAIN}"
             - name: DEPLOYMENT_PLATFORM
               value: "k8s"
+            - name: GOOGLE_CLIENT_ID
+              value: ${GOOGLE_CLIENT_ID}
+            - name: GOOGLE_CLIENT_SECRET
+              value: ${GOOGLE_CLIENT_SECRET}
             # Set the env values below for Tooljet Database
             # - name: ENABLE_TOOLJET_DB
             #   value: "true"
