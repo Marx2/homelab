@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bytebase
-          image: bytebase/bytebase:2.10.0@sha256:4f6b6aa29af5eb268010a792f5ced74c476d91b165999ce74efed03e2aba7ec1
+          image: bytebase/bytebase:2.10.0@sha256:18082b135b63556503de81511e3431b6b576c934705c4af4c41ba1d6b1ba110a
           imagePullPolicy: Always
           args:
             [
