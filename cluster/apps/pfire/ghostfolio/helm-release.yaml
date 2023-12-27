@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghostfolio/ghostfolio
-              tag: 2.31.0
+              tag: 2.32.0
             env:
               DATABASE_URL: postgresql://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/ghostfolio
               NODE_ENV: production
