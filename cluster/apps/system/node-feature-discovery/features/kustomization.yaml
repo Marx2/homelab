@@ -5,4 +5,4 @@ resources:
   - coral-tpu.yaml
   - dvb.yaml
   - intel-gpu.yaml
-  - zigbee2mqtt.yaml
+  - zigbee.yaml
