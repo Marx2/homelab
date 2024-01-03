@@ -29,53 +29,18 @@ spec:
     keepHistory: false        
   values:
     worker:
-      annotations:
-        configmap.reloader.stakater.com/reload: "nfd-worker-conf"
+      resources:
+        requests:
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 64M
       config:
         core:
-          labelSources:
-          - custom
-          - pci
-          - usb
-        
+          sources: ["custom", "pci", "usb"]
         sources:
           usb:
-            deviceClassWhitelist:
-            - "02"
-            - "03"
-            - "0e"
-            - "ef"
-            - "fe"
-            - "ff"
-            deviceLabelFields:
-            - "class"
-            - "vendor"
-            - "device"
-         
+            deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
+            deviceLabelFields: ["class", "vendor", "device"]
           pci:
-            deviceClassWhitelist:
-            - "0300"
-            - "0400"
-          
-          custom:
-          - name: "intel-gpu"
-            matchOn:
-            - pciId:
-                class: ["0300"]
-                vendor: ["8086"]
-          - name: "coral-tpu"
-            matchOn:
-            - usbId:
-                vendor: ["1a6e", "18d1"]
-          - name: "zigbee"
-            matchOn:
-            - usbId:
-                class: ["02"]
-                vendor: ["1cf1"]
-                device: ["0030"]
-          - name: "dvb"
-            matchOn:
-            - pciId:
-                class: ["0400"]
-                vendor: ["14f1"]
-                device: ["8880"]
+            deviceClassWhitelist: ["0300", "0400"]

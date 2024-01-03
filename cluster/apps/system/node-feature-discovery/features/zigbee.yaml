@@ -1,0 +1,15 @@
+---
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: zigbee
+spec:
+  rules:
+    -
+      name: zigbee
+      labels:
+        conbee.feature.node.kubernetes.io/zigbee: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            vendor: { op: In, value: ["02", "1cf1", "0030"] }
