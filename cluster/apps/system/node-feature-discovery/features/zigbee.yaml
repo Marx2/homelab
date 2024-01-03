@@ -5,8 +5,7 @@ metadata:
   name: zigbee
 spec:
   rules:
-    -
-      name: zigbee
+    - name: zigbee
       labels:
         conbee.feature.node.kubernetes.io/zigbee: "true"
       matchFeatures:

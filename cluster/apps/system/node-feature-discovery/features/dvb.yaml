@@ -5,8 +5,7 @@ metadata:
   name: dvb
 spec:
   rules:
-    -
-      name: intel-gpu
+    - name: dvb
       labels:
         dvb.feature.node.kubernetes.io/dvb: "true"
       matchFeatures:

@@ -5,8 +5,7 @@ metadata:
   name: coral-tpu
 spec:
   rules:
-    -
-      name: coral-tpu
+    - name: coral-tpu
       labels:
         google.feature.node.kubernetes.io/coral: "true"
       matchFeatures:
