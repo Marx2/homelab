@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.2.0
+      version: 2.4.0
       interval: 15m
       sourceRef:
         kind: HelmRepository
@@ -19,9 +19,14 @@ spec:
     controller:
       strategy: RollingUpdate
     image:
-      repository: docker.io/library/redis
-      tag: "7"
-    command: ["redis-server", "--requirepass", "${SECRET_REDIS_PASS}"]
+      repository: public.ecr.aws/docker/library/redis
+      tag: "7.2.4"
+    command:
+      - sh
+    args:
+      - -c
+      - >-
+        redis-server --requirepass $REDIS_PASSWORD
     env:
       REDIS_REPLICATION_MODE: master
       REDIS_PASSWORD: ${SECRET_REDIS_PASS}
