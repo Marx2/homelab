@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -16,30 +17,39 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    controller:
-      strategy: RollingUpdate
-    image:
-      repository: public.ecr.aws/docker/library/redis
-      tag: "7.2.4"
-    command:
-      - sh
-    args:
-      - -c
-      - >-
-        redis-server --requirepass $REDIS_PASSWORD
-    env:
-      REDIS_REPLICATION_MODE: master
-      REDIS_PASSWORD: ${SECRET_REDIS_PASS}
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: ghostfolio
+        containers:
+          main:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.2.4
+            command:
+              - sh
+            args:
+              - -c
+              - >-
+                redis-server --requirepass $REDIS_PASSWORD
+            env:
+              REDIS_REPLICATION_MODE: master
+              REDIS_PASSWORD: ${SECRET_REDIS_PASS}
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32M
+              limits:
+                memory: 32M
     persistence:
       data:
         enabled: true
-        path: /data
         existingClaim: redis-pvc
-        subPath: ghostfolio_redis
+        globalMounts:
+          - path: /data
+            subPath: ghostfolio_redis
     service:
       main:
         ports:
           http:
             port: 6379
-    podAnnotations:
-      secret.reloader.stakater.com/reload: ghostfolio
