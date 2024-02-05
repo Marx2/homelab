@@ -35,17 +35,23 @@ spec:
           containers:
             - name: flyway
               image: flyway/flyway:10-alpine
-              #              command: [ "/bin/sh" ]
-              #              args: [ "-c", "ls -al /tmp/git/clone" ]
               args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
+              env:
+                - name: FLYWAY_PASSWORD
+                  value: "${SECRET_POSTGRESQL_PASS}"
               volumeMounts:
                 - name: git-source
                   mountPath: /tmp/git
                   readOnly: true
+                - name: flyway-config-volume
+                  mountPath: /flyway/conf
           securityContext:
             fsGroup: 65533
           restartPolicy: Never
           volumes:
             - name: git-source
               emptyDir: { }
+            - name: flyway-config-volume
+              configMap:
+                name: flyway-configmap
       backoffLimit: 3
