@@ -30,6 +30,8 @@ spec:
                   value: "1"
                 - name: GITSYNC_LINK
                   value: /tmp/git/pgdb
+                - name: GITSYNC_ROOT
+                  value: /tmp/clone
             #          containers:
             - name: flyway
               image: flyway/flyway:10-alpine
