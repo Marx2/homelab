@@ -33,7 +33,8 @@ spec:
           containers:
             - name: flyway
               image: flyway/flyway:10-alpine
-              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
+              command: [ "/usr/bin/ls" ]
+              #              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
               volumeMounts:
                 - name: git-source
                   mountPath: /tmp/git
