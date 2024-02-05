@@ -43,8 +43,6 @@ spec:
                 - name: git-source
                   mountPath: /tmp/git
                   readOnly: true
-                - name: flyway-config-volume
-                  mountPath: /flyway/conf
           securityContext:
             fsGroup: 65533
           restartPolicy: Never
