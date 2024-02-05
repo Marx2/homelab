@@ -1,0 +1,46 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pgdb
+  namespace: pfire
+spec:
+  #Cron Time is set according to server time, ensure server time zone and set accordingly.
+  schedule: "@yearly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+            - name: git-sync
+              image: gcr.azk8s.cn/google-containers/git-sync:v4.2.0
+              securityContext:
+                runAsUser: 65533
+              volumeMounts:
+                - name: git-source
+                  mountPath: /tmp/git
+              env:
+                - name: GITSYNC_REPO
+                  value: "https://github.com/Marx2/pgdb.git"
+                - name: GITSYNC_ONE_TIME
+                  value: "true"
+                - name: GITSYNC_REF
+                  value: "main"
+                - name: GITSYNC_DEPTH
+                  value: "1"
+          #                - name: GITSYNC_LINK
+          #                  value: conf
+          containers:
+            - name: flyway
+              image: flyway/flyway:10-alpine
+              args: [ "-configFiles=/flyway/conf/conf/dev6.conf","migrate" ]
+          #              volumeMounts:
+          #                - name: git-source
+          #                  mountPath: /flyway/
+          securityContext:
+            fsGroup: 65533
+          restartPolicy: Never
+          volumes:
+            - name: git-source
+              emptyDir: { }
+      backoffLimit: 3
