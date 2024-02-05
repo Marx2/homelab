@@ -29,7 +29,7 @@ spec:
                 - name: GITSYNC_DEPTH
                   value: "1"
                 - name: GITSYNC_EXECHOOK_COMMAND
-                  value: "cp /tmp/git/flyway.toml /flyway/flyway.toml; cp /tmp/git/metrics /flyway/metrics -r"
+                  value: "mkdir /flyway/metrics; cp /tmp/git/flyway.toml /flyway/flyway.toml; cp /tmp/git/metrics /flyway/metrics -r"
           #                - name: GITSYNC_LINK
           #                  value: conf
           containers:
