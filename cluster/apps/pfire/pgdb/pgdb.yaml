@@ -30,7 +30,7 @@ spec:
                   value: "1"
                 - name: GITSYNC_EXECHOOK_COMMAND
                   #                  value: "mkdir /flyway/metrics; cp /tmp/git/flyway.toml /flyway/flyway.toml; cp /tmp/git/metrics /flyway/metrics -r"
-                  value: "ls -al /flyway; ls -al /tmp/git"
+                  value: "ls -al /tmp"
           #                - name: GITSYNC_LINK
           #                  value: conf
           containers:
