@@ -31,8 +31,8 @@ spec:
                 - name: GITSYNC_EXECHOOK_COMMAND
                   #                  value: "mkdir /flyway/metrics; cp /tmp/git/flyway.toml /flyway/flyway.toml; cp /tmp/git/metrics /flyway/metrics -r"
                   value: "/usr/bin/ls"
-          #                - name: GITSYNC_LINK
-          #                  value: conf
+                - name: GITSYNC_LINK
+                  value: conf
             - name: flyway
               image: flyway/flyway:10-alpine
               #              args: [ "-configFiles=/tmp/git/flyway.toml","migrate" ]
