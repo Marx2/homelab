@@ -22,8 +22,8 @@ spec:
               env:
                 - name: GITSYNC_REPO
                   value: "https://github.com/Marx2/pgdb.git"
-                - name: GITSYNC_ONE_TIME
-                  value: "true"
+                #                - name: GITSYNC_ONE_TIME
+                #                  value: "true"
                 - name: GITSYNC_REF
                   value: "main"
                 - name: GITSYNC_DEPTH
@@ -32,10 +32,11 @@ spec:
                   value: /tmp/git/pgdb
             - name: flyway
               image: flyway/flyway:10-alpine
-              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-environment=localhost","migrate" ]
+              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-environment=cluster","migrate" ]
               volumeMounts:
                 - name: git-source
                   mountPath: /tmp/git
+                  readOnly: true
           securityContext:
             fsGroup: 65533
           restartPolicy: Never
