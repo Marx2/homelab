@@ -28,15 +28,17 @@ spec:
                   value: "main"
                 - name: GITSYNC_DEPTH
                   value: "1"
+                - name: GITSYNC_EXECHOOK_COMMAND
+                  value: "cp /tmp/git/flyway.toml /flyway/flyway.toml; cp /tmp/git/metrics /flyway/metrics -r"
           #                - name: GITSYNC_LINK
           #                  value: conf
           containers:
             - name: flyway
               image: flyway/flyway:10-alpine
-              args: [ "-configFiles=/flyway/conf/conf/dev6.conf","migrate" ]
-          #              volumeMounts:
-          #                - name: git-source
-          #                  mountPath: /flyway/
+              #              args: [ "-configFiles=/tmp/git/flyway.toml","migrate" ]
+              volumeMounts:
+                - name: git-source
+                  mountPath: /flyway/
           securityContext:
             fsGroup: 65533
           restartPolicy: Never
