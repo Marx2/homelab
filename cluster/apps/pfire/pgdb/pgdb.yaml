@@ -11,7 +11,7 @@ spec:
     spec:
       template:
         spec:
-          initContainers:
+          containers:
             - name: git-sync
               image: registry.k8s.io/git-sync/git-sync:v4.2.0
               securityContext:
@@ -30,11 +30,11 @@ spec:
                   value: "1"
                 - name: GITSYNC_LINK
                   value: /tmp/git/pgdb
-          containers:
+            #          containers:
             - name: flyway
               image: flyway/flyway:10-alpine
               command: [ "/bin/sh" ]
-              args: [ "-c", "ls -al /tmp/git/pgdb/" ]
+              args: [ "-c", "ls -al /tmp/git/pgdb" ]
               #              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
               volumeMounts:
                 - name: git-source
