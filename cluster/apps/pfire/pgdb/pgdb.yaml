@@ -11,7 +11,7 @@ spec:
     spec:
       template:
         spec:
-          containers:
+          initContainers:
             - name: git-sync
               image: registry.k8s.io/git-sync/git-sync:v4.2.0
               securityContext:
@@ -22,8 +22,8 @@ spec:
               env:
                 - name: GITSYNC_REPO
                   value: "https://github.com/Marx2/pgdb.git"
-                #                - name: GITSYNC_ONE_TIME
-                #                  value: "true"
+                - name: GITSYNC_ONE_TIME
+                  value: "true"
                 - name: GITSYNC_REF
                   value: "main"
                 - name: GITSYNC_DEPTH
@@ -32,7 +32,7 @@ spec:
                   value: /tmp/git/pgdb
                 - name: GITSYNC_ROOT
                   value: /tmp/clone
-            #          containers:
+          containers:
             - name: flyway
               image: flyway/flyway:10-alpine
               command: [ "/bin/sh" ]
