@@ -39,6 +39,8 @@ spec:
               env:
                 - name: FLYWAY_PASSWORD
                   value: "${SECRET_POSTGRESQL_PASS}"
+                - name: FLYWAY_LOCATIONS
+                  value: "filesystem:/tmp/git/pgdb/metrics"
               volumeMounts:
                 - name: git-source
                   mountPath: /tmp/git
