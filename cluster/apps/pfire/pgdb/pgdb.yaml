@@ -22,8 +22,8 @@ spec:
               env:
                 - name: GITSYNC_REPO
                   value: "https://github.com/Marx2/pgdb.git"
-                - name: GITSYNC_ONE_TIME
-                  value: "false"
+                #                - name: GITSYNC_ONE_TIME
+                #                  value: "true"
                 - name: GITSYNC_REF
                   value: "main"
                 - name: GITSYNC_DEPTH
