@@ -31,12 +31,12 @@ spec:
                 - name: GITSYNC_LINK
                   value: /tmp/git/pgdb
                 - name: GITSYNC_ROOT
-                  value: /tmp/clone
+                  value: /tmp/git/clone
           containers:
             - name: flyway
               image: flyway/flyway:10-alpine
               command: [ "/bin/sh" ]
-              args: [ "-c", "ls -al /tmp/clone" ]
+              args: [ "-c", "ls -al /tmp/git/clone" ]
               #              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
               volumeMounts:
                 - name: git-source
