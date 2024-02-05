@@ -36,7 +36,7 @@ spec:
             - name: flyway
               image: flyway/flyway:10-alpine
               command: [ "/bin/sh" ]
-              args: [ "-c", "ls -al /tmp/git/pgdb" ]
+              args: [ "-c", "ls -al /tmp/clone" ]
               #              args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
               volumeMounts:
                 - name: git-source
