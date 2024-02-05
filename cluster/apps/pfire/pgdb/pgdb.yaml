@@ -51,7 +51,4 @@ spec:
           volumes:
             - name: git-source
               emptyDir: { }
-            - name: flyway-config-volume
-              configMap:
-                name: flyway-configmap
       backoffLimit: 3
