@@ -19,5 +19,5 @@ spec:
           restartPolicy: Never
           containers:
             - name: cafe
-              image: ghcr.io/marx2/cafe:1.0.3
+              image: ghcr.io/marx2/cafe:1.0.4
               imagePullPolicy: IfNotPresent
