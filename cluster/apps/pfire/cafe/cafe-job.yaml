@@ -26,3 +26,5 @@ spec:
                   value: "${SCRAB_LOGIN_NAME}"
                 - name: SCRAB_PASSWORD
                   value: "${SCRAB_PASSWORD}"
+                - name: SCRAB_LOGIN_PAGE_URL
+                  value: "https://app.scrab.com/login/"
