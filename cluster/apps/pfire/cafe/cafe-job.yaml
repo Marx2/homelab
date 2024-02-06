@@ -21,6 +21,9 @@ spec:
             - name: cafe
               image: ghcr.io/marx2/cafe:1.0.7
               imagePullPolicy: IfNotPresent
+              envFrom:
+                - configMapRef:
+                    name: cafe-tickers
               env:
                 - name: SCRAB_LOGIN_NAME
                   value: "${SCRAB_LOGIN_NAME}"
