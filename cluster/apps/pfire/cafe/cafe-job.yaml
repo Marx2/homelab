@@ -19,7 +19,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cafe
-              image: ghcr.io/marx2/cafe:1.0.6
+              image: ghcr.io/marx2/cafe:1.0.7
               imagePullPolicy: IfNotPresent
               env:
                 - name: SCRAB_LOGIN_NAME
@@ -30,3 +30,5 @@ spec:
                   value: "https://app.scrab.com/login/"
                 - name: LOG_LEVEL
                   value: "debug"
+                - name: MESH_URL
+                  value: "http://graphql-mesh:80/graphql"
