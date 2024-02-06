@@ -21,3 +21,8 @@ spec:
             - name: cafe
               image: ghcr.io/marx2/cafe:1.0.4
               imagePullPolicy: IfNotPresent
+              env:
+                - name: SCRAB_LOGIN_NAME
+                  value: "${SCRAB_LOGIN_NAME}"
+                - name: SCRAB_PASSWORD
+                  value: "${SCRAB_PASSWORD}"
