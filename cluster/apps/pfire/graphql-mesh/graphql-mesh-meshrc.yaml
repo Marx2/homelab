@@ -16,6 +16,20 @@ data:
               value: stooq_
               includeRootOperations: true
               includeTypes: false
+      - name: postgres-attributes
+        handler:
+          postgraphile:
+            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/attributes
+            appendPlugins:
+              - '@graphile-contrib/pg-many-to-many'
+        transforms:
+          - prefix:
+              mode: wrap
+              value: attr_
+              includeRootOperations: true
+              includeTypes: false
+
+
     additionalTypeDefs: |
       extend type Query {
         nodeId: ID! # It might be String
