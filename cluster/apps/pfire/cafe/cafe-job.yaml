@@ -1,0 +1,23 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cafe
+  namespace: pfire
+spec:
+  #   The cron expression to run a job twice a day, once at 6 PM and once at 10 PM
+  schedule: "0 */2 * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: regcred
+          restartPolicy: Never
+          containers:
+            - name: cafe
+              image: ghcr.io/marx2/cafe:1.0.3
+              imagePullPolicy: IfNotPresent
