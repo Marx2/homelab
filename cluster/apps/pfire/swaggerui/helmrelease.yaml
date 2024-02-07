@@ -24,12 +24,12 @@ spec:
       jsonUrl: "http://postgrest/"
       server:
         url: "http://postgrest/"
-        deployment:
-          extraEnv:
-            - name: API_URL
-              value: http://postgrest/
-            - name: BASE_URL
-              value: https://postgrest.k.marx.katowice.pl/
+    deployment:
+      extraEnv:
+        - name: API_URL
+          value: http://postgrest/
+        - name: BASE_URL
+          value: https://postgrest.k.marx.katowice.pl/
     service:
       type: ClusterIP
       port: 8080
