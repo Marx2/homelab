@@ -21,15 +21,16 @@ spec:
       pullPolicy: IfNotPresent
 
     swaggerui:
-      jsonUrl: "http://postgrest/"
+      #      jsonUrl: "http://postgrest/"
+      jsonUrl: "https://postgrest-attr.k.marx.katowice.pl/"
       server:
         url: "http://postgrest/"
     deployment:
       extraEnv:
         #        - name: API_URL
         #          value: http://postgrest/
-        - name: BASE_URL
-          value: http://postgrest/
+    #        - name: BASE_URL
+    #          value: http://postgrest/
     service:
       type: ClusterIP
       port: 8080
