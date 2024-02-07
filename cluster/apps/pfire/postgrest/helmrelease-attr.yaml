@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: postgrest
+  name: postgrest-attr
   namespace: pfire
 spec:
   interval: 15m
@@ -33,19 +33,19 @@ spec:
         # message to display with an appropriate context why the authentication is required
         nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - postgrest'
       hosts:
-        - host: postgrest.${SECRET_DOMAIN}
+        - host: postgrest-attr.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
-            - "postgrest.${SECRET_DOMAIN}"
+            - "postgrest-attr.${SECRET_DOMAIN}"
 
     # http://postgrest.org/en/v4.3/install.html#configuration
     # https://github.com/colearendt/helm/blob/main/charts/postgrest/values.yaml
     postgrest:
       # -- The dbUri for connecting to the database. Required
-      dbUri: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq"
+      dbUri: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/attributes"
       dbSchema: "public"
       dbAnonRole: "web_anon"
       # -- The JWT Secret used for constructing JWTs. Required
