@@ -28,6 +28,8 @@ spec:
           extraEnv:
             - name: API_URL
               value: http://postgrest-attr/
+            - name: BASE_URL
+              value: https://postgrest-attr.k.marx.katowice.pl/
     service:
       type: ClusterIP
       port: 8080
