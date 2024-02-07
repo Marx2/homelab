@@ -26,8 +26,8 @@ spec:
         url: "http://postgrest/"
     deployment:
       extraEnv:
-        - name: API_URL
-          value: http://postgrest/
+        #        - name: API_URL
+        #          value: http://postgrest/
         - name: BASE_URL
           value: https://postgrest.k.marx.katowice.pl/
     service:
