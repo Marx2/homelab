@@ -11,6 +11,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: "harddisk"
     hajimari.io/group: "pfire"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   rules:
     - host: swaggerui.${SECRET_DOMAIN}
