@@ -16,14 +16,17 @@ spec:
     - host: swaggerui.${SECRET_DOMAIN}
       http:
         paths:
-          - path: /stooq
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: swaggerui
                 port:
                   number: 8080
-          - path: /attributes
+    - host: swaggerui-attr.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -33,3 +36,4 @@ spec:
   tls:
     - hosts:
         - swaggerui.${SECRET_DOMAIN}
+        - swaggerui-attr.${SECRET_DOMAIN}
