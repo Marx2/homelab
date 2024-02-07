@@ -23,11 +23,11 @@ spec:
     swaggerui:
       jsonUrl: "http://postgrest-attr/"
       server:
-        url: "http://postgrest-attr/"
+        url: "https://postgrest-attr.k.marx.katowice.pl/"
     deployment:
       extraEnv:
-        - name: API_URL
-          value: https://postgrest-attr.k.marx.katowice.pl/
+    #        - name: API_URL
+    #          value: https://postgrest-attr.k.marx.katowice.pl/
     #        - name: BASE_URL
     #          value: https://postgrest-attr.k.marx.katowice.pl/
     service:
