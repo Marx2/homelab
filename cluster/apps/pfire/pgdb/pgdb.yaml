@@ -13,7 +13,7 @@ spec:
         spec:
           initContainers:
             - name: git-sync
-              image: registry.k8s.io/git-sync/git-sync:v4.2.0
+              image: registry.k8s.io/git-sync/git-sync:v4.2.1
               securityContext:
                 runAsUser: 65533
               volumeMounts:
