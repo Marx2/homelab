@@ -29,7 +29,7 @@ spec:
         #        - name: API_URL
         #          value: http://postgrest/
         - name: BASE_URL
-          value: https://postgrest.k.marx.katowice.pl/
+          value: http://postgrest/
     service:
       type: ClusterIP
       port: 8080
