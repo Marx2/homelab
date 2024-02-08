@@ -30,22 +30,21 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        thanos:
-          enabled: true
-          # ObjectStorageConfig configures object storage in Thanos.
-          objectStorageConfig:
-            secret:
-              type: S3
-              config:
-                bucket: "thanos"
-                endpoint: "192.168.1.49:9001"
-                region: ""
-                access_key: "${MINIO_S3_ACCESS_KEY}"
-                secret_key: "${MINIO_S3_SECRET_KEY}"
+    #        thanos:
+    #          # ObjectStorageConfig configures object storage in Thanos.
+    #          objectStorageConfig:
+    #            secret:
+    #              type: S3
+    #              config:
+    #                bucket: "thanos"
+    #                endpoint: "192.168.1.49:9001"
+    #                region: ""
+    #                access_key: "${MINIO_S3_ACCESS_KEY}"
+    #                secret_key: "${MINIO_S3_SECRET_KEY}"
     thanosService:
-      enabled: true
+      enabled: false
     thanosServiceMonitor:
-      enabled: true
+      enabled: false
     alertmanager:
       config:
         global:
@@ -81,12 +80,11 @@ spec:
         tls:
           - hosts:
             - "grafana.${SECRET_DOMAIN}"
-      dataSources:
+      additionalDataSources:
         - name: Loki
           access: proxy
           basicAuth: false
-          editable: true
-          isDefault: false
+          editable: false
           type: loki
           url: http://loki:3100
     serviceMonitor:
