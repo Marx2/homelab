@@ -80,6 +80,14 @@ spec:
         tls:
           - hosts:
             - "grafana.${SECRET_DOMAIN}"
+      additionalDataSources:
+        - name: Loki
+          access: proxy
+          basicAuth: false
+          editable: true
+          isDefault: false
+          type: loki
+          url: http://loki:3100
     serviceMonitor:
       scrapeTimeout: 60s
     kubeControllerManager:
