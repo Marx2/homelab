@@ -31,6 +31,7 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         thanos:
+          enabled: true
           # ObjectStorageConfig configures object storage in Thanos.
           objectStorageConfig:
             secret:
@@ -80,7 +81,7 @@ spec:
         tls:
           - hosts:
             - "grafana.${SECRET_DOMAIN}"
-      additionalDataSources:
+      dataSources:
         - name: Loki
           access: proxy
           basicAuth: false
