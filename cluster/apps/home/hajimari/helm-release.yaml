@@ -35,6 +35,7 @@ spec:
       showAppInfo: true
       showGlobalBookmarks: false
       name: "Marx"
+      # icons https://pictogrammers.com/library/mdi/
       customApps:
         - group: tools
           apps:
@@ -56,6 +57,9 @@ spec:
           - name: Nas
             url: "https://192.168.1.49:5001/"
             icon: "nas"
+          - name: MinIO
+            url: "http://192.168.1.49:9001/"
+            icon: "database"
 
     ingress:
       main:
