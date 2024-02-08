@@ -40,7 +40,7 @@ spec:
       enabled: false
     query:
       enabled: true
-      replicaCount: 3
+      replicaCount: 1
       podAntiAffinityPreset: hard
       replicaLabels:
         - replica
@@ -60,7 +60,7 @@ spec:
         tls: true
     bucketweb:
       enabled: true
-      replicaCount: 3
+      replicaCount: 1
       podAntiAffinityPreset: hard
     compactor:
       enabled: true
@@ -85,7 +85,7 @@ spec:
         tls: true
     storegateway:
       enabled: true
-      replicaCount: 3
+      replicaCount: 1
       podAntiAffinityPreset: hard
       persistence:
         enabled: true
