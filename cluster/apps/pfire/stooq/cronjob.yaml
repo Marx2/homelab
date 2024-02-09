@@ -11,6 +11,9 @@ spec:
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
   jobTemplate:
+    metadata:
+      labels:
+        created-by: stooq
     spec:
       template:
         spec:

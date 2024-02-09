@@ -10,6 +10,9 @@ spec:
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
   jobTemplate:
+    metadata:
+      labels:
+        created-by: dyndns-updater
     spec:
       template:
         spec:

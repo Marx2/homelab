@@ -9,6 +9,9 @@ spec:
   schedule: "0 */12 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
+    metadata:
+      labels:
+        created-by: cloud-backup
     spec:
       template:
         spec:
