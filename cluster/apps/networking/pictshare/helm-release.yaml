@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: pictshare
+  namespace: networking
+spec:
+  chart:
+    spec:
+      chart: pictshare
+      version: 0.6.3
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        namespace: flux-system
+        name: gabe565
+  interval: 1h
+  driftDetection:
+    mode: enabled
+  values:
+    controller:
+      strategy: Recreate
+
+    env:
+      TZ: ${TIMEZONE}
+      MAX_RESIZED_IMAGES: "2"
+      UPLOAD_FORM_LOCATION: /
+      LOG_UPLOADER: "true"
+
+    podLabels:
+      policy.gabe565.com/ingress-ingress: "true"
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cloud-sync-outline"
+          hajimari.io/group: "networking"
+          # nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+        hosts:
+          - host: pictshare.${SECRET_DOMAIN}
+            paths:
+              - path: "/"
+                service:
+                  port: 80
+        tls:
+          - hosts:
+              - "pictshare.${SECRET_DOMAIN}"
+    persistence:
+      data:
+        enabled: false
+        # storageClass: longhorn-ssd
+        # size: 2Gi
+        # accessMode: ReadWriteOnce

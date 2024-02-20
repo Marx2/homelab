@@ -13,3 +13,4 @@ resources:
   #- authentik
   - mail
   - privatebin
+  - pictshare
