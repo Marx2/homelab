@@ -12,3 +12,4 @@ resources:
   #- authelia
   #- authentik
   - mail
+  - privatebin
