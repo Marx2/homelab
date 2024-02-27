@@ -25,29 +25,8 @@ stringData:
     #]
 
     [feeds]
-      [feeds.BBF1]
-      url = "https://www.youtube.com/channel/UCYpD4da-ipib5LDzxw4r26w" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      # custom.cover_art_quality use "high" or "low" to special cover image quality from channel cover default is equal with "quality" and disable when custom.cover_art was set.
-      # custom = { title = "Level1News", description = "News sections of Level1Techs, in a podcast feed!", author = "Level1Tech", cover_art = "{IMAGE_URL}", cover_art_quality = "high", category = "TV", subcategories = ["Documentary", "Tech News"], explicit = true, lang = "en" } # Optional feed customizations
-      # max_height = 720 # Optional maximal height of video, example: 720, 1080, 1440, 2160, ...
-      # cron_schedule = "@every 12h" # Optional cron expression format. If set then overwrite 'update_period'. See details below
-      # filters = { title = "regex for title here", not_title = "regex for negative title match", description = "...", not_description = "..." } # Optional Golang regexp format. If set, then only download matching episodes.
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      # clean = { keep_last = 10 } # Keep last 10 episodes (order desc by PubDate)
-      # youtube_dl_args = [ "--write-sub", "--embed-subs", "--sub-lang", "en,en-US,en-GB" ] # Optional extra arguments passed to youtube-dl when downloading videos from this feed. This example would embed available English closed captions in the videos. Note that setting '--audio-format' for audio format feeds, or '--format' or '--output' for any format may cause unexpected behaviour. You should only use this if you know what you are doing, and have read up on youtube-dl's options!
       [feeds.CG]
       url = "https://www.youtube.com/channel/UCFNv1Kwrbo31D-fM-IIYcbw"
-      page_size = 10
-      update_period = "2h"
-      quality = "low"
-      format = "audio"
-      opml = true
-      [feeds.PR]
-      url = "https://www.youtube.com/user/donmateo21"
       page_size = 10
       update_period = "2h"
       quality = "low"
@@ -172,13 +151,6 @@ stringData:
       quality = "low"
       format = "audio"
       opml = true
-      [feeds.USSPLAY]
-      url = "https://www.youtube.com/playlist?list=PLmjbxQ3gprnan48PTteCpkdV7kQq7apxI"
-      page_size = 50
-      update_period = "2h"
-      quality = "low"
-      format = "audio"
-      opml = true
       [feeds.EUROPEAN_DGI]
       url = "https://www.youtube.com/channel/UCfkUVLWyjGsHC4UqTRwWa8w"
       page_size = 50
@@ -207,29 +179,8 @@ stringData:
       quality = "low" # "high" or "low"
       format = "audio" # "video" or "audio"
       opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.LUPTON]
-      url = "https://www.youtube.com/channel/UCnNV58dwf5X7dkrvCE18Djw" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.DIVIDEND_EXPERIMENT]
-      url = "https://www.youtube.com/channel/UCOU3Ex1nCLe7u-wtgO0A5Pg" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)      
       [feeds.DIVIDENDOLOGY]
       url = "https://www.youtube.com/channel/UCgCh-2AfEBtWrNBC2OoNQYg" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)      
-      [feeds.LT_INVESTOR]
-      url = "https://www.youtube.com/channel/UCvcWg3xll41Pri7iBf9gh5w" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
       quality = "low" # "high" or "low"
@@ -242,22 +193,8 @@ stringData:
       quality = "low" # "high" or "low"
       format = "audio" # "video" or "audio"
       opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.DIVIN]
-      url = "https://www.youtube.com/channel/UCoWRO4JrsbE-jTz3F1oqWgw" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
       [feeds.DIVGRI]
       url = "https://www.youtube.com/channel/UCL2uoFD7Gv2nflxgCYkcHRw" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.DIVOBSESSION]
-      url = "https://www.youtube.com/channel/UCJisVIpq0N77CibZkZFOT3g" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
       quality = "low" # "high" or "low"
@@ -279,13 +216,6 @@ stringData:
       opml = true # Optional inclusion of the feed in the OPML file (default value: false)
       [feeds.MATTDERON]
       url = "https://www.youtube.com/channel/UClhTn4j-dsQ_-XIVg1usYqw" # URL address of a channel, group, user, or playlist. 
-      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
-      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
-      quality = "low" # "high" or "low"
-      format = "audio" # "video" or "audio"
-      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
-      [feeds.JOHN_MONEY]
-      url = "https://www.youtube.com/channel/UCutyWKycadno0ffWyF3dZew" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
       quality = "low" # "high" or "low"
@@ -313,7 +243,28 @@ stringData:
       format = "audio" # "video" or "audio"
       opml = true # Optional inclusion of the feed in the OPML file (default value: false)
       [feeds.SKRAWKI]
-      url = "https://www.youtube.com/@arturj.1649" # URL address of a channel, group, user, or playlist. 
+      url = "https://m.youtube.com/channel/UC5_xbhivGZyu7US62jglJog" # URL address of a channel, group, user, or playlist. 
+      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
+      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
+      quality = "low" # "high" or "low"
+      format = "audio" # "video" or "audio"
+      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
+      [feeds.STOCKBROKER]
+      url = "https://www.youtube.com/channel/UCYjxwFqTUwO5cja6xi5mvUg" # URL address of a channel, group, user, or playlist. 
+      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
+      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
+      quality = "low" # "high" or "low"
+      format = "audio" # "video" or "audio"
+      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
+      [feeds.ATLASETF]
+      url = "https://www.youtube.com/@atlasETF" # URL address of a channel, group, user, or playlist. 
+      page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
+      update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
+      quality = "low" # "high" or "low"
+      format = "audio" # "video" or "audio"
+      opml = true # Optional inclusion of the feed in the OPML file (default value: false)
+      [feeds.SII]
+      url = "https://www.youtube.com/@inwestorzy" # URL address of a channel, group, user, or playlist. 
       page_size = 50 # The number of episodes to query each update (keep in mind, that this might drain API token)
       update_period = "2h" # How often query for updates, examples: "60m", "4h", "2h45m"
       quality = "low" # "high" or "low"
