@@ -22,7 +22,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cafe
-              image: ghcr.io/marx2/cafe:1.0.25
+              image: ghcr.io/marx2/cafe:1.0.26
               imagePullPolicy: IfNotPresent
               envFrom:
                 - configMapRef:
@@ -40,3 +40,7 @@ spec:
                   value: "debug"
                 - name: MESH_URL
                   value: "http://graphql-mesh:80/graphql"
+                - name: GOOGLE_SERVICE_ACCOUNT_EMAIL
+                  value: "${GOOGLE_SERVICE_ACCOUNT_EMAIL}"
+                - name: GOOGLE_PRIVATE_KEY
+                  value: "${GOOGLE_PRIVATE_KEY}"
