@@ -4,8 +4,8 @@ kind: Plan
 metadata:
   name: controllers
 spec:
-  #version: 1.26.14
-  channel: https://update.k3s.io/v1-release/channels/v1.26
+  version: "${KUBE_VERSION}"
+  #channel: https://update.k3s.io/v1-release/channels/v1.27
   upgrade:
     image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade
@@ -37,8 +37,8 @@ kind: Plan
 metadata:
   name: workers
 spec:
-  #version: 1.26.14
-  channel: https://update.k3s.io/v1-release/channels/v1.26
+  version: "${KUBE_VERSION}"
+  #channel: https://update.k3s.io/v1-release/channels/v1.27
   serviceAccountName: system-upgrade
   concurrency: 1
   nodeSelector:
