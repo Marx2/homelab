@@ -91,7 +91,7 @@ spec:
       media:
         existingClaim: nfs-media-ebook-pvc
         globalMounts:
-          - path: /data/nas-media
+          - path: /data
       cache:
         type: emptyDir
         globalMounts:
