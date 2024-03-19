@@ -24,12 +24,10 @@ spec:
 
         pod:
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
+            runAsUser: 127
+            runAsGroup: 100
+            fsGroup: 100
             fsGroupChangePolicy: "OnRootMismatch"
-        #            supplementalGroups:
-        #              - 65542 # gladius:external-services
 
         containers:
           app:
