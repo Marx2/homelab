@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -7,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.2.0
+      version: 3.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -16,37 +18,36 @@ spec:
   interval: 30m
   values:
     controllers:
-      main:
-        type: statefulset
+      calibre-web:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 200M
-              storageClass: longhorn
-              globalMounts:
-                - path: /config
-
         pod:
-          enableServiceLinks: false
           securityContext:
             runAsUser: 568
             runAsGroup: 568
             fsGroup: 568
             fsGroupChangePolicy: "OnRootMismatch"
-            supplementalGroups:
-              - 65539
+        #            supplementalGroups:
+        #              - 65542 # gladius:external-services
 
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/bjw-s/calibre-web
               tag: 0.6.21@sha256:9aef000820ef1b25705f7c573e285f03b79a50777d95f90748029ceb853f7cf0
             env:
               CACHE_DIR: /cache
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
             resources:
               requests:
                 cpu: 5m
@@ -55,14 +56,14 @@ spec:
                 memory: 470M
 
     service:
-      main:
+      app:
+        controller: calibre-web
         ports:
           http:
             port: 8083
 
     ingress:
-      main:
-        enabled: true
+      app:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
@@ -75,16 +76,22 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
               - calibre-web.${SECRET_DOMAIN}
 
     persistence:
+      config:
+        existingClaim: config
+        globalMounts:
+          - path: /config
+
       media:
-        enabled: true
         existingClaim: nfs-media-ebook-pvc
+        globalMounts:
+          - path: /data/nas-media
       cache:
         type: emptyDir
         globalMounts:
