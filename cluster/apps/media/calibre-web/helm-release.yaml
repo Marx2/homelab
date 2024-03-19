@@ -84,7 +84,9 @@ spec:
 
     persistence:
       config:
-        existingClaim: config
+        accessMode: ReadWriteOnce
+        size: 200M
+        storageClass: longhorn
         globalMounts:
           - path: /config
 
