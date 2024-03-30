@@ -11,6 +11,8 @@ resources:
   - nfs-recordings-omv-pvc.yaml
   - nfs-media-ebook-pv.yaml
   - nfs-media-ebook-pvc.yaml
+  - nfs-media-text-pv.yaml
+  - nfs-media-text-pvc.yaml
   - podsync
   - jellyfin
   #- jackett
@@ -20,3 +22,4 @@ resources:
   - tvheadend
   - calibre
   - calibre-web
+  - silverbullet
