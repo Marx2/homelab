@@ -59,7 +59,7 @@ spec:
           hajimari.io/icon: "disc-player"
           hajimari.io/group: "media"
         hosts:
-          - host: *app .${SECRET_DOMAIN}
+          - host: &host "silverbullet.${SECRET_DOMAIN}"
             paths:
               - path: "/"
                 service:
@@ -67,7 +67,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *app ".${SECRET_DOMAIN}"
+              - *host
 
     persistence:
       data:
