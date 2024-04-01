@@ -22,11 +22,14 @@ spec:
           app.kubernetes.io/name: crunchy-postgres
       replicas: &replica 2
       dataVolumeClaimSpec:
-        dataSource:
+        dataSourceRef:
           name: pfire-pvc
           kind: PersistentVolumeClaim
         accessModes:
           - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: "kubernetes.io/hostname"
