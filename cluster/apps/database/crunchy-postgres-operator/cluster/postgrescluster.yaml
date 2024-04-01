@@ -25,6 +25,8 @@ spec:
         dataSource:
           name: pfire-pvc
           kind: PersistentVolumeClaim
+        accessModes:
+          - ReadWriteOnce
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: "kubernetes.io/hostname"
