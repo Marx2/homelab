@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-configmap
+data:
+  TZ: ${TIMEZONE}
+  DB_DATABASE_NAME: immich
+  DB_HOSTNAME: postgresql.pfire.svc.cluster.local
+  DB_PORT: "5432"
+  DISABLE_REVERSE_GEOCODING: "false"
+  ENABLE_MAPBOX: "false"
+  LOG_LEVEL: log
+  NODE_ENV: production
+  REDIS_HOSTNAME: immich-redis.media.svc.cluster.local
+  REDIS_PORT: "6379"
+  REDIS_DBINDEX: "0"
+  IMMICH_WEB_URL: http://immich-web.media.svc.cluster.local:3000
+  IMMICH_SERVER_URL: http://immich.media.svc.cluster.local:3001
+  IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.media.svc.cluster.local:3003
+  UPLOAD_LOCATION: /usr/src/app/upload

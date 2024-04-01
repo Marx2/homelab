@@ -1,0 +1,168 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+
+    controllers:
+      immich:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: "16.2"
+            envFrom:
+              - secretRef:
+                  name: immich-dbinit-secret
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: &tag v1.100.0
+            command: /bin/sh
+            args:
+              - ./start-server.sh
+            envFrom: &envFrom
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+            resources: &resources
+              requests: &requests
+                cpu: 100m
+                memory: 250Mi
+              limits:
+                memory: 1Gi
+            securityContext: &securityContext
+              fsGroup: 65539
+              fsGroupChangePolicy: OnRootMismatch
+              allowPrivilegeEscalation: false
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                drop:
+                  - ALL
+
+      microservice:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.100.0
+            command: /bin/sh
+            args:
+              - ./start-microservices.sh
+            envFrom: *envFrom
+            resources: *resources
+            securityContext: *securityContext
+
+      machine-learning:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v1.100.0
+            envFrom: *envFrom
+            resources:
+              requests: *requests
+              limits:
+                memory: 2Gi
+            securityContext: *securityContext
+
+      redis:
+        containers:
+          app:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.2.4@sha256:3134997edb04277814aa51a4175a588d45eb4299272f8eff2307bbf8b39e4d43
+
+    service:
+      immich:
+        controller: immich
+        ports:
+          http:
+            port: 3001
+      microservice:
+        controller: microservice
+        ports:
+          http:
+            port: 3002
+      machine-learning:
+        controller: machine-learning
+        ports:
+          http:
+            port: 3003
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          #          external-dns.alpha.kubernetes.io/target: external.chestr.dev
+          #          gethomepage.dev/enabled: "true"
+          #          gethomepage.dev/icon: immich.png
+          #          gethomepage.dev/name: Photos
+          #          gethomepage.dev/group: Home
+          #          gethomepage.dev/widget.type: immich
+          #          gethomepage.dev/widget.fields: '["photos", "videos", "storage"]'
+          #          gethomepage.dev/widget.url: https://photos.chestr.dev
+          #          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "disc-player"
+          hajimari.io/group: "media"
+        hosts:
+          - host: &host "photos.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: immich
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      data:
+        existingClaim: nfs-backup-ro-pvc
+        globalMounts:
+          - path: /usr/src/app/upload

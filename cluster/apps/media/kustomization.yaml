@@ -23,3 +23,5 @@ resources:
   - calibre
   - calibre-web
   - silverbullet
+  - nfs-backup-ro-pvc.yaml
+  - immich
