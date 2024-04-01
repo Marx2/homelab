@@ -33,3 +33,4 @@ resources:
   - postgrest-charts.yaml
   - cetic-charts.yaml
   - gabe565.yaml
+  - crunchydata.yaml

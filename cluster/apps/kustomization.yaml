@@ -14,3 +14,4 @@ resources:
   - default
   - pfire
   - monitoring
+  - database
