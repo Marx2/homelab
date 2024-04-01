@@ -163,6 +163,6 @@ spec:
 
     persistence:
       data:
-        existingClaim: nfs-backup-ro-pvc
+        existingClaim: nfs-media-images-pvc
         globalMounts:
           - path: /usr/src/app/upload
