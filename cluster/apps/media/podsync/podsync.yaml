@@ -80,7 +80,7 @@ spec:
       containers:
       - name: podsync
         # image: ghcr.io/mxpv/podsync:v2.6.1
-        image: tdeutsch/podsync:v2.6.1
+        image: tdeutsch/podsync:v2.7.0
         args: ["/app/podsync", "--config", "/config/config.toml", "--debug"]
         ports:
         - containerPort: 8080
