@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-backup-ro-obrazki-pv
+spec:
+  storageClassName: backup-ro-obrazki
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.49
+    path: /volume1/backup/obrazki
+  mountOptions:
+    # - nfsvers=3
+    - nfsvers=4.1
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime

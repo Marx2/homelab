@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-backup-ro-omv-pvc
+  name: nfs-backup-ro-obrazki-pvc
   namespace: media
 spec:
   accessModes:
     - ReadOnlyMany
-  storageClassName: backup-ro-omv
+  storageClassName: backup-ro-obrazki
   resources:
     requests:
       storage: 1Mi
