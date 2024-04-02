@@ -81,6 +81,8 @@ spec:
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
+              - secretRef:
+                  name: postgres-media-pguser-immich
               - configMapRef:
                   name: immich-configmap
             resources: &resources
