@@ -5,7 +5,7 @@ metadata:
   name: tooljet
   namespace: pfire
 spec:
-  replicas: 1
+  replicas: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
