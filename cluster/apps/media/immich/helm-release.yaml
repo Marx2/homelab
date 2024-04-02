@@ -190,3 +190,7 @@ spec:
         existingClaim: nfs-media-images-pvc
         globalMounts:
           - path: /usr/src/app/upload
+      obrazki:
+        existingClaim: nfs-backup-ro-obrazki-pvc
+        globalMounts:
+          - path: /usr/src/app/obrazki
