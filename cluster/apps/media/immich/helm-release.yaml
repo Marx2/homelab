@@ -192,5 +192,6 @@ spec:
           - path: /usr/src/app/upload
       obrazki:
         existingClaim: nfs-backup-ro-obrazki-pvc
+        mode: ReadOnlyMany
         globalMounts:
           - path: /usr/src/app/obrazki
