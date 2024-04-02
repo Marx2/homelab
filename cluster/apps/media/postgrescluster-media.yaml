@@ -2,7 +2,8 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: &name postgres
+  name: &name postgres-media
+  namespace: media
 spec:
   postgresVersion: 16
 
@@ -16,15 +17,14 @@ spec:
         synchronous_commit: "on"
 
   instances:
-    - name: postgres
+    - name: postgres-media
+      namespace: media
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres
       replicas: &replica 2
       dataVolumeClaimSpec:
-        dataSourceRef:
-          name: pfire-pvc
-          kind: PersistentVolumeClaim
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
