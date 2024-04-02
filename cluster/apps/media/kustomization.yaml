@@ -26,5 +26,5 @@ resources:
   - nfs-media-images-pv.yaml
   - nfs-media-images-pvc.yaml
   - crunchy-postgres-secret.yaml
-#  - postgrescluster-media.yaml
+  - postgrescluster-media.yaml
 #  - immich
