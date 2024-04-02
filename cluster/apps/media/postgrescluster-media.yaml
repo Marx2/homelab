@@ -6,7 +6,7 @@ metadata:
   namespace: media
 spec:
   postgresVersion: 16
-
+  image: ghcr.io/chkpwd/cdpgvecto.rs:ubi8-16.2-0-v0.2.0
   #  service:
   #    type: LoadBalancer
 
