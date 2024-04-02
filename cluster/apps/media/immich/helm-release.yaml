@@ -77,12 +77,13 @@ spec:
               - ./start-server.sh
             env: &env
               - name: DB_URL
-                value: postgresql://$(user):$(password)@$(host):$(port)/$(dbname)?sslmode=require&sslmode=no-verify
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-postgres
+                    key: uri
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
-              - secretRef:
-                  name: postgres-media-pguser-immich
               - configMapRef:
                   name: immich-configmap
             resources: &resources
