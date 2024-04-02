@@ -82,7 +82,7 @@ spec:
                     name: postgres-media-pguser-postgres
                     key: uri
               - name: DB_URL
-                value: $(DB_URL_INCOMPLETE)?sslmode=require&sslmode=no-verify
+                value: $$(DB_URL_INCOMPLETE)?sslmode=require&sslmode=no-verify
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
