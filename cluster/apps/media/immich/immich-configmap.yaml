@@ -7,7 +7,7 @@ metadata:
 data:
   TZ: ${TIMEZONE}
   DB_DATABASE_NAME: immich
-  DB_HOSTNAME: postgresql.pfire.svc.cluster.local
+  DB_HOSTNAME: postgres-media-primary.media.svc
   DB_PORT: "5432"
   DISABLE_REVERSE_GEOCODING: "false"
   ENABLE_MAPBOX: "false"

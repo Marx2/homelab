@@ -40,9 +40,32 @@ spec:
             image:
               repository: ghcr.io/onedr0p/postgres-init
               tag: "16.2"
-            envFrom:
-              - secretRef:
-                  name: immich-dbinit-secret
+            env:
+              - name: INIT_POSTGRES_DBNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: dbname
+              - name: INIT_POSTGRES_HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: host
+              - name: INIT_POSTGRES_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: user
+              - name: INIT_POSTGRES_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: password
+              - name: INIT_POSTGRES_SUPER_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-postgres
+                    key: password
 
         containers:
           app:
@@ -52,6 +75,17 @@ spec:
             command: /bin/sh
             args:
               - ./start-server.sh
+            env:
+              - name: DB_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: user
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-media-pguser-immich
+                    key: password
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret
