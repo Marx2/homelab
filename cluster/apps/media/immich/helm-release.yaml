@@ -79,7 +79,7 @@ spec:
               - name: DB_URL_INCOMPLETE
                 valueFrom:
                   secretKeyRef:
-                    name: postgres-media-pguser-postgres
+                    name: postgres-media-pguser-immich
                     key: uri
               - name: DB_URL
                 value: $$(DB_URL_INCOMPLETE)?sslmode=require&sslmode=no-verify
