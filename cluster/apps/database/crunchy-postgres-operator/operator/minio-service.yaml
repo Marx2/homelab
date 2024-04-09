@@ -10,16 +10,12 @@ spec:
       protocol: TCP
       port: 9000
       targetPort: 9000
-  selector:
-    app: minio
 ---
 kind: Endpoints
 apiVersion: v1
 metadata:
   name: minio
   namespace: database
-  labels:
-    app: minio
 subsets:
   - addresses:
       - ip: 192.168.1.49
