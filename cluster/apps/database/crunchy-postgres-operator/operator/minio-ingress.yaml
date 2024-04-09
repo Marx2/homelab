@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio
+  namespace: media
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "podcast"
+    hajimari.io/group: "media"
+spec:
+  rules:
+    - host: minio.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+  tls:
+    - hosts:
+        - minio.${SECRET_DOMAIN}
