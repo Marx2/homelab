@@ -11,5 +11,13 @@ spec:
       targetPort: 9000
   selector:
     app: minio
-  externalIPs:
-    - 192.168.1.49
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: minio
+subsets:
+  - addresses:
+      - ip: 192.168.1.49
+    ports:
+      - port: 9000
