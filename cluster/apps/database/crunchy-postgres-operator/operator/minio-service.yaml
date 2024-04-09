@@ -5,6 +5,7 @@ metadata:
   name: minio
   namespace: database
 spec:
+  clusterIP: None
   ports:
     - name: http
       protocol: TCP
@@ -20,6 +21,4 @@ subsets:
   - addresses:
       - ip: 192.168.1.49
     ports:
-      - name: http
-        port: 9000
-        protocol: TCP
+      - port: 9000
