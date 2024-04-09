@@ -3,7 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: minio
-  namespace: media
+  namespace: database
 spec:
   ports:
     - protocol: TCP
