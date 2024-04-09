@@ -6,7 +6,8 @@ metadata:
   namespace: database
 spec:
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 9000
       targetPort: 9000
   selector:
@@ -16,8 +17,13 @@ kind: Endpoints
 apiVersion: v1
 metadata:
   name: minio
+  namespace: database
+  labels:
+    app: minio
 subsets:
   - addresses:
       - ip: 192.168.1.49
     ports:
-      - port: 9000
+      - name: http
+        port: 9000
+        protocol: TCP
