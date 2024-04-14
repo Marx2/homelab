@@ -14,6 +14,7 @@ metadata:
       proxy_set_header proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header proxy_set_header X-Forwarded-Proto $scheme;
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - host: minio.${SECRET_DOMAIN}
@@ -26,7 +27,7 @@ spec:
                 name: minio
                 port:
                   number: 9000
-          - path: /ui
+          - path: /ui/.*
             pathType: Prefix
             backend:
               service:
