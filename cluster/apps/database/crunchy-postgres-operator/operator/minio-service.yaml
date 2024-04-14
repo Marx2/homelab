@@ -26,6 +26,13 @@ spec:
                 name: minio
                 port:
                   number: 9000
+          - path: /ui
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9001
   tls:
     - hosts:
         - minio.${SECRET_DOMAIN}
@@ -42,6 +49,10 @@ spec:
       protocol: TCP
       port: 9000
       targetPort: 9000
+    - name: ui
+      protocol: TCP
+      port: 9001
+      targetPort: 9001
 ---
 kind: Endpoints
 apiVersion: v1
@@ -53,3 +64,4 @@ subsets:
       - ip: 192.168.1.49
     ports:
       - port: 9000
+      - port: 9001
