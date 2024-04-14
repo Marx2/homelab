@@ -44,6 +44,7 @@ spec:
         # proxy-real-ip-cidr: 192.168.1.210
         # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
         # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
+        allowSnippetAnnotations: true
       metrics:
         enabled: true
         serviceMonitor:
