@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/bjw-s/calibre-web
-              tag: 0.6.21@sha256:426ddd5dbe51193712b257318eba0d9a9f20cd4af001a7bba54eadb8e5ef2e49
+              tag: 0.6.21@sha256:cdb160c344defdf7df0dc6de6c13cbfe350fa305201455629e4fc3fae3d7a885
             env:
               CACHE_DIR: /cache
               PUID: 1027
