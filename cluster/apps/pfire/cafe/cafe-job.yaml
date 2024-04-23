@@ -28,6 +28,8 @@ spec:
                 - configMapRef:
                     name: cafe-tickers
               env:
+                - name: TZ
+                  value: "${TZ}"
                 - name: SCRAB_LOGIN_NAME
                   value: "${SCRAB_LOGIN_NAME}"
                 - name: SCRAB_PASSWORD
