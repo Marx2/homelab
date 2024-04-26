@@ -10,13 +10,13 @@ resources:
   #  - grafana
   - tooljet
   #  - appwrite
-  - bytebase
+  #  - bytebase
   - pgadmin
   - graphql-mesh
   - stooq-importer
   - redis
   - ghostfolio
-  - openfaas
+  #  - openfaas
   #  - fission
   - stooq
   - postgrest
