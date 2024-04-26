@@ -14,7 +14,7 @@ resources:
   - nfs-media-text-pv.yaml
   - nfs-media-text-pvc.yaml
   - podsync
-  - jellyfin
+  #  - jellyfin
   #- jackett
   #- sonarr
   #- radarr
