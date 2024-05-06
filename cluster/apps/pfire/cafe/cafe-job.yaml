@@ -22,7 +22,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cafe
-              image: ghcr.io/marx2/cafe:1.0.42
+              image: ghcr.io/marx2/cafe:1.0.43
               imagePullPolicy: IfNotPresent
               envFrom:
                 - configMapRef:
