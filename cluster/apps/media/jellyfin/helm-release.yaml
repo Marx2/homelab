@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: jellyfin/jellyfin
-      tag: 10.8.13
+      tag: 10.9.1
     env:
       TZ: ${TZ}
       JELLYFIN_CACHE_DIR: "/config/cache"
