@@ -24,13 +24,13 @@ spec:
       tag: 1.27.7
     env:
       TZ: ${TZ}
-      PUID: "1000"
-      PGID: "1000"
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
+      PUID: "1027"
+      PGID: "100"
+    #    podSecurityContext:
+    #      runAsUser: 1027
+    #      runAsGroup: 100
+    #      fsGroup: 1000
+    #      fsGroupChangePolicy: OnRootMismatch
     strategy:
       type: Recreate
     replicas: 1
