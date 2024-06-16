@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: vernemq/vernemq
-      tag: 2.0.0-alpine
+      tag: 2.0.1-alpine
     replicaCount: 1
     serviceMonitor:
       create: true
