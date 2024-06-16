@@ -90,7 +90,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 50m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
         hosts:
-          - host: jellyfin.${SECRET_DOMAIN}
+          - host: stirling-pdf.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
