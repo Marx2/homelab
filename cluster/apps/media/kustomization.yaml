@@ -28,3 +28,4 @@ resources:
   - crunchy-postgres-secret.yaml
   - postgrescluster-media.yaml
   - immich
+  - stirling-pdf
