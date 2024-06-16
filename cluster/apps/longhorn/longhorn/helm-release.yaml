@@ -63,23 +63,3 @@ spec:
       limits:
         cpu: "2500m"
         memory: "512Mi"
-  # workaround for a bug: https://github.com/longhorn/charts/pull/49
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              version: v1
-              kind: Service
-              name: longhorn-engine-manager
-            patch:
-              - op: replace
-                path: /metadata/namespace
-                value: longhorn
-          - target:
-              version: v1
-              kind: Service
-              name: longhorn-replica-manager
-            patch:
-              - op: replace
-                path: /metadata/namespace
-                value: longhorn
