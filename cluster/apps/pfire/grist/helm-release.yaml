@@ -60,7 +60,7 @@ spec:
     ingress:
       app:
         enabled: true
-        className: internal
+        className: nginx
         hosts:
           - host: &host "grist.${SECRET_DOMAIN}"
             paths:
