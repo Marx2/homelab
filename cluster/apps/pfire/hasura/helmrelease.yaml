@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: hasura/graphql-engine
-      tag: v2.40.2-ce
+      tag: v2.41.0-ce
     ingress:
       enabled: true
       className: nginx
