@@ -70,7 +70,7 @@ spec:
         repo1-retention-full-type: "time"
         repo1-retention-full: "14"
         repo1-retention-diff: "30"
-        repo1-path: "/crunchy-pgo"
+        repo1-path: "/crunchy-woo"
         repo1-s3-uri-style: path
         repo1-storage-verify-tls: "n"
         # repo2-bundle: "y"
