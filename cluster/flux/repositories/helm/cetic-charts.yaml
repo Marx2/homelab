@@ -5,6 +5,6 @@ metadata:
   name: cetic-charts
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   url: https://cetic.github.io/helm-charts
   timeout: 2m

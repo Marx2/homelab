@@ -5,6 +5,6 @@ metadata:
   name: bytebase-charts
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   url: https://bytebase.github.io/bytebase
   timeout: 3m

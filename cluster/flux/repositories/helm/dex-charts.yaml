@@ -5,6 +5,6 @@ metadata:
   name: dex-charts
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   url: https://charts.dexidp.io
   timeout: 3m

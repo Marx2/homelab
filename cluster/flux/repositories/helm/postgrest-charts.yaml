@@ -5,6 +5,6 @@ metadata:
   name: postgrest-charts
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   url: https://colearendt.github.io/helm
   timeout: 2m

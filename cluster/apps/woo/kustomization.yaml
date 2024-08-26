@@ -5,4 +5,4 @@ resources:
   - namespace.yaml
   - crunchy-postgres-secret.yaml
   - postgrescluster-woo.yaml
-#  - wordpress.yaml
+  - wordpress.yaml

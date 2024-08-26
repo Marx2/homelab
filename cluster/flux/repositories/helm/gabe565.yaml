@@ -4,6 +4,6 @@ metadata:
   name: gabe565
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   type: oci
   url: oci://ghcr.io/gabe565/charts

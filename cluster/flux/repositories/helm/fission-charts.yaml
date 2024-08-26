@@ -5,6 +5,6 @@ metadata:
   name: fission-charts
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 4h
   url: https://fission.github.io/fission-charts/
   timeout: 3m
