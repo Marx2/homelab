@@ -94,7 +94,7 @@ spec:
       repos:
         - name: repo1 # Minio
           s3: &minio
-            bucket: "crunchy-postgres"
+            bucket: "crunchy-postgres-media"
             endpoint: "minio.k.marx.katowice.pl"
             region: "us-east-1"
           schedules:
