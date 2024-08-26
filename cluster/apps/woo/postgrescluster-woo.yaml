@@ -70,7 +70,7 @@ spec:
         repo1-retention-full-type: "time"
         repo1-retention-full: "14"
         repo1-retention-diff: "30"
-        repo1-path: "/crunchy-woo"
+        repo1-path: "/crunchy-pgo"
         repo1-s3-uri-style: path
         repo1-storage-verify-tls: "n"
         # repo2-bundle: "y"
@@ -92,7 +92,7 @@ spec:
       repos:
         - name: repo1 # Minio
           s3: &minio
-            bucket: "crunchy-postgres"
+            bucket: "crunchy-postgres-woo"
             endpoint: "minio.k.marx.katowice.pl"
             region: "us-east-1"
           schedules:
