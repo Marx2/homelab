@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: mariadb-operator
+  namespace: flux-charts
+spec:
+  interval: 4h
+  url: https://mariadb-operator.github.io/mariadb-operator
+  timeout: 3m
