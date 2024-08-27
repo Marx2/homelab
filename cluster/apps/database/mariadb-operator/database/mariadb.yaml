@@ -3,9 +3,8 @@ kind: MariaDB
 metadata:
   name: mariadb-galera
 spec:
-  maxScaleRef:
-    name: maxscale-galera
-    namespace: maxscale
+  maxScale:
+    enabled: false
 
   rootPasswordSecretKeyRef:
     name: mariadb-secret
