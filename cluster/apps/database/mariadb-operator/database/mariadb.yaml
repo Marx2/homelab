@@ -19,7 +19,7 @@ spec:
   imagePullPolicy: IfNotPresent
 
   galera:
-    enabled: true
+    enabled: false
 
   myCnf: |
     [mariadb]
