@@ -2,11 +2,10 @@ apiVersion: k8s.mariadb.com/v1alpha1
 kind: User
 metadata:
   name: woo
-  namespace: woo
+  namespace: database
 spec:
   mariaDbRef:
     name: mariadb-galera
-    namespace: database
   passwordSecretKeyRef:
     name: woo-secret
     key: password
