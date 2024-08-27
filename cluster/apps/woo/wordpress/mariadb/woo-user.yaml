@@ -6,6 +6,7 @@ metadata:
 spec:
   mariaDbRef:
     name: mariadb-galera
+    namespace: database
   passwordSecretKeyRef:
     name: woo-secret
     key: password
