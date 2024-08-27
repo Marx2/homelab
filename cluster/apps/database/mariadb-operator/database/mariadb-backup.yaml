@@ -1,0 +1,28 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Backup
+metadata:
+  name: backup
+spec:
+  mariaDbRef:
+    name: mariadb-galera
+  schedule:
+    cron: "*/1 * * * *"
+    suspend: false
+  maxRetention: 720h # 30 days
+  storage:
+    s3:
+      bucket: backups-mariadb
+      prefix: mariadb
+      endpoint: minio.k.marx.katowice.pl:9000
+      region: us-east-1
+      accessKeyIdSecretKeyRef:
+        name: minio-secret
+        key: access-key-id
+      secretAccessKeySecretKeyRef:
+        name: minio-secret
+        key: secret-access-key
+      tls:
+        enabled: true
+        caSecretKeyRef:
+          name: k-marx.katowice.pl-tls
+          key: tls.crt
