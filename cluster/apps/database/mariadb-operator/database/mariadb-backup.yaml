@@ -22,8 +22,7 @@ spec:
         name: minio-secret
         key: secret-access-key
       tls:
-        enabled: true
-        caSecretKeyRef:
-          name: k-marx.katowice.pl-tls
-          key: tls.crt
-          namespace: networking
+        enabled: false
+#        caSecretKeyRef:
+#          name: k-marx.katowice.pl-tls
+#          key: tls.crt
