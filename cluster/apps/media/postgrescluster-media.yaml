@@ -60,6 +60,7 @@ spec:
         type: AlphaNumeric
       options: "SUPERUSER"
   backups:
+    enable: false
     pgbackrest:
       configuration: &backupConfig
         - secret:
