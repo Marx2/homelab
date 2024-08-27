@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./crunchy-postgres-operator/ks.yaml
+  - ./mariadb-operator/ks.yaml

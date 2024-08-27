@@ -1,0 +1,45 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mariadb-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: mariadb-operator
+      version: 0.29.0
+      sourceRef:
+        kind: HelmRepository
+        name: mariadb-operator
+        namespace: flux-system
+      interval: 15m
+  driftDetection:
+    mode: enabled
+  maxHistory: 3
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+
+  values:
+    image:
+      repository: ghcr.io/mariadb-operator/mariadb-operator
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+    webhook:
+      certificate:
+        certManager: true
+
+      serviceMonitor:
+        enabled: true
