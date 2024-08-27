@@ -13,7 +13,7 @@ spec:
     s3:
       bucket: backups-mariadb
       prefix: mariadb
-      endpoint: minio.k.marx.katowice.pl:9000
+      endpoint: minio.database:9000
       region: us-east-1
       accessKeyIdSecretKeyRef:
         name: minio-secret
