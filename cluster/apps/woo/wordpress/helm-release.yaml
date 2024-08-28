@@ -28,33 +28,39 @@ spec:
     image:
       repository: wordpress
       tag: 6.1.1-php7.4-apache@sha256:7e46cf3373751b6d62b7a0fc3a7d6686f641a34a2a0eb18947da5375c55fd009
+    env:
+      TZ: ${TZ}
     externalDatabase:
-      host: ${SECRET_MARIADB_SERVER}
-      name: ${SECRET_WP_0_MARIADB_DB}
-      user: ${SECRET_WP_0_MARIADB_USER}
-      password: ${SECRET_WP_0_MARIADB_PASS}
+      host: mariadb-galera.database
+      name: woo
+      user: woo
+      password: ${WOO_DB_PASSWORD}
     ingress:
       enabled: true
       className: external
       annotations:
+        kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/enable: "true"
+        hajimari.io/appName: "Ola Store"
+        hajimari.io/icon: mdi:database
+        hajimari.io/group: Ola
       hosts:
-        - host: "${SECRET_WP_0_DOMAIN}"
+        - host: woo.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
-        - host: "www.${SECRET_WP_0_DOMAIN}"
+        - host: "www.woo.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
-            - "${SECRET_WP_0_DOMAIN}"
-            - "www.${SECRET_WP_0_DOMAIN}"
-          secretName: "wordpress-0-tls"
+            - "woo.${SECRET_DOMAIN}"
+            - "www.woo.${SECRET_DOMAIN}"
+    #          secretName: "wordpress-0-tls"
     storage:
-      persistentVolumeClaimName: wordpress-0-nfs
+      persistentVolumeClaimName: config-woo-pvc
     mariadb:
       enabled: false
     dnsConfig:
