@@ -59,7 +59,7 @@ spec:
         - hosts:
             - "woo.${SECRET_DOMAIN}"
             - "www.woo.${SECRET_DOMAIN}"
-    #          secretName: "wordpress-0-tls"
+          secretName: "wordpress-0-tls"
     storage:
       persistentVolumeClaimName: config-woo-pvc
     mariadb:
