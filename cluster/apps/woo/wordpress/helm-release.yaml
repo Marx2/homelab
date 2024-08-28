@@ -29,8 +29,8 @@ spec:
     image:
       repository: wordpress
       tag: 6.1.1-php7.4-apache@sha256:7e46cf3373751b6d62b7a0fc3a7d6686f641a34a2a0eb18947da5375c55fd009
-    env:
-      TZ: ${TZ}
+    #    env:
+    #      TZ: ${TZ}
     externalDatabase:
       host: mariadb-galera.database
       name: woo
