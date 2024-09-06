@@ -73,13 +73,13 @@ spec:
     ingress:
       app:
         enabled: true
+        className: nginx
         annotations:
-          #          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          #          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "disc-player"
+          hajimari.io/group: "media"
           #          nginx.ingress.kubernetes.io/proxy-body-size: 50m
           #          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "home-lightning-bolt-outline"
         hosts:
           - host: &host "tube.${SECRET_DOMAIN}"
             paths:
