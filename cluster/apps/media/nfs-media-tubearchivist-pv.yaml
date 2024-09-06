@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: nfs-media-tubearchivist-pv
 spec:
-  storageClassName: tubearchivist-text
+  storageClassName: media-tubearchivist
   capacity:
     storage: 1Mi
   accessModes:
