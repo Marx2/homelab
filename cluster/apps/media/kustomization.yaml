@@ -13,6 +13,8 @@ resources:
   - nfs-media-ebook-pvc.yaml
   - nfs-media-text-pv.yaml
   - nfs-media-text-pvc.yaml
+  - nfs-media-tubearchivist-pv.yaml
+  - nfs-media-tubearchivist-pvc.yaml
   - podsync
   #  - jellyfin
   #- jackett
@@ -29,3 +31,4 @@ resources:
   - postgrescluster-media.yaml
   - immich
   - stirling-pdf
+  - tubearchivist
