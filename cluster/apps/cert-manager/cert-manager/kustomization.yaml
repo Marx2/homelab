@@ -6,4 +6,4 @@ resources:
   - letsencrypt-production.yaml
   - letsencrypt-staging.yaml
   - secret.enc.yaml
-  - letsencrypt-production-oaw.yaml
+  - letsencrypt-oaw.yaml
