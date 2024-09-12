@@ -53,7 +53,7 @@ spec:
 
           #Authentik
           # nginx.ingress.kubernetes.io/auth-url: https://jellyfin.${SECRET_DOMAIN}/akprox/auth?nginx
-          # nginx.ingress.kubernetes.io/auth-signin: https://jellyfin.k.marx.katowice.pl/akprox/start?rd=$escaped_request_uri
+          # nginx.ingress.kubernetes.io/auth-signin: https://jellyfin.${SECRET_DOMAIN}/akprox/start?rd=$escaped_request_uri
           # nginx.ingress.kubernetes.io/auth-snippet: |
           #   proxy_set_header X-Forwarded-Host $http_host;
           # # see: https://dealancer.medium.com/troubleshooting-kubernetes-ingress-controller-943cb9ff8bf5

@@ -26,7 +26,7 @@ spec:
       VAR_BLOCKY_URL: "http://blocky.kube-system.svc.cluster.local:4000"
     grafana.ini:
       server:
-        root_url: "https://grafana.k.marx.katowice.pl"
+        root_url: "https://grafana.${SECRET_DOMAIN}"
       paths:
         data: /var/lib/grafana/data
         logs: /var/log/grafana
@@ -54,9 +54,9 @@ spec:
         client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
         client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
         scopes: openid profile email groups
-        auth_url: https://dex.k.marx.katowice.pl/auth
-        token_url: https://dex.k.marx.katowice.pl/token
-        api_url: https://dex.k.marx.katowice.pl/userinfo
+        auth_url: https://dex.${SECRET_DOMAIN}/auth
+        token_url: https://dex.${SECRET_DOMAIN}/token
+        api_url: https://dex.${SECRET_DOMAIN}/userinfo
       auth.generic_oauth.group_mapping:
         role_attribute_path: "contains(groups[*], 'marx-org:admin') && 'Admin' || 'Viewer'"
         org_id: 1
@@ -159,16 +159,16 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: "external"
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         forecastle.stakater.com/expose: "true"
         forecastle.stakater.com/icon: "https://raw.githubusercontent.com/stakater/ForecastleIcons/master/grafana.png"
         forecastle.stakater.com/network-restricted: "true"
       hosts:
-      - "grafana.k.marx.katowice.pl"
+        - "grafana.${SECRET_DOMAIN}"
       tls:
       - hosts:
-        - "grafana.k.marx.katowice.pl"
+          - "grafana.${SECRET_DOMAIN}"
     persistence:
       enabled: true
       storageClassName: "nfs-client-omv"

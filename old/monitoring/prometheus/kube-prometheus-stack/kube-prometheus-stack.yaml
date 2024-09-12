@@ -58,16 +58,16 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "external"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.k.marx.katowice.pl/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.k.marx.katowice.pl/oauth2/start
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://raw.githubusercontent.com/stakater/ForecastleIcons/master/prometheus.png"
           forecastle.stakater.com/network-restricted: "true"
         hosts:
-        - "prometheus.k.marx.katowice.pl"
+          - "prometheus.${SECRET_DOMAIN}"
         tls:
         - hosts:
-          - "prometheus.k.marx.katowice.pl"
+            - "prometheus.${SECRET_DOMAIN}"
       prometheusSpec:
         # replicas: 2
         # replicaExternalLabelName: "replica"

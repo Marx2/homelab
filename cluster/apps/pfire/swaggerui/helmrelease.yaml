@@ -23,7 +23,7 @@ spec:
     swaggerui:
       jsonUrl: "http://postgrest/"
       server:
-        url: "https://postgrest.k.marx.katowice.pl/"
+        url: "https://postgrest.${SECRET_DOMAIN}/"
     deployment:
       extraEnv:
         #        - name: API_URL

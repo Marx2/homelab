@@ -23,13 +23,13 @@ spec:
     swaggerui:
       jsonUrl: "http://postgrest-attr/"
       server:
-        url: "https://postgrest-attr.k.marx.katowice.pl/"
+        url: "https://postgrest-attr.${SECRET_DOMAIN}"
     deployment:
       extraEnv:
     #        - name: API_URL
-    #          value: https://postgrest-attr.k.marx.katowice.pl/
+    #          value: https://postgrest-attr.${SECRET_DOMAIN}/
     #        - name: BASE_URL
-    #          value: https://postgrest-attr.k.marx.katowice.pl/
+    #          value: https://postgrest-attr.${SECRET_DOMAIN}/
     service:
       type: ClusterIP
       port: 8080

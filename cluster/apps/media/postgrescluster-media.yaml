@@ -95,7 +95,7 @@ spec:
         - name: repo1 # Minio
           s3: &minio
             bucket: "crunchy-postgres-media"
-            endpoint: "minio.k.marx.katowice.pl"
+            endpoint: "minio.${SECRET_DOMAIN}"
             region: "us-east-1"
           schedules:
             full: "0 1 * * 0" # Sunday at 01:00
