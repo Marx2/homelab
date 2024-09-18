@@ -24,7 +24,7 @@ spec:
 #        - name: docker-secret
       containers:
         - name: appwrite
-          image: appwrite/appwrite:1.5.10
+          image: appwrite/appwrite:1.6.0
           imagePullPolicy: Always
 #          args: ["npm", "run", "start:prod"]
 #          resources:
