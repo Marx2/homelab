@@ -93,7 +93,7 @@ spec:
     persistence:
       cache:
         enabled: true
-        existingClaim: ta-cache
+        existingClaim: nfs-media-tubearchivist-pvc-cache
       youtube:
         enabled: true
         existingClaim: nfs-media-tubearchivist-pvc

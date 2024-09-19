@@ -11,3 +11,16 @@ spec:
   resources:
     requests:
       storage: 1Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-media-tubearchivist-pvc-cache
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: media-tubearchivist-cache
+  resources:
+    requests:
+      storage: 1Mi

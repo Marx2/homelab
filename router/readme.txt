@@ -3,6 +3,8 @@ forward DNS queries for subdomain to other DNS server
 add via ssh in router: /jffs/configs/dnsmasq.conf.add
 server=/k.marx.katowice.pl/192.168.1.214
 
+Current solution: PiHole
+/etc/dnsmasq.d/k.marx.conf
 
 
 https://unfinishedbitness.info/2015/05/26/asuswrt-finalized-setup/

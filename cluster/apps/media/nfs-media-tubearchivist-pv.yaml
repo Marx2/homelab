@@ -21,3 +21,26 @@ spec:
     - hard
     - noatime
     - nodiratime
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-media-tubearchivist-cache-pv
+spec:
+  storageClassName: media-tubearchivist-cache
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.49
+    path: "/volume1/media/tubearchivist/cache"
+  mountOptions:
+    #  - nfsvers=3
+    - nfsvers=4.1
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
