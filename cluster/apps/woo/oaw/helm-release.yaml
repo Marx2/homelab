@@ -64,3 +64,7 @@ spec:
           value: "1"
     startupProbe:
       enabled: false
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
