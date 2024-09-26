@@ -62,3 +62,5 @@ spec:
       options:
         - name: ndots
           value: "1"
+    startupProbe:
+      enabled: false
