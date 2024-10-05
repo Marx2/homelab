@@ -2,5 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - https://github.com/fission/fission/crds/v1?ref=v1.20.4
+  - https://github.com/fission/fission/crds/v1?ref=v1.20.5
   - helmrelease.yaml
