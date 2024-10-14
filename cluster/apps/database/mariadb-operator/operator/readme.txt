@@ -1,5 +1,8 @@
 when operator fails with: MARIADB_AUTO_UPGRADE
-do edit deployment and add to env:
+do
+- scale deployment to 0
+- edit deployment and add env with AUtO_UPGRADE
+- scale deployment to 1
 
   env:
   - name: MARIADB_AUTO_UPGRADE
