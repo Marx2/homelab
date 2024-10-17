@@ -15,17 +15,18 @@ spec:
         kind: HelmRepository
         name: longhorn-charts
         namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     namespaceOverride: "longhorn"
     persistence:
-      # workaround for https://github.com/longhorn/longhorn/issues/2964
       defaultFsType: ext4
       defaultClassReplicaCount: 2
       reclaimPolicy: Retain
-      recurringJobs:
-        enable: true
-        jobList: '[{"name":"daily", "task":"backup", "cron":"0 6 * * ?", "retain":2,"labels": {"interval":"daily"}}]'
-
+      recurringJobSelector:
+        enable: false
     csi:
       attacherReplicaCount: 2
       provisionerReplicaCount: 2
@@ -37,6 +38,20 @@ spec:
       createDefaultDiskLabeledNodes: true
       defaultDataLocality: best-effort
       defaultReplicaCount: 2
+      autoCleanupSystemGeneratedSnapshot: true
+      autoCleanupRecurringJobBackupSnapshot: true
+      orphanAutoDeletion: true
+      snapshotDataIntegrity: enable
+      snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false
+      snapshotDataIntegrityCronjob: "0 4 * * *"
+      fastReplicaRebuildEnabled: true
+      removeSnapshotsDuringFilesystemTrim: true
+      v1DataEngine: true
+      v2DataEngine: false
+      allowCollectingLonghornUsageMetrics: false
+      freezeFilesystemForSnapshot: enabled
+      autoCleanupSnapshotWhenDeleteBackup: true
+      rwxVolumeFastFailover: true
     ingress:
       enabled: true
       host: longhorn.${SECRET_DOMAIN}
@@ -61,5 +76,5 @@ spec:
         cpu: "50m"
         memory: "50Mi"
       limits:
-        cpu: "2500m"
-        memory: "512Mi"
+        cpu: "3000m"
+        memory: "1024Mi"
