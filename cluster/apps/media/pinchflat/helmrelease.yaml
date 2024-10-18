@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pinchflat
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      pinchflat:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/kieraneglin/pinchflat
+              tag: v2024.10.2@sha256:78cdb8887b5a52026b8cab150b65577fc97c4c41d8da340f2e4e70ed79bd15f8
+            env:
+              TZ: ${TZ}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: [ "ALL" ] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 2Gi
+              limits:
+                memory: 4Gi
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups: [ 10000 ]
+    service:
+      app:
+        controller: pinchflat
+        ports:
+          http:
+            port: 8945
+    ingress:
+      app:
+        className: nginx
+        hosts:
+          - host: &host "pinchflat.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [ *host ]
+    persistence:
+      config:
+        accessMode: ReadWriteOnce
+        size: 200M
+        storageClass: longhorn
+      tmp:
+        type: emptyDir
+      media:
+        existingClaim: nfs-media-pinchflat-pvc
+        globalMounts:
+          - path: /downloads
+            subPath: youtube
