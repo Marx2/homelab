@@ -1,35 +1,43 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ghostfolio
+  name: &app ghostfolio
   namespace: pfire
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
-      interval: 30m
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    defaultPodOptions:
-      securityContext:
-        fsGroup: 1001
-
     controllers:
-      main:
+      ghostfolio:
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
-              repository: ghostfolio/ghostfolio
-              tag: 2.119.0
+              repository: docker.io/ghostfolio/ghostfolio
+              tag: 2.119.0@sha256:97c45749c6826e68667b74487577b57ae04af0a516288718808fe4159f8dc608
             env:
               DATABASE_URL: postgresql://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/ghostfolio
               NODE_ENV: production
@@ -38,22 +46,33 @@ spec:
               REDIS_PORT: 6379
               ACCESS_TOKEN_SALT: ${GHOSTFOLIO_ACCESS_TOKEN_SALT}
               JWT_SECRET_KEY: ${GHOSTFOLIO_JWT_SECRET_KEY}
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/health
+                    port: &port 3333
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
             resources:
               requests:
                 cpu: 100m
-                memory: 512Mi
-              limits:
-                cpu: 2000m
-                memory: 2Gi
-              
+                memory: 256Mi
     service:
-      main:
+      app:
+        controller: *app
         ports:
           http:
-            port: 3333
-
+            port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: nginx
         annotations:
@@ -61,13 +80,12 @@ spec:
           hajimari.io/icon: cash-multiple
           hajimari.io/group: "pfire"
         hosts:
-          - host: "ghostfolio.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
-                pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
-              - "ghostfolio.${SECRET_DOMAIN}"
+              - *host
