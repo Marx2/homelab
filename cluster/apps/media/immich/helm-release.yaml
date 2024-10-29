@@ -143,12 +143,7 @@ spec:
         controller: immich
         ports:
           http:
-            port: 2283
-      #      microservice:
-      #        controller: microservice
-      #        ports:
-      #          http:
-      #            port: 3002
+            port: 3001
       machine-learning:
         controller: machine-learning
         ports:
