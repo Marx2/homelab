@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: linuxserver/tvheadend
-      tag: release-4.2
+      tag: version-26ec161f
     env:
       TZ: ${TZ}
       PUID: 1000
