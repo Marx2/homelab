@@ -14,6 +14,63 @@
 ---
 -->
 
+## 2023-05-17, v3.4.1
+
+### Notable changes
+
+  - fix: resolve ansible lint warnings and fix molecule tests in github actions
+
+### Contributors
+
+- [dbrennand](https://github.com/dbrennand)
+
+---
+
+## 2023-03-11, v3.4.0
+
+### Notable changes
+
+  - refactor: add `until: 1.23.15` to `secrets-encryption` from `k3s_experimental_config` as it is no longer experimental. Fixes #200.
+  - docs(fix): typo in `CONTRIBUTING.md`
+
+### Contributors
+
+- [dbrennand](https://github.com/dbrennand)
+
+---
+
+## 2022-11-15, v3.3.1
+
+### Notable changes
+
+  - fix: length indentation in registry.yaml
+
+---
+
+## 2022-09-11, v3.3.0
+
+### Notable changes
+
+  - fix: `no_log` removed from `ansible.builtin.uri` tasks
+  - feat: `k3s_skip_post_checks` option added
+
+---
+
+## 2022-06-17, v3.2.0
+
+### Notable changes
+
+  - feature: added support for alpine #182
+  - fix: `k3s_control_token` not working #187
+
+## 2022-05-02, v3.1.2
+
+### Notable changes
+
+  - fix: molecule tests
+
+---
+
 ## 2022-02-18, v3.1.1
 
 ### Notable changes
