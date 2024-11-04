@@ -50,7 +50,7 @@ spec:
   values:
 
     controllers:
-      ${APP}:
+      streammaster:
         enabled: true
         type: deployment
         annotations: { }

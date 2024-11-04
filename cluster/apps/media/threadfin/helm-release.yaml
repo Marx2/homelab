@@ -50,7 +50,7 @@ spec:
   values:
 
     controllers:
-      ${APP}:
+      threadfin:
         enabled: true
         type: deployment
         annotations: { }
