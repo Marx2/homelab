@@ -37,3 +37,4 @@ resources:
   - pinchflat
   - threadfin
   - streammaster
+  - m3u-proxy
