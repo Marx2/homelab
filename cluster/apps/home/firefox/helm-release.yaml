@@ -123,10 +123,10 @@ spec:
           - hosts:
               - *host
 
-        persistence:
+    persistence:
 
-          config:
-            enabled: true
-            type: emptyDir
-            mountPath: /config
-            readOnly: false
+      config:
+        enabled: true
+        type: emptyDir
+        mountPath: /config
+        readOnly: false
