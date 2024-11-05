@@ -74,10 +74,10 @@ spec:
 
             env:
               TZ: ${TZ}
-              UMASK: 022
-              DISPLAY_WIDTH: 1920
-              DISPLAY_HEIGHT: 1080
-              KEEP_APP_RUNNING: 1
+              UMASK: "0022"
+              DISPLAY_WIDTH: "1920"
+              DISPLAY_HEIGHT: "1080"
+              KEEP_APP_RUNNING: "1"
             # resources:
             #   requests:
             #     cpu: 10m **review for update**
