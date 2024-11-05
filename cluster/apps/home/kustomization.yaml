@@ -10,3 +10,4 @@ resources:
   - zigbee2mqtt
   - home-assistant
   - hajimari
+  - firefox
