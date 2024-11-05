@@ -5,18 +5,17 @@ kind: HelmRelease
 metadata:
   name: &name firefox
   namespace: home
-
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
       version: 3.5.1
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-      interval: 10m
 
   install:
     timeout: 10m
@@ -50,7 +49,7 @@ spec:
   values:
 
     controllers:
-      m3u-proxy:
+      firefox:
         enabled: true
         type: deployment
         annotations: { }
