@@ -120,7 +120,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-          - host: &host
+          - host: "{{ .Release.Name }}"
             paths:
               - path: /
                 service:
