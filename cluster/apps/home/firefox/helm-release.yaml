@@ -122,11 +122,9 @@ spec:
         tls:
           - hosts:
               - *host
-
     persistence:
-
       config:
-        enabled: true
         type: emptyDir
-        mountPath: /config
-        readOnly: false
+        globalMounts:
+          - path: /config
+
