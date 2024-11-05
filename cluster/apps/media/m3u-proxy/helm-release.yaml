@@ -120,6 +120,12 @@ spec:
                 service:
                   identifier: app
                   port: http
+          - host: &host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
 
         tls:
           - hosts:
