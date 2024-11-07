@@ -70,7 +70,7 @@ spec:
             nameOverride: *name
             image:
               repository: senexcrenshaw/streammaster
-              tag: 0.17.3
+              tag: 0.17.9
               pullPolicy: IfNotPresent
 
             env:
