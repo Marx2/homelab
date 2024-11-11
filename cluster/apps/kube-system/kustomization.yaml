@@ -6,4 +6,3 @@ resources:
   - metrics-server
   - reloader
   - metallb
-  - ./spegel/ks.yaml

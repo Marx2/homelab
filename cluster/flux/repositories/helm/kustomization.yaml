@@ -36,4 +36,3 @@ resources:
   - crunchydata.yaml
   - groundhog2k.yaml
   - mariadb-operator.yaml
-  - spegel.yaml
