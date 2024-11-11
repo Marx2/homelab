@@ -1,6 +1,7 @@
 ---
 nameReference:
   - kind: ConfigMap
+    namespace: kube-system
     version: v1
     fieldSpecs:
       - path: spec/valuesFrom/name
