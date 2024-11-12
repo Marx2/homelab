@@ -41,7 +41,10 @@ spec:
               args: [ "-configFiles=/tmp/git/pgdb/flyway.toml","-X","-environment=cluster","migrate" ]
               env:
                 - name: FLYWAY_PASSWORD
-                  value: "${SECRET_POSTGRESQL_PASS}"
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-pfire-pguser-postgres
+                      key: password
                 - name: FLYWAY_LOCATIONS
                   value: "filesystem:/tmp/git/pgdb/metrics"
               volumeMounts:
