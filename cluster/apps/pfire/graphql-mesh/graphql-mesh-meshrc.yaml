@@ -9,7 +9,7 @@ data:
       - name: postgres
         handler:
           postgraphile:
-            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
+            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/stooq
         transforms:
           - prefix:
               mode: wrap
@@ -19,7 +19,7 @@ data:
       - name: postgres-attributes
         handler:
           postgraphile:
-            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/attributes
+            connectionString: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/attributes
             appendPlugins:
               - '@graphile-contrib/pg-many-to-many'
         transforms:

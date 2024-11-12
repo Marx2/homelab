@@ -45,12 +45,8 @@ spec:
     # https://github.com/colearendt/helm/blob/main/charts/postgrest/values.yaml
     postgrest:
       # -- The dbUri for connecting to the database. Required
-      dbUri: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq"
+      dbUri: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/stooq"
       dbSchema: "public"
       dbAnonRole: "web_anon"
       # -- The JWT Secret used for constructing JWTs. Required
       jwtSecret: "mrt3g309vhfdsvrebgredfwgwf4gff4t5ytg6h5g"
-    pod:
-      env:
-        - name: PGRST_DB_URI
-          value: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq"

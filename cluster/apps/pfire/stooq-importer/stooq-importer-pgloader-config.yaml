@@ -8,11 +8,11 @@ data:
   csv.load: |
     LOAD ARCHIVE
       FROM /home/stooq/d_us_txt.zip
-      INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
+      INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/stooq
 
       LOAD CSV
         FROM ALL FILENAMES MATCHING ~/./
-        INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq
+        INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/stooq
           TARGET TABLE daily
           TARGET COLUMNS
           (
