@@ -51,6 +51,7 @@ spec:
         - attributes
         - stooq
         - ghostfolio
+        - tooljet
       options: "SUPERUSER"
       password:
         type: AlphaNumeric
