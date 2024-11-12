@@ -65,7 +65,7 @@ spec:
           Group: "Servers"
           Port: 5432
           Username: "postgres"
-          Host: "postgres-media-primary.pfire.svc"
+          Host: "postgres-media-primary.media.svc"
           #SSLMode: "prefer"
           MaintenanceDB: "postgres"
 
