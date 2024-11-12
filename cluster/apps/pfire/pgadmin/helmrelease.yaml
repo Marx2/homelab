@@ -53,11 +53,19 @@ spec:
 
       servers:
         firstServer:
-          Name: "Minimally Defined Server"
+          Name: "postgres-pfire"
           Group: "Servers"
           Port: 5432
           Username: "postgres"
-          Host: "postgresql"
+          Host: "postgres-pfire-primary.pfire.svc"
+          #SSLMode: "prefer"
+          MaintenanceDB: "postgres"
+        secondServer:
+          Name: "postgres-media"
+          Group: "Servers"
+          Port: 5432
+          Username: "postgres"
+          Host: "postgres-media-primary.pfire.svc"
           #SSLMode: "prefer"
           MaintenanceDB: "postgres"
 
@@ -82,7 +90,9 @@ spec:
       ## If true, pgAdmin4 will create/use a Persistent Volume Claim
       ## If false, use emptyDir
       ##
-      enabled: false
+      enabled: true
+      size: 2Gi
+      storageClass: "longhorn"
     env:
       # can be email or nickname
       email: mnazarko.nospam@gmail.com
