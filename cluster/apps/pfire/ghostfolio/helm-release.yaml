@@ -49,8 +49,13 @@ spec:
                   secretKeyRef:
                     name: *pgsecret
                     key: password
+              - name: PGHOST
+                valueFrom:
+                  secretKeyRef:
+                    name: *pgsecret
+                    key: host
               - name: DATABASE_URL
-                value: postgresql://$(PGUSER):$(PGPASSWORD)@postgresql:5432/ghostfolio
+                value: postgresql://$(PGUSER):$(PGPASSWORD)@$(PGHOST):5432/ghostfolio
               - name: NODE_ENV
                 value: production
               - name: REDIS_HOST
