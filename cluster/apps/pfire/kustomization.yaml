@@ -5,6 +5,8 @@ resources:
   - namespace.yaml
   - rbac.yaml
   - regcred.yaml
+  - crunchy-postgres-secret.yaml
+  - postgrescluster-pfire.yaml
   - postgresql
   - hasura
   #  - grafana
