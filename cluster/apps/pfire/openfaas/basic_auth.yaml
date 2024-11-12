@@ -1,9 +1,0 @@
-apiVersion: v1
-data:
-  basic-auth-password: RjREaXFid1lBSFl2YVRzZUNyaVI0L0tNVnVlZHord0xGMnd1a2wzclBlZz0=
-  basic-auth-user: YWRtaW4=
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: basic-auth
-  namespace: pfire

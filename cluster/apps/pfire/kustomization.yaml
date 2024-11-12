@@ -9,15 +9,11 @@ resources:
   - hasura
   #  - grafana
   - tooljet
-  #  - appwrite
-  #  - bytebase
   - pgadmin
   - graphql-mesh
   - stooq-importer
   - redis
   - ghostfolio
-  #  - openfaas
-  #  - fission
   - stooq
   - postgrest
   - captchasolver
