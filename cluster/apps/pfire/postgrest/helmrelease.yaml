@@ -52,5 +52,5 @@ spec:
       jwtSecret: "mrt3g309vhfdsvrebgredfwgwf4gff4t5ytg6h5g"
     pod:
       env:
-        - name: XXX
-          value: "postgres-xxxx"
+        - name: PGRST_DB_URI
+          value: "postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgresql:5432/stooq"
