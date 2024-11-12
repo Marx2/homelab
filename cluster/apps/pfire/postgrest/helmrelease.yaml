@@ -50,3 +50,10 @@ spec:
       dbAnonRole: "web_anon"
       # -- The JWT Secret used for constructing JWTs. Required
       jwtSecret: "mrt3g309vhfdsvrebgredfwgwf4gff4t5ytg6h5g"
+    pod:
+      env:
+        - name: PGRST_DB_URI
+          valueFrom:
+            secretKeyRef:
+              name: postgres-pfire-pguser-postgres
+              key: password
