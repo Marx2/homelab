@@ -29,7 +29,6 @@ data:
               includeRootOperations: true
               includeTypes: false
 
-
     additionalTypeDefs: |
       extend type Query {
         nodeId: ID! # It might be String
