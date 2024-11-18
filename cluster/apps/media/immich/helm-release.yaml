@@ -71,7 +71,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: &tag v1.120.1
+              tag: &tag v1.120.2
             env: &env
               - name: DB_URL_INCOMPLETE
                 valueFrom:
