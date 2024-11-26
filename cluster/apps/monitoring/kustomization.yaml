@@ -8,4 +8,4 @@ resources:
 #  - thanos
   - loki
   - speedtest-exporter
-  - scrutiny
+  - scrutiny/ks.yaml
