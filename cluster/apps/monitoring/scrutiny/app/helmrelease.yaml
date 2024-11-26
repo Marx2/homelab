@@ -108,7 +108,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: *app
+        existingClaim: scrutiny-config-pvc
         globalMounts:
           - path: /opt/scrutiny/config
       udev:
