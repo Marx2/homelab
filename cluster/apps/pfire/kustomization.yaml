@@ -7,7 +7,6 @@ resources:
   - regcred.yaml
   - crunchy-postgres-secret.yaml
   - postgrescluster-pfire.yaml
-  - postgresql
   - hasura
   #  - grafana
   - tooljet
