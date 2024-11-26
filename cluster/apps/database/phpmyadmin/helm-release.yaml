@@ -28,6 +28,7 @@ spec:
         hajimari.io/icon: mdi:database
         hajimari.io/group: Databases
         hajimari.io/instance: "admin"
+        hajimari.io/info: Application to manage MySQL databases
         nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         cert-manager.io/cluster-issuer: letsencrypt-production

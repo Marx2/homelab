@@ -71,6 +71,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
           hajimari.io/group: "infra"
+          hajimari.io/info: Automatic k8s bookmarks
         hosts:
         - host: hajimari.${SECRET_DOMAIN}
           paths:

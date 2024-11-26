@@ -7,8 +7,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     hajimari.io/enable: "true"
-    hajimari.io/icon: "podcast"
-    hajimari.io/group: "media"
+    hajimari.io/icon: "mdi:nas"
+    hajimari.io/group: "infra"
+    hajimari.io/info: S3 compatible object storage
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header proxy_set_header Host $http_host;
       proxy_set_header proxy_set_header X-Real-IP $remote_addr;

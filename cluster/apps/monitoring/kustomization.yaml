@@ -8,3 +8,4 @@ resources:
 #  - thanos
   - loki
   - speedtest-exporter
+  - scrutiny

@@ -40,6 +40,9 @@ spec:
           forecastle.stakater.com/expose: "true"
           forecastle.stakater.com/icon: "https://stakater.com/static/gradient-gear-2x-3dd8db60f1d32f67a4599873bd901866.png"
           forecastle.stakater.com/network-restricted: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "mdi:bookmark-multiple-outline"
+          hajimari.io/info: Automatic k8s bookmarks
         hosts:
         - host: forecastle.${SECRET_DOMAIN}
           paths:

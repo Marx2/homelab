@@ -7,3 +7,4 @@ resources:
   - ./crunchy-postgres-operator/ks.yaml
   - ./mariadb-operator/ks.yaml
   - ./phpmyadmin
+  - ./influx

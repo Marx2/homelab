@@ -5,7 +5,6 @@ resources:
   - namespace.yaml
   - forecastle
   - syncthing
-  #  - scrutiny
   - vernemq
   - zigbee2mqtt
   - home-assistant

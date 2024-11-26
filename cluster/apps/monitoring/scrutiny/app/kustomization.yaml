@@ -1,6 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- scrutiny-config-pvc.yaml
-- scrutiny-collector.yaml
-- scrutiny-web.yaml
+  - helmrelease.yaml
