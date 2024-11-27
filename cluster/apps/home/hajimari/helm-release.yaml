@@ -60,6 +60,9 @@ spec:
           - name: MinIO
             url: "http://192.168.1.49:9001/"
             icon: "database"
+          - name: Renovate
+            url: "https://developer.mend.io/github/Marx2"
+            icon: "refresh"
 
     ingress:
       main:
