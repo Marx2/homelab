@@ -13,7 +13,8 @@
     "github>Marx2/homelab//.github/renovate/autoMerge.json5",
     "github>Marx2/homelab//.github/renovate/labels.json5",
     "github>Marx2/homelab//.github/renovate/commitMessage.json5",
-    "github>Marx2/homelab//.github/renovate/semanticCommits.json5"
+    "github>Marx2/homelab//.github/renovate/semanticCommits.json5",
+    "github>Marx2/homelab//.github/renovate/customManagers.json5"
   ],
   dependencyDashboard: true,
   dependencyDashboardTitle: 'Renovate Dashboard 🤖',

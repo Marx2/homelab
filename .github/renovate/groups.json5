@@ -10,6 +10,36 @@
         "commitMessageTopic": "{{{groupName}}} group"
       },
       "separateMinorPatch": true
+    },
+    {
+      "description": [
+        "System Upgrade Controller Group"
+      ],
+      "groupName": "System Upgrade Controller",
+      "matchPackagePatterns": [
+        "system-upgrade-controller"
+      ],
+      "matchDatasources": [
+        "docker",
+        "github-releases"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": true
+    },
+    // custom versioning
+    {
+      "description": [
+        "Use custom versioning for k3s"
+      ],
+      "matchDatasources": [
+        "github-releases"
+      ],
+      "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k.s)\\.?(?<build>\\d+)$",
+      "matchPackagePatterns": [
+        "k3s"
+      ]
     }
   ]
 }
