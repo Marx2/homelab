@@ -87,6 +87,10 @@ spec:
         storageClass: longhorn
       tmp:
         type: emptyDir
+      yt-dlp:
+        type: emptyDir
+        globalMounts:
+          - path: /etc/yt-dlp
       media:
         existingClaim: nfs-media-pinchflat-pvc
         globalMounts:
