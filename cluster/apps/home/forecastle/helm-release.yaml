@@ -26,11 +26,6 @@ spec:
             - home
             - networking
             - longhorn
-            #        customApps:
-            #        - name: Tvheadend
-            #          icon: "https://www.minipctv.de/wp-content/uploads/TV-Headend-Logo-ohne-Schriftzug.jpg"
-            #          url: "https://tvheadend.${SECRET_DOMAIN}"
-            #          group: MEDIA
       ingress:
         enabled: true
         annotations:
