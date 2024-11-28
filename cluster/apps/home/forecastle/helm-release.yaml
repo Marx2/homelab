@@ -22,15 +22,15 @@ spec:
         title: "Marx's Apps"
         namespaceSelector:
           matchNames:
-          - media
-          - home
-          - networking
-          - longhorn
-#        customApps:
-#        - name: Tvheadend
-#          icon: "https://www.minipctv.de/wp-content/uploads/TV-Headend-Logo-ohne-Schriftzug.jpg"
-#          url: "https://tvheadend.${SECRET_DOMAIN}"
-#          group: MEDIA
+            - media
+            - home
+            - networking
+            - longhorn
+            #        customApps:
+            #        - name: Tvheadend
+            #          icon: "https://www.minipctv.de/wp-content/uploads/TV-Headend-Logo-ohne-Schriftzug.jpg"
+            #          url: "https://tvheadend.${SECRET_DOMAIN}"
+            #          group: MEDIA
       ingress:
         enabled: true
         annotations:
@@ -44,10 +44,10 @@ spec:
           hajimari.io/icon: "mdi:bookmark-multiple-outline"
           hajimari.io/info: Automatic k8s bookmarks
         hosts:
-        - host: forecastle.${SECRET_DOMAIN}
-          paths:
-          - path: /
-            pathType: Prefix          
+          - host: forecastle.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
-        - hosts:
-          - "forecastle.${SECRET_DOMAIN}"
+          - hosts:
+              - "forecastle.${SECRET_DOMAIN}"

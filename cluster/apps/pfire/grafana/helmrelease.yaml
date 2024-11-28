@@ -23,58 +23,58 @@ spec:
       retries: 3
   values:
     replicas: 1
-#    namespaceOverride: pfire
+    #    namespaceOverride: pfire
     rbac:
       pspEnabled: false
     testFramework:
       enabled: false
     admin:
       existingSecret: grafana-secrets
-#      userKey: adminUser
-#      passwordKey: adminPass
+      #      userKey: adminUser
+      #      passwordKey: adminPass
     grafana.ini:
       auth.basic:
         disable_login_form: false
 
-#    dashboardProviders:
-#      dashboardproviders.yaml:
-#        apiVersion: 1
-#        providers:
-#          - name: "default"
-#            orgId: 1
-#            folder: ""
-#            type: file
-#            disableDeletion: false
-#            editable: true
-#            options:
-#              path: /var/lib/grafana/dashboards/default
+    #    dashboardProviders:
+    #      dashboardproviders.yaml:
+    #        apiVersion: 1
+    #        providers:
+    #          - name: "default"
+    #            orgId: 1
+    #            folder: ""
+    #            type: file
+    #            disableDeletion: false
+    #            editable: true
+    #            options:
+    #              path: /var/lib/grafana/dashboards/default
 
 
-#    datasources:
-#      datasources.yaml:
-#        apiVersion: 1
-#        datasources:
-#          - name: Prometheus
-#            type: prometheus
-#            access: proxy
-#            url: http://kube-prometheus-stack-prometheus:9090/
-#            isDefault: true
-#    sidecar:
-#      dashboards:
-#        enabled: true
-#        searchNamespace: ALL
-#      datasources:
-#        enabled: true
-#        searchNamespace: ALL
-#    plugins:
-#      - natel-discrete-panel
-#      - pr0ps-trackmap-panel
-#      - grafana-piechart-panel
-#      - vonage-status-panel
-#      - grafana-worldmap-panel
-#      - grafana-clock-panel
-#    serviceMonitor:
-#      enabled: true
+    #    datasources:
+    #      datasources.yaml:
+    #        apiVersion: 1
+    #        datasources:
+    #          - name: Prometheus
+    #            type: prometheus
+    #            access: proxy
+    #            url: http://kube-prometheus-stack-prometheus:9090/
+    #            isDefault: true
+    #    sidecar:
+    #      dashboards:
+    #        enabled: true
+    #        searchNamespace: ALL
+    #      datasources:
+    #        enabled: true
+    #        searchNamespace: ALL
+    #    plugins:
+    #      - natel-discrete-panel
+    #      - pr0ps-trackmap-panel
+    #      - grafana-piechart-panel
+    #      - vonage-status-panel
+    #      - grafana-worldmap-panel
+    #      - grafana-clock-panel
+    #    serviceMonitor:
+    #      enabled: true
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -85,7 +85,7 @@ spec:
         - &host grafana.${SECRET_DOMAIN}
       tls:
         - hosts:
-          - "grafana.${SECRET_DOMAIN}"
+            - "grafana.${SECRET_DOMAIN}"
 
     imageRenderer:
       enabled: true
