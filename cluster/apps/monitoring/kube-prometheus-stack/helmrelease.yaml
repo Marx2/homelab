@@ -79,7 +79,7 @@ spec:
           - &host grafana.${SECRET_DOMAIN}
         tls:
           - hosts:
-            - "grafana.${SECRET_DOMAIN}"
+              - "grafana.${SECRET_DOMAIN}"
       additionalDataSources:
         - name: Loki
           access: proxy
@@ -104,7 +104,7 @@ spec:
         volumeClaimTemplate:
           spec:
             storageClassName: prometheus-omv
-            accessModes: ["ReadWriteOnce"]
+            accessModes: [ "ReadWriteOnce" ]
             resources:
               requests:
                 storage: 50Gi
