@@ -80,6 +80,8 @@ spec:
                     key: uri
               - name: DB_URL
                 value: $$(DB_URL_INCOMPLETE)?sslmode=require&sslmode=no-verify
+              - name: IMMICH_LOG_LEVEL
+                value: "verbose"
             envFrom: &envFrom
               - secretRef:
                   name: immich-secret

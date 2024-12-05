@@ -8,5 +8,5 @@ kubectl create secret generic postgrest-basic-auth --from-file=auth -o yaml -n p
 Base on: https://postgrest.org/en/stable/tutorials/tut0.html
 create role web_anon nologin;
 
-grant usage on schema public to web_anon;
-grant select on public.attributes to web_anon;
+grant usage on schema attributes to web_anon;
+grant select on attributes to web_anon;
