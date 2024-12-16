@@ -30,7 +30,7 @@ spec:
     defaultPodOptions:
       automountServiceAccountToken: false
     controllers:
-      scrutiny:
+      investbrain:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
