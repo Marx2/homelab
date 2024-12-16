@@ -77,37 +77,37 @@ spec:
         tls:
           - hosts:
               - *host
-    probes:
-      liveness:
-        enabled: true
-        custom: true
-        spec:
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-          httpGet:
-            path: /terms
-            port: *port
-        readiness:
-          enabled: true
-          custom: true
-          spec:
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 1
-            failureThreshold: 3
-            httpGet:
-              path: /terms
-              port: *port
-        startup:
-          enabled: true
-          custom: true
-          spec:
-            initialDelaySeconds: 0
-            timeoutSeconds: 1
-            periodSeconds: 5
-            failureThreshold: 30
-            httpGet:
-              path: /terms
-              port: *port
+#    probes:
+#      liveness:
+#        enabled: true
+#        custom: true
+#        spec:
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          timeoutSeconds: 1
+#          failureThreshold: 3
+#          httpGet:
+#            path: /terms
+#            port: *port
+#        readiness:
+#          enabled: true
+#          custom: true
+#          spec:
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#            timeoutSeconds: 1
+#            failureThreshold: 3
+#            httpGet:
+#              path: /terms
+#              port: *port
+#        startup:
+#          enabled: true
+#          custom: true
+#          spec:
+#            initialDelaySeconds: 0
+#            timeoutSeconds: 1
+#            periodSeconds: 5
+#            failureThreshold: 30
+#            httpGet:
+#              path: /terms
+#              port: *port
