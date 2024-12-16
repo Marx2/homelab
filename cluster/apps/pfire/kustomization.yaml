@@ -22,3 +22,4 @@ resources:
   - pgdb
   - cafe
   - grist
+  - investbrain/ks.yaml

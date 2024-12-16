@@ -1,0 +1,12 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: User
+metadata:
+  name: ib
+  namespace: database
+spec:
+  mariaDbRef:
+    name: mariadb-galera
+  passwordSecretKeyRef:
+    name: ib-secret
+    key: password
+  maxUserConnections: 20
