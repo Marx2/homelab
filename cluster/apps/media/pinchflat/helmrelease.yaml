@@ -83,7 +83,7 @@ spec:
     persistence:
       config:
         accessMode: ReadWriteOnce
-        size: 200M
+        size: 400M
         storageClass: longhorn
       tmp:
         type: emptyDir
