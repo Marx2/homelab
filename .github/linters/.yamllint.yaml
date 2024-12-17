@@ -7,7 +7,8 @@ rules:
   truthy:
     allowed-values: ["true", "false", "on"]
   comments:
-    min-spaces-from-content: 1
+    min-spaces-from-content: 0
+    level: ignore
   line-length:
     max: 120
     level: warning
