@@ -1,0 +1,31 @@
+# Configuration file for MegaLinter
+# See all available variables at https://megalinter.github.io/configuration/ and in linters documentation
+
+APPLY_FIXES: none
+# ENABLE:  # If you use ENABLE variable, all other languages/formats/tooling formats will be disabled by default
+ENABLE_LINTERS:
+  - ACTION_ACTIONLINT
+  - ANSIBLE_ANSIBLE_LINT
+  - KUBERNETES_KUBEVAL
+  - JSON_PRETTIER
+  - MARKDOWN_MARKDOWNLINT
+  - YAML_PRETTIER
+  - YAML_YAMLLINT
+  - EDITORCONFIG_EDITORCONFIG_CHECKER
+  #  - TERRAFORM_TFLINT
+  #  - TERRAFORM_TERRAFORM_FMT
+  # - REPOSITORY_CHECKOV
+  - REPOSITORY_GITLEAKS
+  - REPOSITORY_GIT_DIFF
+  - REPOSITORY_SECRETLINT
+  - SPELL_MISSPELL
+  - SPELL_PROSELINT
+ANSIBLE_DIRECTORY: ansible
+ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/linters/.ansible-lint
+KUBERNETES_DIRECTORY: cluster
+KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/linters/.markdownlint.yaml
+MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
+YAML_YAMLLINT_CONFIG_FILE: .github/linters/.yamllint.yaml
+YAML_PRETTIER_CONFIG_FILE: .github/linters/.prettierrc.yaml
+YAML_PRETTIER_FILTER_REGEX_EXCLUDE: "(.*\\.sops\\.ya?ml)"
