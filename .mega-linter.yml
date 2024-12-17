@@ -1,5 +1,0 @@
-# .mega-linter.yml
-
-# Disable specific rules
-YAML_YAMLLINT_RULES_DISABLE:
-  - line-length  # Line length
