@@ -48,7 +48,7 @@ spec:
               pathType: Prefix
       tls:
         - hosts:
-          - "mailhog.${SECRET_DOMAIN}"
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
+            - "mailhog.${SECRET_DOMAIN}"
+            #  - secretName: chart-example-tls
+            #    hosts:
+            #      - chart-example.local
