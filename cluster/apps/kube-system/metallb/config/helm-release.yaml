@@ -43,3 +43,4 @@ spec:
         spec:
           addresses:
             - "${METALLB_LB_RANGE}"
+
