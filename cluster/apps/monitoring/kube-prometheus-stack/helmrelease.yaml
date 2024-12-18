@@ -104,7 +104,7 @@ spec:
         volumeClaimTemplate:
           spec:
             storageClassName: prometheus-omv
-            accessModes: [ "ReadWriteOnce" ]
+            accessModes: ["ReadWriteOnce"]
             resources:
               requests:
                 storage: 50Gi

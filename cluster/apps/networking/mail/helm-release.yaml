@@ -49,6 +49,3 @@ spec:
       tls:
         - hosts:
             - "mailhog.${SECRET_DOMAIN}"
-            #  - secretName: chart-example-tls
-            #    hosts:
-            #      - chart-example.local
