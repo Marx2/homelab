@@ -61,6 +61,8 @@ spec:
           hajimari.io/icon: mdi:harddiskstatus
           hajimari.io/enable: "true"
           hajimari.io/info: Hard Drive S.M.A.R.T Monitoring
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
