@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - cyberchef/ks.yaml
+  - it-tools/ks.yaml
 # - toolbox.yaml
