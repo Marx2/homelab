@@ -40,10 +40,11 @@ spec:
               tag: v1.0.8
             env:
               APP_TIMEZONE: ${TZ}
+              DB_HOST: "mariadb-galera.database"
               MYSQL_DATABASE: "ib"
               MYSQL_USER: "ib"
               MYSQL_PASSWORD: ${IB_DB_PASSWORD}
-              MYSQL_ROOT_PASSWORD: ${IB_DB_PASSWORD}
+              MYSQL_ROOT_PASSWORD: ${MARIA_DB_PASSWORD}
               APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               APP_PORT: 443
               REGISTRATION_ENABLED: "false"
