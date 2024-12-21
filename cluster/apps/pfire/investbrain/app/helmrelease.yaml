@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: investbrainapp/investbrain
-              tag: latest
+              tag: 1.0.8
             env:
               APP_TIMEZONE: ${TZ}
               MYSQL_DATABASE: "ib"
@@ -48,6 +48,11 @@ spec:
               APP_PORT: 443
               REGISTRATION_ENABLED: "false"
               REDIS_HOST: "ib-redis.pfire.svc.cluster.local"
+            #              REDIS_HOST=investbrain-redis
+            #              REDIS_PATH=/tmp/database_server.sock
+            #              REDIS_PASSWORD=null
+            #              REDIS_PORT=6379
+
             resources:
               requests:
                 cpu: 100m
