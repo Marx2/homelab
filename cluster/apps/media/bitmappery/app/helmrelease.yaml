@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: morphos
+  name: bitmappery
   namespace: media
 spec:
   interval: 30m
@@ -25,27 +25,14 @@ spec:
       retries: 3
   values:
     controllers:
-      morphos:
+      bitmappery:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/danvergara/morphos-server
-              tag: 0.6.0@sha256:3d6f64ef386cbb6a7c5d55526e1a69da2d3661a1996d757897e92bf4369088f5
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /healthz
-                    port: &port 8080
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+              repository: ghcr.io/marx2/bitmappery
+              tag: v1.0.0
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -55,7 +42,7 @@ spec:
                 cpu: 100m
                 memory: 100Mi
               limits:
-                memory: 2Gi
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -67,17 +54,17 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: morphos
+        controller: bitmappery
         ports:
           http:
-            port: *port
+            port: 5173
     ingress:
       app:
         className: nginx
         annotations:
           hajimari.io/icon: mdi:harddiskstatus
           hajimari.io/enable: "true"
-          hajimari.io/info: File conversion service.
+          hajimari.io/info: Image editor.
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:

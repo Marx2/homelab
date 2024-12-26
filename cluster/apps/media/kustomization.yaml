@@ -39,3 +39,4 @@ resources:
   - streammaster
   - m3u-proxy
   - morphos/ks.yaml
+  - bitmappery/ks.yaml
