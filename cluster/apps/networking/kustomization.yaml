@@ -14,3 +14,4 @@ resources:
   - mail
   - privatebin
   - pictshare
+  - keda/ks.yaml

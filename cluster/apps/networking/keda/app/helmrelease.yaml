@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keda
+  namespace: networking
+spec:
+  chart:
+    spec:
+      chart: keda
+      sourceRef:
+        kind: HelmRepository
+        name: kedacore
+        namespace: flux-system
+      version: 2.16.1
+  install:
+    crds: Create
+    timeout: 7m
+  interval: 1m0s
+  timeout: 7m
+  releaseName: keda
+  targetNamespace: networking
+  upgrade:
+    crds: CreateReplace
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3

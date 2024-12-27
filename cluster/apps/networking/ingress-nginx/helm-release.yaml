@@ -36,6 +36,8 @@ spec:
           https: https
           htsp: htsp
       config:
+        block-user-agents: "AdsBot-Google,Amazonbot,anthropic-ai,Applebot-Extended,Bytespider,CCBot,ChatGPT-User,ClaudeBot,Claude-Web,cohere-ai,Diffbot,FacebookBot,FriendlyCrawler,Google-Extended,GoogleOther,GPTBot,img2dataset,omgili,omgilibot,peer39_crawler,peer39_crawler/1.0,PerplexityBot,YouBot," # taken from https://github.com/ai-robots-txt/ai.robots.txt
+        use-geoip2: true
         ssl-protocols: "TLSv1.3 TLSv1.2"
         proxy-body-size: "100m"
         use-forwarded-headers: "true"
@@ -49,6 +51,8 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
+          namespaceSelector:
+            any: true
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-tls"
       resources:
