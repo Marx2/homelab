@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app capacitor
+  name: capacitor
   namespace: networking
 spec:
   interval: 30m
@@ -46,7 +46,7 @@ spec:
                 ephemeral-storage: 2Gi
     service:
       app:
-        controller: *app
+        controller: app
         ports:
           http:
             port: 9000
