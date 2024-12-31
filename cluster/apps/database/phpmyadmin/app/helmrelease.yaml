@@ -1,0 +1,79 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app phpmyadmin
+  namespace: database
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: false
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      phpmyadmin:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          phpmyadmin:
+            image:
+              repository: docker.io/phpmyadmin
+              tag: 5.2.1-apache@sha256:e2306dbeddb7901fb3f08bb0c8e5896ef816e8d53f6bdd82ffb538e5fc5a725e
+            env:
+              PMA_ARBITRARY: 1
+            resources:
+              requests:
+                cpu: 30m
+                memory: 256Mi
+              limits:
+                memory: 512Mi
+
+    service:
+      phpmyadmin:
+        controller: *app
+        ports:
+          http:
+            port: 80
+    ingress:
+      main:
+        enabled: true
+        className: "internal"
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "PHP MyAdmin (MySQL)"
+          hajimari.io/icon: mdi:database
+          hajimari.io/group: Databases
+          hajimari.io/instance: "admin"
+          hajimari.io/info: Application to manage MySQL databases
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
