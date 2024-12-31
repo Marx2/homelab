@@ -3,14 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app keda
+  name: &app phpmyadmin
   namespace: flux-system
 spec:
-  targetNamespace: networking
+  targetNamespace: database
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./cluster/apps/networking/keda/app
+  path: ./cluster/apps/database/phpmyadmin/app
   prune: true
   sourceRef:
     kind: GitRepository
