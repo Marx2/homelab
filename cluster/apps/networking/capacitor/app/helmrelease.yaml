@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      phpmyadmin:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -51,7 +51,7 @@ spec:
           http:
             port: 9000
     ingress:
-      main:
+      app:
         enabled: true
         className: "nginx"
         annotations:

@@ -27,12 +27,12 @@ spec:
     keepHistory: false
   values:
     controllers:
-      phpmyadmin:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
 
         containers:
-          phpmyadmin:
+          app:
             image:
               repository: docker.io/phpmyadmin
               tag: 5.2.1-apache@sha256:e2306dbeddb7901fb3f08bb0c8e5896ef816e8d53f6bdd82ffb538e5fc5a725e
@@ -46,13 +46,13 @@ spec:
                 memory: 512Mi
 
     service:
-      phpmyadmin:
+      app:
         controller: *app
         ports:
           http:
             port: 80
     ingress:
-      main:
+      app:
         enabled: true
         className: "nginx"
         annotations:
