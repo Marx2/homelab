@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - forecastle
-  - syncthing
+  #  - syncthing
   - vernemq
   - zigbee2mqtt
   - home-assistant
