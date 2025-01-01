@@ -6,7 +6,7 @@ metadata:
   name: &app capacitor
   namespace: flux-system
 spec:
-  targetNamespace: networking
+  targetNamespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

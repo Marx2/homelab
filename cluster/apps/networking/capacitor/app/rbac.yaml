@@ -51,7 +51,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: capacitor
-    namespace: networking
+    namespace: flux-system
 roleRef:
   kind: ClusterRole
   name: capacitor
