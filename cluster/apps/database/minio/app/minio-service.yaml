@@ -1,4 +1,44 @@
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio
+  namespace: database
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "mdi:nas"
+    hajimari.io/group: "infra"
+    hajimari.io/info: S3 compatible object storage
+#    nginx.ingress.kubernetes.io/auth-snippet: |
+#      proxy_set_header proxy_set_header Host $http_host;
+#      proxy_set_header proxy_set_header X-Real-IP $remote_addr;
+#      proxy_set_header proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#      proxy_set_header proxy_set_header X-Forwarded-Proto $scheme;
+#    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: minio.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+  #          - path: /ui/.*
+  #            pathType: Prefix
+  #            backend:
+  #              service:
+  #                name: minio
+  #                port:
+  #                  number: 9001
+  tls:
+    - hosts:
+        - minio.${SECRET_DOMAIN}
+---
 kind: Service
 apiVersion: v1
 metadata:
