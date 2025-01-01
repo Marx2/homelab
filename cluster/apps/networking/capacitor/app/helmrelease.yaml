@@ -33,15 +33,27 @@ spec:
 
         containers:
           app:
+            env:
+              TZ: ${TZ}
             image:
               repository: ghcr.io/gimlet-io/capacitor
               tag: v0.4.8@sha256:c999a42cccc523b91086547f890466d09be4755bf05a52763b0d14594bf60782
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                  - ALL
-              readOnlyRootFilesystem: true
+            probes:
+              startup:
+                enabled: false
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 9000
+                    scheme: HTTP
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probe
             resources:
               requests:
                 cpu: 50m
