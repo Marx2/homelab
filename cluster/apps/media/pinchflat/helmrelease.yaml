@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kieraneglin/pinchflat
-              tag: v2024.12.31
+              tag: v2025.1.3
             env:
               TZ: ${TZ}
               TZ_DATA_DIR: /tmp/elixir_tz_data
