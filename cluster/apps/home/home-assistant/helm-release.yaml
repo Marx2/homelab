@@ -59,7 +59,7 @@ spec:
         tls:
           # - secretName: tls.home-assistant-frontend
           - hosts:
-            - hass.${SECRET_DOMAIN}
+              - hass.${SECRET_DOMAIN}
 
     env:
       TZ: ${TZ}
@@ -92,7 +92,6 @@ spec:
         persistence:
         enabled: true
         existingClaim: home-assistant-data-pvc
-      # storageClass: ""
 
     addons:
       codeserver:
