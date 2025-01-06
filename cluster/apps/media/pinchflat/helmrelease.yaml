@@ -47,7 +47,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: [ "ALL" ] }
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
@@ -61,7 +61,7 @@ spec:
             runAsNonRoot: true
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [ 10000 ]
+            supplementalGroups: [10000]
     service:
       app:
         controller: pinchflat
@@ -79,7 +79,7 @@ spec:
                   identifier: app
                   port: http
         tls:
-          - hosts: [ *host ]
+          - hosts: [*host]
     persistence:
       config:
         accessMode: ReadWriteOnce
