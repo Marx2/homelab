@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 4h
-  url: https://github.com/ToolJet/helm-charts.git
+  url: https://ToolJet.github.io/helm-charts
   timeout: 3m
