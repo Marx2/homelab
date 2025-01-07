@@ -51,7 +51,7 @@ spec:
             resources:
               requests:
                 cpu: 10m
-                memory: 2Gi
+                memory: 256Mi
               limits:
                 memory: 4Gi
         pod:
@@ -83,7 +83,7 @@ spec:
     persistence:
       config:
         accessMode: ReadWriteOnce
-        size: 410M
+        size: 400M
         storageClass: longhorn
       tmp:
         type: emptyDir
