@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: tooljet-charts
+  namespace: flux-system
+spec:
+  interval: 4h
+  url: https://github.com/ToolJet/helm-charts.git
+  timeout: 3m

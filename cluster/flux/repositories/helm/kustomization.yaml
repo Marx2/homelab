@@ -37,3 +37,4 @@ resources:
   - groundhog2k.yaml
   - mariadb-operator.yaml
   - kedacore.yaml
+  - tooljet-charts.yaml
