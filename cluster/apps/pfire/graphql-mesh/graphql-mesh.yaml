@@ -68,7 +68,7 @@ spec:
           defaultMode: 420
       containers:
       - name: graphql-mesh-docker
-        image: ghcr.io/marx2/graphql-mesh-docker:1.0.7
+        image: ghcr.io/marx2/graphql-mesh-docker:1.0.8
         resources:
           limits:
             cpu: 2000m
