@@ -11,3 +11,4 @@ resources:
   - hajimari
   - firefox
   - sshwifty
+  - emqx/ks.yaml
