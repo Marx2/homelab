@@ -39,3 +39,4 @@ resources:
   - kedacore.yaml
   - tooljet-charts.yaml
   - emqx.yaml
+  - intel.yaml
