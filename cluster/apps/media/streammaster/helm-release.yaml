@@ -133,12 +133,12 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         retain: true
-        globalMounts: [ ] #default will mount at name of the pvc item above (e.g. /config)
+        globalMounts: [] # default will mount at name of the pvc item above (e.g. /config)
 
-      # tv-logos:
-      #   enabled: true
-      #   type: nfs
-      #   server: ${OMV_IP}
-      #   path: /export/media/
-      #   globalMounts:
-      #     - path: /media/
+        # tv-logos:
+        #   enabled: true
+        #   type: nfs
+        #   server: ${OMV_IP}
+        #   path: /export/media/
+        #   globalMounts:
+        #     - path: /media/
