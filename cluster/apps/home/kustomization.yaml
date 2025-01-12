@@ -12,3 +12,4 @@ resources:
   - firefox
   - sshwifty
   - emqx/ks.yaml
+  - frigate/ks.yaml

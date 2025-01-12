@@ -1,0 +1,141 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app frigate
+  namespace: home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      nodeSelector:
+        google.feature.node.kubernetes.io/coral: "true"
+        intel.feature.node.kubernetes.io/gpu: "true"
+    controllers:
+      frigate:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/blakeblackshear/frigate
+              tag: 0.15.0-beta3@sha256:6c8e87b6d9f767e3acf950943cc45c4201a889bf0b672302ed1ef8efc6373db2
+            env:
+              TZ: ${TZ}
+              LIBVA_DRIVER_NAME: i965
+            envFrom:
+              - secretRef:
+                  name: frigate-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/version
+                    port: &port 5000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 10m
+                memory: 1000Mi
+                gpu.intel.com/i915: 1
+              limits:
+                memory: 6000Mi
+                gpu.intel.com/i915: 1
+            securityContext:
+              privileged: true
+    service:
+      app:
+        controller: *app
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 192.168.1.221
+        ports:
+          http:
+            port: *port
+          rtsp:
+            enabled: true
+            port: 8554
+    ingress:
+      app:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+          hajimari.io/icon: mdi:cctv
+          hajimari.io/enable: "true"
+          hajimari.io/info: CCTV.
+        className: nginx
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+        size: 400Mi
+        globalMounts:
+          - path: /data
+      config-file:
+        type: configMap
+        name: frigate-configmap
+        globalMounts:
+          - path: /config/config.yml
+            subPath: config.yml
+            readOnly: true
+      media:
+        type: nfs
+        server: 192.168.1.49
+        path: /volume1/kubernetes/frigate
+        globalMounts:
+          - path: /media/frigate
+      cache:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 4Gi
+        globalMounts:
+          - path: /dev/shm
+      usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+        hostPathType: Directory
+        advancedMounts:
+          frigate:
+            app:
+              - path: /dev/bus/usb

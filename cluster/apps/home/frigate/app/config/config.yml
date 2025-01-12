@@ -1,0 +1,76 @@
+---
+logger:
+  default: info
+  # logs:
+  #   frigate.record: debug
+
+auth:
+  enabled: false
+
+tls:
+  enabled: false
+
+mqtt:
+  host: emqx.home.svc.cluster.local
+  topic_prefix: frigate
+  user: "{FRIGATE_MQTT_USERNAME}"
+  password: "{FRIGATE_MQTT_PASSWORD}"
+
+database:
+  path: /data/frigate.db
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+
+ffmpeg:
+  global_args: [-hide_banner, -loglevel, info]
+  hwaccel_args: preset-vaapi
+
+snapshots:
+  enabled: true
+  timestamp: true
+  bounding_box: true
+  retain:
+    default: 7
+
+record:
+  enabled: true
+  retain:
+    days: 7
+    mode: all
+
+objects:
+  track: [person]
+  filters:
+    person:
+      min_area: 5000
+      max_area: 100000
+      threshold: 0.7
+
+go2rtc:
+  streams:
+    cam_01: ffmpeg:https://cam-01.frigate.{SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
+    cam_01_sub: ffmpeg:https://cam-01.frigate.{SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}
+
+cameras:
+  cam-01:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.1.28/ch0_0.h264
+          input_args: preset-rtsp-restream
+          roles: [record]
+        - path: rtsp://192.168.1.28/ch0_1.h264
+          input_args: preset-rtsp-restream
+          roles: [detect]
+    detect:
+      width: 640
+      height: 480
+      fps: 7
+    # objects:
+    #   filters:
+    #     person:
+    #       mask:
+    #         - 960,626,800,617,797,0,960,0
+    #         - 960,0,960,138,0,149,0,0
