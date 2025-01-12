@@ -108,8 +108,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
-        size: 400Mi
+        existingClaim: frigate-config-pvc
         globalMounts:
           - path: /data
       config-file:
