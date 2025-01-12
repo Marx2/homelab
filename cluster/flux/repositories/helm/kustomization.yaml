@@ -38,3 +38,4 @@ resources:
   - mariadb-operator.yaml
   - kedacore.yaml
   - tooljet-charts.yaml
+  - emqx.yaml
