@@ -29,4 +29,4 @@ spec:
     keepHistory: false
   dependsOn:
     - name: node-feature-discovery
-      namespace: system
+      namespace: kube-system
