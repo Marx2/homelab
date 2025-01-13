@@ -33,13 +33,19 @@ snapshots:
   timestamp: true
   bounding_box: true
   retain:
-    default: 7
+    default: 5
 
 record:
   enabled: true
   retain:
-    days: 7
-    mode: all
+    days: 5
+    mode: motion
+  events:
+    retain:
+      default: 15
+      mode: motion
+      objects:
+        person: 30
 
 objects:
   track: [person]
