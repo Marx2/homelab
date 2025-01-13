@@ -14,7 +14,7 @@ mqtt:
   host: emqx.home.svc.cluster.local
   topic_prefix: frigate
   user: "${EMQX_MQTT_USER}"
-  password: "{EMQX_MQTT_PASSWORD}"
+  password: "${EMQX_MQTT_PASSWORD}"
 
 database:
   path: /data/frigate.db
@@ -51,8 +51,8 @@ objects:
 
 go2rtc:
   streams:
-    cam_01: ffmpeg:https://cam-01.frigate.{SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
-    cam_01_sub: ffmpeg:https://cam-01.frigate.{SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_CAMERA_USER}&password={FRIGATE_CAMERA_PASSWORD}
+    cam_01: ffmpeg:https://cam-01.frigate.${SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=${FRIGATE_CAMERA_USER}&password=${FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
+    cam_01_sub: ffmpeg:https://cam-01.frigate.${SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=${FRIGATE_CAMERA_USER}&password=${FRIGATE_CAMERA_PASSWORD}
 
 cameras:
   cam-01:
