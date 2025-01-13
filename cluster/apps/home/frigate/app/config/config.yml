@@ -40,12 +40,12 @@ record:
   retain:
     days: 5
     mode: motion
-  events:
-    retain:
-      default: 15
-      mode: motion
-      objects:
-        person: 30
+    #  events:
+    #    retain:
+    #      default: 15
+    #      mode: motion
+    #      objects:
+    #        person: 30
 
 objects:
   track: [person]
