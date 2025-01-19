@@ -44,7 +44,7 @@ spec:
           app:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
-              tag: 0.36.6
+              tag: 0.37.1
               pullPolicy: IfNotPresent
 
             env:
