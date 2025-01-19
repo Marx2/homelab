@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kieraneglin/pinchflat
-              tag: v2025.1.17
+              tag: v2025.1.14
             env:
               TZ: ${TZ}
               TZ_DATA_DIR: /tmp/elixir_tz_data
@@ -82,9 +82,7 @@ spec:
           - hosts: [*host]
     persistence:
       config:
-        accessMode: ReadWriteOnce
-        size: 500M
-        storageClass: longhorn
+        existingClaim: pinchflat-config-pvc
       tmp:
         type: emptyDir
       yt-dlp:
