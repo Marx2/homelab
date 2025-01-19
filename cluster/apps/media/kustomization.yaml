@@ -34,7 +34,7 @@ resources:
   - immich
   - stirling-pdf
   - tubearchivist
-  - pinchflat
+  - pinchflat/ks.yaml
   - threadfin
   - streammaster
   - m3u-proxy
