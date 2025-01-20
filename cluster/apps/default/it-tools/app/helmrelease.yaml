@@ -73,4 +73,3 @@ spec:
         tls:
           - hosts:
               - *host
-
