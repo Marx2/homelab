@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: docker.io/ghostfolio/ghostfolio
-              tag: 2.134.0@sha256:cdb119f5ebd0c7ac71ed57f113cb5865c5eb24acbf21ff6c1897f7f92d0a6ca1
+              tag: 2.135.0@sha256:85b6124f3607bac0725be7c2e87af27d46bf3142a712409e8ab5353b92d09c64
             env:
               - name: PGUSER
                 valueFrom:
