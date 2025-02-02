@@ -43,10 +43,13 @@ spec:
               DB_CONNECTION: "mysql"
               DB_HOST: "mariadb-galera.database"
               DB_PORT: 3306
-              MYSQL_DATABASE: "ib"
-              MYSQL_USER: "ib"
-              MYSQL_PASSWORD: ${IB_DB_PASSWORD}
-              MYSQL_ROOT_PASSWORD: ${MARIA_DB_PASSWORD}
+              DB_DATABASE: ib
+              DB_USERNAME: ib
+              DB_PASSWORD: ${IB_DB_PASSWORD}
+              #              MYSQL_DATABASE: "ib"
+              #              MYSQL_USER: "ib"
+              #              MYSQL_PASSWORD: ${IB_DB_PASSWORD}
+              #              MYSQL_ROOT_PASSWORD: ${MARIA_DB_PASSWORD}
               APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               APP_PORT: 443
