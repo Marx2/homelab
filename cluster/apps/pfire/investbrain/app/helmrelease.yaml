@@ -46,10 +46,6 @@ spec:
               DB_DATABASE: ib
               DB_USERNAME: ib
               DB_PASSWORD: ${IB_DB_PASSWORD}
-              #              MYSQL_DATABASE: "ib"
-              #              MYSQL_USER: "ib"
-              #              MYSQL_PASSWORD: ${IB_DB_PASSWORD}
-              #              MYSQL_ROOT_PASSWORD: ${MARIA_DB_PASSWORD}
               APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               APP_PORT: 443
@@ -59,9 +55,6 @@ spec:
               SESSION_DRIVER: redis
               QUEUE_CONNECTION: redis
               CACHE_STORE: redis
-              #              REDIS_PATH=/tmp/database_server.sock
-              #              REDIS_PASSWORD=null
-              #              REDIS_PORT=6379
               # MARKET_DATA_PROVIDER: "yahoo" - default
             resources:
               requests:
