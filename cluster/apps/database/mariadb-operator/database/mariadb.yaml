@@ -12,7 +12,7 @@ spec:
     generate: false
 
   storage:
-    size: 1Gi
+    size: 2Gi
 
   replicas: 1
   image: "mariadb:11.6.2"
