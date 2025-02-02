@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: investbrainapp/investbrain
-              tag: 1.0.9
+              tag: 1.1.4
             env:
               APP_TIMEZONE: ${TZ}
               DB_CONNECTION: "mysql"
