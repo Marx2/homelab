@@ -50,7 +50,7 @@ spec:
               APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               APP_PORT: 443
-              APP_KEY: "{{ IB_APP_KEY }}"
+              APP_KEY: "${IB_APP_KEY}"
               REGISTRATION_ENABLED: "false"
               REDIS_HOST: "ib-redis.pfire.svc.cluster.local"
               SESSION_DRIVER: redis
