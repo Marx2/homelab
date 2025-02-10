@@ -124,7 +124,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.125.7
+              tag: v1.126.0
             envFrom: *envFrom
             env: *env
             resources:
