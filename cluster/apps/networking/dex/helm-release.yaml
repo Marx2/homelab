@@ -119,14 +119,14 @@ spec:
         hajimari.io/icon: "lock"
         hajimari.io/group: "infra"
       hosts:
-      - host: dex.${SECRET_DOMAIN}
-        paths:
-        - path: /
-          pathType: ImplementationSpecific
+        - host: dex.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
       tls:
-      - secretName: dex-cert
-        hosts:
-        - dex.${SECRET_DOMAIN}
+        - secretName: dex-cert
+          hosts:
+            - dex.${SECRET_DOMAIN}
     resources:
       requests:
         memory: 250Mi
