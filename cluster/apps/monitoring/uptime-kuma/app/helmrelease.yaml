@@ -66,4 +66,3 @@ spec:
           main:
             app:
               - path: /app/data
-
