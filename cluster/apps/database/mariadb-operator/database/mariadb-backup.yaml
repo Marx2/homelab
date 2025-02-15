@@ -6,7 +6,7 @@ spec:
   mariaDbRef:
     name: mariadb-galera
   schedule:
-    cron: "0 * * * *"
+    cron: "0 4 * * *" # 4:00 AM every day
     suspend: false
   maxRetention: 720h # 30 days
   storage:
