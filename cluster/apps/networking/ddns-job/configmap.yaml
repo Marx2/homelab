@@ -17,7 +17,7 @@ data:
     #IP4CUR=$(dig @1.1.1.1 +short marxhome.marx.katowice.pl A)
     zone_id="e24e4482459427c92358a4906ee5a2c8"
     dns_record="marxhome"
-    dns_domain="marx.katowice.pl"
+    dns_domain="homylab.com"
 
     # echo token: $TOKEN
     # echo zone_id: $ZONE_ID
