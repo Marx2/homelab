@@ -15,11 +15,18 @@ DNS switching:
   - kmarx.conf
 - router: NOTHNIG
 - new domain in password manager (BOOTSTRAP_DOMAIN)
+- url for passwords in password manager
 - recreate sealed secrets
 - cafe upload address (?)
 - each cluster node:
   - /etc/hosts
   - /etc/postfix/main.cf
 - NAS: NOTHING
+- GitHub - Dex authentication
+  - change Homepage URL:: https://k.marx.katowice.pl
+  - change Authorization callback URL: https://dex.k.marx.katowice.pl/callback
+
+Apps:
+- Uptime Kuma
 - Google Sheets functions
 - AntennaPod
