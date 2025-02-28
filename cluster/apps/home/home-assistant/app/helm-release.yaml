@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: hass
+  name: &app hass
 spec:
   interval: 1h
   chart:
@@ -82,7 +82,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: hass
+        controller: *app
         ports:
           http:
             port: 8123
