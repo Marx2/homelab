@@ -6,10 +6,10 @@ resources:
   - forecastle
   #  - syncthing
   - vernemq
-  - home-assistant
   - hajimari
   - firefox
   - sshwifty
   - emqx/ks.yaml
   - frigate/ks.yaml
   - zigbee2mqtt/ks.yaml
+  - home-assistant/ks.yaml
