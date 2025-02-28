@@ -24,7 +24,7 @@ spec:
       retries: 3
   values:
     controllers:
-      home-assistant:
+      hass:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -82,7 +82,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: home-assistant
+        controller: hass
         ports:
           http:
             port: 8123
@@ -90,11 +90,11 @@ spec:
             port: 12321
     ingress:
       app:
+        className: nginx
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: "mdi:home-assistant"
           hajimari.io/info: Home Automation
-        className: nginx
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
