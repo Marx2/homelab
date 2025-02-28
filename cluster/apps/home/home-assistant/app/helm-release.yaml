@@ -90,6 +90,7 @@ spec:
             port: 12321
     ingress:
       app:
+        enabled: true
         className: nginx
         annotations:
           hajimari.io/enable: "true"
@@ -106,6 +107,7 @@ spec:
           - hosts:
               - *host
       code-server:
+        enabled: true
         className: nginx
         annotations:
           hajimari.io/enable: "true"
