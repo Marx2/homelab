@@ -106,6 +106,8 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "arrow-right-circle-outline"
           hajimari.io/group: "home"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
