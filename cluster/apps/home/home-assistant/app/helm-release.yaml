@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app hass
+  name: hass
 spec:
   interval: 1h
   chart:
@@ -106,7 +106,13 @@ spec:
           - hosts:
               - *host
       code-server:
-        className: internal
+        className: nginx
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "arrow-right-circle-outline"
+          hajimari.io/group: "home"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:
           - host: &host2 "code-server.${SECRET_DOMAIN}"
             paths:
