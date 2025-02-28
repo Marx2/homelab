@@ -97,7 +97,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: 8080
+            port: *port
     ingress:
       main:
         enabled: true
