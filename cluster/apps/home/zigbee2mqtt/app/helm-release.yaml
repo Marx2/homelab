@@ -50,10 +50,10 @@ spec:
                   failureThreshold: 30
                   periodSeconds: 10
             securityContext:
-              #privileged: true
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              privileged: true
+              #allowPrivilegeEscalation: false
+              #readOnlyRootFilesystem: true
+              #capabilities: { drop: ["ALL"] }
             env:
               TZ: ${TZ}
               ZIGBEE2MQTT_DATA: /config
@@ -85,13 +85,13 @@ spec:
               #ZIGBEE2MQTT_CONFIG_ADVANCED_NETWORK_KEY: "{{ .ZIGBEE2MQTT_CONFIG_ADVANCED_NETWORK_KEY }}"
               ZIGBEE2MQTT_CONFIG_MQTT_USER: "${EMQX_MQTT_USER}"
               ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD: "${EMQX_MQTT_PASSWORD}"
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
+    #    defaultPodOptions:
+    #      securityContext:
+    #        runAsNonRoot: true
+    #        runAsUser: 1000
+    #        runAsGroup: 1000
+    #        fsGroup: 1000
+    #        fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         controller: *app
