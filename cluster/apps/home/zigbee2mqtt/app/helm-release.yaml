@@ -128,4 +128,5 @@ spec:
         #hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2423929-if00
         hostPath: /dev/ttyACM0
         hostPathType: CharDevice
-
+        globalMounts:
+          - path: /dev/ttyUSB0
