@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: elasticsearch
-              tag: 8.18.1
+              tag: 9.0.1
             env:
               xpack.security.enabled: "true"
               discovery.type: "single-node"
