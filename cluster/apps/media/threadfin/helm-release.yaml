@@ -62,7 +62,7 @@ spec:
             nameOverride: *name
             image:
               repository: fyb3roptik/threadfin
-              tag: 1.2.33
+              tag: 1.2.34
               pullPolicy: IfNotPresent
 
             env:
