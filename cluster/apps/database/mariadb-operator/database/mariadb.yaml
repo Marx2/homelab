@@ -15,7 +15,7 @@ spec:
     size: 2Gi
 
   replicas: 1
-  image: "mariadb:11.7.2"
+  image: "mariadb:11.8.2"
   imagePullPolicy: IfNotPresent
 
   galera:
