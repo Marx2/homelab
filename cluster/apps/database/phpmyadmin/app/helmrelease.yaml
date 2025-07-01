@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: docker.io/phpmyadmin
-              tag: 5.2.2-apache@sha256:083368f8b24bdce34bfee84f7ba7d25fab958b32872f82584f96c937da52bb42
+              tag: 5.2.2-apache@sha256:5f4a8cf37334b9f3ae284c8f6dd8b61bed83e770f37c155aadeed43651efb1ca
             env:
               PMA_ARBITRARY: 1
             resources:
