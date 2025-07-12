@@ -56,7 +56,7 @@ spec:
           export: # shit ain't working yet...
             image:
               repository: jgraph/export-server
-              tag: latest@sha256:144f16c747db2055104270952bf98830ecdae1e08a9a5a1a7b839adb78f764a1
+              tag: latest@sha256:9cac8287a99f33a84faacac3e45999c734131bb91686eab273bf832464fce86c
             env:
               DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
             securityContext:
