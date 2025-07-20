@@ -70,7 +70,7 @@ spec:
             nameOverride: *name
             image:
               repository: carlreid/streammaster
-              tag: v0.15.0
+              tag: 0.15.0
               pullPolicy: IfNotPresent
 
             env:
