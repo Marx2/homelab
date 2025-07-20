@@ -14,7 +14,7 @@ resources:
   - graphql-mesh
   - stooq-importer
   - redis
-  - ghostfolio
+  - ghostfolio/ks.yaml
   - stooq
   - postgrest
   - captchasolver
