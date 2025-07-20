@@ -24,7 +24,7 @@ resources:
   #- radarr
   #- qbittorrent
   - tvheadend
-  - calibre
+  - calibre/ks.yaml
   - calibre-web
   - silverbullet
   - nfs-media-images-pv.yaml

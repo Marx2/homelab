@@ -1,0 +1,106 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app calibre
+  namespace: media
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: app-template
+      version: 4.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 10m
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  values:
+
+    controllers:
+      calibre:
+        type: deployment
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/linuxserver/calibre
+              tag: 8.6.0
+
+            env:
+              TZ: ${TZ}
+              PUID: 1027
+              PGID: 100
+            #              FM_HOME: /media/calibre
+            #              UMASK_SET: 002
+
+            resources:
+              requests:
+                cpu: 0.003
+                memory: 249Mi
+              limits:
+                memory: 1Gi
+
+            probes:
+              startup:
+                spec:
+                  initialDelaySeconds: 60
+                  failureThreshold: 160
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: &port 8080
+
+      webserver:
+        controller: *app
+        primary: false
+        ports:
+          webserver:
+            enabled: true
+            port: 8081
+            protocol: TCP
+            targetPort: 8081
+
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "disc-player"
+          hajimari.io/group: "media"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: nfs-media-ebook-pvc
+      nfs-nas-media:
+        enabled: true
+        type: emptyDir
+        mountPath: /data
+        readOnly: false
+
