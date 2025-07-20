@@ -1,8 +1,3 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: capacitor
-  namespace: flux-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -33,13 +28,13 @@ rules:
       - infra.contrib.fluxcd.io
     resources:
       - gitrepositories
-      - ocirepositories
-      - buckets
       - helmrepositories
       - helmcharts
+      - ocirepositories
+      - buckets
+      - terraforms
       - kustomizations
       - helmreleases
-      - terraforms
     verbs:
       - get
       - watch
