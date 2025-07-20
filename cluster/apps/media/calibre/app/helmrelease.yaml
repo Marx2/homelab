@@ -98,8 +98,7 @@ spec:
       config:
         enabled: true
         existingClaim: nfs-media-ebook-pvc
-      nfs-nas-media:
+      media:
         type: emptyDir
         globalMounts:
           - path: /data
-        sizeLimit: 1Gi
