@@ -3,14 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app pinchflat
+  name: &app m3u-proxy
   namespace: flux-system
 spec:
   targetNamespace: media
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./cluster/apps/media/pinchflat/app
+  path: ./cluster/apps/media/m3u-proxy/app
   prune: true
   sourceRef:
     kind: GitRepository
