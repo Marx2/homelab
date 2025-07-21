@@ -18,7 +18,7 @@ resources:
   - nfs-media-pinchflat-pv.yaml
   - nfs-media-pinchflat-pvc.yaml
   - podsync
-  - jellyfin
+  - jellyfin/ks.yaml
   #- jackett
   #- sonarr
   #- radarr
