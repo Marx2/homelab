@@ -37,7 +37,7 @@ resources:
   - pinchflat/ks.yaml
   - threadfin
   - streammaster
-  - m3u-proxy
+  - m3u-proxy/ks.yaml
   - morphos/ks.yaml
   - bitmappery/ks.yaml
   - drawio/ks.yaml
