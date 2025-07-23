@@ -29,7 +29,7 @@ spec:
           drawio:
             image:
               repository: jgraph/drawio
-              tag: 28.0.5@sha256:7f34fa44685ebcf7263654e4add2e5120b7fb0cdcd02b1120e174d3e578670a8
+              tag: 28.0.6@sha256:a61f68115a9851054fefa8abc1aabd14b3782e55a2ef0baa4e190d6c9f3e8fc7
             env:
               TZ: ${TZ}
               DRAWIO_SELF_CONTAINED: "1"
