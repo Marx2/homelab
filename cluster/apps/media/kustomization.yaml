@@ -33,7 +33,7 @@ resources:
   - postgrescluster-media.yaml
   - immich
   - stirling-pdf
-  - tubearchivist
+  #- tubearchivist
   - pinchflat/ks.yaml
   - threadfin
   - streammaster
