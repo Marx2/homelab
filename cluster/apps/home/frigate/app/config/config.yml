@@ -5,7 +5,7 @@ logger:
   #   frigate.record: debug
 
 auth:
-  enabled: False
+  enabled: false
 
 tls:
   enabled: false
@@ -23,6 +23,7 @@ detectors:
   coral:
     type: edgetpu
     device: usb
+
 detect:
   enabled: true
   fps: 5
@@ -51,7 +52,8 @@ record:
     #        person: 30
 
 objects:
-  track: [person]
+  track:
+    - person
   filters:
     person:
       min_area: 5000
