@@ -23,6 +23,9 @@ detectors:
   coral:
     type: edgetpu
     device: usb
+detect:
+  enabled: true
+  fps: 5
 
 ffmpeg:
   global_args: [-hide_banner, -loglevel, info]
