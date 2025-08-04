@@ -5,7 +5,7 @@ logger:
   #   frigate.record: debug
 
 auth:
-  enabled: false
+  enabled: False
 
 tls:
   enabled: false
