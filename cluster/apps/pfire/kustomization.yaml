@@ -10,11 +10,11 @@ resources:
   - hasura
   #  - grafana
   - tooljet
-  - pgadmin
+  - pgadmin/ks.yaml
   - graphql-mesh
   - stooq-importer
   - redis
-  - ghostfolio/ks.yaml
+  #  - ghostfolio/ks.yaml
   - stooq
   - postgrest
   - captchasolver
