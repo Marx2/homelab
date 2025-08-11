@@ -17,7 +17,7 @@ resources:
   - nfs-media-tubearchivist-pvc.yaml
   - nfs-media-pinchflat-pv.yaml
   - nfs-media-pinchflat-pvc.yaml
-  - podsync
+  #  - podsync
   - jellyfin/ks.yaml
   #- jackett
   #- sonarr
