@@ -32,7 +32,7 @@ resources:
   - crunchy-postgres-secret.yaml
   - postgrescluster-media.yaml
   - immich
-  - stirling-pdf
+  - stirling-pdf/ks.yaml
   #- tubearchivist
   - pinchflat/ks.yaml
   - threadfin

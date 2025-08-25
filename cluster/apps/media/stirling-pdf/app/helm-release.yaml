@@ -32,14 +32,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: &context 1000
-            runAsGroup: *context
-            fsGroup: *context
-            fsGroupChangePolicy: OnRootMismatch
-
         containers:
           app:
             image:
@@ -50,6 +42,7 @@ spec:
             env:
               TZ: ${TZ}
               DOCKER_ENABLE_SECURITY: "false"
+              SYSTEM_ENABLEANALYTICS: "false"
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
 
             probes:
@@ -66,13 +59,22 @@ spec:
 
             securityContext:
               readOnlyRootFilesystem: true
-
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
                 memory: 550Mi
               limits:
                 memory: 775Mi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: &context 1000
+        runAsGroup: *context
+        fsGroup: *context
+        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
@@ -108,14 +110,14 @@ spec:
       configs:
         enabled: true
         type: emptyDir
-      logs:
-        enabled: true
-        type: emptyDir
-      tmp:
-        enabled: true
-        type: emptyDir
-      tessdata:
-        enabled: true
+      tmpfs:
         type: emptyDir
         globalMounts:
+          - path: /logs
+            subPath: logs
+          - path: /pipeline
+            subPath: pipeline
           - path: /usr/share/tessdata
+            subPath: tessdata
+          - path: /tmp
+            subPath: tmp
