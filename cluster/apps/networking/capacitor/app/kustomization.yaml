@@ -5,6 +5,3 @@ kind: Kustomization
 resources:
   - ./rbac.yaml
   - ./helmrelease.yaml
-commonLabels:
-  app.kubernetes.io/name: capacitor
-  app.kubernetes.io/instance: capacitor

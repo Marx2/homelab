@@ -28,13 +28,13 @@ rules:
       - infra.contrib.fluxcd.io
     resources:
       - gitrepositories
-      - helmrepositories
-      - helmcharts
       - ocirepositories
       - buckets
-      - terraforms
+      - helmrepositories
+      - helmcharts
       - kustomizations
       - helmreleases
+      - terraforms
     verbs:
       - get
       - watch
