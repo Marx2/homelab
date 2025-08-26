@@ -8,7 +8,7 @@ resources:
   - longhorn
   - system
   - cert-manager
-  #  - system-upgrade
+  - system-upgrade
   - home
   - media
   - default
