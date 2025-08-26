@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.16.0/crd.yaml
   - rbac.yaml
-#  - helmrelease.yaml
+  - helmrelease.yaml
