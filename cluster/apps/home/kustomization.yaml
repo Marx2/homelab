@@ -5,7 +5,7 @@ resources:
   - namespace.yaml
   - forecastle
   #  - syncthing
-  - vernemq
+  #  - vernemq
   - hajimari
   - firefox
   - sshwifty
