@@ -15,4 +15,4 @@ resources:
   - privatebin
   - pictshare
   - keda/ks.yaml
-  - capacitor/ks.yaml
+#  - capacitor/ks.yaml
