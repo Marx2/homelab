@@ -53,4 +53,4 @@ spec:
 
     extraEnv:
       - name: MARIADB_AUTO_UPGRADE
-        value: true
+        value: "true"
