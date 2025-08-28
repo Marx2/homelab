@@ -29,9 +29,7 @@ spec:
       retries: 3
 
   values:
-    logLevel: debug
-    image:
-      repository: ghcr.io/mariadb-operator/mariadb-operator
+    logLevel: DEBUG
 
     metrics:
       enabled: true
