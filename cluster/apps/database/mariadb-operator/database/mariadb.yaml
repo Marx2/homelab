@@ -49,3 +49,7 @@ spec:
 
   metrics:
     enabled: true
+
+  extraEnv:
+    - name: MARIADB_AUTO_UPGRADE
+      value: true
