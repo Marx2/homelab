@@ -39,11 +39,12 @@ spec:
         enabled: true
 
     webhook:
-      certificate:
-        certManager: true
+      cert:
+        certManager:
+          enabled: true
 
-      serviceMonitor:
-        enabled: true
+    serviceMonitor:
+      enabled: true
 
     extraEnv:
       - name: MARIADB_AUTO_UPGRADE
