@@ -29,7 +29,10 @@ spec:
       retries: 3
 
   values:
-    logLevel: debug
+    crds:
+      enable: true
+
+    logLevel: DEBUG
 
     metrics:
       enabled: true
@@ -47,6 +50,3 @@ spec:
     extraEnv:
       - name: MARIADB_AUTO_UPGRADE
         value: true
-
-    crds:
-      enable: true
