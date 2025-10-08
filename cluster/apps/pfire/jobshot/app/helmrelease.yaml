@@ -26,7 +26,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  serviceAccountName: jobshot
   values:
     defaultPodOptions:
       automountServiceAccountToken: true
@@ -74,37 +73,39 @@ spec:
         tls:
           - hosts:
               - *host
-#    probes:
-#      liveness:
-#        enabled: true
-#        custom: true
-#        spec:
-#          initialDelaySeconds: 30
-#          periodSeconds: 10
-#          timeoutSeconds: 1
-#          failureThreshold: 3
-#          httpGet:
-#            path: /terms
-#            port: *port
-#        readiness:
-#          enabled: true
-#          custom: true
-#          spec:
-#            initialDelaySeconds: 30
-#            periodSeconds: 10
-#            timeoutSeconds: 1
-#            failureThreshold: 3
-#            httpGet:
-#              path: /terms
-#              port: *port
-#        startup:
-#          enabled: true
-#          custom: true
-#          spec:
-#            initialDelaySeconds: 0
-#            timeoutSeconds: 1
-#            periodSeconds: 5
-#            failureThreshold: 30
-#            httpGet:
-#              path: /terms
-#              port: *port
+    serviceAccount:
+      jobshot:
+        enabled: true
+
+    rbac:
+      roles:
+        jobshot-job-runner:
+          # -- Enables or disables the Role. Can be templated.
+          enabled: true
+          # -- Set to Role,ClusterRole
+          type: Role
+          rules:
+            - apiGroups: ["batch"]
+              resources: ["jobs"]
+              verbs: ["create","get","list","watch"]
+            - apiGroups: [""]
+              resources: ["pods"]
+              verbs: ["get","list","watch"]
+            - apiGroups: [""]
+              resources: ["namespaces"]
+              verbs: ["get","list"]
+      bindings:
+        jobshot-job-runner-binding:
+          # -- Enables or disables the Role. Can be templated.
+          enabled: true
+          # -- Set to RoleBinding,ClusterRoleBinding
+          type: RoleBinding
+          # -- Can be an identifier of rbac.roles or a custom name and kind
+          roleRef:
+            name: jobshot-job-runner
+            kind: Role
+          # -- If using an identifier it will be automatically filled, otherwise every key will need to be explicitly declared
+          subjects:
+            - kind: ServiceAccount
+              name: jobshot
+              namespace: "{{ .Release.Namespace }}"
