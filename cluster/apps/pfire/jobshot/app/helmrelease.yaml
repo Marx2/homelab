@@ -29,7 +29,7 @@ spec:
   serviceAccountName: jobshot
   values:
     defaultPodOptions:
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
     controllers:
       jobshot:
         annotations:
