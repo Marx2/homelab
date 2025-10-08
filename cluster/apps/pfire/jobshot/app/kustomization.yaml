@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - serviceaccount.yaml
   - clusterrolebinding.yaml
+  - helmrelease.yaml
