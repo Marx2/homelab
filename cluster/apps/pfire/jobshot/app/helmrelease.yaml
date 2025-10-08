@@ -62,7 +62,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/info: UI to run Kubernetes jobs.
         hosts:
-          - host: *host
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
