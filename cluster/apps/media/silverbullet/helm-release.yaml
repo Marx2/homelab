@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: docker.io/zefhemel/silverbullet
-              tag: '2.1.8'
+              tag: '2.1.9'
             env:
               TZ: ${TIMEZONE}
             probes:
