@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/jobshot
-              tag: 1.0.5
+              tag: 1.0.6
             env:
               APP_TIMEZONE: ${TZ}
               VITE_K8S_API: "https://192.168.1.13:6443"
