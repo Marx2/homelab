@@ -95,7 +95,7 @@ spec:
               resources: ["namespaces"]
               verbs: ["get","list"]
       bindings:
-        jobshot-job-runner-binding:
+        jobshot:
           # -- Enables or disables the Role. Can be templated.
           enabled: true
           # -- Set to RoleBinding,ClusterRoleBinding
