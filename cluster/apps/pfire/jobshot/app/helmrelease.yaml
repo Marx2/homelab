@@ -79,7 +79,7 @@ spec:
 
     rbac:
       roles:
-        jobshot-job-runner:
+        jobshot:
           # -- Enables or disables the Role. Can be templated.
           enabled: true
           # -- Set to Role,ClusterRole
@@ -102,7 +102,7 @@ spec:
           type: RoleBinding
           # -- Can be an identifier of rbac.roles or a custom name and kind
           roleRef:
-            name: jobshot-job-runner
+            name: jobshot
             kind: Role
             apiGroup: rbac.authorization.k8s.io
           # -- If using an identifier it will be automatically filled, otherwise every key will need to be explicitly declared
