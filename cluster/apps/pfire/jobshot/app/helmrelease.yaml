@@ -104,6 +104,7 @@ spec:
           roleRef:
             name: jobshot-job-runner
             kind: Role
+            apiGroup: rbac.authorization.k8s.io
           # -- If using an identifier it will be automatically filled, otherwise every key will need to be explicitly declared
           subjects:
             - kind: ServiceAccount
