@@ -32,7 +32,7 @@ spec:
     controllers:
       jobshot:
         annotations:
-          reloader.stakater.com/auto: "true"
+          configmap.reloader.stakater.com/reload: &config jobshot-jobs
         containers:
           app:
             image:
@@ -112,7 +112,7 @@ spec:
     persistence:
       config-file:
         type: configMap
-        name: jobshot-jobs
+        name: *config
         globalMounts:
           - path: /app/config/jobs.yaml
             subPath: jobs.yaml
