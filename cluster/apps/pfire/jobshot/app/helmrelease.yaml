@@ -114,6 +114,6 @@ spec:
         type: configMap
         name: jobshot-jobs
         globalMounts:
-          - path: /app/config/jobs.yml
-            subPath: jobs.yml
+          - path: /app/config/jobs.yaml
+            subPath: jobs.yaml
             readOnly: true
