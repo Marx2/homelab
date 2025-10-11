@@ -86,7 +86,7 @@ spec:
           rules:
             - apiGroups: ["batch"]
               resources: ["jobs"]
-              verbs: ["create","get","list","watch"]
+              verbs: ["create","get","list","watch","delete"]
             - apiGroups: [""]
               resources: ["pods"]
               verbs: ["get","list","watch"]
