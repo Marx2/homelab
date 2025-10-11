@@ -6,7 +6,7 @@ resources:
 configMapGenerator:
   - name: jobshot-jobs
     files:
-      - jobs.yml=./config/jobs.yaml
+      - jobs.yaml=./config/jobs.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
