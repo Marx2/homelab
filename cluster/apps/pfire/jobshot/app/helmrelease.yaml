@@ -109,3 +109,11 @@ spec:
             - kind: ServiceAccount
               name: jobshot
               namespace: "{{ .Release.Namespace }}"
+    persistence:
+      config-file:
+        type: configMap
+        name: jobshot-configmap
+        globalMounts:
+          - path: /app/config/jobs.yml
+            subPath: jobs.yml
+            readOnly: true

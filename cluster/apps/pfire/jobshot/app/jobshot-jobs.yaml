@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jobshot-jobs
+  namespace: pfire
+data:
+  jobs.yaml: |-
+    jobs:
+      - name: "Test container"
+        description: "Run an alpine echo."
+        container: "alpine:latest"
+        entrypoint: ["/bin/sh", "-c"]
+        parameters: ["echo 'Job completed successfully!'"]
+        namespace: "pfire"
+      - name: "Backup Database"
+        description: "Run a one-time backup of the main database."
+        container: "backup-db:latest"
+        entrypoint: ["/bin/sh", "-c"]
+        parameters:
+          - "--db=main"
+          - "--output=/backup"
+        namespace: "pfire"
