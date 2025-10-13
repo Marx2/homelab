@@ -20,7 +20,7 @@ resources:
   - captchasolver
   - swaggerui
   - pgdb
-  - cafe
+  - cafe/ks.yaml
   #  - grist
   #  - investbrain/ks.yaml
   - jobshot/ks.yaml
