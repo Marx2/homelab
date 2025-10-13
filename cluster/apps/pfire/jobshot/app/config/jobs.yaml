@@ -1,15 +1,15 @@
 jobs:
+  - name: "Scan single ticker"
+    description: "Run scan of single ticker."
+    container: "ghcr.io/marx2/cafe:2.0.0"
+    entrypoint: ["npx", "testcafe chrome start.js"]
+    parameters:
+      - "-tickers=MSFT"
+      - "-metrics=./custom-metrics.yaml"
+    namespace: "pfire"
   - name: "Test container"
     description: "Run an alpine echo."
     container: "alpine:latest"
     entrypoint: ["/bin/sh", "-c"]
     parameters: ["echo 'Job completed successfully!'"]
-    namespace: "pfire"
-  - name: "Backup Database"
-    description: "Run a one-time backup of the main database."
-    container: "backup-db:latest"
-    entrypoint: ["/bin/sh", "-c"]
-    parameters:
-      - "--db=main"
-      - "--output=/backup"
     namespace: "pfire"
