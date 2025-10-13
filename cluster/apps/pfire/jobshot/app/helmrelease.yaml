@@ -29,8 +29,6 @@ spec:
   values:
     defaultPodOptions:
       automountServiceAccountToken: true
-      imagePullSecrets:
-        - name: regcred
     controllers:
       jobshot:
         annotations:
@@ -77,6 +75,8 @@ spec:
     serviceAccount:
       jobshot:
         enabled: true
+        imagePullSecrets:
+          - name: regcred
 
     rbac:
       roles:
