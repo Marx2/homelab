@@ -8,13 +8,11 @@ jobs:
       - "--metrics=./custom-metrics.yaml"
     namespace: "pfire"
 
-  - name: "Test logs"
-    description: "Run scan of single ticker."
+  - name: "List testcafe browsers"
+    description: "List available browsers in TestCafe container."
     container: "ghcr.io/marx2/cafe:2.0.4"
-    entrypoint: ["./run-tests.sh"]
-    parameters:
-      - "--tickers=MSFT"
-      - "--metrics=./custom-metrics.yaml"
+    entrypoint: ["npx", "testcafe", "--list-browsers"]
+    parameters: []
     namespace: "pfire"
 
   - name: "Test container"
