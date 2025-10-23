@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: louislam/uptime-kuma
-              tag: "1.23.16"
+              tag: "1.23.17"
             env:
               TZ: "${TZ}"
               UPTIME_KUMA_PORT: 3001
