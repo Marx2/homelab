@@ -1,7 +1,7 @@
 jobs:
   - name: "Scan single ticker"
     description: "Run scan of single ticker."
-    container: "ghcr.io/marx2/cafe:2.0.5"
+    container: "ghcr.io/marx2/cafe:latest"
     entrypoint: ["bash", "./run-tests.sh"]
     parameters:
       - "--tickers=MSFT"
