@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -71,7 +71,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: &tag v1.144.1
+              tag: &tag v2.1.0
             env: &env
               - name: DB_URL_INCOMPLETE
                 valueFrom:
@@ -124,7 +124,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v1.144.1
+              tag: v2.1.0
             envFrom: *envFrom
             env: *env
             resources:
@@ -138,7 +138,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/redis
-              tag: 8.2.2@sha256:f0957bcaa75fd58a9a1847c1f07caf370579196259d69ac07f2e27b5b389b021
+              tag: 8.2.2@sha256:4521b581dbddea6e7d81f8fe95ede93f5648aaa66a9dacd581611bf6fe7527bd
 
     service:
       immich:

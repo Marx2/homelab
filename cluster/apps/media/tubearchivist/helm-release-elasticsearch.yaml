@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: elasticsearch
-              tag: 9.1.5
+              tag: 9.2.0
             env:
               xpack.security.enabled: "true"
               discovery.type: "single-node"

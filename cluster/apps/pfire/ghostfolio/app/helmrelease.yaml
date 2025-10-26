@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: docker.io/ghostfolio/ghostfolio
-              tag: 2.208.0@sha256:1dd62767202f533a4a95d0287714760c359057131c5d96e21b9d4f8067430541
+              tag: 2.211.0@sha256:2cee694919d35acaaf83a12a5b8f058aee969f83868dc20177e435c4f3ac9f70
             env:
               - name: PGUSER
                 valueFrom:

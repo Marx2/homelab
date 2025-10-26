@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/analogj/scrutiny
-              tag: master-collector@sha256:de04d8229c3977a437edd4aca96f3413464f5dbbef910cc64067cfdc5e330624
+              tag: master-collector@sha256:ea3989639fc43234c0315a7cdfaa21b750da140896a74a4cfd71965ef748cb3c
             env:
               COLLECTOR_API_ENDPOINT: http://scrutiny.monitoring.svc.cluster.local:8080
               COLLECTOR_HOST_ID:

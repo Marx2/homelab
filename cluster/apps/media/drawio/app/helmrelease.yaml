@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.3.0
+      version: 4.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -29,7 +29,7 @@ spec:
           drawio:
             image:
               repository: jgraph/drawio
-              tag: 28.2.5@sha256:8a3328c7090fb1038edbb278d019283301e4194a26d7585c43e2b2c89d8c5bfb
+              tag: 28.2.8@sha256:b8b579ac50c7aec2250050e66e6f7b376be608f7694b22068ab0b466906f90ea
             env:
               TZ: ${TZ}
               DRAWIO_SELF_CONTAINED: "1"
@@ -56,7 +56,7 @@ spec:
           export: # shit ain't working yet...
             image:
               repository: jgraph/export-server
-              tag: latest@sha256:0cf8c52ef4c5613e7e056c3f68effe33f5b37969d6e69aef8a054a22a19cc58c
+              tag: latest@sha256:a588cb89a5e521674b844d809408079194cd3512094263f7bad29b1523fb9ffb
             env:
               DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
             securityContext:
