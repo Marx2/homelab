@@ -23,6 +23,7 @@ The host you're running Ansible from requires the following Python dependencies:
 
   - `python >= 3.6.0` - [See Notes below](#important-note-about-python).
   - `ansible >= 2.9.16` or `ansible-base >= 2.10.4`
+  - `netaddr >= 1.3.0` - Required for dual-stack IP address handling
 
 You can install dependencies using the requirements.txt file in this repository:
 `pip3 install -r requirements.txt`.
@@ -30,16 +31,17 @@ You can install dependencies using the requirements.txt file in this repository:
 This role has been tested against the following Linux Distributions:
 
   - Alpine Linux
-  - Amazon Linux 2
   - Archlinux
   - CentOS 8
   - Debian 11
-  - Fedora 31
-  - Fedora 32
-  - Fedora 33
+  - Debian 12
+  - Fedora 41
+  - Fedora 42
   - openSUSE Leap 15
-  - RockyLinux 8
-  - Ubuntu 20.04 LTS
+  - RockyLinux 9
+  - RockyLinux 10
+  - Ubuntu 22.04 LTS
+  - Ubuntu 24.04 LTS
 
 :warning: The v3 releases of this role only supports `k3s >= v1.19`, for
 `k3s < v1.19` please consider updating or use the v1.x releases of this role.
@@ -106,6 +108,8 @@ for more information.
 | `k3s_service_after`    | Start k3s after a defined list of systemd units.                     | []\*          |
 | `k3s_service_env_vars` | Dictionary of environment variables to use within systemd unit file. | {}            |
 | `k3s_service_env_file` | Location on host of a environment file to include.                   | `false`\*\*   |
+| `k3s_service_cpu_limit` | Limit the cpu usage, e.g. to 2 CPUs set value to `200%``            |      N/A      |
+| `k3s_service_memory_limit` | Limit the memory usage, e.g for 4G set value to `4G`             |      N/A      |
 
 \* The systemd unit template **always** specifies `network-online.target` for
 `wants` and `after`.
