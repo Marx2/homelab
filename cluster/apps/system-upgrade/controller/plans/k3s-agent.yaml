@@ -14,9 +14,10 @@ spec:
   prepare:
     image: rancher/k3s-upgrade
     args: ["prepare", "k3s-server"]
-  drain:
-    force: true
-    ignoreDaemonSets: true
-    skipWaitForDeleteTimeout: 60 # 1.18+ (honor pod disruption budgets up to 60 seconds per pod then moves on)
+  cordon: true
+  #  drain:
+  #    force: true
+  #    ignoreDaemonSets: true
+  #    skipWaitForDeleteTimeout: 60 # 1.18+ (honor pod disruption budgets up to 60 seconds per pod then moves on)
   upgrade:
     image: rancher/k3s-upgrade
