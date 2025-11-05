@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: git-api-token
-  namespace: flux-system
-type: Opaque
-stringData:
-  token: ${SEALED_GITHUB_API_TOKEN}
