@@ -35,7 +35,7 @@ resources:
   - stirling-pdf/ks.yaml
   #- tubearchivist
   - pinchflat/ks.yaml
-  - threadfin
+  #  - threadfin
   - streammaster
   - m3u-proxy/ks.yaml
   - morphos/ks.yaml
