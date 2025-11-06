@@ -84,7 +84,7 @@ spec:
               - name: APP_KEY
                 value: "${IB_APP_KEY}"
               - name: REGISTRATION_ENABLED
-                value: "false"
+                value: "true"
               # MARKET_DATA_PROVIDER: "yahoo" - default
               # ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               # APP_PORT: 443
@@ -119,47 +119,14 @@ spec:
         tls:
           - hosts:
               - *host
-#    persistence:
-#      storage1:
-#        type: emptyDir
-#        globalMounts:
-#          - path: /storage
-#      storage2:
-#        type: emptyDir
-#        globalMounts:
-#          - path: /var/app/storage
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 100Mi
+        retain: true
+        globalMounts:
+          - path: /var/app/storage
 
-#    probes:
-#      liveness:
-#        enabled: true
-#        custom: true
-#        spec:
-#          initialDelaySeconds: 30
-#          periodSeconds: 10
-#          timeoutSeconds: 1
-#          failureThreshold: 3
-#          httpGet:
-#            path: /terms
-#            port: *port
-#        readiness:
-#          enabled: true
-#          custom: true
-#          spec:
-#            initialDelaySeconds: 30
-#            periodSeconds: 10
-#            timeoutSeconds: 1
-#            failureThreshold: 3
-#            httpGet:
-#              path: /terms
-#              port: *port
-#        startup:
-#          enabled: true
-#          custom: true
-#          spec:
-#            initialDelaySeconds: 0
-#            timeoutSeconds: 1
-#            periodSeconds: 5
-#            failureThreshold: 30
-#            httpGet:
-#              path: /terms
-#              port: *port
