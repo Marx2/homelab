@@ -115,6 +115,16 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      storage1:
+        type: emptyDir
+        globalMounts:
+          - path: /storage
+      storage2:
+        type: emptyDir
+        globalMounts:
+          - path: /var/app/storage
+
 #    probes:
 #      liveness:
 #        enabled: true
