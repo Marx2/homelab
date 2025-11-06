@@ -39,22 +39,52 @@ spec:
               repository: investbrainapp/investbrain
               tag: 1.2.3
             env:
-              APP_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              APP_TIMEZONE: ${TZ}
-              DB_CONNECTION: "pgsql"
-              DB_HOST: "$(PGHOST)"
-              DB_PORT: 5432
-              DB_DATABASE: investbrain
-              DB_USERNAME: $(PGUSER)
-              DB_PASSWORD: $(PGPASSWORD)
-              SESSION_DRIVER: redis
-              QUEUE_CONNECTION: redis
-              CACHE_STORE: redis
-              REDIS_HOST: "ib-redis.pfire.svc.cluster.local"
+              - name: PGUSER
+                valueFrom:
+                  secretKeyRef:
+                    name: &pgsecret postgres-pfire-pguser-postgres
+                    key: user
+              - name: PGPASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: *pgsecret
+                    key: password
+              - name: PGHOST
+                valueFrom:
+                  secretKeyRef:
+                    name: *pgsecret
+                    key: host
+
+              - name: APP_URL
+                value: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              - name:
+                  APP_TIMEZONE: ${TZ}
+              - name: DB_CONNECTION
+                value: "pgsql"
+              - name: DB_HOST
+                value: "$(PGHOST)"
+              - name: DB_PORT
+                value: 5432
+              - name: DB_DATABASE
+                value: investbrain
+              - name: DB_USERNAME
+                value: $(PGUSER)
+              - name: DB_PASSWORD
+                value: $(PGPASSWORD)
+              - name: SESSION_DRIVER
+                value: redis
+              - name: QUEUE_CONNECTION
+                value: redis
+              - name: CACHE_STORE
+                value: redis
+              - name: REDIS_HOST
+                value: "ib-redis.pfire.svc.cluster.local"
               #              ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               #              APP_PORT: 443
-              APP_KEY: "${IB_APP_KEY}"
-              REGISTRATION_ENABLED: "false"
+              - name: APP_KEY
+                value: "${IB_APP_KEY}"
+              - name: REGISTRATION_ENABLED
+                value: "false"
               # MARKET_DATA_PROVIDER: "yahoo" - default
             resources:
               requests:
