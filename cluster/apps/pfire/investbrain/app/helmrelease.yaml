@@ -54,11 +54,10 @@ spec:
                   secretKeyRef:
                     name: *pgsecret
                     key: host
-
               - name: APP_URL
                 value: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              - name:
-                  APP_TIMEZONE: ${TZ}
+              - name: APP_TIMEZONE
+                value: ${TZ}
               - name: DB_CONNECTION
                 value: "pgsql"
               - name: DB_HOST
@@ -79,13 +78,13 @@ spec:
                 value: redis
               - name: REDIS_HOST
                 value: "ib-redis.pfire.svc.cluster.local"
-              #              ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-              #              APP_PORT: 443
               - name: APP_KEY
                 value: "${IB_APP_KEY}"
               - name: REGISTRATION_ENABLED
                 value: "false"
               # MARKET_DATA_PROVIDER: "yahoo" - default
+              # ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              # APP_PORT: 443
             resources:
               requests:
                 cpu: 100m
