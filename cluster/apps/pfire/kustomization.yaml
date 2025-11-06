@@ -22,5 +22,5 @@ resources:
   - pgdb
   - cafe/ks.yaml
   #  - grist
-  #  - investbrain/ks.yaml
+  - investbrain/ks.yaml
   - jobshot/ks.yaml
