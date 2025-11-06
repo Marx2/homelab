@@ -84,7 +84,7 @@ spec:
               - name: APP_KEY
                 value: "${IB_APP_KEY}"
               - name: REGISTRATION_ENABLED
-                value: "true"
+                value: "false"
               # MARKET_DATA_PROVIDER: "yahoo" - default
               # ASSET_URL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               # APP_PORT: 443
