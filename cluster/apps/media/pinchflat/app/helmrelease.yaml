@@ -46,8 +46,8 @@ spec:
               TZ_DATA_DIR: /tmp/elixir_tz_data
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+            #              readOnlyRootFilesystem: true
+            #              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
@@ -58,7 +58,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            runAsNonRoot: true
+            #            runAsNonRoot: true
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [10000]
