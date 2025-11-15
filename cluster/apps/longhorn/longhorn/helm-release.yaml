@@ -21,6 +21,8 @@ spec:
     crds: CreateReplace
   values:
     namespaceOverride: "longhorn"
+    preUpgradeChecker:
+      upgradeVersionCheck: true
     persistence:
       defaultFsType: ext4
       defaultClassReplicaCount: 2
