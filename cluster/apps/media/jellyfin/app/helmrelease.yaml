@@ -39,7 +39,7 @@ spec:
           main:
             image:
               repository: jellyfin/jellyfin
-              tag: 10.11.2
+              tag: 10.11.3
             env:
               TZ: ${TZ}
             resources:
