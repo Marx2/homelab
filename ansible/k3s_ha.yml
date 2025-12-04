@@ -4,7 +4,7 @@
   #become: true
   vars:
 #    k3s_release_version: stable #by default it's: stable
-    k3s_release_version: v1.32.8+k3s1
+    k3s_release_version: v1.34.1+k3s1
     # installed, started, stopped, downloaded, uninstalled, validated
     k3s_state: installed
 #    k3s_state: uninstalled
@@ -27,7 +27,7 @@
     - name: Set 3 nodes to be a control nodes
       ansible.builtin.set_fact:
         k3s_control_node: true
-      when: inventory_hostname in ['wezyr', 'wuwek', 'enigma']
+      when: inventory_hostname in ['wezyr', 'kaczka', 'kura']
   roles:
     - role: common
     - role: xanmanning.k3s

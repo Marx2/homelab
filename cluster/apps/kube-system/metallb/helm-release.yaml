@@ -28,3 +28,6 @@ spec:
       create: false
     prometheus:
       enabled: true
+    speaker:
+      frr:
+        enabled: false
