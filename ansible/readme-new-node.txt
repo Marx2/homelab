@@ -46,3 +46,10 @@ fs.inotify.max_user_instances=100000
 
 on plain Debian add missing NFS package:
 nfs-common
+
+on Proxmox 9 disable AppArmor:
+1. mcedit /etc/default/grub
+2.modify line to be:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet apparmor=0"
+3. update-grub
+4. reboot
