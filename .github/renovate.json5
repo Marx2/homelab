@@ -19,27 +19,37 @@
   dependencyDashboard: true,
   dependencyDashboardTitle: 'Renovate Dashboard 🤖',
   suppressNotifications: [
-    'prIgnoreNotification',
+    'prIgnoreNotification'
   ],
   rebaseWhen: 'conflicted',
+  ignorePaths: [
+    'ansible/**',
+    'dns/**',
+    'nas/**',
+    'router/**',
+    'tmpl/**',
+    'encode.py',
+    'readme.txt',
+    'Taskfile.yml'
+  ],
   'pre-commit': {
-    enabled: true,
+    enabled: true
   },
   flux: {
     fileMatch: [
-      'cluster/.+\\.ya?ml$',
-    ],
+      'cluster/.+\\.ya?ml$'
+    ]
   },
   'helm-values': {
     fileMatch: [
-      'cluster/.+\\.ya?ml$',
-    ],
+      'cluster/.+\\.ya?ml$'
+    ]
   },
   kubernetes: {
     fileMatch: [
       'ansible/.+\\.ya?ml.j2$',
-      'cluster/.+\\.ya?ml$',
-    ],
+      'cluster/.+\\.ya?ml$'
+    ]
   },
   customManagers: [
     {
@@ -47,13 +57,13 @@
       description: 'Process various other dependencies',
       fileMatch: [
         'ansible/.+\\.ya?ml$',
-        'cluster/.+\\.ya?ml$',
+        'cluster/.+\\.ya?ml$'
       ],
       matchStrings: [
-        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?"(?<currentValue>.*)"\n',
+        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?"(?<currentValue>.*)"\n'
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
-      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
-    },
-  ],
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}'
+    }
+  ]
 }
