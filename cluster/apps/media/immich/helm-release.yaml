@@ -71,7 +71,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: &tag v2.5.0
+              tag: &tag v2.5.2
             env: &env
               - name: DB_URL_INCOMPLETE
                 valueFrom:
@@ -124,7 +124,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v2.5.0
+              tag: v2.5.2
             envFrom: *envFrom
             env: *env
             resources:
