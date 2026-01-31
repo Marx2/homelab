@@ -47,12 +47,16 @@ spec:
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
 
             probes:
-              liveness:
+              liveness: &probe
                 enabled: true
-              readiness:
-                enabled: true
+                type: HTTP
+                path: /api/v1/info/status
+              readiness: *probe
               startup:
-                enabled: true
+                <<: *probe
+                spec:
+                  failureThreshold: 90
+                  periodSeconds: 5
 
             resources:
               requests:
