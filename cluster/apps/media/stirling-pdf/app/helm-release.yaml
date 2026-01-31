@@ -43,24 +43,17 @@ spec:
               TZ: ${TZ}
               DOCKER_ENABLE_SECURITY: "false"
               SYSTEM_ENABLEANALYTICS: "false"
+              SYSTEM_GOOGLEVISIBILITY: "false"
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
 
             probes:
-              liveness: &probe
+              liveness:
                 enabled: true
-                type: HTTP
-                path: /api/v1/info/status
-              readiness: *probe
+              readiness:
+                enabled: true
               startup:
-                <<: *probe
-                spec:
-                  failureThreshold: 90
-                  periodSeconds: 5
+                enabled: true
 
-            securityContext:
-              readOnlyRootFilesystem: true
-              allowPrivilegeEscalation: false
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m

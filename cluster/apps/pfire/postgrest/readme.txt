@@ -10,3 +10,4 @@ create role web_anon nologin;
 
 grant usage on schema attributes to web_anon;
 grant select on attributes to web_anon;
+grant select on latest_attributes to web_anon;
