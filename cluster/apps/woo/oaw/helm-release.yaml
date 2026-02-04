@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: wordpress
-      tag: 6.9.0-php8.3-apache
+      tag: 6.9.1-php8.3-apache
     #    env:
     #      TZ: ${TZ}
     externalDatabase:
