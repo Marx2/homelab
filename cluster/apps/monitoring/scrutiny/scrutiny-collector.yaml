@@ -24,7 +24,7 @@ spec:
             path: /run/udev
       containers:
         - name: scrutiny-collector
-          image: ghcr.io/analogj/scrutiny:v0.8.1-collector
+          image: ghcr.io/analogj/scrutiny:v0.8.2-collector
           resources:
             limits:
               cpu: 100m
