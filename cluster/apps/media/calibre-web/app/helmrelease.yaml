@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/bjw-s-labs/calibre-web
-              tag: 0.6.25
+              tag: 0.6.26
             env:
               CACHE_DIR: /cache
               PUID: 1027
