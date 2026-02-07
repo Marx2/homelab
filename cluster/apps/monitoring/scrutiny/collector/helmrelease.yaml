@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/analogj/scrutiny
-              tag: master-collector@sha256:6adb51b7297015d89e771d51aee6b5b984661c83fb8c123d79262cf904d19512
+              tag: master-collector@sha256:06a274b34a8fc649c89a31ba0abea2b8a4c940fa5b6d0b620e58db40c3fcda0a
             env:
               COLLECTOR_API_ENDPOINT: http://scrutiny.monitoring.svc.cluster.local:8080
               COLLECTOR_HOST_ID:
