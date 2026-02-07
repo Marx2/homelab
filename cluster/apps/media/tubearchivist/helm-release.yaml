@@ -51,7 +51,7 @@ spec:
           app:
             image:
               repository: bbilly1/tubearchivist
-              tag: v0.5.8
+              tag: v0.5.9
             env:
               ES_URL: "http://ta-elasticsearch.media.svc.cluster.local:9200"
               REDIS_HOST: "ta-redis.media.svc.cluster.local"
