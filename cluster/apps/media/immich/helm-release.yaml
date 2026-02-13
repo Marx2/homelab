@@ -39,7 +39,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/home-operations/postgres-init
-              tag: "18.1.0"
+              tag: "18.2.0"
             env:
               - name: INIT_POSTGRES_DBNAME
                 valueFrom:
