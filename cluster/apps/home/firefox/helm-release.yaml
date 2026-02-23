@@ -69,7 +69,7 @@ spec:
             nameOverride: *name
             image:
               repository: docker.io/jlesage/firefox
-              tag: v26.02.2
+              tag: v26.02.3
               pullPolicy: IfNotPresent
 
             env:
