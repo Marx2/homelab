@@ -39,3 +39,4 @@ resources:
   - tooljet-charts.yaml
   - emqx.yaml
   - intel.yaml
+  - karpor.yaml
