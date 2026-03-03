@@ -10,3 +10,5 @@ resources:
   - speedtest-exporter
   - scrutiny/ks.yaml
   - uptime-kuma/ks.yaml
+  - karpor/ks.yaml
+
