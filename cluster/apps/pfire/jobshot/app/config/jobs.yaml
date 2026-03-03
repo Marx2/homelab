@@ -14,6 +14,9 @@ jobs:
     entrypoint: ["python", "main.py"]
     parameters:
       - "MSFT"
+    env:
+      SCRAB_USERNAME: "your_username"
+      SCRAB_PASSWORD: "your_password"
     namespace: "pfire"
 
   - name: "List testcafe browsers"
