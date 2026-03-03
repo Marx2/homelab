@@ -13,8 +13,7 @@ jobs:
     container: "ghcr.io/marx2/scanst:latest"
     entrypoint: ["python", "main.py"]
     parameters:
-      - "--tickers=MSFT"
-      - "--metrics=./custom-metrics.yaml"
+      - "MSFT"
     namespace: "pfire"
 
   - name: "List testcafe browsers"
