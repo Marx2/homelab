@@ -9,6 +9,7 @@ jobs:
     env:
       SCRAB_USERNAME: "your_username"
       SCRAB_PASSWORD: "your_password"
+      GRAPHQL_ENDPOINT: "http://graphql-mesh:80/graphql"
     resources:
       requests:
         cpu: "250m"
