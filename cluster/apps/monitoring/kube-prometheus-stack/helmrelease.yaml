@@ -85,6 +85,7 @@ spec:
           access: proxy
           basicAuth: false
           editable: false
+          isDefault: false
           type: loki
           url: http://loki:3100
     serviceMonitor:
