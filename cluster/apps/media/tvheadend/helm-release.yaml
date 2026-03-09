@@ -27,8 +27,6 @@ spec:
       RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
     controller:
       strategy: Recreate
-    nodeSelector:
-      k3s.io/hostname: "wezyr"
     ingress:
       main:
         enabled: true
@@ -58,16 +56,6 @@ spec:
         enabled: true
         existingClaim: nfs-recordings-omv-pvc
         mountPath: "/recordings"
-      dvb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/dvb
-        mountPath: "/dev/dvb"
-      dri:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/dri
-        mountPath: "/dev/dri"
     service:
       main:
         type: LoadBalancer
