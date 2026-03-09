@@ -27,7 +27,7 @@
     - name: Set 3 nodes to be a control nodes
       ansible.builtin.set_fact:
         k3s_control_node: true
-      when: inventory_hostname in ['wezyr', 'kaczka', 'kura']
+      when: inventory_hostname in ['kaczka', 'kura', 'indyk']
   roles:
     - role: common
     - role: xanmanning.k3s
