@@ -1,11 +1,12 @@
 Adding new node:
-- add DHCP entry in router
+- add DHCP?DNS entry in router
 - add Pi-hole Local DNS entry
 - set /etc/resolv.conf content to:
-nameserver 192.168.1.201
+NOT USED nameserver 192.168.1.201
+nameserver 192.168.1.1
 - add SSH keys: 
   ssh-copy-id root@<new host>
-- remove search... from /etc/resolv.conf 
+- remove search... from /etc/resolv.conf (?)
 - add packages:
   apt-get install aptitude mc
 - update:
