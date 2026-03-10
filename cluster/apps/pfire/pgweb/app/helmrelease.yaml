@@ -42,7 +42,7 @@ spec:
               tag: 0.17.0
 
             env:
-              DATABASE_URL: postgres-media-primary.media.svc://postgres:${SECRET_POSTGRESQL_PASS}@host:5432/dbname?sslmode=disable
+              DATABASE_URL: postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-media-primary.media.svc:5432/dbname?sslmode=disable
 
             resources:
               requests:
