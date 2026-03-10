@@ -24,3 +24,4 @@ resources:
   #  - grist
   - investbrain/ks.yaml
   - jobshot/ks.yaml
+  - pgweb/ks.yaml
