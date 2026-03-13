@@ -39,5 +39,5 @@ spec:
                 - name: GRAPHQL_ENDPOINT
                   value: "http://graphql-mesh:80/graphql"
                 - name: DELAY_BETWEEN_METRICS
-                  value: "5"
+                  value: "1.5"
 
