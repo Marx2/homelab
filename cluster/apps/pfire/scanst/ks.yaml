@@ -3,14 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cafe
+  name: &app scanst
   namespace: flux-system
 spec:
   targetNamespace: pfire
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./cluster/apps/pfire/cafe/app
+  path: ./cluster/apps/pfire/scanst/app
   prune: true
   sourceRef:
     kind: GitRepository
