@@ -24,6 +24,7 @@ spec:
             - name: scanst
               image: ghcr.io/marx2/scanst:v1.0.9
               imagePullPolicy: IfNotPresent
+              args: ["--headless"]
               envFrom:
                 - configMapRef:
                     name: scanst-tickers
@@ -40,4 +41,3 @@ spec:
                   value: "http://graphql-mesh:80/graphql"
                 - name: DELAY_BETWEEN_METRICS
                   value: "1.5"
-
