@@ -32,6 +32,22 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        initContainers:
+          init-symlink:
+            image:
+              repository: ghcr.io/stirling-tools/s-pdf
+              tag: 2.7.2
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                echo "Copying /usr/local/bin to emptyDir...";
+                cp -a /usr/local/bin/* /mnt/usr-local-bin/ 2>/dev/null || true;
+                ln -sf /opt/stirling-pdf/diagnostics /mnt/usr-local-bin/diagnostics;
+                echo "Done. Contents:"; ls -la /mnt/usr-local-bin/;
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+
         containers:
           app:
             image:
@@ -40,8 +56,10 @@ spec:
               pullPolicy: IfNotPresent
 
             securityContext:
-              runAsUser: 0
-              runAsGroup: 0
+              runAsNonRoot: true
+              runAsUser: 1000
+              runAsGroup: 1000
+              allowPrivilegeEscalation: false
 
             env:
               TZ: ${TZ}
@@ -106,6 +124,14 @@ spec:
       configs:
         enabled: true
         type: emptyDir
+      usr-local-bin:
+        type: emptyDir
+        advancedMounts:
+          stirling-pdf:
+            init-symlink:
+              - path: /mnt/usr-local-bin
+            app:
+              - path: /usr/local/bin
       tmpfs:
         type: emptyDir
         globalMounts:
