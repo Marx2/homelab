@@ -7,7 +7,7 @@ resources:
   - wildcard-certificate
   - ddns-job
   - k8s_gateway
-  - oauth2-proxy
+  - oauth2-proxy/ks.yaml
   - dex
   #- authelia
   #- authentik
