@@ -16,9 +16,6 @@ spec:
         name: oauth2-proxy
         namespace: flux-system
   values:
-    image:
-      repository: "quay.io/oauth2-proxy/oauth2-proxy"
-      tag: "v7.14.3"
     replicaCount: 1
     ingress:
       enabled: true
