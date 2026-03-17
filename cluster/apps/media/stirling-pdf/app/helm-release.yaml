@@ -39,6 +39,10 @@ spec:
               tag: 2.7.2
               pullPolicy: IfNotPresent
 
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+
             env:
               TZ: ${TZ}
               DOCKER_ENABLE_SECURITY: "false"
@@ -67,13 +71,6 @@ spec:
               limits:
                 memory: 775Mi
 
-    #    defaultPodOptions:
-    #      securityContext:
-    #        runAsNonRoot: true
-    #        runAsUser: &context 1000
-    #        runAsGroup: *context
-    #        fsGroup: *context
-    #        fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
