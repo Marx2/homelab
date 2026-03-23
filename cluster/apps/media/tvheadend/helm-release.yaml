@@ -41,6 +41,17 @@ spec:
     #            securityContext:
     #              privileged: true
     # RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
+          epg-updater:
+            image:
+              repository: alpine
+              tag: latest
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                apk add --no-cache socat wget && \
+                wget -q -O - http://epg.ovh/pl.xml | socat - UNIX-CONNECT:/config/epggrab/xmltv.sock && \
+                echo '0 */6 * * * wget -q -O - http://epg.ovh/pl.xml | socat - UNIX-CONNECT:/config/epggrab/xmltv.sock' > /etc/crontabs/root && \
+                crond -f -l 6
 
     service:
       tvheadend:
@@ -57,10 +68,6 @@ spec:
             enabled: true
             protocol: TCP
             port: 9982
-          http2:
-            enabled: true
-            port: 9983
-            targetPort: 9983
 
     ingress:
       app:
