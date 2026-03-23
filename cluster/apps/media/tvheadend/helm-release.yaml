@@ -2,65 +2,52 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tvheadend
+  name: &app tvheadend
   namespace: media
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: tvheadend
-      version: 5.4.2
+      chart: app-template
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-  timeout: 20m
+      interval: 15m
   values:
-    image:
-      repository: linuxserver/tvheadend
-      tag: version-26ec161f
-    env:
-      TZ: ${TZ}
-      PUID: 1000
-      PGID: 1000
-      RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
-    controller:
-      strategy: Recreate
-    ingress:
-      main:
-        enabled: true
-        # ingressClassName: "nginx"
-        annotations:
-          kubernetes.io/ingress.class: "nginx"
-          #forecastle.stakater.com/icon: "https://avatars.githubusercontent.com/u/1908588?s=400&v=4"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "record-rec"
-          hajimari.io/group: "media"
-        hosts:
-        - host: "tvheadend.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
-            service:
-              name: tvheadend
-              port: 80
-        tls:
-        - hosts:
-          - "tvheadend.${SECRET_DOMAIN}"
-    persistence:
-      config:
-        enabled: true
-        existingClaim: config-tvheadend-pvc
-      recordings-omv:
-        enabled: true
-        existingClaim: nfs-recordings-omv-pvc
-        mountPath: "/recordings"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+    #        supplementalGroups:
+    #          - 44
+    #          - 212
+    #          - 109
+
+    controllers:
+      tvheadend:
+        containers:
+          tvheadend:
+            image:
+              repository: registry.skysolutions.fi/library/tvheadend
+              tag: 4.3.10225@sha256:cae945e9e44023ac38cf9b8201271a05a79de8d7e94ad1799a3a1501737b1690
+            command: "/entrypoint.sh"
+            args: ["--noacl"]
+            env:
+              TZ: "${TZ}"
+    #            securityContext:
+    #              privileged: true
+    # RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
+
     service:
-      main:
+      tvheadend:
+        controller: tvheadend
         type: LoadBalancer
-        externalIPs: 
-        - 192.168.1.211
+        externalIPs:
+          - 192.168.1.211
         ports:
           http:
             enabled: true
@@ -74,12 +61,51 @@ spec:
             enabled: true
             port: 9983
             targetPort: 9983
-    securityContext:
-      privileged: true
+
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/proxy-body-size: 50m
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "home-lightning-bolt-outline"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: tvheadend
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: config-tvheadend-pvc
+        globalMounts:
+          - path: /config
+      recordings-omv:
+        enabled: true
+        existingClaim: nfs-recordings-omv-pvc
+        globalMounts:
+          - path: /recordings
+      timeshift:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /timeshift
     resources:
       requests:
-        cpu: 1
-        memory: 128Mi
+        cpu: 100m
+        memory: 20Mi
       limits:
-        cpu: 2
-        memory: 1500Mi
+        cpu: 1000m
+        memory: 1096Mi
+
