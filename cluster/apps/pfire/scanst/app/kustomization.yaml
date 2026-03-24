@@ -4,3 +4,9 @@ kind: Kustomization
 resources:
   - scanst-tickers.yaml
   - scanst-job.yaml
+secretGenerator:
+  - name: scanst-secrets
+    literals:
+      - SCRAB_USERNAME=${SCRAB_LOGIN_NAME}
+      - SCRAB_PASSWORD=${SCRAB_PASSWORD}
+    type: Opaque

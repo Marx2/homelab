@@ -28,13 +28,11 @@ spec:
               envFrom:
                 - configMapRef:
                     name: scanst-tickers
+                - secretRef:
+                    name: scanst-secrets
               env:
                 - name: TZ
                   value: "${TZ}"
-                - name: SCRAB_USERNAME
-                  value: "${SCRAB_LOGIN_NAME}"
-                - name: SCRAB_PASSWORD
-                  value: "${SCRAB_PASSWORD}"
                 - name: LOG_LEVEL
                   value: "INFO"
                 - name: GRAPHQL_ENDPOINT
