@@ -2,11 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - scanst-secrets.yaml
   - scanst-job.yaml
   - scanst-ui.yaml
-secretGenerator:
-  - name: scanst-secrets
-    literals:
-      - SCRAB_USERNAME=${SCRAB_LOGIN_NAME}
-      - SCRAB_PASSWORD=${SCRAB_PASSWORD}
-    type: Opaque
