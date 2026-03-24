@@ -27,8 +27,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    imagePullSecrets:
-      - name: regcred
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
     controllers:
       scanst-ui:
         strategy: RollingUpdate
