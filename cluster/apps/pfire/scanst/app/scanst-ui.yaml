@@ -39,7 +39,7 @@ spec:
               repository: ghcr.io/marx2/scanst-ui
               tag: v1.0.0
             env:
-              POSTGREST_URL: http://postgrest-attr:3000/
+              POSTGREST_URL: http://postgrest-attr:80/
             resources:
               requests:
                 cpu: 100m
