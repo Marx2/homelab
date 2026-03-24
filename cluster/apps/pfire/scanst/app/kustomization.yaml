@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - scanst-tickers.yaml
   - scanst-job.yaml
+  - scanst-ui.yaml
 secretGenerator:
   - name: scanst-secrets
     literals:
