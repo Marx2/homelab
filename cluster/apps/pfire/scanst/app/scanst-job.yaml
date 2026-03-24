@@ -22,12 +22,10 @@ spec:
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx2/scanst:v1.0.10
+              image: ghcr.io/marx2/scanst:v1.0.12
               imagePullPolicy: IfNotPresent
               args: ["--headless"]
               envFrom:
-                - configMapRef:
-                    name: scanst-tickers
                 - secretRef:
                     name: scanst-secrets
               env:
