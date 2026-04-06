@@ -21,6 +21,7 @@ resources:
   - swaggerui
   - pgdb
   - scanst/ks.yaml
+  - scorest/ks.yaml
   #  - grist
   - investbrain/ks.yaml
   - jobshot/ks.yaml
