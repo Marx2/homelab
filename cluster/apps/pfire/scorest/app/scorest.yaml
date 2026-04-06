@@ -38,11 +38,10 @@ spec:
             image:
               repository: ghcr.io/marx2/scorest
               tag: v1.0.4
-            envFrom:
-              - secretRef:
-                  name: scanst-secrets
             env:
               POSTGREST_URL: http://postgrest-attr:80/
+              POSTGREST_USER: ""
+              POSTGREST_PASSWORD: ""
             resources:
               requests:
                 cpu: 100m
