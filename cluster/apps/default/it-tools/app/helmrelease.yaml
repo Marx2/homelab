@@ -22,12 +22,24 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/containers/resources/limits
+        target:
+          kind: Pod
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
   values:
 
     controllers:
       it-tools:
         annotations:
           reloader.stakater.com/auto: "true"
+        replicas: 0
         containers:
           app:
             image:
@@ -68,8 +80,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host

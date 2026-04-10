@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: it-tools
+  namespace: default
+spec:
+  hosts:
+    - it-tools.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: it-tools
+    kind: Deployment
+    apiVersion: apps/v1
+    service: it-tools
+    port: 80
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300
