@@ -29,6 +29,10 @@ spec:
           - /spec/containers/resources/limits
         target:
           kind: Pod
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
   values:
     #    defaultPodOptions:
     #      securityContext:
@@ -40,6 +44,7 @@ spec:
 
     controllers:
       cyberchef:
+        replicas: 0
         containers:
           app:
             image:
@@ -80,8 +85,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host

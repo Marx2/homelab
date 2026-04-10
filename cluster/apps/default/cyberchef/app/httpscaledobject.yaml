@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: cyberchef
+  namespace: default
+spec:
+  hosts:
+    - cyberchef.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: cyberchef
+    kind: Deployment
+    apiVersion: apps/v1
+    service: cyberchef
+    port: 8000
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

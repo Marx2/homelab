@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keda-http
+  namespace: networking
+spec:
+  chart:
+    spec:
+      chart: keda-add-ons-http
+      version: 0.13.0
+      sourceRef:
+        kind: HelmRepository
+        name: kedacore
+        namespace: flux-system
+  interval: 15m
+  install:
+    crds: Create
+    remediation:
+      retries: 3
+    timeout: 7m
+  upgrade:
+    crds: CreateReplace
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+    timeout: 7m
+  timeout: 7m
+  releaseName: keda-add-ons-http
+  targetNamespace: networking
+  values:
+    interceptor:
+      replicas:
+        min: 1
+        max: 1
+    operator:
+      watchNamespaces:
+        - networking
+        - default
