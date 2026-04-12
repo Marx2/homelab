@@ -51,14 +51,6 @@
       'cluster/.+\\.ya?ml$'
     ]
   },
-  hostRules: [
-    {
-      matchHost: 'ghcr.io',
-      hostType: 'docker',
-      username: 'Marx2',
-      password: '{{ secrets.GHCR_PAT }}'
-    }
-  ],
   customManagers: [
     {
       customType: 'regex',
