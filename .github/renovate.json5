@@ -56,9 +56,7 @@
       matchHost: 'ghcr.io',
       hostType: 'docker',
       username: 'Marx2',
-      encrypted: {
-        password: 'wcFMA/xDdHCJBTolAQ/+OZQgedGGs1I+aW+tki9zdgMOdXypMQq044SkBaDYFM0TIq8Qa5JP2m8Vy8E9VinX1PmV5tc9xIf0nGJ42F2o1pll0qFckwX+HDeq+ZUPMIaAox/lEyHJJBN/2ilgaZ6pUaaSulrTI/w7ndIkkiBaJh2Zt2xuAwCUpNIq32kAaguJySzZY9tQLAcXogYVFgv7/qbqlZfkFzLkOcpp2WY61PdkOlYEwC8eREPm9c+PQggiENAawoMhb19XyeHPwjYs08sq+pHL93NhjDKqSmsw8l14e+JiF4Gwp0t+6i/bLcRhg1nghHQ9yjnhp5wnz2I48eDrf7W/IfNXb+kcTrG161WORDUy8QIMpxVMCJWELSUNdd/++Atfipxjf5I6K9lxIi8XfB5S2Le63dFr4xbfiRmG4/AIfKBUtdfiEGhnwdqQ1iAZ1d6B/FFMIUvBj01g84Ca/erUnVXhJ+yGTzDZokDLV4Q6NGNWMOlKMuYqhfatoVuJNtRZSBAYVordj05Wnhdf5qAfA8JBQHK28nuJWnvm9ngKLpOV5LgdKv/yPtMGx5OOC70gazbeXH9VuHbLNQa2ppfMK/SDvWTJfJwpXRjYRGXWpOdXe9dHINS86nDiFeLWYmPk09xvJ+ZwqfdXpQoY1LtVMtgrWTi2VCrAUbHum8/udakugYA2eRoONy/SfAElxuPYTytR6SM/uplHNAAiiBPwzfehzMJSWr2MtwuMAlAbsRs7EmBWY9aGLtXOJIohWBUwpskIpazu4nCDEDBplgG6NOwbjhnD8m1qA7sARtiZDhSXBQCxrXOvJQvabzyYQBnyzS3mEpZvvE00Y34rmmO14tizk6qTvlc'
-      }
+      password: '{{ secrets.GHCR_PAT }}'
     }
   ],
   customManagers: [
