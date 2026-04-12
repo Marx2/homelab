@@ -47,6 +47,8 @@ spec:
                       key: password
                 - name: FLYWAY_LOCATIONS
                   value: "filesystem:/tmp/git/pgdb/metrics"
+                - name: JAVA_TOOL_OPTIONS
+                  value: "-Djava.net.preferIPv4Stack=true"
               volumeMounts:
                 - name: git-source
                   mountPath: /tmp/git
