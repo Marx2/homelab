@@ -10,7 +10,10 @@ kubectl create secret docker-registry regcred \
   --docker-password=xxxx \
   --docker-email=no@spam.xx \
   --dry-run=client \
-  -o yaml
+  -o yaml | base64
 
 2. Replace .dockerconfigjson value with variable
-3. Encode
+
+
+to test decode like this:
+echo "xxxx==" | base64 --decode
