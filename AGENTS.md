@@ -19,9 +19,18 @@ Always prefer context7 docs over web search or training data for these libraries
 
 ## Agent Behaviors
 
+Do not make any changes until you have 95% confidence in what you need to build. Ask me
+follow-upquestions until you reach that confidence.
+
 ### Code Style
 
 - subfolders contains namespaces configurations
 - subfolders in namespace contains definition of deployment of specific service
 - most deployments uses universal App Template helm chart, which documentation is available
   at: https://bjw-s-labs.github.io/helm-charts/docs/app-template/
+
+## Applied Learning
+
+When something fails repeatedly, when I has to re-explain, or when a workaround is found for a
+platform/tool limitation, add a one-line bullet here. Keep each bullet under 15 words. No
+explanations. Only add things that will save time in future.

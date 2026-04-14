@@ -3,17 +3,14 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
 
 private image registry support:
 
-1. Generate secret text
+1. Generate secret text (replace xxx with token)
 kubectl create secret docker-registry regcred \
   --docker-server=ghcr.io \
   --docker-username=Marx2 \
-  --docker-password=xxxx \
+  --docker-password=xxx \
   --docker-email=no@spam.xx \
   --dry-run=client \
-  -o yaml | base64
+  -o yaml
 
-2. Replace .dockerconfigjson value with variable
-
-
-to test decode like this:
-echo "xxxx==" | base64 --decode
+2. take .dockerconfigjson value and save in keepass
+3. run ./encode.py
