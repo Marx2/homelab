@@ -61,7 +61,7 @@ spec:
                 cpu: 0.003
                 memory: 249Mi
               limits:
-                memory: 1Gi
+                memory: 4Gi
 
             probes:
               startup:
