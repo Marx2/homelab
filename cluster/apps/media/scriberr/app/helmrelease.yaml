@@ -54,6 +54,7 @@ spec:
               UV_PYTHON_INSTALL_DIR: /app/whisperx-env/.cache/uv-python
               GIT_CONFIG_NOSYSTEM: "1"
               GIT_CONFIG_GLOBAL: /app/data/.gitconfig
+              HF_HOME: /app/whisperx-env/.cache/huggingface
 
             resources:
               requests:
