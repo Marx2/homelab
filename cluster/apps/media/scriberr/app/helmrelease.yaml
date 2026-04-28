@@ -50,7 +50,8 @@ spec:
               APP_ENV: production
               TRANSCRIPTS_DIR: /app/transcripts
               UPLOAD_DIR: /app/uploads
-              UV_CACHE_DIR: /app/data/.cache/uv
+              UV_CACHE_DIR: /app/whisperx-env/.cache/uv
+              UV_PYTHON_INSTALL_DIR: /app/whisperx-env/.cache/uv-python
 
             resources:
               requests:
