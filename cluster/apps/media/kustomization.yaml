@@ -41,3 +41,4 @@ resources:
   - morphos/ks.yaml
   - bitmappery/ks.yaml
   - drawio/ks.yaml
+  - scriberr/ks.yaml
