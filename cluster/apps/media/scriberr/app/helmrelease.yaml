@@ -54,14 +54,13 @@ spec:
               UV_PYTHON_INSTALL_DIR: /app/whisperx-env/.cache/uv-python
               HF_HOME: /app/whisperx-env/.cache/huggingface
               XDG_CACHE_HOME: /app/whisperx-env/.cache
-              NLTK_DATA: /app/whisperx-env/.cache/nltk_data
 
             resources:
               requests:
                 cpu: 0.003
                 memory: 249Mi
               limits:
-                memory: 7Gi
+                memory: 10Gi
 
             probes:
               startup:
@@ -128,3 +127,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /.cache
+      nltk:
+        type: emptyDir
+        globalMounts:
+          - path: /nltk_data
