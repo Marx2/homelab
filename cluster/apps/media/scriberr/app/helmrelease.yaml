@@ -56,6 +56,7 @@ spec:
               GIT_CONFIG_GLOBAL: /app/data/.gitconfig
               HF_HOME: /app/whisperx-env/.cache/huggingface
               XDG_CACHE_HOME: /app/whisperx-env/.cache
+              NLTK_DATA: /app/whisperx-env/.cache/nltk_data
 
             resources:
               requests:
