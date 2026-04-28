@@ -52,11 +52,6 @@ spec:
               UPLOAD_DIR: /app/uploads
               UV_CACHE_DIR: /app/whisperx-env/.cache/uv
               UV_PYTHON_INSTALL_DIR: /app/whisperx-env/.cache/uv-python
-              GIT_CONFIG_NOSYSTEM: "1"
-              GIT_CONFIG_GLOBAL: /app/data/.gitconfig
-              GIT_CONFIG_COUNT: "1"
-              GIT_CONFIG_KEY_0: safe.directory
-              GIT_CONFIG_VALUE_0: "*"
               HF_HOME: /app/whisperx-env/.cache/huggingface
               XDG_CACHE_HOME: /app/whisperx-env/.cache
               NLTK_DATA: /app/whisperx-env/.cache/nltk_data
@@ -129,3 +124,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /app/uploads
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /.cache
