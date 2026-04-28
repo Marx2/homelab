@@ -50,6 +50,7 @@ spec:
               APP_ENV: production
               TRANSCRIPTS_DIR: /app/transcripts
               UPLOAD_DIR: /app/uploads
+              UV_CACHE_DIR: /app/data/.cache/uv
 
             resources:
               requests:
