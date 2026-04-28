@@ -26,6 +26,13 @@ spec:
 
   values:
 
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1027
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
+
     controllers:
       scriberr:
         type: deployment
