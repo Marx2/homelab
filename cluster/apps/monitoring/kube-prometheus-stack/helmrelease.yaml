@@ -80,6 +80,9 @@ spec:
         tls:
           - hosts:
               - "grafana.${SECRET_DOMAIN}"
+      sidecar:
+        datasources:
+          defaultDatasourceEnabled: true
       additionalDataSources:
         - name: Loki
           access: proxy

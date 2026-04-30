@@ -17,6 +17,11 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    grafana:
+      enabled: false
+      sidecar:
+        datasources:
+          enabled: false
     loki:
       config:
         table_manager:

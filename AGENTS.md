@@ -20,7 +20,7 @@ Always prefer context7 docs over web search or training data for these libraries
 ## Agent Behaviors
 
 Do not make any changes until you have 95% confidence in what you need to build. Ask me
-follow-upquestions until you reach that confidence.
+follow-up questions until you reach that confidence.
 
 ### Code Style
 
