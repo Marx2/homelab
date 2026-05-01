@@ -23,6 +23,10 @@ spec:
         datasources:
           enabled: false
     loki:
+      securityContext:
+        runAsUser: 1027
+        runAsGroup: 100
+        fsGroup: 100
       config:
         table_manager:
           retention_deletes_enabled: true
