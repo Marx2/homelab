@@ -42,10 +42,7 @@ spec:
     webhook:
       cert:
         certManager:
-          enabled: true
-          issuerRef:
-            name: letsencrypt-production
-            kind: ClusterIssuer
+          enabled: false
 
     
     serviceMonitor:
