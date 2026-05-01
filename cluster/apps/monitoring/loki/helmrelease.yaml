@@ -26,7 +26,7 @@ spec:
       config:
         table_manager:
           retention_deletes_enabled: true
-          retention_period: 336h
+          retention_period: 120h
       persistence:
         enabled: true
         storageClassName: "loki-omv"
