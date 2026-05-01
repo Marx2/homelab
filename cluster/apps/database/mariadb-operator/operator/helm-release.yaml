@@ -44,8 +44,8 @@ spec:
         certManager:
           enabled: true
           issuerRef:
-            - name: letsencrypt-prod
-            - kind: ClusterIssuer
+            name: letsencrypt-prod
+            kind: ClusterIssuer
 
     
     serviceMonitor:
