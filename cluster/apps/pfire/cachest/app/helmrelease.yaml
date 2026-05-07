@@ -55,7 +55,7 @@ spec:
           redis:
             image:
               repository: redis
-              tag: 7-alpine
+              tag: 8-alpine
             resources:
               requests:
                 cpu: 50m
