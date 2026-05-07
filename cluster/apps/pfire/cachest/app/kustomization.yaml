@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - pvc.yaml
   - helmrelease.yaml
+  - interceptor-service.yaml
+  - httpscaledobject.yaml
 configMapGenerator:
   - name: cachest-config
     files:
