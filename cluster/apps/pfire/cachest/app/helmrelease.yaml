@@ -77,11 +77,11 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/info: HTTP caching proxy for financial data.
           # type of authentication
-          nginx.ingress.kubernetes.io/auth-type: basic
+          #nginx.ingress.kubernetes.io/auth-type: basic
           # name of the secret that contains the user/password definitions
-          nginx.ingress.kubernetes.io/auth-secret: postgrest-basic-auth
+          #nginx.ingress.kubernetes.io/auth-secret: postgrest-basic-auth
           # message to display with an appropriate context why the authentication is required
-          nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - cachest'
+          #nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - cachest'
         hosts:
           - host: &host "cachest.${SECRET_DOMAIN}"
             paths:
