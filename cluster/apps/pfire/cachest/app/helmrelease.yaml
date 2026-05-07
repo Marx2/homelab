@@ -1,0 +1,101 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app cachest
+  namespace: pfire
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.6.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      cachest:
+        annotations:
+          configmap.reloader.stakater.com/reload: &config cachest-config
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/cachest
+              tag: v1.0.3
+            env:
+              TZ: "${TZ}"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+          redis:
+            image:
+              repository: redis
+              tag: 7-alpine
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 8080
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          hajimari.io/icon: mdi:cached
+          hajimari.io/enable: "true"
+          hajimari.io/info: HTTP caching proxy for financial data.
+          # type of authentication
+          nginx.ingress.kubernetes.io/auth-type: basic
+          # name of the secret that contains the user/password definitions
+          nginx.ingress.kubernetes.io/auth-secret: postgrest-basic-auth
+          # message to display with an appropriate context why the authentication is required
+          nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - cachest'
+        hosts:
+          - host: &host "cachest.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config-file:
+        type: configMap
+        name: *config
+        globalMounts:
+          - path: /app/config.yaml
+            subPath: config.yaml
+            readOnly: true
+      redis-data:
+        enabled: true
+        existingClaim: cachest-redis
+        advancedMounts:
+          cachest:
+            redis:
+              - path: /data

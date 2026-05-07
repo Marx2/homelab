@@ -1,0 +1,18 @@
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+
+routes:
+  - path: /dy/{ticker}
+    url: "https://dividendhistory.org/payout/{ticker}/"
+    extract:
+      selector: "dl.metrics-list .metric-row"
+      label: "Yield"
+      field: "dd"
+    cache_ttl: 86400
+
+  - path: /price/{ticker}
+    url: "https://someapi.com/price/{ticker}"
+    cache_ttl: 300
