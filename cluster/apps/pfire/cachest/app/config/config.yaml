@@ -1,5 +1,5 @@
 redis:
-  host: redis          # use "localhost" when running outside Docker
+  host: redis          # override via REDIS_HOST env var
   port: 6379
   password: ""
   db: 0

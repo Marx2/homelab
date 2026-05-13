@@ -46,6 +46,7 @@ spec:
               tag: v1.0.15
             env:
               TZ: "${TZ}"
+              REDIS_HOST: localhost
             envFrom:
               - secretRef:
                   name: cachest-secrets
