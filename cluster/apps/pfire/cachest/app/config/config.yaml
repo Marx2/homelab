@@ -1,18 +1,38 @@
 redis:
-  host: localhost
+  host: redis          # use "localhost" when running outside Docker
   port: 6379
   password: ""
   db: 0
 
 routes:
-  - path: /dy/{ticker}
+  - name: DIVIDENDHISTORY
+    path: /dyhistory/{ticker}
     url: "https://dividendhistory.org/payout/{ticker}/"
     extract:
       selector: "dl.metrics-list .metric-row"
       label: "Yield"
       field: "dd"
-    cache_ttl: 86400
+    cache_ttl: 86400          # seconds (24h)
+    stale_ttl: 2592000        # seconds (30 days) — max age for stale fallback
+    fetch_interval: 2         # min seconds between remote fetches
+    fetch_max_wait: 4         # max queue wait before falling back to stale
 
-  - path: /price/{ticker}
-    url: "https://someapi.com/price/{ticker}"
-    cache_ttl: 300
+  - name: ALPHAVANTAGE
+    path: /dy/{ticker}
+    url: "https://www.alphavantage.co/query?function=OVERVIEW&symbol={ticker}&apikey={api_key}"
+    json_field: DividendYield
+    daily_limit: 25
+    cache_ttl: 86400
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: FMP
+    path: /dy2/{ticker}
+    url: "https://financialmodelingprep.com/api/v3/profile/{ticker}?apikey={api_key}"
+    daily_limit: 250          # max upstream fetches per calendar day; 0 = unlimited
+    cache_ttl: 86400
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
