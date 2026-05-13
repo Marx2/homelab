@@ -26,4 +26,4 @@ resources:
   - investbrain/ks.yaml
   - jobshot/ks.yaml
   - pgweb/ks.yaml
-#  - cachest/ks.yaml
+  - cachest/ks.yaml
