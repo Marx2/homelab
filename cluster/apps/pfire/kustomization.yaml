@@ -12,7 +12,7 @@ resources:
   - tooljet
   - pgadmin/ks.yaml
   - graphql-mesh
-  - stooq-importer
+  - stooq-importer/ks.yaml
   - redis
   #  - ghostfolio/ks.yaml
   - stooq

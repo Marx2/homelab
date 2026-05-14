@@ -7,7 +7,7 @@ metadata:
 data:
   csv.load: |
     LOAD ARCHIVE
-      FROM /home/stooq/d_us_txt.zip
+      FROM /home/stooq/usa_daily.zip
       INTO postgres://postgres:${SECRET_POSTGRESQL_PASS}@postgres-pfire-primary.pfire.svc:5432/stooq
 
       LOAD CSV
