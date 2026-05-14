@@ -27,3 +27,4 @@ resources:
   - jobshot/ks.yaml
   - pgweb/ks.yaml
   - cachest/ks.yaml
+  - stooq-downloader/ks.yaml

@@ -1,0 +1,43 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stooq-downloader
+  namespace: pfire
+spec:
+  schedule: "0 3 * * 0"
+  suspend: true
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        created-by: stooq-downloader
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          imagePullSecrets:
+            - name: regcred
+          restartPolicy: Never
+          containers:
+            - name: stooq-downloader
+              image: ghcr.io/marx2/stooq-downloader:v1.0.1
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: OUTPUT_DIR
+                  value: /data
+                - name: CAPTCHA_BACKEND
+                  value: ddddocr
+                - name: MAX_CAPTCHA_ATTEMPTS
+                  value: "10"
+                - name: LOG_FORMAT
+                  value: json
+              volumeMounts:
+                - name: stooq-data
+                  mountPath: /data
+          volumes:
+            - name: stooq-data
+              persistentVolumeClaim:
+                claimName: nfs-pfire-stooq-pvc

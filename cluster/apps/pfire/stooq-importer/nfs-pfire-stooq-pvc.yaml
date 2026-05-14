@@ -6,7 +6,7 @@ metadata:
   namespace: pfire
 spec:
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteMany
   storageClassName: pfire-stooq-ro
   resources:
     requests:
