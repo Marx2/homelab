@@ -40,4 +40,4 @@ spec:
           volumes:
             - name: stooq-data
               persistentVolumeClaim:
-                claimName: nfs-pfire-stooq-pvc
+                claimName: nfs-pfire-stooq-rw-pvc
