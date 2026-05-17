@@ -58,8 +58,8 @@ spec:
               startup:
                 <<: *probe
                 spec:
-                  failureThreshold: 90
-                  periodSeconds: 20
+                  failureThreshold: 180
+                  periodSeconds: 40
 
             resources:
               requests:
