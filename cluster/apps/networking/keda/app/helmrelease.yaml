@@ -26,3 +26,29 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  values:
+    prometheus:
+      metricServer:
+        enabled: true
+        podMonitor:
+          enabled: true
+          namespace: networking
+          namespaceSelector:
+            matchNames:
+              - networking
+      operator:
+        enabled: true
+        podMonitor:
+          enabled: true
+          namespace: networking
+          namespaceSelector:
+            matchNames:
+              - networking
+      webhooks:
+        enabled: true
+        podMonitor:
+          enabled: true
+          namespace: networking
+          namespaceSelector:
+            matchNames:
+              - networking
