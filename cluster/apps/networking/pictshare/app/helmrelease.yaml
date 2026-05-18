@@ -69,7 +69,3 @@ spec:
         tls:
           - hosts:
               - *host
-
-    persistence:
-      data:
-        enabled: false
