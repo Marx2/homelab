@@ -1,0 +1,20 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: drawio
+  namespace: media
+spec:
+  hosts:
+    - drawio.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: drawio
+    kind: Deployment
+    apiVersion: apps/v1
+    service: drawio
+    port: 8080
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

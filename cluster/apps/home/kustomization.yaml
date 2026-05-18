@@ -7,8 +7,8 @@ resources:
   #  - syncthing
   #  - vernemq
   - hajimari
-  - firefox
-  - sshwifty
+  - firefox/ks.yaml
+  - sshwifty/ks.yaml
   - emqx/ks.yaml
   - frigate/ks.yaml
   - zigbee2mqtt/ks.yaml

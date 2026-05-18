@@ -12,8 +12,8 @@ resources:
   #- authelia
   #- authentik
   - mail
-  - privatebin
-  - pictshare
+  - privatebin/ks.yaml
+  - pictshare/ks.yaml
   - keda/ks.yaml
   - keda-http/ks.yaml
 #  - capacitor/ks.yaml

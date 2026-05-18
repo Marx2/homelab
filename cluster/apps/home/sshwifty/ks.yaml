@@ -1,16 +1,15 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app bitmappery
+  name: &app sshwifty
   namespace: flux-system
 spec:
-  targetNamespace: media
+  targetNamespace: home
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./cluster/apps/media/bitmappery/app
+  path: ./cluster/apps/home/sshwifty/app
   prune: true
   sourceRef:
     kind: GitRepository

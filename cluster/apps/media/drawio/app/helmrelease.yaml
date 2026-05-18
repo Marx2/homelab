@@ -22,9 +22,19 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/replicas]
+        target:
+          kind: Deployment
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
   values:
     controllers:
       drawio:
+        replicas: 0
         containers:
           drawio:
             image:
@@ -33,9 +43,9 @@ spec:
             env:
               TZ: ${TZ}
               DRAWIO_SELF_CONTAINED: "1"
-              DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}/
-              DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
-              DRAWIO_VIEWER_URL: https://draw.${SECRET_DOMAIN}/js/viewer.min.js
+              DRAWIO_SERVER_URL: https://drawio.${SECRET_DOMAIN}/
+              DRAWIO_BASE_URL: https://drawio.${SECRET_DOMAIN}
+              DRAWIO_VIEWER_URL: https://drawio.${SECRET_DOMAIN}/js/viewer.min.js
               EXPORT_URL: http://localhost:8000/
             securityContext:
               runAsUser: 1001
@@ -92,11 +102,11 @@ spec:
           hajimari.io/icon: simple-icons:diagramsdotnet
           hajimari.io/group: "media"
         hosts:
-          - host: &host draw.${SECRET_DOMAIN}
+          - host: &host drawio.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  identifier: *app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts: [*host]

@@ -1,10 +1,8 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: bitmappery
-  namespace: media
+  name: pictshare
 spec:
   interval: 30m
   chart:
@@ -34,38 +32,35 @@ spec:
           kind: Pod
   values:
     controllers:
-      bitmappery:
+      pictshare:
         replicas: 0
-        annotations:
-          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/bitmappery
-              tag: 1.0.0
-            resources:
-              requests:
-                cpu: 100m
-                memory: 100Mi
-              limits:
-                memory: 1Gi
+              repository: ghcr.io/hascheksolutions/pictshare
+              tag: 19d7cb06
+            env:
+              TZ: ${TZ}
+              MAX_RESIZED_IMAGES: "2"
+              UPLOAD_FORM_LOCATION: /
+              LOG_UPLOADER: "true"
+
     service:
       app:
-        controller: bitmappery
+        controller: pictshare
         ports:
           http:
-            port: 5173
+            port: 80
+
     ingress:
       app:
         className: nginx
         annotations:
-          hajimari.io/icon: mdi:harddiskstatus
           hajimari.io/enable: "true"
-          hajimari.io/info: Image editor.
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/icon: "cloud-sync-outline"
+          hajimari.io/group: "networking"
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host pictshare.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -74,6 +69,7 @@ spec:
         tls:
           - hosts:
               - *host
+
     persistence:
-      tmp:
-        type: emptyDir
+      data:
+        enabled: false

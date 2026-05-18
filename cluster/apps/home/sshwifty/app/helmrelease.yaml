@@ -1,16 +1,15 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: bitmappery
-  namespace: media
+  name: sshwifty
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
       version: 4.6.2
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -34,46 +33,49 @@ spec:
           kind: Pod
   values:
     controllers:
-      bitmappery:
+      main:
         replicas: 0
-        annotations:
-          reloader.stakater.com/auto: "true"
         containers:
-          app:
+          main:
             image:
-              repository: ghcr.io/marx2/bitmappery
-              tag: 1.0.0
+              repository: niruix/sshwifty
+              tag: latest
+            env:
+              TZ: ${TZ}
             resources:
               requests:
                 cpu: 100m
-                memory: 100Mi
+                memory: 52M
               limits:
-                memory: 1Gi
+                memory: 256M
+
     service:
-      app:
-        controller: bitmappery
+      main:
+        controller: main
         ports:
           http:
-            port: 5173
+            port: 8182
+
     ingress:
-      app:
+      main:
+        enabled: true
         className: nginx
         annotations:
-          hajimari.io/icon: mdi:harddiskstatus
-          hajimari.io/enable: "true"
-          hajimari.io/info: Image editor.
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Remote Access"
+          hajimari.io/info: "sshwifty remote access jumpbox"
+          hajimari.io/icon: "remote-desktop"
+          hajimari.io/targetBlank: "true"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
-              - path: /
+              - path: "/"
+                pathType: "Prefix"
                 service:
                   name: keda-http-interceptor-proxy
                   port: 8080
         tls:
           - hosts:
               - *host
-    persistence:
-      tmp:
-        type: emptyDir
