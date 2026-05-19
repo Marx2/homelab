@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.6.2
+      version: 5.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -25,6 +25,8 @@ spec:
       retries: 3
 
   values:
+    global:
+      createDefaultServiceAccount: false
     controllers:
       stirling-pdf:
         enabled: true

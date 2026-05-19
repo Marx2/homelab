@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.6.2
+      version: 5.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -34,6 +34,8 @@ spec:
         target:
           kind: Pod
   values:
+    global:
+      createDefaultServiceAccount: false
     controllers:
       calibre-web:
         replicas: 0
