@@ -27,6 +27,7 @@ spec:
           kind: Pod
   values:
     defaultPodOptions:
+      automountServiceAccountToken: true
       securityContext:
         runAsNonRoot: true
         runAsGroup: 65534
