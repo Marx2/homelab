@@ -55,7 +55,7 @@ cluster/apps/default/
 
 ### helmrelease.yaml
 
-- Chart: `app-template` v4.6.2 from `bjw-s` HelmRepository
+- Chart: `app-template` v5.0.1 from `bjw-s` HelmRepository
 - `interval: 15m`
 - `install.remediation.retries: 3`
 - `upgrade.cleanupOnFail: true`, strategy `rollback`, retries 3
@@ -103,3 +103,4 @@ explanations. Only add things that will save time in future.
 - `readOnlyRootFilesystem: true`: mount ConfigMap to separate path (e.g. `/config/`), emptyDir for writable dirs.
 - interceptor-service.yaml (ExternalName for KEDA HTTP proxy) is identical across all default-namespace apps — copy verbatim.
 - HTTPScaledObject ingress path routes to `keda-http-interceptor-proxy` service, not the app service directly.
+- app-template v5: set `global.createDefaultServiceAccount: false` to keep namespace `default` SA.
