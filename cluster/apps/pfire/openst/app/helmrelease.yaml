@@ -55,19 +55,19 @@ spec:
             resources:
               requests:
                 cpu: 50m
-                memory: 64Mi
-              limits:
                 memory: 128Mi
+              limits:
+                memory: 512Mi
           redis:
             image:
               repository: redis
               tag: 7-alpine
             resources:
               requests:
-                cpu: 50m
-                memory: 64Mi
+                cpu: 10m
+                memory: 32Mi
               limits:
-                memory: 128Mi
+                memory: 64Mi
     service:
       app:
         controller: *app
