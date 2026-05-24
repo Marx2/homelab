@@ -17,8 +17,16 @@ routes:
     fetch_interval: 2         # min seconds between remote fetches
     fetch_max_wait: 4         # max queue wait before falling back to stale
 
-  - name: ALPHAVANTAGE
+  - name: OPENST
     path: /dy/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/dividend/yield/{ticker}"
+    cache_ttl: 86400
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: ALPHAVANTAGE
+    path: /dy3/{ticker}
     url: "https://www.alphavantage.co/query?function=OVERVIEW&symbol={ticker}&apikey={api_key}"
     json_field: DividendYield
     daily_limit: 25
