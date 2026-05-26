@@ -38,7 +38,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.0.7
+              tag: v1.0.10
             env:
               TZ: "${TZ}"
               REDIS_HOST: localhost
