@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - scanst-secrets.yaml
   - scanst-job.yaml
+  - scanst-override-job.yaml
   - scanst-ui.yaml
