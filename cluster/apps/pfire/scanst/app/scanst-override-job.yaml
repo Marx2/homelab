@@ -25,7 +25,7 @@ spec:
             - name: scanst
               image: ghcr.io/marx2/scanst:v1.0.24
               imagePullPolicy: IfNotPresent
-              args: ["--headless --override"]
+              args: ["--headless", "--override"]
               envFrom:
                 - secretRef:
                     name: scanst-secrets
