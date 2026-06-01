@@ -22,7 +22,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx2/scanst:v1.0.19
+              image: ghcr.io/marx2/scanst:v1.0.21
               imagePullPolicy: IfNotPresent
               args: ["--headless"]
               envFrom:
@@ -33,7 +33,7 @@ spec:
                   value: "${TZ}"
                 - name: LOG_LEVEL
                   value: "INFO"
-                - name: GRAPHQL_ENDPOINT
-                  value: "http://graphql-mesh:80/graphql"
+                - name: POSTGREST_URL
+                  value: "http://postgrest-attr:80/"
                 - name: DELAY_BETWEEN_METRICS
                   value: "1.5"
