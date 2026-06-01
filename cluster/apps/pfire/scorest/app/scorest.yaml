@@ -44,6 +44,7 @@ spec:
               POSTGREST_URL: http://postgrest-attr:80/
               POSTGREST_USER: ""
               POSTGREST_PASSWORD: ""
+              JOBSHOT_URL: http://jobshot.pfire.svc:3000
             resources:
               requests:
                 cpu: 100m
