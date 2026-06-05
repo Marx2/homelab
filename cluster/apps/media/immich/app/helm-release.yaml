@@ -31,6 +31,9 @@ spec:
     defaultPodOptions:
       automountServiceAccountToken: false
       enableServiceLinks: false
+      securityContext:
+        fsGroup: 65539
+        fsGroupChangePolicy: OnRootMismatch
 
     controllers:
       immich:
@@ -97,8 +100,6 @@ spec:
                 cpu: 2000m
                 memory: 2Gi
             securityContext: &securityContext
-              fsGroup: 65539
-              fsGroupChangePolicy: OnRootMismatch
               allowPrivilegeEscalation: false
               seccompProfile:
                 type: RuntimeDefault
