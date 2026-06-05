@@ -135,7 +135,7 @@ spec:
         type: persistentVolumeClaim
         storageClass: longhorn
         accessMode: ReadWriteOnce
-        size: 100Mi
+        size: 200Mi
         retain: true
         globalMounts:
           - path: /var/app/storage
