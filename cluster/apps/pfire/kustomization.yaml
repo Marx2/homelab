@@ -13,13 +13,13 @@ resources:
   - pgadmin/ks.yaml
   - graphql-mesh
   - stooq-importer/ks.yaml
-  - redis
+  - redis/ks.yaml
   #  - ghostfolio/ks.yaml
   - stooq
-  - postgrest
+  - postgrest/ks.yaml
   - captchasolver
-  - swaggerui
-  - pgdb
+  - swaggerui/ks.yaml
+  - pgdb/ks.yaml
   - scanst/ks.yaml
   - scorest/ks.yaml
   #  - grist

@@ -11,7 +11,7 @@ resources:
   - dex
   #- authelia
   #- authentik
-  - mail
+  - mail/ks.yaml
   - privatebin/ks.yaml
   - pictshare/ks.yaml
   - keda/ks.yaml
