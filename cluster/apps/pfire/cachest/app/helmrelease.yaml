@@ -33,7 +33,7 @@ spec:
       createDefaultServiceAccount: false
     controllers:
       cachest:
-        replicas: 2
+        replicas: 1
         annotations:
           configmap.reloader.stakater.com/reload: &config cachest-config
         containers:
