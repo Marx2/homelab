@@ -26,6 +26,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
@@ -33,6 +40,7 @@ spec:
       automountServiceAccountToken: true
     controllers:
       jobshot:
+        replicas: 0
         annotations:
           configmap.reloader.stakater.com/reload: &config jobshot-jobs
         containers:
@@ -69,8 +77,8 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host

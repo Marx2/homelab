@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: streammaster
+  namespace: media
+spec:
+  hosts:
+    - streammaster.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: streammaster
+    kind: Deployment
+    apiVersion: apps/v1
+    service: streammaster
+    port: 7095
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

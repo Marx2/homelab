@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: silverbullet
+  namespace: media
+spec:
+  hosts:
+    - silverbullet.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: silverbullet
+    kind: Deployment
+    apiVersion: apps/v1
+    service: silverbullet
+    port: 3000
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

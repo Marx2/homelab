@@ -28,17 +28,12 @@ spec:
     keepHistory: false
   driftDetection:
     mode: enabled
-    ignore:
-      - paths:
-          - /spec/replicas
-        target:
-          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
     controllers:
       cachest:
-        replicas: 0
+        replicas: 1
         annotations:
           configmap.reloader.stakater.com/reload: &config cachest-config
         containers:
@@ -93,8 +88,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: keda-http-interceptor-proxy
-                  port: 8080
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host

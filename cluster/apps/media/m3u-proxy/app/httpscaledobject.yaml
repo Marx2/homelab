@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: m3u-proxy
+  namespace: media
+spec:
+  hosts:
+    - m3u-proxy.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: m3u-proxy
+    kind: Deployment
+    apiVersion: apps/v1
+    service: m3u-proxy
+    port: 4123
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

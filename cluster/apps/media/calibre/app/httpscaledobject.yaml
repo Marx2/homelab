@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: calibre
+  namespace: media
+spec:
+  hosts:
+    - calibre.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: calibre
+    kind: Deployment
+    apiVersion: apps/v1
+    service: calibre
+    port: 8080
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: scanst-ui
+  namespace: pfire
+spec:
+  hosts:
+    - scanst-ui.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: scanst-ui
+    kind: Deployment
+    apiVersion: apps/v1
+    service: scanst-ui
+    port: 3000
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

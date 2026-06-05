@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: morphos
+  namespace: media
+spec:
+  hosts:
+    - morphos.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: morphos
+    kind: Deployment
+    apiVersion: apps/v1
+    service: morphos
+    port: 8080
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

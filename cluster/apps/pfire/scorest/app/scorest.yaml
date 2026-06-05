@@ -26,6 +26,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
@@ -34,6 +41,7 @@ spec:
         - name: regcred
     controllers:
       scorest:
+        replicas: 0
         strategy: RollingUpdate
         containers:
           app:
@@ -73,8 +81,8 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host

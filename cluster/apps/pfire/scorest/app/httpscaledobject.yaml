@@ -1,0 +1,21 @@
+---
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: scorest
+  namespace: pfire
+spec:
+  hosts:
+    - scorest.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: scorest
+    kind: Deployment
+    apiVersion: apps/v1
+    service: scorest
+    port: 3000
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300

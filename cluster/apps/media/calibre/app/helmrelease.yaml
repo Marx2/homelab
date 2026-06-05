@@ -23,6 +23,13 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
 
   values:
     global:
@@ -30,6 +37,7 @@ spec:
 
     controllers:
       calibre:
+        replicas: 0
         type: deployment
 
         containers:
@@ -89,8 +97,8 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
 
         tls:
           - hosts:

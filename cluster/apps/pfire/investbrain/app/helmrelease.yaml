@@ -26,13 +26,20 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
     global:
       createDefaultServiceAccount: false
     defaultPodOptions:
       automountServiceAccountToken: false
     controllers:
       investbrain:
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -116,8 +123,8 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host

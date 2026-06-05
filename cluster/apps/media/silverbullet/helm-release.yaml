@@ -16,11 +16,19 @@ spec:
         name: bjw-s
         namespace: flux-system
       interval: 15m
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
     controllers:
       silverbullet:
+        replicas: 0
         pod:
           securityContext:
             runAsUser: 1027
@@ -75,8 +83,8 @@ spec:
             paths:
               - path: "/"
                 service:
-                  identifier: app
-                  port: http
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host
