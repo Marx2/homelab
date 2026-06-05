@@ -33,6 +33,7 @@ spec:
           - /spec/replicas
         target:
           kind: Deployment
+  values:
     global:
       createDefaultServiceAccount: false
     defaultPodOptions:
