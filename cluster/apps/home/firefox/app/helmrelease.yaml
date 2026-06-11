@@ -76,7 +76,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: app
+                  name: firefox
                   port: 5800
         tls:
           - hosts:
