@@ -21,3 +21,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
+  dependsOn:
+    - name: keda-http
