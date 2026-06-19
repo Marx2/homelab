@@ -40,17 +40,25 @@ spec:
             args: ["--noacl"]
             env:
               TZ: "${TZ}"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 20Mi
+              limits:
+                cpu: 1000m
+                memory: 1096Mi
     #            securityContext:
     #              privileged: true
     # RUN_OPTS: "-d -l --debug -l --subsystems -l --trace -l --libav -l --uidebug"
           epg-updater:
             image:
               repository: alpine
-              tag: latest
+              tag: 3.21
             command: ["/bin/sh", "-c"]
             args:
               - |
                 apk add --no-cache socat wget && \
+                until [ -S /config/epggrab/xmltv.sock ]; do echo "Waiting for EPG socket..."; sleep 10; done && \
                 wget -q -O - http://epg.ovh/pl.xml | socat - UNIX-CONNECT:/config/epggrab/xmltv.sock && \
                 echo '0 */6 * * * wget -q -O - http://epg.ovh/pl.xml | socat - UNIX-CONNECT:/config/epggrab/xmltv.sock' > /etc/crontabs/root && \
                 crond -f -d 8
@@ -113,11 +121,4 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /timeshift
-    resources:
-      requests:
-        cpu: 100m
-        memory: 20Mi
-      limits:
-        cpu: 1000m
-        memory: 1096Mi
 
