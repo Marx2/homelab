@@ -13,3 +13,4 @@ resources:
   - frigate/ks.yaml
   - zigbee2mqtt/ks.yaml
   - home-assistant/ks.yaml
+  - hermes/ks.yaml
