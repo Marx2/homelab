@@ -123,8 +123,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: hermes
-                  port: 80
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
