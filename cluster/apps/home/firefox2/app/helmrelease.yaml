@@ -107,6 +107,6 @@ spec:
 
     persistence:
       config:
-        type: emptyDir
+        existingClaim: firefox2-config-pvc
         globalMounts:
           - path: /config
