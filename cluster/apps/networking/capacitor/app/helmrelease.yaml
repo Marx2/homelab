@@ -70,10 +70,10 @@ spec:
             resources:
               requests:
                 cpu: 50m
-                memory: 100Mi
+                memory: 200Mi
                 ephemeral-storage: 1Gi
               limits:
-                memory: 200Mi
+                memory: 512Mi
                 ephemeral-storage: 2Gi
     service:
       app:
