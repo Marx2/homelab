@@ -37,20 +37,35 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/jlesage/firefox
-              tag: v26.03.1
+              repository: lscr.io/linuxserver/firefox
+              tag: latest
             env:
               TZ: ${TZ}
-              KEEP_APP_RUNNING: "1"
-              WEB_AUTHENTICATION: "0"
+              PUID: "1000"
+              PGID: "1000"
             probes:
               liveness:
                 enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 3001
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
               readiness:
                 enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 3001
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
               startup:
                 enabled: true
+                custom: true
                 spec:
+                  tcpSocket:
+                    port: 3001
                   failureThreshold: 30
                   periodSeconds: 5
 
@@ -59,7 +74,7 @@ spec:
         controller: firefox2
         ports:
           http:
-            port: 5800
+            port: 3001
 
     ingress:
       app:
@@ -68,16 +83,19 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           hajimari.io/enable: "true"
           hajimari.io/icon: "firefox"
-          hajimari.io/info: Firefox with seamless clipboard
+          hajimari.io/info: Firefox with clipboard integration
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   name: firefox2
-                  port: 5800
+                  port: 3001
         tls:
           - hosts:
               - *host
