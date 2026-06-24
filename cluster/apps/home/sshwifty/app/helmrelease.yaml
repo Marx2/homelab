@@ -68,9 +68,6 @@ spec:
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
           hajimari.io/enable: "true"
           hajimari.io/appName: "Remote Access"
           hajimari.io/info: "sshwifty remote access jumpbox"
