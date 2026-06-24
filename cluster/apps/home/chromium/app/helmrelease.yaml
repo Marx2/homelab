@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: firefox2
+  name: chromium
 spec:
   interval: 15m
   chart:
@@ -35,38 +35,55 @@ spec:
     global:
       createDefaultServiceAccount: false
     controllers:
-      firefox2:
+      chromium:
         replicas: 0
         containers:
           app:
             image:
-              repository: docker.io/browserless/chrome
-              tag: latest
-            args:
-              - --no-sandbox
-              - --disable-gpu
-              - --disable-dev-shm-usage
-              - --enable-features=SharedClipboard,UseOzonePlatform
-              - --ozone-platform=wayland
+              repository: docker.io/kasmweb/chromium
+              tag: 1.16.1
             env:
               TZ: ${TZ}
+              VNC_PW: "kasm"
+              VNC_RESOLUTION: "1920x1080"
             probes:
               liveness:
                 enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 6901
+                    scheme: HTTPS
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
               readiness:
                 enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 6901
+                    scheme: HTTPS
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
               startup:
                 enabled: true
+                custom: true
                 spec:
+                  httpGet:
+                    path: /
+                    port: 6901
+                    scheme: HTTPS
                   failureThreshold: 30
                   periodSeconds: 5
 
     service:
       app:
-        controller: firefox2
+        controller: chromium
         ports:
           http:
-            port: 3000
+            port: 6901
 
     ingress:
       app:
@@ -75,9 +92,12 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "firefox"
-          hajimari.io/info: Internet browser with clipboard
+          hajimari.io/icon: "google-chrome"
+          hajimari.io/info: Chromium browser with seamless clipboard
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -93,4 +113,4 @@ spec:
       config:
         type: emptyDir
         globalMounts:
-          - path: /config
+          - path: /home/kasm-user
