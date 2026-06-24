@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: firefox2
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      firefox2:
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: docker.io/jlesage/firefox
+              tag: v26.03.1
+            env:
+              TZ: ${TZ}
+              KEEP_APP_RUNNING: "1"
+              WEB_AUTHENTICATION: "0"
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+    service:
+      app:
+        controller: firefox2
+        ports:
+          http:
+            port: 5800
+
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "firefox"
+          hajimari.io/info: Firefox with seamless clipboard
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: firefox2
+                  port: 5800
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        type: emptyDir
+        globalMounts:
+          - path: /config

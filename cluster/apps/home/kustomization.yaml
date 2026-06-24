@@ -8,6 +8,7 @@ resources:
   #  - vernemq/ks.yaml
   - hajimari
   - firefox/ks.yaml
+  - firefox2/ks.yaml
   - chromium/ks.yaml
   - sshwifty/ks.yaml
   - emqx/ks.yaml
