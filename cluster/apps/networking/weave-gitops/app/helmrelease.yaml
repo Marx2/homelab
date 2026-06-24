@@ -44,7 +44,7 @@ spec:
           gen-certs:
             image:
               repository: docker.io/library/alpine
-              tag: 3.19
+              tag: 3.24
             command:
               - sh
               - -c
