@@ -48,8 +48,6 @@ spec:
             env:
               WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
               WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
-            args:
-              - --insecure-no-tls
             resources:
               requests:
                 cpu: 50m
@@ -76,6 +74,8 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
           hajimari.io/enable: "true"
           hajimari.io/appName: "Weave GitOps"
           hajimari.io/icon: "mdi:sync"
