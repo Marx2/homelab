@@ -43,8 +43,8 @@ spec:
             env:
               TZ: ${TZ}
             image:
-              repository: ghcr.io/gimlet-io/capacitor
-              tag: 0.14.0@sha256:3cc1b73e81471d9dcd2672f0b5a102c7632fc068e47b5346738dfd9a549608f0
+              repository: ghcr.io/gimlet-io/capacitor-next
+              tag: 0.14.0@sha256:95368be3e6b473108a3ccdfc15c22ed1a99475e4b92d6b11c983887dbee1860a
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
