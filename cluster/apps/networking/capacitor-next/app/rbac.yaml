@@ -1,0 +1,134 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: capacitor-next
+rules:
+  - apiGroups:
+      - ""
+      - apps
+      - batch
+      - autoscaling
+      - networking.k8s.io
+      - policy
+      - storage.k8s.io
+      - events.k8s.io
+    resources:
+      - pods
+      - pods/log
+      - services
+      - endpoints
+      - configmaps
+      - events
+      - namespaces
+      - nodes
+      - persistentvolumes
+      - persistentvolumeclaims
+      - serviceaccounts
+      - deployments
+      - statefulsets
+      - daemonsets
+      - replicasets
+      - ingresses
+      - networkpolicies
+      - jobs
+      - cronjobs
+      - horizontalpodautoscalers
+      - poddisruptionbudgets
+      - storageclasses
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - clusterroles
+      - rolebindings
+      - clusterrolebindings
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - selfsubjectaccessreviews
+    verbs:
+      - create
+  - apiGroups:
+      - source.toolkit.fluxcd.io
+      - kustomize.toolkit.fluxcd.io
+      - helm.toolkit.fluxcd.io
+      - infra.contrib.fluxcd.io
+    resources:
+      - gitrepositories
+      - ocirepositories
+      - buckets
+      - helmrepositories
+      - helmcharts
+      - kustomizations
+      - helmreleases
+      - terraforms
+    verbs:
+      - get
+      - watch
+      - list
+      - patch
+  - apiGroups:
+      - keda.sh
+    resources:
+      - scaledjobs
+      - scaledobjects
+    verbs:
+      - get
+      - watch
+      - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: capacitor-next
+subjects:
+  - kind: ServiceAccount
+    name: capacitor-next
+    namespace: flux-system
+roleRef:
+  kind: ClusterRole
+  name: capacitor-next
+  apiGroup: rbac.authorization.k8s.io
+---
+# Allows capacitor-next to impersonate users/groups for per-user RBAC
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: capacitor-next-impersonator
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - users
+      - groups
+      - serviceaccounts
+    verbs:
+      - impersonate
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - userextras
+    verbs:
+      - impersonate
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: capacitor-next-impersonator
+subjects:
+  - kind: ServiceAccount
+    name: capacitor-next
+    namespace: flux-system
+roleRef:
+  kind: ClusterRole
+  name: capacitor-next-impersonator
+  apiGroup: rbac.authorization.k8s.io

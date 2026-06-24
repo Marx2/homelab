@@ -17,3 +17,4 @@ resources:
   - keda/ks.yaml
   - keda-http/ks.yaml
   - capacitor/ks.yaml
+  - capacitor-next/ks.yaml
