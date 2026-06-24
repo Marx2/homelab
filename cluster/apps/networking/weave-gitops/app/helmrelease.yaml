@@ -40,6 +40,17 @@ spec:
       weave-gitops:
         serviceAccount:
           identifier: weave-gitops
+        initContainers:
+          gen-certs:
+            image:
+              repository: docker.io/library/alpine
+              tag: 3.19
+            command:
+              - sh
+              - -c
+              - |
+                apk add --no-cache openssl &&
+                openssl req -x509 -newkey rsa:2048 -keyout /tls/tls.key -out /tls/tls.crt -days 3650 -nodes -subj '/CN=weave-gitops'
         containers:
           app:
             image:
@@ -48,6 +59,9 @@ spec:
             env:
               WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
               WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
+            args:
+              - --tls-cert-file=/tls/tls.crt
+              - --tls-private-key-file=/tls/tls.key
             resources:
               requests:
                 cpu: 50m
@@ -59,6 +73,12 @@ spec:
                 enabled: true
               readiness:
                 enabled: true
+
+    persistence:
+      tls:
+        type: emptyDir
+        globalMounts:
+          - path: /tls
 
     service:
       app:
