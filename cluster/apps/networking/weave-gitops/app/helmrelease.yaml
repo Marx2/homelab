@@ -55,7 +55,7 @@ spec:
           app:
             image:
               repository: ghcr.io/weaveworks/wego-app
-              tag: v0.38.0
+              tag: v0.39.0-rc.2
             env:
               WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
               WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
