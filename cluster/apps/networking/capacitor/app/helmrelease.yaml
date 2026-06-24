@@ -44,7 +44,7 @@ spec:
               TZ: ${TZ}
             image:
               repository: ghcr.io/gimlet-io/capacitor
-              tag: v0.4.8@sha256:c999a42cccc523b91086547f890466d09be4755bf05a52763b0d14594bf60782
+              tag: 0.14.0@sha256:3cc1b73e81471d9dcd2672f0b5a102c7632fc068e47b5346738dfd9a549608f0
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
