@@ -30,6 +30,8 @@ spec:
       createDefaultServiceAccount: false
     serviceAccount:
       capacitor: {}
+    defaultPodOptions:
+      automountServiceAccountToken: true
     controllers:
       app:
         annotations:
