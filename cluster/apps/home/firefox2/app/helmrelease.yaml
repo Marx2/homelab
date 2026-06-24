@@ -25,6 +25,9 @@ spec:
   driftDetection:
     mode: enabled
     ignore:
+      - paths: [/spec/replicas]
+        target:
+          kind: Deployment
       - paths: [/spec/containers/resources/limits]
         target:
           kind: Pod
@@ -33,7 +36,7 @@ spec:
       createDefaultServiceAccount: false
     controllers:
       firefox2:
-        replicas: 1
+        replicas: 0
         containers:
           app:
             image:
@@ -99,8 +102,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: firefox2
-                  port: 3001
+                  name: keda-http-interceptor-proxy
+                  port: 8080
         tls:
           - hosts:
               - *host
