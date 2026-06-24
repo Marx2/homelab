@@ -51,30 +51,24 @@ spec:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /
+                  tcpSocket:
                     port: 6901
-                    scheme: HTTPS
                   initialDelaySeconds: 10
                   periodSeconds: 10
               readiness:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /
+                  tcpSocket:
                     port: 6901
-                    scheme: HTTPS
                   initialDelaySeconds: 10
                   periodSeconds: 10
               startup:
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /
+                  tcpSocket:
                     port: 6901
-                    scheme: HTTPS
                   failureThreshold: 30
                   periodSeconds: 5
 
