@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: docker.io/kasmweb/chromium
-              tag: 1.16.1
+              tag: 1.19.0
             env:
               TZ: ${TZ}
               VNC_PW: "kasm"
