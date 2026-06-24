@@ -48,6 +48,8 @@ spec:
             env:
               WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
               WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
+            args:
+              - --insecure-no-tls
             resources:
               requests:
                 cpu: 50m
