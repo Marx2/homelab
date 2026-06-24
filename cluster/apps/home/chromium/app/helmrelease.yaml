@@ -44,7 +44,7 @@ spec:
               tag: 1.19.0
             env:
               TZ: ${TZ}
-              VNC_PW: "kasm"
+              VNC_PW: "kasmweb"
               VNC_RESOLUTION: "1920x1080"
             probes:
               liveness:
