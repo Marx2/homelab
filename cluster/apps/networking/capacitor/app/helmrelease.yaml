@@ -28,11 +28,14 @@ spec:
   values:
     global:
       createDefaultServiceAccount: false
+    serviceAccount:
+      capacitor: {}
     controllers:
       app:
         annotations:
           reloader.stakater.com/auto: "true"
-
+        serviceAccount:
+          identifier: capacitor
         containers:
           app:
             env:
