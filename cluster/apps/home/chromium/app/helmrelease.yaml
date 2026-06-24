@@ -36,7 +36,7 @@ spec:
       createDefaultServiceAccount: false
     controllers:
       chromium:
-        replicas: 0
+        replicas: 1
         containers:
           app:
             image:
@@ -86,6 +86,7 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           hajimari.io/enable: "true"
@@ -96,8 +97,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: keda-http-interceptor-proxy
-                  port: 8080
+                  name: chromium
+                  port: 6901
         tls:
           - hosts:
               - *host
