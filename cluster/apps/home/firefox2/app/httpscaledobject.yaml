@@ -13,7 +13,7 @@ spec:
     kind: Deployment
     apiVersion: apps/v1
     service: firefox2
-    port: 3001
+    port: 3000
   replicas:
     min: 0
     max: 1

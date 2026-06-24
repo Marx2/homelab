@@ -57,7 +57,7 @@ spec:
                 custom: true
                 spec:
                   tcpSocket:
-                    port: 3001
+                    port: 3000
                   initialDelaySeconds: 10
                   periodSeconds: 10
               readiness:
@@ -65,7 +65,7 @@ spec:
                 custom: true
                 spec:
                   tcpSocket:
-                    port: 3001
+                    port: 3000
                   initialDelaySeconds: 10
                   periodSeconds: 10
               startup:
@@ -73,7 +73,7 @@ spec:
                 custom: true
                 spec:
                   tcpSocket:
-                    port: 3001
+                    port: 3000
                   failureThreshold: 30
                   periodSeconds: 5
 
@@ -82,7 +82,7 @@ spec:
         controller: firefox2
         ports:
           http:
-            port: 3001
+            port: 3000
 
     ingress:
       app:
