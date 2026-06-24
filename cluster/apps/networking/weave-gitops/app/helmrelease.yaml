@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    serviceAccount:
+      weave-gitops: {}
+    defaultPodOptions:
+      automountServiceAccountToken: true
+    controllers:
+      weave-gitops:
+        serviceAccount:
+          identifier: weave-gitops
+        containers:
+          app:
+            image:
+              repository: ghcr.io/weaveworks/wego-app
+              tag: v0.38.0
+            env:
+              WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
+              WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+
+    service:
+      app:
+        controller: weave-gitops
+        ports:
+          http:
+            port: 9001
+
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Weave GitOps"
+          hajimari.io/icon: "mdi:sync"
+          hajimari.io/group: "networking"
+          hajimari.io/info: "Flux UI"
+        hosts:
+          - host: &host "weave-gitops.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host

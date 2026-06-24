@@ -16,5 +16,4 @@ resources:
   - pictshare/ks.yaml
   - keda/ks.yaml
   - keda-http/ks.yaml
-  - capacitor/ks.yaml
-  - capacitor-next/ks.yaml
+  - weave-gitops/ks.yaml

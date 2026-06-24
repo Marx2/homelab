@@ -1,0 +1,40 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: weave-gitops
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["namespaces", "pods", "events", "services", "serviceaccounts", "configmaps"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets", "replicasets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["source.toolkit.fluxcd.io"]
+    resources: ["gitrepositories", "ocirepositories", "buckets", "helmrepositories", "helmcharts"]
+    verbs: ["get", "list", "watch", "patch"]
+  - apiGroups: ["kustomize.toolkit.fluxcd.io"]
+    resources: ["kustomizations"]
+    verbs: ["get", "list", "watch", "patch"]
+  - apiGroups: ["helm.toolkit.fluxcd.io"]
+    resources: ["helmreleases"]
+    verbs: ["get", "list", "watch", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: weave-gitops
+subjects:
+  - kind: ServiceAccount
+    name: weave-gitops
+    namespace: flux-system
+roleRef:
+  kind: ClusterRole
+  name: weave-gitops
+  apiGroup: rbac.authorization.k8s.io
