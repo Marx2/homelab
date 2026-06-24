@@ -59,6 +59,7 @@ spec:
             env:
               WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL: ""
               WEAVE_GITOPS_FEATURE_TELEMETRY: "false"
+              WEAVE_GITOPS_FEATURE_OIDC: "false"
             args:
               - --tls-cert-file=/tls/tls.crt
               - --tls-private-key-file=/tls/tls.key
