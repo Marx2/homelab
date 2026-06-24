@@ -12,7 +12,7 @@ spec:
     name: sshwifty
     kind: Deployment
     apiVersion: apps/v1
-    service: main
+    service: sshwifty
     port: 8182
   replicas:
     min: 0
