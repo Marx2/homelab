@@ -1,0 +1,20 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: firefox2
+  namespace: home
+spec:
+  hosts:
+    - firefox2.${SECRET_DOMAIN}
+  pathPrefixes:
+    - /
+  scaleTargetRef:
+    name: firefox2
+    kind: Deployment
+    apiVersion: apps/v1
+    service: firefox2
+    port: 3000
+  replicas:
+    min: 0
+    max: 1
+  scaledownPeriod: 300
