@@ -29,7 +29,8 @@ spec:
     global:
       createDefaultServiceAccount: false
     serviceAccount:
-      capacitor: {}
+      capacitor:
+        automountServiceAccountToken: true
     defaultPodOptions:
       automountServiceAccountToken: true
     controllers:
