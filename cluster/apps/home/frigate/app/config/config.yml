@@ -39,9 +39,8 @@ snapshots:
 
 record:
   enabled: true
-  retain:
+  motion:
     days: 5
-    mode: motion
   alerts:
     pre_capture: 5
     post_capture: 5
