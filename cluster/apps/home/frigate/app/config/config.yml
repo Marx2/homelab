@@ -57,6 +57,14 @@ record:
       days: 10
       mode: motion
 
+face_recognition:
+  enabled: true
+  model_size: large
+  detection_threshold: 0.7
+  min_area: 750
+  unknown_score: 0.8
+  recognition_threshold: 0.9
+
 objects:
   track:
     - person
