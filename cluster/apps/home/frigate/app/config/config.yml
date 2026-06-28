@@ -60,10 +60,10 @@ record:
 face_recognition:
   enabled: true
   model_size: large
-  detection_threshold: 0.5
-  min_area: 500
+  detection_threshold: 0.3
+  min_area: 100
   unknown_score: 0.7
-  recognition_threshold: 0.75
+  recognition_threshold: 0.65
 
 objects:
   track:
