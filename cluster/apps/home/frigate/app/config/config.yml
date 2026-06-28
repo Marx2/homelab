@@ -1,6 +1,9 @@
 ---
 logger:
   default: info
+  logs:
+    frigate.data_processing.real_time.face: debug
+    frigate.embeddings: debug
 
 auth:
   enabled: false
