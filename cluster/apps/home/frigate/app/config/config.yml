@@ -63,7 +63,7 @@ face_recognition:
   detection_threshold: 0.3
   min_area: 100
   unknown_score: 0.7
-  recognition_threshold: 0.65
+  recognition_threshold: 0.5
 
 objects:
   track:
