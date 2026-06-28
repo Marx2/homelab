@@ -57,22 +57,24 @@ objects:
   filters:
     person:
       min_area: 5000
-      max_area: 100000
+      max_area: 1000000
       threshold: 0.7
 
-#go2rtc:
-#  streams:
-#    cam_01: ffmpeg:https://cam-01.frigate.${SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=${FRIGATE_CAMERA_USER}&password=${FRIGATE_CAMERA_PASSWORD}#video=copy#audio=copy
-#    cam_01_sub: ffmpeg:https://cam-01.frigate.${SECRET_DOMAIN}:443/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=${FRIGATE_CAMERA_USER}&password=${FRIGATE_CAMERA_PASSWORD}
+go2rtc:
+  streams:
+    cam-01:
+      - rtsp://192.168.1.28/ch0_0.h264
+    cam-01-sub:
+      - rtsp://192.168.1.28/ch0_1.h264
 
 cameras:
   cam-01:
     ffmpeg:
       inputs:
-        - path: rtsp://192.168.1.28/ch0_0.h264
+        - path: rtsp://localhost:8554/cam-01
           input_args: preset-rtsp-restream
           roles: [record]
-        - path: rtsp://192.168.1.28/ch0_1.h264
+        - path: rtsp://localhost:8554/cam-01-sub
           input_args: preset-rtsp-restream
           roles: [detect]
     detect:
