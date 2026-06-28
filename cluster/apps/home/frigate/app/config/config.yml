@@ -42,7 +42,7 @@ snapshots:
 record:
   enabled: true
   retain:
-    interval: 5
+    days: 5
     mode: motion
     #  events:
     #    retain:
