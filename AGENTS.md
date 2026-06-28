@@ -103,4 +103,5 @@ explanations. Only add things that will save time in future.
 - `readOnlyRootFilesystem: true`: mount ConfigMap to separate path (e.g. `/config/`), emptyDir for writable dirs.
 - interceptor-service.yaml (ExternalName for KEDA HTTP proxy) is identical across all default-namespace apps — copy verbatim.
 - HTTPScaledObject ingress path routes to `keda-http-interceptor-proxy` service, not the app service directly.
-- app-template v5: set `global.createDefaultServiceAccount: false` to keep namespace `default` SA.
+- Frigate 0.17: `/api/faces/{name}/register` saves new file each call — avoid on live-detection crops (duplicates).
+- Frigate 0.17: UI upload auto-detects + crops face; use UI, not manual `/register` calls on raw crops.
