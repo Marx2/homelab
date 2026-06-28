@@ -44,12 +44,18 @@ record:
   retain:
     days: 5
     mode: motion
-    #  events:
-    #    retain:
-    #      default: 15
-    #      mode: motion
-    #      objects:
-    #        person: 30
+  alerts:
+    pre_capture: 5
+    post_capture: 5
+    retain:
+      days: 10
+      mode: motion
+  detections:
+    pre_capture: 5
+    post_capture: 5
+    retain:
+      days: 10
+      mode: motion
 
 objects:
   track:
@@ -71,10 +77,10 @@ cameras:
   cam-01:
     ffmpeg:
       inputs:
-        - path: rtsp://localhost:8554/cam-01
+        - path: rtsp://127.0.0.1:8554/cam-01
           input_args: preset-rtsp-restream
           roles: [record]
-        - path: rtsp://localhost:8554/cam-01-sub
+        - path: rtsp://127.0.0.1:8554/cam-01-sub
           input_args: preset-rtsp-restream
           roles: [detect]
     detect:
@@ -85,14 +91,3 @@ cameras:
         - car
         - dog
         - cat
-
-    #    detect:
-    #      width: 640
-    #      height: 480
-    #      fps: 7
-    # objects:
-    #   filters:
-    #     person:
-    #       mask:
-    #         - 960,626,800,617,797,0,960,0
-    #         - 960,0,960,138,0,149,0,0
