@@ -75,6 +75,15 @@ cameras:
         - path: rtsp://192.168.1.28/ch0_1.h264
           input_args: preset-rtsp-restream
           roles: [detect]
+    detect:
+      enabled: true
+      objects:
+        track:
+          - person
+          - car
+          - dog
+          - cat
+
     #    detect:
     #      width: 640
     #      height: 480
