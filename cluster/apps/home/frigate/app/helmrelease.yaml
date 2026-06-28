@@ -71,6 +71,7 @@ spec:
                     - -c
                     - |
                       until curl -sf http://localhost:5000/api/version >/dev/null 2>&1; do sleep 5; done
+                      sleep 20
                       for dir in /media/frigate/clips/faces/*/; do
                         name=$$(basename "$$dir")
                         [ "$$name" = "train" ] && continue
