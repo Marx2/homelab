@@ -77,12 +77,12 @@ cameras:
           roles: [detect]
     detect:
       enabled: true
-      objects:
-        track:
-          - person
-          - car
-          - dog
-          - cat
+    objects:
+      track:
+        - person
+        - car
+        - dog
+        - cat
 
     #    detect:
     #      width: 640
