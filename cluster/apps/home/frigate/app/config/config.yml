@@ -88,6 +88,15 @@ cameras:
     objects:
       track:
         - person
+        - bicycle
         - car
-        - dog
+        - motorcycle
+        - bus
+        - boat
+        - bird
         - cat
+        - dog
+        - horse
+        - sheep
+        - cow
+        - bear
