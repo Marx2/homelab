@@ -72,7 +72,15 @@ spec:
                     - |
                       (
                         until curl -sf http://localhost:5000/api/version >/dev/null 2>&1; do sleep 5; done
-                        sleep 20
+                        TESTIMG=$$(ls /media/frigate/clips/faces/*/*.webp 2>/dev/null | head -1)
+                        if [ -n "$$TESTIMG" ]; then
+                          until ! curl -sf -X POST http://localhost:5000/api/faces/recognize \
+                            -F "file=@$$TESTIMG" 2>/dev/null | grep -q "Could not process"; do
+                            sleep 3
+                          done
+                        else
+                          sleep 30
+                        fi
                         for dir in /media/frigate/clips/faces/*/; do
                           name=$$(basename "$$dir")
                           [ "$$name" = "train" ] && continue
