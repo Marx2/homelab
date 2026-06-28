@@ -63,6 +63,23 @@ spec:
               limits:
                 memory: 6000Mi
                 gpu.intel.com/i915: 1
+            lifecycle:
+              postStart:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - |
+                      until curl -sf http://localhost:5000/api/version >/dev/null 2>&1; do sleep 5; done
+                      for dir in /media/frigate/clips/faces/*/; do
+                        name=$(basename "$dir")
+                        [ "$name" = "train" ] && continue
+                        for f in "$dir"*.webp "$dir"*.jpg "$dir"*.png; do
+                          [ -f "$f" ] || continue
+                          curl -sf -X POST "http://localhost:5000/api/faces/${name}/register" \
+                            -F "file=@${f}" >/dev/null 2>&1 || true
+                        done
+                      done
             securityContext:
               privileged: true
     service:
