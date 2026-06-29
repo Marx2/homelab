@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
   annotations:
     kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   rules:
@@ -19,3 +20,6 @@ spec:
                 name: webhook-receiver
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - flux-webhook.${SECRET_DOMAIN}
