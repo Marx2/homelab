@@ -22,4 +22,4 @@ spec:
   tls:
     - hosts:
         - flux-webhook.${SECRET_DOMAIN}
-      secretName: k-homylab.com-tls
+      secretName: flux-webhook-tls
