@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hass-k8s
+  labels:
+    app.kubernetes.io/name: hass-k8s
+    app.kubernetes.io/component: rbac
+subjects:
+  - kind: ServiceAccount
+    name: hass-k8s
+    namespace: home
+roleRef:
+  kind: ClusterRole
+  name: hass-k8s
+  apiGroup: rbac.authorization.k8s.io
