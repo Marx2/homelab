@@ -21,7 +21,7 @@
   suppressNotifications: [
     'prIgnoreNotification'
   ],
-  rebaseWhen: 'conflicted',
+  rebaseWhen: 'behind-base-branch',
   ignorePaths: [
     'ansible/**',
     'dns/**',
