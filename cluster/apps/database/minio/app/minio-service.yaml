@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     hajimari.io/enable: "true"
-    hajimari.io/icon: "mdi:nas"
+    hajimari.io/icon: "simple-icons:minio"
     hajimari.io/group: "infra"
     hajimari.io/info: S3 compatible object storage
 #    nginx.ingress.kubernetes.io/auth-snippet: |

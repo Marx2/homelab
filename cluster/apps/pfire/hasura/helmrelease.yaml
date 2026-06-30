@@ -24,7 +24,7 @@ spec:
       className: nginx
       annotations:
         hajimari.io/enable: "true"
-        hajimari.io/icon: "weather-sunset"
+        hajimari.io/icon: "simple-icons:hasura"
         hajimari.io/group: "pfire"
       hosts:
         - host: hasura.${SECRET_DOMAIN}

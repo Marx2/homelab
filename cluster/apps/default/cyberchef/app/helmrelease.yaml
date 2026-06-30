@@ -77,7 +77,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
-          hajimari.io/icon: mdi:harddiskstatus
+          hajimari.io/icon: mdi:chef-hat
           hajimari.io/enable: "true"
           hajimari.io/info: Different useful tools
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"

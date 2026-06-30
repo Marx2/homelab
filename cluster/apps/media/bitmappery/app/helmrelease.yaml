@@ -61,7 +61,7 @@ spec:
       app:
         className: nginx
         annotations:
-          hajimari.io/icon: mdi:harddiskstatus
+          hajimari.io/icon: mdi:brush
           hajimari.io/enable: "true"
           hajimari.io/info: Image editor.
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"

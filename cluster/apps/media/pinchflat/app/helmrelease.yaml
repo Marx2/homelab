@@ -35,7 +35,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 50m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "disc-player"
+          hajimari.io/icon: "mdi:download-box"
           hajimari.io/group: "media"
 
         containers:

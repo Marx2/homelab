@@ -23,7 +23,7 @@ spec:
       enabled: true
       annotations:
         hajimari.io/enable: "true"
-        hajimari.io/icon: "weather-sunset"
+        hajimari.io/icon: "mdi:api"
         hajimari.io/group: "pfire"
         kubernetes.io/ingress.class: nginx
         # type of authentication

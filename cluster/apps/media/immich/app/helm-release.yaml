@@ -166,7 +166,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "disc-player"
+          hajimari.io/icon: "mdi:image-multiple"
           hajimari.io/group: "media"
         hosts:
           - host: &host "photos.${SECRET_DOMAIN}"

@@ -59,7 +59,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "cloud-sync-outline"
+          hajimari.io/icon: "mdi:image-multiple-outline"
           hajimari.io/group: "networking"
         hosts:
           - host: &host pictshare.${SECRET_DOMAIN}

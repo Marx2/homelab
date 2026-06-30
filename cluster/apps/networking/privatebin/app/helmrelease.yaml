@@ -72,7 +72,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "cloud-sync-outline"
+          hajimari.io/icon: "mdi:lock-outline"
           hajimari.io/group: "networking"
         hosts:
           - host: &host privatebin.${SECRET_DOMAIN}

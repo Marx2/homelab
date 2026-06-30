@@ -73,7 +73,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          hajimari.io/icon: simple-icons:grafana
+          hajimari.io/icon: simple-icons:prometheus
           hajimari.io/group: "monitoring"
         hosts:
           - &host grafana.${SECRET_DOMAIN}

@@ -78,7 +78,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "disc-player"
+          hajimari.io/icon: "mdi:youtube"
           hajimari.io/group: "media"
           #          nginx.ingress.kubernetes.io/proxy-body-size: 50m
           #          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"

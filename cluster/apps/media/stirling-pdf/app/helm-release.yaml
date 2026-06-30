@@ -87,7 +87,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 50m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "home-lightning-bolt-outline"
+          hajimari.io/icon: "mdi:file-pdf-box"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

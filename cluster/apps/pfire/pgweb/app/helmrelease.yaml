@@ -72,7 +72,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
-          hajimari.io/icon: "weather-sunset"
+          hajimari.io/icon: "mdi:database-eye"
           hajimari.io/group: "pfire"
           kubernetes.io/ingress.class: nginx
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"

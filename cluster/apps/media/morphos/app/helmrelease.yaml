@@ -85,7 +85,7 @@ spec:
       app:
         className: nginx
         annotations:
-          hajimari.io/icon: mdi:harddiskstatus
+          hajimari.io/icon: mdi:file-convert
           hajimari.io/enable: "true"
           hajimari.io/info: File conversion service.
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"

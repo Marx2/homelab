@@ -43,7 +43,7 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         hajimari.io/enable: "true"
         hajimari.io/appName: "Ola Store"
-        hajimari.io/icon: mdi:database
+        hajimari.io/icon: simple-icons:wordpress
         hajimari.io/group: Ola
       hosts:
         - host: woo.${SECRET_DOMAIN}

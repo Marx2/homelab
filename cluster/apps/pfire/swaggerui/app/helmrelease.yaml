@@ -38,7 +38,7 @@ spec:
       enabled: false
       annotations:
         hajimari.io/enable: "true"
-        hajimari.io/icon: "weather-sunset"
+        hajimari.io/icon: "simple-icons:swagger"
         hajimari.io/group: "pfire"
         nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start

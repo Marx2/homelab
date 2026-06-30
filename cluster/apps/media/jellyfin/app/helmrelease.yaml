@@ -92,7 +92,7 @@ spec:
           # nginx.ingress.kubernetes.io/proxy-buffer-size: 10k
           ###
           hajimari.io/enable: "true"
-          hajimari.io/icon: "disc-player"
+          hajimari.io/icon: "simple-icons:jellyfin"
           hajimari.io/group: "media"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
