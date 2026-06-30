@@ -9,7 +9,6 @@ resources:
   - postgrescluster-pfire.yaml
   #  - hasura
   #  - grafana
-  - tooljet
   - pgadmin/ks.yaml
   - graphql-mesh
   - stooq-importer/ks.yaml
