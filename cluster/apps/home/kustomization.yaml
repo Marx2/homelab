@@ -3,6 +3,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
+  - crunchy-postgres-secret.yaml
+  - postgrescluster-home.yaml
+  - endurain/ks.yaml
   - forecastle/ks.yaml
   #  - syncthing
   #  - vernemq/ks.yaml

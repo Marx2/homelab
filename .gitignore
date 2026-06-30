@@ -18,3 +18,4 @@ xanmanning.k3s*
 terraform.tfstate*
 megalinter-reports
 /homelab.iml
+/.playwright-mcp/
