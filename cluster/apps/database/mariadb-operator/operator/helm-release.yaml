@@ -44,7 +44,7 @@ spec:
         certManager:
           enabled: false
 
-    
+
     serviceMonitor:
       enabled: true
 
