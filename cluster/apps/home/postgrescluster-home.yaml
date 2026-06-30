@@ -49,6 +49,7 @@ spec:
     - name: endurain
       databases:
         - endurain
+      options: "SUPERUSER"
       password:
         type: AlphaNumeric
   backups:
