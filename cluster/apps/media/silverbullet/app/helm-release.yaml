@@ -43,7 +43,7 @@ spec:
               repository: docker.io/zefhemel/silverbullet
               tag: '2.9.0'
             env:
-              TZ: ${TIMEZONE}
+              TZ: ${TZ}
             probes:
               liveness:
                 enabled: true
