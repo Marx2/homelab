@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/scorest
-              tag: v1.0.14
+              tag: v1.0.15
             env:
               POSTGREST_URL: http://postgrest-attr:80/
               POSTGREST_USER: ""
@@ -86,3 +86,29 @@ spec:
         tls:
           - hosts:
               - *host
+      public:
+        enabled: true
+        className: nginx
+        annotations:
+          hajimari.io/enable: "false"
+          nginx.ingress.kubernetes.io/proxy-buffering: "on"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_cache leaderboard_cache;
+            proxy_cache_valid 200 5m;
+            proxy_cache_use_stale updating error timeout;
+            proxy_cache_lock on;
+            add_header X-Cache-Status $upstream_cache_status;
+        hosts:
+          - host: &hostpublic "top10.${SECRET_DOMAIN}"
+            paths:
+              - path: /leaderboard
+                service:
+                  name: keda-http-interceptor-proxy
+                  port: 8080
+              - path: /api/leaderboard
+                service:
+                  name: keda-http-interceptor-proxy
+                  port: 8080
+        tls:
+          - hosts:
+              - *hostpublic
