@@ -1,0 +1,109 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scanst-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  scanst.json: |-
+    {
+      "title": "scanst",
+      "uid": "scanst-metrics",
+      "timezone": "browser",
+      "refresh": "30s",
+      "time": { "from": "now-24h", "to": "now" },
+      "panels": [
+        {
+          "id": 1,
+          "type": "stat",
+          "title": "Tickers Total",
+          "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+          "targets": [
+            {
+              "expr": "scanst_tickers_total",
+              "legendFormat": ""
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] } }
+        },
+        {
+          "id": 2,
+          "type": "stat",
+          "title": "Succeeded",
+          "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+          "targets": [
+            {
+              "expr": "scanst_tickers_succeeded_total",
+              "legendFormat": ""
+            }
+          ],
+          "options": {
+            "reduceOptions": { "calcs": ["lastNotNull"] },
+            "colorMode": "background",
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": null }
+              ]
+            }
+          }
+        },
+        {
+          "id": 3,
+          "type": "stat",
+          "title": "Failed",
+          "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+          "targets": [
+            {
+              "expr": "scanst_tickers_failed_total",
+              "legendFormat": ""
+            }
+          ],
+          "options": {
+            "reduceOptions": { "calcs": ["lastNotNull"] },
+            "colorMode": "background",
+            "thresholds": {
+              "steps": [
+                { "color": "green", "value": null },
+                { "color": "red", "value": 1 }
+              ]
+            }
+          }
+        },
+        {
+          "id": 4,
+          "type": "stat",
+          "title": "Job Duration (s)",
+          "gridPos": { "x": 12, "y": 0, "w": 4, "h": 4 },
+          "targets": [
+            {
+              "expr": "scanst_job_duration_seconds",
+              "legendFormat": ""
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] } }
+        },
+        {
+          "id": 5,
+          "type": "timeseries",
+          "title": "Tickers Processed Over Time",
+          "gridPos": { "x": 0, "y": 4, "w": 24, "h": 8 },
+          "targets": [
+            {
+              "expr": "scanst_tickers_processed_total",
+              "legendFormat": "processed"
+            },
+            {
+              "expr": "scanst_tickers_succeeded_total",
+              "legendFormat": "succeeded"
+            },
+            {
+              "expr": "scanst_tickers_failed_total",
+              "legendFormat": "failed"
+            }
+          ]
+        }
+      ],
+      "schemaVersion": 38
+    }
