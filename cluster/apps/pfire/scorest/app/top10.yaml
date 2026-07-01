@@ -33,6 +33,20 @@ spec:
                 name: scorest
                 port:
                   number: 3000
+          - path: /assets
+            pathType: Prefix
+            backend:
+              service:
+                name: scorest
+                port:
+                  number: 3000
+          - path: /vite.svg
+            pathType: Prefix
+            backend:
+              service:
+                name: scorest
+                port:
+                  number: 3000
   tls:
     - hosts:
         - "top10.${SECRET_DOMAIN}"
