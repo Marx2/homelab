@@ -86,7 +86,7 @@ spec:
         tls:
           - hosts:
               - *host
-      public:
+      top10:
         enabled: true
         className: nginx
         annotations:
