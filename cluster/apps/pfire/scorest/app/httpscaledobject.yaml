@@ -7,6 +7,7 @@ metadata:
 spec:
   hosts:
     - scorest.${SECRET_DOMAIN}
+    - top10.${SECRET_DOMAIN}
   pathPrefixes:
     - /
   scaleTargetRef:
