@@ -56,6 +56,7 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-tls"
+        allow-snippet-annotations: "true"
       resources:
         requests:
           memory: 100Mi
