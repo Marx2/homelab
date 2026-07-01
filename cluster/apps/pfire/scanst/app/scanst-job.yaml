@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx2/scanst:v1.0.25
+              image: ghcr.io/marx2/scanst:v1.0.26
               imagePullPolicy: IfNotPresent
               args: ["--headless"]
               envFrom:
@@ -38,3 +38,5 @@ spec:
                   value: "http://postgrest-attr:80/"
                 - name: DELAY_BETWEEN_METRICS
                   value: "1.5"
+                - name: PUSHGATEWAY_URL
+                  value: "http://prometheus-pushgateway.monitoring.svc.cluster.local:9091"
