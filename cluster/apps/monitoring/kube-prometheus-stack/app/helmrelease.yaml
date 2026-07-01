@@ -69,10 +69,18 @@ spec:
     grafana:
       enabled: true
       defaultDashboardsTimezone: Europe/Warsaw
+      grafana.ini:
+        auth.basic:
+          disable_login_form: true
+        auth.anonymous:
+          enabled: true
+          org_role: Admin
       ingress:
         enabled: true
         ingressClassName: nginx
         annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/icon: simple-icons:prometheus
           hajimari.io/group: "monitoring"
         hosts:
