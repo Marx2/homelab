@@ -28,11 +28,6 @@ spec:
     keepHistory: false
   driftDetection:
     mode: enabled
-    ignore:
-      - paths:
-          - /spec/replicas
-        target:
-          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
@@ -41,7 +36,7 @@ spec:
         - name: regcred
     controllers:
       scorest:
-        replicas: 0
+        replicas: 1
         strategy: RollingUpdate
         containers:
           app:

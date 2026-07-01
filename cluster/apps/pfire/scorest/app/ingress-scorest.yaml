@@ -21,9 +21,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: keda-http-interceptor-proxy
+                name: scorest
                 port:
-                  number: 8080
+                  number: 3000
   tls:
     - hosts:
         - "scorest.${SECRET_DOMAIN}"

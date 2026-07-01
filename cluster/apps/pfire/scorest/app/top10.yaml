@@ -23,16 +23,16 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: keda-http-interceptor-proxy
+                name: scorest
                 port:
-                  number: 8080
+                  number: 3000
           - path: /api/leaderboard
             pathType: Prefix
             backend:
               service:
-                name: keda-http-interceptor-proxy
+                name: scorest
                 port:
-                  number: 8080
+                  number: 3000
   tls:
     - hosts:
         - "top10.${SECRET_DOMAIN}"
