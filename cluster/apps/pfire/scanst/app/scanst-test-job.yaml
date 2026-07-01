@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx2/scanst:v1.0.26
+              image: ghcr.io/marx2/scanst:v1.0.27
               imagePullPolicy: IfNotPresent
               args: ["--headless", "--metric", "Revenue (TTM)", "MSFT", "NVDA", "GOOG"]
               envFrom:
