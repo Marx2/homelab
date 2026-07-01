@@ -1,0 +1,42 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scanst-test
+  namespace: pfire
+spec:
+  # fake schedule - never runs
+  schedule: "0 0 31 2 *"
+  suspend: true
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        created-by: scanst
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: regcred
+          restartPolicy: Never
+          containers:
+            - name: scanst
+              image: ghcr.io/marx2/scanst:v1.0.26
+              imagePullPolicy: IfNotPresent
+              args: ["--headless", "--metric", "Revenue (TTM)", "MSFT", "NVDA", "GOOG"]
+              envFrom:
+                - secretRef:
+                    name: scanst-secrets
+              env:
+                - name: TZ
+                  value: "${TZ}"
+                - name: LOG_LEVEL
+                  value: "INFO"
+                - name: POSTGREST_URL
+                  value: "http://postgrest-attr:80/"
+                - name: DELAY_BETWEEN_METRICS
+                  value: "1.5"
+                - name: PUSHGATEWAY_URL
+                  value: "http://prometheus-pushgateway.monitoring.svc.cluster.local:9091"

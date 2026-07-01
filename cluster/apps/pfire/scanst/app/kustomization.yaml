@@ -5,6 +5,7 @@ resources:
   - scanst-secrets.yaml
   - scanst-job.yaml
   - scanst-override-job.yaml
+  - scanst-test-job.yaml
   - scanst-ui.yaml
   - interceptor-service.yaml
   - httpscaledobject.yaml
