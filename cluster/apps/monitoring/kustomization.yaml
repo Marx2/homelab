@@ -10,4 +10,5 @@ resources:
   - speedtest-exporter/ks.yaml
   - scrutiny/ks.yaml
   - uptime-kuma/ks.yaml
+  - pushgateway/ks.yaml
 
