@@ -6,6 +6,7 @@ metadata:
   namespace: pfire
   annotations:
     hajimari.io/enable: "false"
+    nginx.ingress.kubernetes.io/enable-snippet-annotations: "true"
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_cache leaderboard_cache;
