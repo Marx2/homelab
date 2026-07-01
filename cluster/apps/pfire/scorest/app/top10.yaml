@@ -1,0 +1,38 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: top10
+  namespace: pfire
+  annotations:
+    hajimari.io/enable: "false"
+    nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_cache leaderboard_cache;
+      proxy_cache_valid 200 5m;
+      proxy_cache_use_stale updating error timeout;
+      proxy_cache_lock on;
+      add_header X-Cache-Status $upstream_cache_status;
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "top10.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /leaderboard
+            pathType: Prefix
+            backend:
+              service:
+                name: keda-http-interceptor-proxy
+                port:
+                  number: 8080
+          - path: /api/leaderboard
+            pathType: Prefix
+            backend:
+              service:
+                name: keda-http-interceptor-proxy
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "top10.${SECRET_DOMAIN}"

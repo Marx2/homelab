@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scorest
+  namespace: pfire
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/icon: mdi:chart-line
+    hajimari.io/group: "pfire"
+    hajimari.io/info: "UI for managing stock tickers"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "scorest.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: keda-http-interceptor-proxy
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "scorest.${SECRET_DOMAIN}"
