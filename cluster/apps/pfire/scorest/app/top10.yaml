@@ -7,6 +7,10 @@ metadata:
   annotations:
     hajimari.io/enable: "false"
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location = / {
+        return 302 /leaderboard;
+      }
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_cache leaderboard_cache;
       proxy_cache_valid 200 5m;
