@@ -39,4 +39,4 @@ spec:
                 - name: DELAY_BETWEEN_METRICS
                   value: "1.5"
                 - name: PUSHGATEWAY_URL
-                  value: "http://prometheus-pushgateway.monitoring.svc.cluster.local:9091"
+                  value: "http://pushgateway-prometheus-pushgateway.monitoring.svc.cluster.local:9091"
