@@ -5,7 +5,10 @@ metadata:
   name: top10
   namespace: pfire
   annotations:
-    hajimari.io/enable: "false"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: mdi:chart-line
+    hajimari.io/group: "pfire"
+    hajimari.io/info: "Top 10 best stocks"
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
     nginx.ingress.kubernetes.io/server-snippet: |
       location = / {

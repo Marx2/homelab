@@ -8,7 +8,7 @@ metadata:
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:chart-line
     hajimari.io/group: "pfire"
-    hajimari.io/info: "UI for managing stock tickers"
+    hajimari.io/info: "Stock scoring system"
     nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
 spec:
