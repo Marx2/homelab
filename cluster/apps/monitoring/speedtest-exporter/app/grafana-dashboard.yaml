@@ -1,0 +1,144 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: speedtest-exporter-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  speedtest-exporter.json: |-
+    {
+      "title": "Speedtest",
+      "uid": "speedtest-exporter",
+      "timezone": "browser",
+      "refresh": "1h",
+      "time": { "from": "now-7d", "to": "now" },
+      "panels": [
+        {
+          "id": 1,
+          "type": "stat",
+          "title": "Download",
+          "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_download_bits_per_second{job=\"speedtest-exporter\"}",
+              "legendFormat": "download"
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "value" },
+          "fieldConfig": { "defaults": { "unit": "bps", "decimals": 0 } }
+        },
+        {
+          "id": 2,
+          "type": "stat",
+          "title": "Upload",
+          "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_upload_bits_per_second{job=\"speedtest-exporter\"}",
+              "legendFormat": "upload"
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "value" },
+          "fieldConfig": { "defaults": { "unit": "bps", "decimals": 0 } }
+        },
+        {
+          "id": 3,
+          "type": "stat",
+          "title": "Ping",
+          "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_ping_latency_milliseconds{job=\"speedtest-exporter\"}",
+              "legendFormat": "ping"
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "ms",
+              "decimals": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 30 },
+                  { "color": "red", "value": 80 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": 4,
+          "type": "stat",
+          "title": "Jitter",
+          "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_jitter_latency_milliseconds{job=\"speedtest-exporter\"}",
+              "legendFormat": "jitter"
+            }
+          ],
+          "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "ms",
+              "decimals": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 10 },
+                  { "color": "red", "value": 30 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": 5,
+          "type": "timeseries",
+          "title": "Download / Upload Over Time",
+          "gridPos": { "x": 0, "y": 4, "w": 24, "h": 10 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_download_bits_per_second{job=\"speedtest-exporter\"}",
+              "legendFormat": "Download"
+            },
+            {
+              "expr": "speedtest_upload_bits_per_second{job=\"speedtest-exporter\"}",
+              "legendFormat": "Upload"
+            }
+          ],
+          "fieldConfig": { "defaults": { "unit": "bps" } },
+          "options": { "tooltip": { "mode": "multi" } }
+        },
+        {
+          "id": 6,
+          "type": "timeseries",
+          "title": "Ping / Jitter Over Time",
+          "gridPos": { "x": 0, "y": 14, "w": 24, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "speedtest_ping_latency_milliseconds{job=\"speedtest-exporter\"}",
+              "legendFormat": "Ping"
+            },
+            {
+              "expr": "speedtest_jitter_latency_milliseconds{job=\"speedtest-exporter\"}",
+              "legendFormat": "Jitter"
+            }
+          ],
+          "fieldConfig": { "defaults": { "unit": "ms" } },
+          "options": { "tooltip": { "mode": "multi" } }
+        }
+      ],
+      "schemaVersion": 38
+    }
