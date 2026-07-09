@@ -17,6 +17,8 @@ resources:
   - nfs-media-tubearchivist-pvc.yaml
   - nfs-media-pinchflat-pv.yaml
   - nfs-media-pinchflat-pvc.yaml
+  - nfs-media-reframe-pv.yaml
+  - nfs-media-reframe-pvc.yaml
   #  - podsync/ks.yaml
   - jellyfin/ks.yaml
   #- jackett
@@ -42,3 +44,4 @@ resources:
   - bitmappery/ks.yaml
   - drawio/ks.yaml
   - scriberr/ks.yaml
+  - reframe/ks.yaml
