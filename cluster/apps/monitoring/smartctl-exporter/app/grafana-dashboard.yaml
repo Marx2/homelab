@@ -17,11 +17,11 @@ data:
       "templating": {
         "list": [
           {
-            "name": "instance",
+            "name": "pod",
             "type": "query",
-            "label": "Node",
-            "datasource": "prometheus",
-            "query": "label_values(smartctl_device_info, instance)",
+            "label": "Node (pod)",
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "query": "label_values(smartctl_device_smart_status{job=\"smartctl-exporter\"}, pod)",
             "refresh": 2,
             "includeAll": true,
             "multi": true,
@@ -31,8 +31,8 @@ data:
             "name": "device",
             "type": "query",
             "label": "Device",
-            "datasource": "prometheus",
-            "query": "label_values(smartctl_device_info{instance=~\"$instance\"}, device)",
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "query": "label_values(smartctl_device_smart_status{job=\"smartctl-exporter\",pod=~\"$pod\"}, device)",
             "refresh": 2,
             "includeAll": true,
             "multi": true,
@@ -46,10 +46,11 @@ data:
           "type": "stat",
           "title": "SMART Overall Health",
           "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_smart_status{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_smart_status{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "options": {
@@ -71,10 +72,11 @@ data:
           "type": "stat",
           "title": "Temperature (°C)",
           "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_temperature{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_temperature{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\",temperature_type=\"current\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "options": {
@@ -100,10 +102,11 @@ data:
           "type": "stat",
           "title": "Power-On Hours",
           "gridPos": { "x": 12, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_power_on_seconds{instance=~\"$instance\",device=~\"$device\"} / 3600",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_power_on_seconds{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"} / 3600",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "options": { "reduceOptions": { "calcs": ["lastNotNull"] } },
@@ -114,10 +117,11 @@ data:
           "type": "stat",
           "title": "Power Cycle Count",
           "gridPos": { "x": 18, "y": 0, "w": 6, "h": 4 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_power_cycle_count{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_power_cycle_count{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "options": { "reduceOptions": { "calcs": ["lastNotNull"] } }
@@ -127,10 +131,11 @@ data:
           "type": "timeseries",
           "title": "Temperature Over Time",
           "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_temperature{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_temperature{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\",temperature_type=\"current\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "fieldConfig": {
@@ -150,39 +155,33 @@ data:
         {
           "id": 6,
           "type": "timeseries",
-          "title": "Read/Write Errors",
+          "title": "Read/Write Errors (ATA)",
           "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_attribute{instance=~\"$instance\",device=~\"$device\",attribute_name=\"Reallocated_Sector_Ct\"}",
-              "legendFormat": "Reallocated {{instance}} {{device}}"
+              "expr": "smartctl_device_attribute{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\",attribute_name=\"Reallocated_Sector_Ct\",attribute_value_type=\"raw\"}",
+              "legendFormat": "Reallocated {{pod}} {{device}}"
             },
             {
-              "expr": "smartctl_device_attribute{instance=~\"$instance\",device=~\"$device\",attribute_name=\"Offline_Uncorrectable\"}",
-              "legendFormat": "Uncorrectable {{instance}} {{device}}"
+              "expr": "smartctl_device_attribute{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\",attribute_name=\"Offline_Uncorrectable\",attribute_value_type=\"raw\"}",
+              "legendFormat": "Uncorrectable {{pod}} {{device}}"
             },
             {
-              "expr": "smartctl_device_attribute{instance=~\"$instance\",device=~\"$device\",attribute_name=\"Current_Pending_Sector\"}",
-              "legendFormat": "Pending {{instance}} {{device}}"
+              "expr": "smartctl_device_attribute{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\",attribute_name=\"Current_Pending_Sector\",attribute_value_type=\"raw\"}",
+              "legendFormat": "Pending {{pod}} {{device}}"
             }
-          ],
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 1 }]
-              }
-            }
-          }
+          ]
         },
         {
           "id": 7,
           "type": "table",
           "title": "Device Info",
           "gridPos": { "x": 0, "y": 12, "w": 24, "h": 6 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_info{instance=~\"$instance\",device=~\"$device\"}",
+              "expr": "smartctl_device{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"}",
               "legendFormat": "",
               "instant": true,
               "format": "table"
@@ -190,7 +189,19 @@ data:
           ],
           "transformations": [
             { "id": "labelsToFields", "options": {} },
-            { "id": "organize", "options": { "excludeByName": { "Time": true, "Value": true, "__name__": true, "job": true } } }
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true, "Value": true, "__name__": true,
+                  "job": true, "namespace": true, "endpoint": true,
+                  "container": true, "service": true,
+                  "ata_additional_product_id": true, "ata_version": true,
+                  "sata_version": true, "scsi_product": true,
+                  "scsi_revision": true, "scsi_vendor": true, "scsi_version": true
+                }
+              }
+            }
           ]
         },
         {
@@ -198,10 +209,11 @@ data:
           "type": "timeseries",
           "title": "NVMe Media Errors",
           "gridPos": { "x": 0, "y": 18, "w": 12, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_nvme_log_health_info_media_errors_total{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_media_errors{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ]
         },
@@ -210,10 +222,11 @@ data:
           "type": "timeseries",
           "title": "NVMe Available Spare (%)",
           "gridPos": { "x": 12, "y": 18, "w": 12, "h": 8 },
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "targets": [
             {
-              "expr": "smartctl_device_nvme_log_health_info_available_spare{instance=~\"$instance\",device=~\"$device\"}",
-              "legendFormat": "{{instance}} {{device}}"
+              "expr": "smartctl_device_available_spare{job=\"smartctl-exporter\",pod=~\"$pod\",device=~\"$device\"}",
+              "legendFormat": "{{pod}} {{device}}"
             }
           ],
           "fieldConfig": {
