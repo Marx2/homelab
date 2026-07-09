@@ -6,6 +6,11 @@ metadata:
   namespace: flux-system
   annotations:
     kubernetes.io/ingress.class: nginx
+    hajimari.io/enable: "true"
+    hajimari.io/appName: "Flux Webhook"
+    hajimari.io/icon: "mdi:webhook"
+    hajimari.io/group: "infra"
+    hajimari.io/info: Flux GitOps webhook receiver
 spec:
   ingressClassName: nginx
   rules:

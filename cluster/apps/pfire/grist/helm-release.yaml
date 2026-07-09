@@ -66,6 +66,11 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Grist"
+          hajimari.io/icon: "simple-icons:airtable"
+          hajimari.io/group: "pfire"
+          hajimari.io/info: Modern spreadsheet and database hybrid
         hosts:
           - host: &host "grist.${SECRET_DOMAIN}"
             paths:
