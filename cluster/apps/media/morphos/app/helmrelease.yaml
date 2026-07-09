@@ -85,6 +85,7 @@ spec:
       app:
         className: nginx
         annotations:
+          hajimari.io/appName: "Morphos"
           hajimari.io/icon: mdi:file-convert
           hajimari.io/enable: "true"
           hajimari.io/info: File conversion service.

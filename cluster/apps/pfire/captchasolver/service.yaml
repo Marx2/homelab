@@ -23,8 +23,10 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
     hajimari.io/enable: "true"
+    hajimari.io/appName: "Captcha Solver"
     hajimari.io/icon: "mdi:robot"
     hajimari.io/group: "pfire"
+    hajimari.io/info: Automated CAPTCHA solving service
 spec:
   rules:
     - host: captchasolver.${SECRET_DOMAIN}

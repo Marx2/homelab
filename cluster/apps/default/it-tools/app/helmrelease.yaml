@@ -71,6 +71,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "IT Tools"
           hajimari.io/icon: mdi:tools
           hajimari.io/enable: "true"
           hajimari.io/info: Different useful it tools

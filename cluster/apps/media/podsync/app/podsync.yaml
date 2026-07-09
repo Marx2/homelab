@@ -14,8 +14,10 @@ metadata:
     # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
     #forecastle.stakater.com/icon: "https://raw.githubusercontent.com/mxpv/podsync/master/docs/img/logo.png"
     hajimari.io/enable: "true"
+    hajimari.io/appName: "Podsync"
     hajimari.io/icon: "podcast"
     hajimari.io/group: "media"
+    hajimari.io/info: YouTube/Vimeo to podcast RSS feed converter
 spec:
   rules:
   - host: podsync.${SECRET_DOMAIN}

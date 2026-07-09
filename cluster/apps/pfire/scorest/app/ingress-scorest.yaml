@@ -6,6 +6,7 @@ metadata:
   namespace: pfire
   annotations:
     hajimari.io/enable: "true"
+    hajimari.io/appName: "Scorest"
     hajimari.io/icon: mdi:chart-line
     hajimari.io/group: "pfire"
     hajimari.io/info: "Stock scoring system"

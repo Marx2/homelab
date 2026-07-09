@@ -72,8 +72,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "PrivateBin"
           hajimari.io/icon: "mdi:lock-outline"
           hajimari.io/group: "networking"
+          hajimari.io/info: Encrypted pastebin with zero-knowledge storage
         hosts:
           - host: &host privatebin.${SECRET_DOMAIN}
             paths:

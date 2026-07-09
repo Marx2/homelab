@@ -87,7 +87,9 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 50m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Stirling PDF"
           hajimari.io/icon: "mdi:file-pdf-box"
+          hajimari.io/info: PDF manipulation toolset
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

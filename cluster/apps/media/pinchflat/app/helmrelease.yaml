@@ -35,8 +35,10 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 50m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Pinchflat"
           hajimari.io/icon: "mdi:download-box"
           hajimari.io/group: "media"
+          hajimari.io/info: YouTube media downloader
 
         containers:
           app:

@@ -74,6 +74,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "OpenST"
           hajimari.io/icon: mdi:finance
           hajimari.io/enable: "true"
           hajimari.io/info: OpenBB dividend data proxy.

@@ -110,6 +110,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "SearXNG"
           hajimari.io/icon: mdi:magnify
           hajimari.io/enable: "true"
           hajimari.io/info: Privacy-respecting metasearch engine

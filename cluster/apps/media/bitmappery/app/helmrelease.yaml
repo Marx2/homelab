@@ -61,6 +61,7 @@ spec:
       app:
         className: nginx
         annotations:
+          hajimari.io/appName: "Bitmappery"
           hajimari.io/icon: mdi:brush
           hajimari.io/enable: "true"
           hajimari.io/info: Image editor.

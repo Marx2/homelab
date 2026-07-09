@@ -23,8 +23,10 @@ spec:
       annotations:
         kubernetes.io/ingress.class: "nginx"
         hajimari.io/enable: "true"
+        hajimari.io/appName: "OAuth2 Proxy"
         hajimari.io/icon: "lock"
         hajimari.io/group: "infra"
+        hajimari.io/info: Authentication proxy for OAuth2/OIDC
       hosts:
         - auth.${SECRET_DOMAIN}
       tls:

@@ -104,6 +104,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Endurain"
           hajimari.io/icon: "mdi:run-fast"
           hajimari.io/info: Fitness tracker
         hosts:

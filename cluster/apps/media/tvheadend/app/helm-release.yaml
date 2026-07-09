@@ -92,7 +92,9 @@ spec:
           #          nginx.ingress.kubernetes.io/proxy-body-size: 50m
           #          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           hajimari.io/enable: "true"
+          hajimari.io/appName: "TVHeadend"
           hajimari.io/icon: "mdi:television-play"
+          hajimari.io/info: TV streaming server and recorder
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

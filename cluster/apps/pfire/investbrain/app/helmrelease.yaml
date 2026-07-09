@@ -116,6 +116,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "Investbrain"
           hajimari.io/icon: mdi:cash
           hajimari.io/enable: "true"
           hajimari.io/info: A financial analysis tool.

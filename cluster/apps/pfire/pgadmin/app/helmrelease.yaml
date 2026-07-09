@@ -79,8 +79,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "pgAdmin"
           hajimari.io/icon: "mdi:database-cog"
           hajimari.io/group: "pfire"
+          hajimari.io/info: Web-based PostgreSQL administration tool
           kubernetes.io/ingress.class: nginx
         hosts:
           - host: pgadmin.${SECRET_DOMAIN}

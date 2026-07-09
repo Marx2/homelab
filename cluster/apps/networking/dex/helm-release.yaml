@@ -116,8 +116,10 @@ spec:
         kubernetes.io/tls-acme: "true"
         cert-manager.io/cluster-issuer: letsencrypt-production
         hajimari.io/enable: "true"
+        hajimari.io/appName: "Dex"
         hajimari.io/icon: "lock"
         hajimari.io/group: "infra"
+        hajimari.io/info: OpenID Connect identity provider
       hosts:
         - host: dex.${SECRET_DOMAIN}
           paths:

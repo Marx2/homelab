@@ -9,8 +9,10 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
     hajimari.io/enable: "true"
+    hajimari.io/appName: "GraphQL Mesh"
     hajimari.io/icon: "simple-icons:graphql"
     hajimari.io/group: "pfire"
+    hajimari.io/info: GraphQL gateway aggregating multiple APIs
 spec:
   rules:
     - host: graphql-mesh.${SECRET_DOMAIN}

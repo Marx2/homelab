@@ -65,8 +65,10 @@ spec:
         # forecastle.stakater.com/icon: "https://longhorn.io/img/logos/longhorn-horizontal-color.png"
         # forecastle.stakater.com/url: "https://longhorn.${SECRET_DOMAIN}/"
         hajimari.io/enable: "true"
+        hajimari.io/appName: "Longhorn"
         hajimari.io/icon: "hdd"
         hajimari.io/group: "infra"
+        hajimari.io/info: Distributed block storage for Kubernetes
     service:
       # type: LoadBalancer
       # loadBalancerIP: 192.168.1.215

@@ -78,8 +78,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "TubeArchivist"
           hajimari.io/icon: "mdi:youtube"
           hajimari.io/group: "media"
+          hajimari.io/info: Self-hosted YouTube media server
           #          nginx.ingress.kubernetes.io/proxy-body-size: 50m
           #          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
         hosts:

@@ -67,6 +67,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "Jobshot"
           hajimari.io/icon: mdi:cash
           hajimari.io/enable: "true"
           hajimari.io/info: UI to run Kubernetes jobs.

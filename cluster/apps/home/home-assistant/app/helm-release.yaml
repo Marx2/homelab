@@ -97,6 +97,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Home Assistant"
           hajimari.io/icon: "mdi:home-assistant"
           hajimari.io/info: Home Automation
         hosts:
@@ -114,8 +115,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Home Assistant Code"
           hajimari.io/icon: "arrow-right-circle-outline"
           hajimari.io/group: "home"
+          hajimari.io/info: Code Server for Home Assistant config
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:

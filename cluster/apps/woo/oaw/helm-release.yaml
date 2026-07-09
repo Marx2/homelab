@@ -45,6 +45,7 @@ spec:
         hajimari.io/appName: "Ola's Abstract World'"
         hajimari.io/icon: simple-icons:wordpress
         hajimari.io/group: Ola
+        hajimari.io/info: Ola's Abstract World WordPress site
       hosts:
         - host: www.${SECRET_DOMAIN_OAW}
           paths:

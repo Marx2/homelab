@@ -68,6 +68,7 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Scanst UI"
           hajimari.io/icon: mdi:chart-line
           hajimari.io/group: "pfire"
           hajimari.io/info: "UI for managing stock tickers"

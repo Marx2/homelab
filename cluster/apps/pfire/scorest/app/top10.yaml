@@ -6,6 +6,7 @@ metadata:
   namespace: pfire
   annotations:
     hajimari.io/enable: "true"
+    hajimari.io/appName: "Scorest Top 10"
     hajimari.io/icon: mdi:chart-line
     hajimari.io/group: "pfire"
     hajimari.io/info: "Top 10 best stocks"

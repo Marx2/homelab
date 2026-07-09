@@ -92,8 +92,10 @@ spec:
           # nginx.ingress.kubernetes.io/proxy-buffer-size: 10k
           ###
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Jellyfin"
           hajimari.io/icon: "simple-icons:jellyfin"
           hajimari.io/group: "media"
+          hajimari.io/info: Free software media system
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

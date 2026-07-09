@@ -116,6 +116,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Nous Hermes"
           hajimari.io/icon: "mdi:robot-outline"
           hajimari.io/info: Nous Hermes agent
         hosts:

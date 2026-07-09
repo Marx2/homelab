@@ -59,8 +59,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "PictShare"
           hajimari.io/icon: "mdi:image-multiple-outline"
           hajimari.io/group: "networking"
+          hajimari.io/info: Open source image and video hosting
         hosts:
           - host: &host pictshare.${SECRET_DOMAIN}
             paths:

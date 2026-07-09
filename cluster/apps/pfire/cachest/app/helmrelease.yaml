@@ -74,6 +74,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "Cachest"
           hajimari.io/icon: mdi:cached
           hajimari.io/enable: "true"
           hajimari.io/info: HTTP caching proxy for financial data.

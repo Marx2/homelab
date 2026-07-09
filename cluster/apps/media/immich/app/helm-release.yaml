@@ -166,8 +166,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Immich"
           hajimari.io/icon: "mdi:image-multiple"
           hajimari.io/group: "media"
+          hajimari.io/info: Self-hosted photo and video backup
         hosts:
           - host: &host "photos.${SECRET_DOMAIN}"
             paths:

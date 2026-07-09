@@ -54,9 +54,11 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/appName: "Thanos"
           hajimari.io/icon: mdi:infinity
           hajimari.io/group: "monitoring"
           hajimari.io/enable: "true"
+          hajimari.io/info: Highly available Prometheus long-term storage
         tls: true
     bucketweb:
       enabled: true
@@ -79,9 +81,11 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/appName: "Thanos"
           hajimari.io/icon: mdi:infinity
           hajimari.io/group: "monitoring"
           hajimari.io/enable: "true"
+          hajimari.io/info: Highly available Prometheus long-term storage
         tls: true
     storegateway:
       enabled: true

@@ -23,8 +23,10 @@ spec:
       enabled: true
       annotations:
         hajimari.io/enable: "true"
+        hajimari.io/appName: "PostgREST"
         hajimari.io/icon: "mdi:api"
         hajimari.io/group: "pfire"
+        hajimari.io/info: Auto-generated REST API for PostgreSQL
         kubernetes.io/ingress.class: nginx
         # type of authentication
         nginx.ingress.kubernetes.io/auth-type: basic

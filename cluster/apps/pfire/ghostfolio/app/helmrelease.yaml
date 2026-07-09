@@ -101,8 +101,10 @@ spec:
         className: nginx
         annotations:
           hajimari.io/enable: "true"
+          hajimari.io/appName: "Ghostfolio"
           hajimari.io/icon: cash-multiple
           hajimari.io/group: "pfire"
+          hajimari.io/info: Open source wealth management software
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

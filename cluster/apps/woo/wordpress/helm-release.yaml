@@ -45,6 +45,7 @@ spec:
         hajimari.io/appName: "Ola Store"
         hajimari.io/icon: simple-icons:wordpress
         hajimari.io/group: Ola
+        hajimari.io/info: Ola's WooCommerce store
       hosts:
         - host: woo.${SECRET_DOMAIN}
           paths:

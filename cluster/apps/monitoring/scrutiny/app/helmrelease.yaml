@@ -60,6 +60,7 @@ spec:
         enabled: true
         className: nginx
         annotations:
+          hajimari.io/appName: "Scrutiny"
           hajimari.io/icon: mdi:harddiskstatus
           hajimari.io/enable: "true"
           hajimari.io/info: Hard Drive S.M.A.R.T Monitoring
