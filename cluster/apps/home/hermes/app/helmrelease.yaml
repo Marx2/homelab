@@ -48,7 +48,9 @@ spec:
               repository: nousresearch/hermes-agent
               tag: main@sha256:688cc0b819ca0417c25331ab7c9671bedb32d491736552abd8bc704ed604840c
             securityContext:
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: true
+              capabilities:
+                add: ["SYS_ADMIN"]
             args:
               - gateway
               - run
