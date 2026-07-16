@@ -1,4 +1,9 @@
-use_default_settings: true
+use_default_settings:
+  engines:
+    remove:
+      - ahmia
+      - torch
+      - wikidata
 
 general:
   debug: false
@@ -39,11 +44,3 @@ outgoing:
   max_request_timeout: 10.0
   pool_connections: 100
   pool_maxsize: 10
-
-engines:
-  - name: ahmia
-    disabled: true
-  - name: torch
-    disabled: true
-  - name: wikidata
-    disabled: true
