@@ -20,3 +20,4 @@ resources:
   - hermes/ks.yaml
   - hass-k8s/ks.yaml
   - odysseus/ks.yaml
+  - llama-cpp/ks.yaml

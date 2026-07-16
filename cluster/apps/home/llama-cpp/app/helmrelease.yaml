@@ -1,0 +1,152 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app llama-cpp
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    controllers:
+      llama-cpp:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          download-model:
+            image:
+              repository: curlimages/curl
+              tag: latest
+            command:
+              - sh
+              - -c
+              - |
+                BASE=https://huggingface.co/Qwen/Qwen2.5-14B-Instruct-GGUF/resolve/main
+                MODEL=/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
+                if [ ! -f "$MODEL" ]; then
+                  echo "Downloading model shards..."
+                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf"
+                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf"
+                  echo "Download complete."
+                else
+                  echo "Model already exists, skipping download."
+                fi
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ggerganov/llama.cpp
+              tag: server
+            args:
+              - --model
+              - /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
+              - --host
+              - 0.0.0.0
+              - --port
+              - "8080"
+              - --ctx-size
+              - "8192"
+              - --n-predict
+              - "2048"
+              - --threads
+              - "4"
+              - --parallel
+              - "2"
+            env:
+              TZ: ${TZ}
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 60
+            resources:
+              requests:
+                cpu: 2
+                memory: 14Gi
+              limits:
+                memory: 20Gi
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "llama.cpp"
+          hajimari.io/icon: "mdi:brain"
+          hajimari.io/info: Local LLM server
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      models:
+        existingClaim: llama-cpp-models
+        globalMounts:
+          - path: /models
