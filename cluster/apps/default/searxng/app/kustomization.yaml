@@ -5,8 +5,6 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./searxng-secret.yaml
-  - ./interceptor-service.yaml
-  - ./httpscaledobject.yaml
 configMapGenerator:
   - name: searxng-config
     files:

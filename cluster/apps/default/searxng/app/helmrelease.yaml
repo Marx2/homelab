@@ -29,10 +29,6 @@ spec:
           - /spec/containers/resources/limits
         target:
           kind: Pod
-      - paths:
-          - /spec/replicas
-        target:
-          kind: Deployment
   values:
     global:
       createDefaultServiceAccount: false
@@ -49,7 +45,7 @@ spec:
       searxng:
         annotations:
           reloader.stakater.com/auto: "true"
-        replicas: 0
+        replicas: 1
         containers:
           app:
             image:
@@ -122,8 +118,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: keda-http-interceptor-proxy
-                  port: 8080
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
