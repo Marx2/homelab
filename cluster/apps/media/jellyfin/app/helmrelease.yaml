@@ -124,8 +124,7 @@ spec:
           - path: /config
 
       transcode:
-        type: emptyDir
-        medium: "Memory"
-        sizeLimit: 2Gi
+        existingClaim: nfs-media-omv-pvc
         globalMounts:
           - path: /config/transcodes
+            subPath: jellyfin-cache
