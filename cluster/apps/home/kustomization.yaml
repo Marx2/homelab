@@ -19,3 +19,4 @@ resources:
   - home-assistant/ks.yaml
   - hermes/ks.yaml
   - hass-k8s/ks.yaml
+  - odysseus/ks.yaml
