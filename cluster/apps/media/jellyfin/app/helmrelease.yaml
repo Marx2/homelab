@@ -126,5 +126,5 @@ spec:
       transcode:
         existingClaim: nfs-media-omv-pvc
         globalMounts:
-          - path: /config/transcodes
+          - path: /cache/transcodes
             subPath: jellyfin-cache
