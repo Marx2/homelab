@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - config-jellyfin-pvc.yaml
   - helmrelease.yaml
+  - transcode-cleanup-cronjob.yaml
