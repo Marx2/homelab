@@ -38,6 +38,7 @@ spec:
         runAsUser: 977
         runAsGroup: 977
         runAsNonRoot: true
+        fsGroup: 977
         seccompProfile:
           type: RuntimeDefault
 

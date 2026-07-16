@@ -14,6 +14,7 @@ server:
   limiter: false
   public_instance: false
   image_proxy: false
+  forwarded_allow_ips: "*"
 
 ui:
   static_use_hash: true
@@ -38,3 +39,11 @@ outgoing:
   max_request_timeout: 10.0
   pool_connections: 100
   pool_maxsize: 10
+
+engines:
+  - name: ahmia
+    disabled: true
+  - name: torch
+    disabled: true
+  - name: wikidata
+    disabled: true
