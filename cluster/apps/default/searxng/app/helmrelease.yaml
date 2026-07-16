@@ -55,7 +55,6 @@ spec:
             env:
               TZ: ${TZ}
               SEARXNG_BASE_URL: "https://searxng.${SECRET_DOMAIN}/"
-              SEARXNG_SETTINGS_PATH: /config/settings.yml
             envFrom:
               - secretRef:
                   name: searxng-secret
@@ -130,14 +129,10 @@ spec:
         type: configMap
         name: searxng-config
         globalMounts:
-          - path: /config/settings.yml
+          - path: /etc/searxng/settings.yml
             subPath: settings.yml
             readOnly: true
       tmp:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      searxng-data:
-        type: emptyDir
-        globalMounts:
-          - path: /etc/searxng
