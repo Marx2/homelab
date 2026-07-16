@@ -92,7 +92,7 @@ spec:
         - name: repo1 # Minio
           s3: &minio
             bucket: "crunchy-postgres-pfire"
-            endpoint: "minio.${SECRET_DOMAIN}"
+            endpoint: "minio.database.svc.cluster.local:9000"
             region: "us-east-1"
           schedules:
             full: "0 1 * * 0" # Sunday at 01:00
