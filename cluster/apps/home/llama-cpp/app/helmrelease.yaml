@@ -34,6 +34,9 @@ spec:
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
         initContainers:
           download-model:
             image:
@@ -69,7 +72,7 @@ spec:
           app:
             image:
               repository: ghcr.io/ggml-org/llama.cpp
-              tag: server
+              tag: server-vulkan
             env:
               TZ: ${TZ}
               LLAMA_ARG_HOST: "0.0.0.0"
@@ -81,6 +84,7 @@ spec:
               LLAMA_ARG_PARALLEL: "2"
               LLAMA_ARG_BATCH_SIZE: "512"
               LLAMA_ARG_UBATCH_SIZE: "256"
+              LLAMA_ARG_N_GPU_LAYERS: "33"
               LLAMA_OFFLINE: "1"
             probes:
               liveness:
@@ -120,8 +124,10 @@ spec:
               requests:
                 cpu: 100m
                 memory: 6Gi
+                gpu.intel.com/i915: 1
               limits:
                 memory: 10Gi
+                gpu.intel.com/i915: 1
 
     service:
       app:
