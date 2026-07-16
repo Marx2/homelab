@@ -31,50 +31,53 @@ spec:
   values:
     controllers:
       llama-cpp:
+        strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
           download-model:
             image:
-              repository: curlimages/curl
-              tag: latest
+              repository: ghcr.io/astral-sh/uv
+              tag: python3.13-alpine
             command:
-              - sh
-              - -c
+              - /bin/sh
+              - -ec
               - |
-                BASE=https://huggingface.co/Qwen/Qwen2.5-14B-Instruct-GGUF/resolve/main
-                MODEL=/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
-                if [ ! -f "$MODEL" ]; then
-                  echo "Downloading model shards..."
-                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
-                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf"
-                  curl -L -o /models/qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf "$BASE/qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf"
-                  echo "Download complete."
-                else
-                  echo "Model already exists, skipping download."
-                fi
+                uv pip install --system --no-cache huggingface_hub
+                python3 -c "
+                from huggingface_hub import hf_hub_download
+                import os
+                model_dir = '/models'
+                repo = 'Qwen/Qwen2.5-14B-Instruct-GGUF'
+                files = [
+                  'qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf',
+                  'qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf',
+                  'qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf',
+                ]
+                for f in files:
+                    dest = os.path.join(model_dir, f)
+                    if os.path.exists(dest):
+                        print(f'Already exists: {f}')
+                        continue
+                    print(f'Downloading: {f}')
+                    hf_hub_download(repo_id=repo, filename=f, local_dir=model_dir)
+                    print(f'Done: {f}')
+                "
         containers:
           app:
             image:
-              repository: ghcr.io/ggerganov/llama.cpp
+              repository: ghcr.io/ggml-org/llama.cpp
               tag: server
-            args:
-              - --model
-              - /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
-              - --host
-              - 0.0.0.0
-              - --port
-              - "8080"
-              - --ctx-size
-              - "8192"
-              - --n-predict
-              - "2048"
-              - --threads
-              - "4"
-              - --parallel
-              - "2"
             env:
               TZ: ${TZ}
+              LLAMA_ARG_HOST: "0.0.0.0"
+              LLAMA_ARG_PORT: "8080"
+              LLAMA_ARG_MODEL: /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
+              LLAMA_ARG_CTX_SIZE: "8192"
+              LLAMA_ARG_N_PREDICT: "2048"
+              LLAMA_ARG_THREADS: "4"
+              LLAMA_ARG_PARALLEL: "2"
+              LLAMA_OFFLINE: "1"
             probes:
               liveness:
                 enabled: true
@@ -111,7 +114,7 @@ spec:
                   failureThreshold: 60
             resources:
               requests:
-                cpu: 500m
+                cpu: 100m
                 memory: 14Gi
               limits:
                 memory: 20Gi
@@ -148,5 +151,11 @@ spec:
     persistence:
       models:
         existingClaim: llama-cpp-models
-        globalMounts:
-          - path: /models
+        advancedMounts:
+          llama-cpp:
+            app:
+              - path: /models
+                readOnly: true
+            download-model:
+              - path: /models
+                readOnly: false
