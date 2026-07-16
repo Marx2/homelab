@@ -46,14 +46,15 @@ spec:
                 uv pip install --system --no-cache huggingface_hub
                 python3 -c "
                 from huggingface_hub import hf_hub_download
-                import os
+                import os, glob
                 model_dir = '/models'
-                repo = 'Qwen/Qwen2.5-14B-Instruct-GGUF'
+                repo = 'Qwen/Qwen2.5-7B-Instruct-GGUF'
                 files = [
-                  'qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf',
-                  'qwen2.5-14b-instruct-q4_k_m-00002-of-00003.gguf',
-                  'qwen2.5-14b-instruct-q4_k_m-00003-of-00003.gguf',
+                  'qwen2.5-7b-instruct-q4_k_m.gguf',
                 ]
+                for old in glob.glob(os.path.join(model_dir, 'qwen2.5-14b*')):
+                    print(f'Removing old: {old}')
+                    os.remove(old)
                 for f in files:
                     dest = os.path.join(model_dir, f)
                     if os.path.exists(dest):
@@ -72,11 +73,13 @@ spec:
               TZ: ${TZ}
               LLAMA_ARG_HOST: "0.0.0.0"
               LLAMA_ARG_PORT: "8080"
-              LLAMA_ARG_MODEL: /models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf
-              LLAMA_ARG_CTX_SIZE: "8192"
+              LLAMA_ARG_MODEL: /models/qwen2.5-7b-instruct-q4_k_m.gguf
+              LLAMA_ARG_CTX_SIZE: "4096"
               LLAMA_ARG_N_PREDICT: "2048"
               LLAMA_ARG_THREADS: "4"
               LLAMA_ARG_PARALLEL: "2"
+              LLAMA_ARG_BATCH_SIZE: "512"
+              LLAMA_ARG_UBATCH_SIZE: "256"
               LLAMA_OFFLINE: "1"
             probes:
               liveness:
@@ -115,9 +118,9 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 14Gi
+                memory: 6Gi
               limits:
-                memory: 20Gi
+                memory: 10Gi
 
     service:
       app:
