@@ -21,7 +21,7 @@ spec:
               command:
                 - sh
                 - -c
-                - find /cache/transcodes -type f -name "*.ts" -mmin +1440 -delete && find /cache/transcodes -type f -name "*.m3u8" -mmin +1440 -delete
+                - find /cache/transcodes -type f \( -name "*.ts" -o -name "*.m3u8" \) -mmin +1440 -print -delete
               volumeMounts:
                 - name: transcode
                   mountPath: /cache/transcodes
