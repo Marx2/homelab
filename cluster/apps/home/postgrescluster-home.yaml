@@ -67,6 +67,7 @@ spec:
         repo1-retention-diff: "30"
         repo1-path: "/crunchy-pgo"
         repo1-s3-uri-style: path
+        repo1-s3-https: "n"
         repo1-storage-verify-tls: "n"
         archive-push-queue-max: 4GiB
       manual:
