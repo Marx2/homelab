@@ -67,7 +67,6 @@ spec:
         repo1-retention-diff: "30"
         repo1-path: "/crunchy-pgo"
         repo1-s3-uri-style: path
-        repo1-s3-https: "n"
         repo1-storage-verify-tls: "n"
         archive-push-queue-max: 4GiB
       manual:
@@ -81,7 +80,7 @@ spec:
         - name: repo1
           s3:
             bucket: "crunchy-postgres-home"
-            endpoint: "minio.database.svc.cluster.local:9000"
+            endpoint: "minio.${SECRET_DOMAIN}"
             region: "us-east-1"
           schedules:
             full: "20 1 * * 0"
