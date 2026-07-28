@@ -109,6 +109,13 @@ spec:
       main:
         className: nginx
         annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+          nginx.ingress.kubernetes.io/server-snippets: |
+            location / {
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+            }
           hajimari.io/enable: "true"
           hajimari.io/appName: "Ntfy"
           hajimari.io/icon: "mdi:bell"
