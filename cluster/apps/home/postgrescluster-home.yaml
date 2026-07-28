@@ -52,6 +52,12 @@ spec:
       options: "SUPERUSER"
       password:
         type: AlphaNumeric
+    - name: firecrawl
+      databases:
+        - firecrawl
+      options: "SUPERUSER"
+      password:
+        type: AlphaNumeric
   backups:
     pgbackrest:
       configuration:

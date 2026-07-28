@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: firecrawl-redis
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+
+    controllers:
+      redis:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 8.0.2
+            command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                memory: 256Mi
+
+    service:
+      app:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
+
+    persistence:
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /data
