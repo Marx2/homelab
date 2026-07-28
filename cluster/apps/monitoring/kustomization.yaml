@@ -12,4 +12,6 @@ resources:
   - uptime-kuma/ks.yaml
   - pushgateway/ks.yaml
   - smartctl-exporter/ks.yaml
+  - ntfy/ks.yaml
+  - apprise/ks.yaml
 

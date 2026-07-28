@@ -1,0 +1,137 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app apprise
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      apprise:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/caronc/apprise
+              tag: v1.5.1
+            env:
+              TZ: "${TZ}"
+              APPRISE_DEFAULT_THEME: dark
+              APPRISE_STATEFUL_MODE: simple
+              APPRISE_WORKER_COUNT: 4
+              APPRISE_CONFIG_LOCK: "yes"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /status
+                    port: &port 8000
+                  initialDelaySeconds: 5
+                  periodSeconds: 60
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                <<: *probes
+                spec:
+                  initialDelaySeconds: 10
+                  periodSeconds: 5
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+                  httpGet:
+                    path: /status
+                    port: *port
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: apprise
+        ports:
+          http:
+            port: *port
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Apprise"
+          hajimari.io/icon: "mdi:bell-ring"
+          hajimari.io/group: "monitoring"
+          hajimari.io/info: Notification gateway
+        hosts:
+          - host: &host "apprise.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+    persistence:
+      config:
+        existingClaim: apprise-config-pvc
+        advancedMounts:
+          apprise:
+            app:
+              - path: /config
+      apprise-yml:
+        type: secret
+        name: apprise-secret
+        advancedMounts:
+          apprise:
+            app:
+              - path: /config/apprise.yml
+                subPath: apprise.yml
+                readOnly: true
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          apprise:
+            app:
+              - path: /tmp
