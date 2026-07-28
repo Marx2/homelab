@@ -124,6 +124,11 @@ spec:
               LOGGING_LEVEL: INFO
               IS_KUBERNETES: "true"
               HOST: 0.0.0.0
+              NUQ_DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-home-pguser-firecrawl
+                    key: uri
             envFrom:
               - secretRef:
                   name: firecrawl-env
