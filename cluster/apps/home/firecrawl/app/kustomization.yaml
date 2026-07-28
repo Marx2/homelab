@@ -5,3 +5,4 @@ resources:
   - helmrelease.yaml
   - redis-helmrelease.yaml
   - firecrawl-secret.yaml
+  - nuq-schema-job.yaml
