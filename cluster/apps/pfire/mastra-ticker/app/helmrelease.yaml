@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app mastra-ticker
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    controllers:
+      mastra-ticker:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/mastra-ticker
+              tag: latest
+            env:
+              TZ: "${TZ}"
+              TICKER_SYMBOL: SAP
+              OPENROUTER_MODEL: openrouter/free
+              DATA_DIR: /data
+              FIRECRAWL_API_URL: http://firecrawl-api.home.svc.cluster.local:3002
+              APPRISE_URL: http://apprise.monitoring.svc.cluster.local:8000/notify/apprise
+            envFrom:
+              - secretRef:
+                  name: mastra-ticker-secret
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 4111
+                  initialDelaySeconds: 30
+                  periodSeconds: 60
+                  failureThreshold: 3
+              readiness:
+                enabled: false
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+    service:
+      app:
+        controller: mastra-ticker
+        ports:
+          http:
+            port: *port
+    ingress:
+      main:
+        className: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Mastra Ticker"
+          hajimari.io/icon: "mdi:finance"
+          hajimari.io/group: "pfire"
+          hajimari.io/info: Stock price agent
+        hosts:
+          - host: &host "mastra-ticker.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+    persistence:
+      data:
+        existingClaim: mastra-ticker-data
+        globalMounts:
+          - path: /data
