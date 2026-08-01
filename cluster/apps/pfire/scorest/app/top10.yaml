@@ -15,6 +15,14 @@ metadata:
       location = / {
         return 302 /leaderboard;
       }
+      location /api/stats/stream {
+        proxy_pass http://scorest.pfire.svc.cluster.local:3000;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        chunked_transfer_encoding on;
+      }
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_cache leaderboard_cache;
       proxy_cache_valid 200 5m;
@@ -35,6 +43,13 @@ spec:
                 port:
                   number: 3000
           - path: /api/leaderboard
+            pathType: Prefix
+            backend:
+              service:
+                name: scorest
+                port:
+                  number: 3000
+          - path: /api/stats
             pathType: Prefix
             backend:
               service:
