@@ -49,12 +49,23 @@ spec:
               POSTGREST_PASSWORD: ""
               JOBSHOT_URL: http://jobshot.pfire.svc:3000
               CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
+              REDIS_URL: redis://localhost:6379
             resources:
               requests:
                 cpu: 100m
                 memory: 128Mi
               limits:
                 memory: 128Mi
+          redis:
+            image:
+              repository: redis
+              tag: 8-alpine
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 64Mi
     service:
       app:
         controller: *app
