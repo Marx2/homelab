@@ -48,6 +48,7 @@ spec:
               POSTGREST_USER: ""
               POSTGREST_PASSWORD: ""
               JOBSHOT_URL: http://jobshot.pfire.svc:3000
+              CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
             resources:
               requests:
                 cpu: 100m
