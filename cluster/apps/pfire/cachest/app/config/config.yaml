@@ -25,6 +25,14 @@ routes:
     fetch_interval: 2
     fetch_max_wait: 4
 
+  - name: OPENST_PRICE_HISTORY
+    path: /price/history/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/price/history/{ticker}"
+    cache_ttl: 86400
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
   - name: ALPHAVANTAGE
     path: /dy3/{ticker}
     url: "https://www.alphavantage.co/query?function=OVERVIEW&symbol={ticker}&apikey={api_key}"
