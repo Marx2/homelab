@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: docker.io/binwiederhier/ntfy
-              tag: v2.26.3
+              tag: v2.27.0
             command:
               - /bin/sh
               - -c
