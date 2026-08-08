@@ -6,7 +6,7 @@ metadata:
   namespace: media
 spec:
   postgresVersion: 16
-  image: ghcr.io/chkpwd/cdpgvecto.rs:ubi8-16.2-0-v0.2.0
+  image: ghcr.io/janpretzel/crunchydata-vectorchord:ubi9-16.10-2542-1.1.1
   shutdown: false
   #  service:
   #    type: LoadBalancer
@@ -20,8 +20,7 @@ spec:
           - hostnossl all all 10.42.0.0/16 md5
           - hostssl all all 0.0.0.0/0 md5
         parameters:
-          shared_preload_libraries: "vectors.so"
-          search_path: '"$user", public, vectors'
+          shared_preload_libraries: "vchord.so"
   instances:
     - name: postgres-media
       metadata:
