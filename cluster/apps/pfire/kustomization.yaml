@@ -28,4 +28,4 @@ resources:
   - cachest/ks.yaml
   - openst/ks.yaml
   - stooq-downloader/ks.yaml
-  - mastra-ticker/ks.yaml
+#  - mastra-ticker/ks.yaml
