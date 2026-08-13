@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: docker.io/jlesage/firefox
-              tag: v26.07.2
+              tag: v26.08.1
             env:
               TZ: ${TZ}
               KEEP_APP_RUNNING: "1"
