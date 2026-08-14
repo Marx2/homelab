@@ -7,8 +7,8 @@ spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: *app
-    namespace: flux-system
+    name: pocket-id-operator
+    namespace: networking
   install:
     remediation:
       retries: 3
