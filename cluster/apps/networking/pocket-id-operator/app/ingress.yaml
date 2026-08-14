@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pocket-id
+  namespace: networking
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/enable: "true"
+    hajimari.io/appName: "PocketID"
+    hajimari.io/icon: "mdi:key-chain"
+    hajimari.io/group: "infra"
+    hajimari.io/info: "OIDC with passkey login"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: pocket-id.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pocket-id
+                port:
+                  number: 1411
+  tls:
+    - secretName: pocket-id-tls
+      hosts:
+        - pocket-id.${SECRET_DOMAIN}

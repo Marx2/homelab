@@ -4,4 +4,5 @@ resources:
   - oci-repository.yaml
   - pvc.yaml
   - secret.yaml
+  - ingress.yaml
   - helmrelease.yaml
