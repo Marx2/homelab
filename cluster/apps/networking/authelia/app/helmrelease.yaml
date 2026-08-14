@@ -76,6 +76,10 @@ spec:
             secretName: authelia-oidc-key
     configMap:
       disabled: true
+      session:
+        cookies:
+          - domain: ${SECRET_DOMAIN}
+            authelia_url: https://authelia.${SECRET_DOMAIN}
     persistence:
       enabled: true
       existingClaim: config-authelia-pvc
