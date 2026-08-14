@@ -20,7 +20,7 @@ data:
         group_name_attribute: cn
         mail_attribute: mail
         display_name_attribute: displayName
-        user: cn=admin,ou=people,${LLDAP_BASE_DN}
+        user: uid=admin,ou=people,${LLDAP_BASE_DN}
         password: ${LLDAP_LDAP_USER_PASS}
     session:
       name: authelia_session

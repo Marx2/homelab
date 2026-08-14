@@ -54,7 +54,7 @@ spec:
             - name: LDAP_BASE_DN
               value: ${LLDAP_BASE_DN}
             - name: LDAP_BIND_DN
-              value: cn=admin,ou=people,${LLDAP_BASE_DN}
+              value: uid=admin,ou=people,${LLDAP_BASE_DN}
             - name: LDAP_BIND_PASSWORD
               valueFrom:
                 secretKeyRef:
