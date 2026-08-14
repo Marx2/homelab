@@ -32,7 +32,6 @@ spec:
       instance:
         enabled: true
         spec:
-          image: v2.13.0
           encryptionKey:
             valueFrom:
               secretKeyRef:
