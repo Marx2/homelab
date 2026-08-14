@@ -67,7 +67,6 @@ JWKS: `https://authelia.${SECRET_DOMAIN}/jwks.json`
 ## Verification
 
 ```bash
-flux reconcile kustomization authelia --with-source
 kubectl get pods -n networking
 curl https://authelia.${SECRET_DOMAIN}/api/health
 curl https://authelia.${SECRET_DOMAIN}/.well-known/openid-configuration
@@ -77,32 +76,33 @@ kubectl get oidcclient,oidcprovider -n networking
 ## Secrets setup
 
 Add to KeePass + run `python3 encode.py`:
-- `AUTHELIA_SESSION_SECRET` — `openssl rand -hex 32`
-- `AUTHELIA_STORAGE_ENCRYPTION_KEY` — `openssl rand -hex 32`
-- `AUTHELIA_OIDC_HMAC_SECRET` — `openssl rand -hex 32`
-- `AUTHELIA_ADMIN_USER` — e.g. `admin`
-- `AUTHELIA_ADMIN_PASSWORD_HASH` — `docker run --rm authelia/authelia:latest authelia crypto hash generate argon2 --password 'yourpassword'`
-- `AUTHELIA_ADMIN_EMAIL` — your email
+
+| KeePass entry | How to generate | Notes |
+|---|---|---|
+| `AUTHELIA_ADMIN_USER` | e.g. `admin` | plaintext |
+| `AUTHELIA_ADMIN_PASSWORD_HASH` | `docker run --rm authelia/authelia:latest authelia crypto hash generate argon2 --password 'yourpassword'` | plaintext, starts with `$argon2id$` |
+| `AUTHELIA_ADMIN_EMAIL` | your email | plaintext |
+| `AUTHELIA_OIDC_PRIVATE_KEY` | `openssl genrsa 4096 \| base64 -w0` | **must be base64-encoded single line** — stored in `data:` field |
+
+**Not needed** (chart auto-generates via its own secret):
+- ~~`AUTHELIA_SESSION_SECRET`~~ — chart injects via `AUTHELIA_SESSION_SECRET_FILE`
+- ~~`AUTHELIA_STORAGE_ENCRYPTION_KEY`~~ — chart injects via `AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE`
+- ~~`AUTHELIA_OIDC_HMAC_SECRET`~~ — OIDC not configured in configmap (operator manages it)
 
 Add to `tmpl/cluster-secrets.yaml`:
 ```yaml
-AUTHELIA_SESSION_SECRET: ${AUTHELIA_SESSION_SECRET}
-AUTHELIA_STORAGE_ENCRYPTION_KEY: ${AUTHELIA_STORAGE_ENCRYPTION_KEY}
-AUTHELIA_OIDC_HMAC_SECRET: ${AUTHELIA_OIDC_HMAC_SECRET}
 AUTHELIA_ADMIN_USER: ${AUTHELIA_ADMIN_USER}
 AUTHELIA_ADMIN_PASSWORD_HASH: ${AUTHELIA_ADMIN_PASSWORD_HASH}
 AUTHELIA_ADMIN_EMAIL: ${AUTHELIA_ADMIN_EMAIL}
+AUTHELIA_OIDC_PRIVATE_KEY: ${AUTHELIA_OIDC_PRIVATE_KEY}
 ```
 
-## OIDC key (oidc-key-secret.yaml — generate once, SOPS-encrypt)
+## Re-installing from scratch
+
+If the storage encryption key changes (e.g. after helm uninstall), the SQLite DB must be wiped:
 
 ```bash
-openssl genrsa 4096 > /tmp/oidc.pem
-kubectl create secret generic authelia-oidc-key \
-  --namespace networking \
-  --from-file=private.pem=/tmp/oidc.pem \
-  --dry-run=client -o yaml \
-  | sops --encrypt --input-type yaml --output-type yaml /dev/stdin \
-  > cluster/apps/networking/authelia/app/oidc-key-secret.yaml
-rm /tmp/oidc.pem
+kubectl run -n networking tmp-cleanup --rm -i --restart=Never \
+  --image=busybox \
+  --overrides='{"spec":{"volumes":[{"name":"pvc","persistentVolumeClaim":{"claimName":"config-authelia-pvc"}}],"containers":[{"name":"tmp-cleanup","image":"busybox","command":["sh","-c","rm -f /config/db.sqlite3 /config/notification.txt && echo done"],"volumeMounts":[{"name":"pvc","mountPath":"/config"}]}]}}'
 ```
