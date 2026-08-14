@@ -8,7 +8,7 @@ metadata:
   name: jellyfin-transcode-cleanup
   namespace: media
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 3 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
