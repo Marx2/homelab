@@ -29,10 +29,3 @@ data:
         filename: /config/notification.txt
     access_control:
       default_policy: one_factor
-    identity_providers:
-      oidc:
-        hmac_secret: ${AUTHELIA_OIDC_HMAC_SECRET}
-        jwks:
-          - algorithm: RS256
-            key: {{ secret "/secrets/oidc/private.pem" | quote }}
-        clients: []
