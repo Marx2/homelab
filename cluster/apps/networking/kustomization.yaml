@@ -9,7 +9,8 @@ resources:
   - k8s_gateway
   - oauth2-proxy/ks.yaml
   - dex
-  #- authelia
+  - authelia/ks.yaml
+  - authelia-oidc-operator/ks.yaml
   #- authentik
   - mail/ks.yaml
   - privatebin/ks.yaml

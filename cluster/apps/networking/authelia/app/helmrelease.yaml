@@ -1,0 +1,75 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app authelia
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authelia
+      version: ">=0.9.0 <1.0.0"
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: authelia-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    domain: ${SECRET_DOMAIN}
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        hajimari.io/enable: "true"
+        hajimari.io/appName: "Authelia"
+        hajimari.io/icon: "mdi:shield-account"
+        hajimari.io/group: "infra"
+        hajimari.io/info: "Authentication portal"
+      tls:
+        enabled: true
+        secret: authelia-tls
+      subdomain: authelia
+    pod:
+      kind: Deployment
+      replicas: 1
+      env:
+        X_AUTHELIA_CONFIG_FILTERS: template
+      extraVolumeMounts:
+        - name: authelia-config
+          mountPath: /etc/authelia/configuration.yaml
+          subPath: configuration.yaml
+          readOnly: true
+        - name: authelia-users
+          mountPath: /secrets
+          readOnly: true
+        - name: authelia-oidc-key
+          mountPath: /secrets/oidc
+          readOnly: true
+      extraVolumes:
+        - name: authelia-config
+          configMap:
+            name: authelia-config
+        - name: authelia-users
+          secret:
+            secretName: authelia-users
+        - name: authelia-oidc-key
+          secret:
+            secretName: authelia-oidc-key
+    persistence:
+      enabled: true
+      existingClaim: config-authelia-pvc

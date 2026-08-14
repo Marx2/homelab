@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authelia-config
+  namespace: networking
+data:
+  configuration.yaml: |
+    server:
+      address: 'tcp://:80'
+    log:
+      level: info
+    theme: dark
+    authentication_backend:
+      file:
+        path: /secrets/users_database.yaml
+    session:
+      name: authelia_session
+      secret: ${AUTHELIA_SESSION_SECRET}
+      expiration: 1h
+      inactivity: 5m
+      cookies:
+        - domain: ${SECRET_DOMAIN}
+          authelia_url: https://authelia.${SECRET_DOMAIN}
+      redis:
+        host: authelia-redis.networking.svc.cluster.local
+        port: 6379
+    storage:
+      encryption_key: ${AUTHELIA_STORAGE_ENCRYPTION_KEY}
+      local:
+        path: /config/db.sqlite3
+    notifier:
+      filesystem:
+        filename: /config/notification.txt
+    access_control:
+      default_policy: one_factor
+    identity_providers:
+      oidc:
+        hmac_secret: ${AUTHELIA_OIDC_HMAC_SECRET}
+        jwks:
+          - algorithm: RS256
+            key: {{ secret "/secrets/oidc/private.pem" }}

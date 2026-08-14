@@ -1,0 +1,42 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app authelia-oidc-operator
+  namespace: networking
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    controllers:
+      controller_manager:
+        containers:
+          manager:
+            resources:
+              limits:
+                memory: 256Mi
+    rawResources:
+      provider:
+        forceRename: default
+        manifest:
+          apiVersion: authelia.milas.dev/v1alpha1
+          kind: OIDCProvider
+          spec:
+            cors:
+              allowed_origins_from_client_redirect_uris: true
