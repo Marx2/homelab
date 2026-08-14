@@ -55,9 +55,6 @@ spec:
           mountPath: /configuration.yaml
           subPath: configuration.yaml
           readOnly: true
-        - name: authelia-users
-          mountPath: /secrets
-          readOnly: true
         - name: authelia-oidc-key
           mountPath: /secrets/oidc
           readOnly: true
@@ -65,9 +62,6 @@ spec:
         - name: authelia-config
           configMap:
             name: authelia-config
-        - name: authelia-users
-          secret:
-            secretName: authelia-users
         - name: authelia-oidc-key
           secret:
             secretName: authelia-oidc-key

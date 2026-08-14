@@ -1,14 +1,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app authelia
+  name: &app pocket-id-operator
   namespace: flux-system
 spec:
   targetNamespace: networking
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./cluster/apps/networking/authelia/app
+  dependsOn:
+    - name: lldap
+  path: ./cluster/apps/networking/pocket-id-operator/app
   prune: true
   sourceRef:
     kind: GitRepository

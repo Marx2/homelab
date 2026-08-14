@@ -9,8 +9,19 @@ data:
       level: info
     theme: dark
     authentication_backend:
-      file:
-        path: /secrets/users_database.yaml
+      ldap:
+        address: ldap://lldap.networking.svc.cluster.local:3890
+        base_dn: ${LLDAP_BASE_DN}
+        username_attribute: uid
+        additional_users_dn: ou=people
+        users_filter: (&({username_attribute}={input})(objectClass=person))
+        additional_groups_dn: ou=groups
+        groups_filter: (member={dn})
+        group_name_attribute: cn
+        mail_attribute: mail
+        display_name_attribute: displayName
+        user: cn=admin,ou=people,${LLDAP_BASE_DN}
+        password: ${LLDAP_LDAP_USER_PASS}
     session:
       name: authelia_session
       cookies:

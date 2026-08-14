@@ -1,0 +1,91 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app pocket-id-operator
+  namespace: networking
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    operator:
+      replicas: 1
+      timezone: ${TZ}
+
+    pocket-id-instance:
+      instance:
+        enabled: true
+        spec:
+          replicas: 1
+          image:
+            tag: v2.13.0
+          env:
+            - name: TZ
+              value: ${TZ}
+            - name: APP_URL
+              value: https://pocket-id.${SECRET_DOMAIN}
+            - name: DB_PROVIDER
+              value: sqlite
+            - name: KEYS_PATH
+              value: /data/keys
+            - name: UPLOAD_PATH
+              value: /data/uploads
+            - name: TRUST_PROXY
+              value: "true"
+            - name: LDAP_ENABLED
+              value: "true"
+            - name: LDAP_HOST
+              value: lldap.networking.svc.cluster.local
+            - name: LDAP_PORT
+              value: "3890"
+            - name: LDAP_BASE_DN
+              value: ${LLDAP_BASE_DN}
+            - name: LDAP_BIND_DN
+              value: cn=admin,ou=people,${LLDAP_BASE_DN}
+            - name: LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lldap-secret
+                  key: LLDAP_LDAP_USER_PASS
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pocket-id-secret
+                  key: ENCRYPTION_KEY
+          persistence:
+            existingClaim: pocket-id-data
+          ingress:
+            enabled: true
+            annotations:
+              kubernetes.io/ingress.class: nginx
+              cert-manager.io/cluster-issuer: letsencrypt-production
+              hajimari.io/enable: "true"
+              hajimari.io/appName: "PocketID"
+              hajimari.io/icon: "mdi:key-chain"
+              hajimari.io/group: "infra"
+              hajimari.io/info: "OIDC with passkey login"
+            hosts:
+              - host: pocket-id.${SECRET_DOMAIN}
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - secretName: pocket-id-tls
+                hosts:
+                  - pocket-id.${SECRET_DOMAIN}

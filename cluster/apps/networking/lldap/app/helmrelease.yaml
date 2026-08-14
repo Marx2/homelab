@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app lldap
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    controllers:
+      lldap:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/lldap/lldap
+              tag: v0.6.3
+            env:
+              TZ: ${TZ}
+              LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
+              LLDAP_LDAP_BASE_DN: ${LLDAP_BASE_DN}
+              LLDAP_DATABASE_URL: sqlite:///data/users.db?mode=rwc
+              LLDAP_KEY_SEED_FILE: /data/key_seed
+            envFrom:
+              - secretRef:
+                  name: lldap-secret
+            securityContext:
+              readOnlyRootFilesystem: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 36Mi
+              limits:
+                memory: 128Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 17170
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 17170
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      app:
+        controller: lldap
+        ports:
+          http:
+            port: 17170
+          ldap:
+            port: 3890
+
+    ingress:
+      app:
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "LLDAP"
+          hajimari.io/icon: "mdi:account-group"
+          hajimari.io/group: "infra"
+          hajimari.io/info: "LDAP user management"
+        hosts:
+          - host: lldap.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - secretName: lldap-tls
+            hosts:
+              - lldap.${SECRET_DOMAIN}
+
+    persistence:
+      data:
+        existingClaim: lldap-data
+        globalMounts:
+          - path: /data
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - config-authelia-pvc.yaml
   - configmap.yaml
-  - secret.yaml
   - oidc-key-secret.yaml
   - redis-helmrelease.yaml
   - helmrelease.yaml

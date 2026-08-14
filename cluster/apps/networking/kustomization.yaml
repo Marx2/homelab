@@ -11,6 +11,8 @@ resources:
   - dex
   - authelia/ks.yaml
   - authelia-oidc-operator/ks.yaml
+  - lldap/ks.yaml
+  - pocket-id-operator/ks.yaml
   #- authentik
   - mail/ks.yaml
   - privatebin/ks.yaml
