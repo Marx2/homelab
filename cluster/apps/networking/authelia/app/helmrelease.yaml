@@ -29,7 +29,6 @@ spec:
         target:
           kind: Pod
   values:
-    domain: ${SECRET_DOMAIN}
     ingress:
       enabled: true
       className: nginx
@@ -43,12 +42,17 @@ spec:
       tls:
         enabled: true
         secret: authelia-tls
-      subdomain: authelia
+      rulesOverride:
+        - host: authelia.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
     pod:
       kind: Deployment
       replicas: 1
       env:
-        X_AUTHELIA_CONFIG_FILTERS: template
+        - name: X_AUTHELIA_CONFIG_FILTERS
+          value: template
       extraVolumeMounts:
         - name: authelia-config
           mountPath: /etc/authelia/configuration.yaml
@@ -70,6 +74,8 @@ spec:
         - name: authelia-oidc-key
           secret:
             secretName: authelia-oidc-key
+    configMap:
+      disabled: true
     persistence:
       enabled: true
       existingClaim: config-authelia-pvc
