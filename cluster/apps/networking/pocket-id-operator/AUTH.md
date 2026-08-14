@@ -63,7 +63,41 @@ spec:
 The operator creates the client in PocketID and writes credentials to a secret
 `<cr-name>-oidc-credentials` with keys `clientId` and `clientSecret`.
 
-## LDAP
+## LDAP (lldap)
 
 Users are sourced from lldap (`ldap://lldap.networking.svc.cluster.local:3890`).
 Manage users at `https://lldap.${SECRET_DOMAIN}` (admin / `${LLDAP_LDAP_USER_PASS}`).
+
+LDAP config is stored in PocketID's DB — env vars only apply on first boot if the DB is empty.
+Configure via UI: Settings → Application Configuration → LDAP section.
+
+### Working configuration for this cluster
+
+| Field | Value |
+|---|---|
+| **LDAP URL** | `ldap://lldap.networking.svc.cluster.local:3890` |
+| **LDAP Bind DN** | `uid=admin,ou=people,dc=home,dc=local` |
+| **LDAP Bind Password** | `${LLDAP_LDAP_USER_PASS}` |
+| **LDAP Base DN** | `dc=home,dc=local` |
+| **User Search Filter** | `(&(objectClass=person)(!(uid=admin)))` |
+| **Groups Search Filter** | `(objectClass=groupOfUniqueNames)` |
+| **Admin Group Name** | `lldap_admin` |
+
+### Attribute mapping (leave defaults, except)
+
+| Field | Value |
+|---|---|
+| **Group Members Attribute** | `uniqueMember` |
+| **Group Unique Identifier Attribute** | `cn` |
+| **Group RDN Attribute (in DN)** | `cn` |
+
+### Sync
+
+LDAP syncs automatically every hour. A CronJob (`pocket-id-ldap-sync`) also triggers sync every 5 minutes via the API.
+
+Manual sync:
+```bash
+kubectl -n networking get secret pocket-id-static-api-key -o jsonpath='{.data.token}' | base64 -d | \
+  xargs -I{} curl -sf -X POST https://pocket-id.${SECRET_DOMAIN}/api/application-configuration/sync-ldap \
+  -H "X-API-KEY: {}"
+```
