@@ -32,9 +32,7 @@ spec:
       instance:
         enabled: true
         spec:
-          replicas: 1
-          image:
-            tag: v2.13.0
+          image: v2.13.0
           env:
             - name: TZ
               value: ${TZ}
@@ -69,23 +67,5 @@ spec:
                   name: pocket-id-secret
                   key: ENCRYPTION_KEY
           persistence:
-            existingClaim: pocket-id-data
-          ingress:
             enabled: true
-            annotations:
-              kubernetes.io/ingress.class: nginx
-              cert-manager.io/cluster-issuer: letsencrypt-production
-              hajimari.io/enable: "true"
-              hajimari.io/appName: "PocketID"
-              hajimari.io/icon: "mdi:key-chain"
-              hajimari.io/group: "infra"
-              hajimari.io/info: "OIDC with passkey login"
-            hosts:
-              - host: pocket-id.${SECRET_DOMAIN}
-                paths:
-                  - path: /
-                    pathType: Prefix
-            tls:
-              - secretName: pocket-id-tls
-                hosts:
-                  - pocket-id.${SECRET_DOMAIN}
+            existingClaim: pocket-id-data
