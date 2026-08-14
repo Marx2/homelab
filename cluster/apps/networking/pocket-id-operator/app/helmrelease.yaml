@@ -45,12 +45,6 @@ spec:
               value: https://pocket-id.${SECRET_DOMAIN}
             - name: DB_PROVIDER
               value: sqlite
-            - name: KEYS_PATH
-              value: /data/keys
-            - name: UPLOAD_PATH
-              value: /data/uploads
-            - name: TRUST_PROXY
-              value: "true"
             - name: LDAP_ENABLED
               value: "true"
             - name: LDAP_HOST
