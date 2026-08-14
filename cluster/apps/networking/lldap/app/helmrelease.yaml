@@ -42,7 +42,6 @@ spec:
               LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
               LLDAP_LDAP_BASE_DN: ${LLDAP_BASE_DN}
               LLDAP_DATABASE_URL: sqlite:///data/users.db?mode=rwc
-              LLDAP_KEY_SEED_FILE: /data/key_seed
             envFrom:
               - secretRef:
                   name: lldap-secret
