@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pocket-id-ldap-sync
+  namespace: networking
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: sync
+              image: curlimages/curl:latest
+              command:
+                - sh
+                - -c
+                - |
+                  curl -sf -X POST \
+                    http://pocket-id.networking.svc:1411/api/application-configuration/sync-ldap \
+                    -H "X-API-KEY: $(cat /secret/token)" && echo "LDAP sync triggered"
+              volumeMounts:
+                - name: apikey
+                  mountPath: /secret
+                  readOnly: true
+          volumes:
+            - name: apikey
+              secret:
+                secretName: pocket-id-static-api-key
