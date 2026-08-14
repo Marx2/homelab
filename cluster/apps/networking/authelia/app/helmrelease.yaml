@@ -50,9 +50,6 @@ spec:
     pod:
       kind: Deployment
       replicas: 1
-      env:
-        - name: X_AUTHELIA_CONFIG_FILTERS
-          value: template
       extraVolumeMounts:
         - name: authelia-config
           mountPath: /etc/authelia/configuration.yaml
