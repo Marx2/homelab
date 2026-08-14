@@ -33,6 +33,10 @@ spec:
         enabled: true
         spec:
           image: v2.13.0
+          encryptionKey:
+            secretRef:
+              name: pocket-id-secret
+              key: ENCRYPTION_KEY
           env:
             - name: TZ
               value: ${TZ}
@@ -61,11 +65,6 @@ spec:
                 secretKeyRef:
                   name: lldap-secret
                   key: LLDAP_LDAP_USER_PASS
-            - name: ENCRYPTION_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: pocket-id-secret
-                  key: ENCRYPTION_KEY
           persistence:
             enabled: true
             existingClaim: pocket-id-data
