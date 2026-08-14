@@ -38,4 +38,5 @@ data:
         hmac_secret: ${AUTHELIA_OIDC_HMAC_SECRET}
         jwks:
           - algorithm: RS256
-            key: {{ secret "/secrets/oidc/private.pem" }}
+            key: |
+              {{ secret "/secrets/oidc/private.pem" | indent 14 }}
