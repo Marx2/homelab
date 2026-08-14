@@ -52,7 +52,7 @@ spec:
       replicas: 1
       extraVolumeMounts:
         - name: authelia-config
-          mountPath: /etc/authelia/configuration.yaml
+          mountPath: /configuration.yaml
           subPath: configuration.yaml
           readOnly: true
         - name: authelia-users
