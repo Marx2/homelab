@@ -33,7 +33,11 @@ spec:
         enabled: true
         spec:
           image: v2.13.0
-          encryptionKey: ${POCKET_ID_ENCRYPTION_KEY}
+          encryptionKey:
+            valueFrom:
+              secretKeyRef:
+                name: pocket-id-secret
+                key: ENCRYPTION_KEY
           env:
             - name: TZ
               value: ${TZ}
