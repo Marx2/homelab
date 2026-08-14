@@ -5,10 +5,27 @@ UI: `https://pocket-id.${SECRET_DOMAIN}`
 
 ## First Boot
 
-1. Open the UI — set up admin account on first visit
-2. The operator API key is needed for the operator to manage OIDC clients as CRDs.
+There is no setup page. PocketID uses a Static API User (created by the operator) to bootstrap.
+
+1. Get the static API username:
+   ```bash
+   kubectl -n networking get secret pocket-id-static-api-key -o jsonpath='{.data.token}' | base64 -d | \
+     xargs -I{} curl -s https://pocket-id.${SECRET_DOMAIN}/api/users -H "X-API-KEY: {}" | \
+     python3 -m json.tool | grep username
+   ```
+
+2. Generate a one-time login URL (valid 1 hour):
+   ```bash
+   kubectl -n networking exec deploy/pocket-id -- /app/pocket-id one-time-access-token <username-from-above>
+   ```
+
+3. Open the URL — you're logged in as admin (Static API User).
+
+4. Go to Users → create your personal admin account and register your passkey.
+
+5. The operator API key is needed for the operator to manage OIDC clients as CRDs.
    Create it: UI → Settings → API Keys → New key → copy value
-3. Store it in a secret:
+6. Store it in a secret:
    ```bash
    kubectl -n networking create secret generic pocket-id-operator-api-key \
      --from-literal=api-key=<paste-key>
