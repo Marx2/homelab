@@ -3,3 +3,11 @@ kind: Kustomization
 resources:
   - oci-repository.yaml
   - helmrelease.yaml
+patches:
+  - patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: flux-system
+    target:
+      kind: OCIRepository
+      name: authelia-oidc-operator
