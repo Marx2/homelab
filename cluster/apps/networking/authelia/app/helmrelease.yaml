@@ -79,7 +79,7 @@ spec:
       session:
         cookies:
           - domain: ${SECRET_DOMAIN}
-            authelia_url: https://authelia.${SECRET_DOMAIN}
+            subdomain: authelia
     persistence:
       enabled: true
       existingClaim: config-authelia-pvc
