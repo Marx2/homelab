@@ -5,8 +5,6 @@ metadata:
   namespace: networking
 data:
   configuration.yaml: |
-    server:
-      address: 'tcp://:80'
     log:
       level: info
     theme: dark
