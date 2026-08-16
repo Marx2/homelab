@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app portfoliost
+  namespace: pfire
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/containers/resources/limits
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
+    controllers:
+      portfoliost:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost
+              tag: v1.0.0
+            env:
+              API_AUTH_URL: http://localhost:4010
+              API_USERS_URL: http://localhost:4010
+              API_PORTFOLIOS_URL: http://localhost:4010
+              API_WALLETS_URL: http://localhost:4010
+              API_INSTRUMENTS_URL: http://localhost:4010
+              API_WATCHLISTS_URL: http://localhost:4010
+              API_NOTIFICATIONS_URL: http://localhost:4010
+              API_NEWS_URL: http://localhost:4010
+              API_BILLING_URL: http://localhost:4010
+              API_CHARTING_URL: http://localhost:4010
+              API_COPILOT_URL: http://localhost:4010
+              API_LOGOS_URL: http://localhost:4010
+              API_EXCHANGE_RATES_URL: http://localhost:4010
+              API_SNAPTRADE_URL: http://localhost:4010
+              API_PUBLIC_URL: http://localhost:4010
+              API_BACKEND_URL: http://localhost:4010
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 64Mi
+          stoxly-mock:
+            image:
+              repository: ghcr.io/marx2/portfoliost-mock
+              tag: latest
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 128Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+    ingress:
+      app:
+        enabled: true
+        className: nginx
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Portfoliost"
+          hajimari.io/icon: mdi:briefcase-outline
+          hajimari.io/group: "pfire"
+          hajimari.io/info: "Investment portfolio tracker"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: *app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
