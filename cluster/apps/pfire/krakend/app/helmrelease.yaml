@@ -47,7 +47,7 @@ spec:
         containers:
           app:
             image:
-              repository: krakend/krakend
+              repository: krakend
               tag: "2.13"
             command: ["krakend", "run", "-d", "-c", "/etc/krakend/krakend.json.tmpl"]
             env:
