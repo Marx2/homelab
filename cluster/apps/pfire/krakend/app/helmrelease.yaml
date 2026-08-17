@@ -87,4 +87,6 @@ spec:
         enabled: true
         type: configMap
         name: krakend-config
-        mountPath: /etc/krakend
+        globalMounts:
+          - path: /etc/krakend
+            readOnly: true
