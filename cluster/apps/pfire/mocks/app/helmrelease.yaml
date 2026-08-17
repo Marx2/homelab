@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app portfoliost
+  name: &app mocks
   namespace: pfire
 spec:
   interval: 30m
@@ -41,49 +41,32 @@ spec:
       imagePullSecrets:
         - name: regcred
     controllers:
-      portfoliost:
+      stoxly-mock:
         replicas: 1
         strategy: RollingUpdate
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost
-              tag: v1.0.0
+              repository: ghcr.io/marx2/portfoliost-mock
+              tag: latest
             resources:
               requests:
-                cpu: 50m
-                memory: 64Mi
+                cpu: 100m
+                memory: 128Mi
               limits:
-                memory: 64Mi
+                memory: 128Mi
     service:
       app:
-        controller: *app
+        controller: stoxly-mock
         ports:
           http:
-            port: &port 80
-    ingress:
-      app:
+            port: 4010
+      stoxly-mock:
         enabled: true
-        className: nginx
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/appName: "Portfoliost"
-          hajimari.io/icon: mdi:briefcase-outline
-          hajimari.io/group: "pfire"
-          hajimari.io/info: "Investment portfolio tracker"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: *app
-                  port: *port
-              - path: /api
-                service:
-                  name: krakend
-                  port: 8080
-        tls:
-          - hosts:
-              - *host
+        controller: stoxly-mock
+        type: ClusterIP
+        clusterIP: None
+        forceRename: "stoxly-mock"
+        ports:
+          http:
+            port: 4010

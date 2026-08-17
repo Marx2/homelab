@@ -1,0 +1,90 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app krakend
+  namespace: pfire
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/containers/resources/limits
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
+    controllers:
+      krakend:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: krakend/krakend
+              tag: "2.13"
+            command: ["krakend", "run", "-d", "-c", "/etc/krakend/krakend.json.tmpl"]
+            env:
+              FC_ENABLE: "1"
+              FC_OUT: /tmp/krakend.json
+              FC_TEMPLATES: /etc/krakend
+              API_AUTH_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_USERS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_PORTFOLIOS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_WALLETS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_INSTRUMENTS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_WATCHLISTS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_NOTIFICATIONS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_NEWS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_BILLING_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_CHARTING_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_COPILOT_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_LOGOS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_EXCHANGE_RATES_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_SNAPTRADE_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_PUBLIC_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_BACKEND_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 8080
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: krakend-config
+        mountPath: /etc/krakend

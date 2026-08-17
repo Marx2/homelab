@@ -1,0 +1,1442 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: krakend-config
+  namespace: pfire
+data:
+  krakend.json.tmpl: |
+    {
+      "version": 3,
+      "name": "portfoliost-gateway",
+      "port": 8080,
+      "extra_config": {
+        "router": { "auto_options": true },
+        "security/cors": {
+          "allow_origins": ["http://localhost:3000", "http://localhost:8080"],
+          "allow_methods": ["GET", "POST", "PATCH", "PUT", "DELETE"],
+          "allow_headers": ["Authorization", "Content-Type", "Accept"]
+        }
+      },
+      "endpoints": [
+        {
+          "endpoint": "/api/auth",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/auth",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/auth/login",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth/login",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/auth/register",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth/register",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/auth/me",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth/me",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users",
+          "method": "PUT",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/{id}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/{id}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/account",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/account",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/account",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/account",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/account",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/account",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/profile",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/profile",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/profile",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/profile",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/change-password",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/change-password",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/users/clear-data",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_USERS_URL"}}"],
+            "url_pattern": "/api/users/clear-data",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/summary-metrics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/summary-metrics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions/bare",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions/bare",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions/cfd-hints",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions/cfd-hints",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions/{posId}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions/{posId}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/positions/{posId}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/positions/{posId}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/analytics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/analytics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/transactions",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/transactions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/transactions",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/transactions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/transactions/export",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/transactions/export",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/transactions/{txId}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/transactions/{txId}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/transactions/{txId}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/transactions/{txId}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/allocation",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/allocation",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/dividends",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/dividends",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/calendar",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/calendar",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/news",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/news",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/compare",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/compare",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/risk-metrics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/risk-metrics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/{id}/snapshot",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/{id}/snapshot",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/total-metrics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/total-metrics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/shares",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/shares",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/shares",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/shares",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/shares/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/shares/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/transactions",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/transactions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/held-stocks",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/held-stocks",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/light",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/light",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/merged",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/merged",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/portfolios/merged/light",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PORTFOLIOS_URL"}}"],
+            "url_pattern": "/api/portfolios/merged/light",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}/balance-history",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}/balance-history",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}/deposits",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}/deposits",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}/transactions",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}/transactions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}/transfers",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}/transfers",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/{id}/withdrawals",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/{id}/withdrawals",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/total-balance",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/total-balance",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/recent-transactions",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/recent-transactions",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/transactions/{id}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/transactions/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/transactions/{id}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/transactions/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/wallets/transactions/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WALLETS_URL"}}"],
+            "url_pattern": "/api/wallets/transactions/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/overview-metrics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/overview-metrics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/metrics",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/metrics",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/quote",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/quote",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/profile",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/profile",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/fundamentals",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/fundamentals",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/history",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/history",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/dividends",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/dividends",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/eps-surprises",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/eps-surprises",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/ownership",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/ownership",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/projections",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/projections",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/peers",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/peers",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/compare",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/compare",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/calendar",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/calendar",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/seasonality",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/seasonality",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/investor-relations",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/investor-relations",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/{symbol}/investor-relations/{eventId}/transcript",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/{symbol}/investor-relations/{eventId}/transcript",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/search",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/search",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/instruments/lookup",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_INSTRUMENTS_URL"}}"],
+            "url_pattern": "/api/instruments/lookup",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists/{id}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists/{id}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists/{id}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists/{id}/items",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists/{id}/items",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists/{id}/items",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists/{id}/items",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/watchlists/{id}/items/{symbol}",
+          "method": "DELETE",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_WATCHLISTS_URL"}}"],
+            "url_pattern": "/api/watchlists/{id}/items/{symbol}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications/preferences",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications/preferences",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications/preferences",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications/preferences",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications/symbols",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications/symbols",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications/symbols/{symbol}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications/symbols/{symbol}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/notifications/symbols/{symbol}",
+          "method": "PATCH",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NOTIFICATIONS_URL"}}"],
+            "url_pattern": "/api/notifications/symbols/{symbol}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/news",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NEWS_URL"}}"],
+            "url_pattern": "/api/news",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/news/articles",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NEWS_URL"}}"],
+            "url_pattern": "/api/news/articles",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/news/stats",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_NEWS_URL"}}"],
+            "url_pattern": "/api/news/stats",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing/plans",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing/plans",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing/current",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing/current",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing/subscription",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing/subscription",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/billing/subscription",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_BILLING_URL"}}"],
+            "url_pattern": "/api/billing/subscription",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/charting",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_CHARTING_URL"}}"],
+            "url_pattern": "/api/charting",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/charting/presets",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_CHARTING_URL"}}"],
+            "url_pattern": "/api/charting/presets",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/charting/compare",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_CHARTING_URL"}}"],
+            "url_pattern": "/api/charting/compare",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/logos",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_LOGOS_URL"}}"],
+            "url_pattern": "/api/logos",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/logos/{symbol}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_LOGOS_URL"}}"],
+            "url_pattern": "/api/logos/{symbol}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/snaptrade",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_SNAPTRADE_URL"}}"],
+            "url_pattern": "/api/snaptrade",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/public",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PUBLIC_URL"}}"],
+            "url_pattern": "/api/public",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/conversations",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_COPILOT_URL"}}"],
+            "url_pattern": "/api/conversations",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/conversations",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_COPILOT_URL"}}"],
+            "url_pattern": "/api/conversations",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/chatbot/{path}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_COPILOT_URL"}}"],
+            "url_pattern": "/api/chatbot/{path}",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/exchange-rates",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_EXCHANGE_RATES_URL"}}"],
+            "url_pattern": "/api/exchange-rates",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/public/portfolios/{shareId}",
+          "method": "GET",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_PUBLIC_URL"}}"],
+            "url_pattern": "/api/public/portfolios/{shareId}",
+            "encoding": "no-op"
+          }]
+        }
+      ]
+    }

@@ -22,6 +22,8 @@ resources:
   - scanst/ks.yaml
   - scorest/ks.yaml
   - portfoliost/ks.yaml
+  - krakend/ks.yaml
+  - mocks/ks.yaml
   #  - grist
   - investbrain/ks.yaml
   - jobshot/ks.yaml
