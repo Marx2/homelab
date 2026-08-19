@@ -101,3 +101,23 @@ kubectl -n networking get secret pocket-id-static-api-key -o jsonpath='{.data.to
   xargs -I{} curl -sf -X POST https://pocket-id.${SECRET_DOMAIN}/api/application-configuration/sync-ldap \
   -H "X-API-KEY: {}"
 ```
+
+## Potential Integrations
+
+Apps that support deeper OIDC integration (user identity, groups, roles passed to the app).
+
+### Native OIDC
+
+| App | Namespace | Config |
+|-----|-----------|--------|
+| **Immich** | media | Env vars: `OAUTH_ENABLED=true`, `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET`, `OAUTH_ISSUER_URL`. Secret already has `OAUTH_CLIENT_SECRET`. |
+| **Grafana** | monitoring | `grafana.ini` → `[auth.generic_oauth]`. Supports `groups_attribute_path` and `role_attribute_path` for group/role mapping. |
+| **Weave GitOps** | flux-system | `oidc-auth` secret with `issuerURL`, `clientID`, `clientSecret`, `redirectURL`. Uses Kubernetes RBAC impersonation — OIDC groups map to cluster roles. |
+| **Endurain** | home | Settings → Identity Providers → add provider. Supports OIDC with PKCE. |
+
+### Proxy Headers (no native OIDC)
+
+| App | Namespace | Headers |
+|-----|-----------|---------|
+| **Frigate** | home | `x-forwarded-user` (username), `x-forwarded-groups` (roles). Role mapping via `proxy.header_map.role_map` in Frigate config. |
+| **Calibre-Web** | media | `Remote-User`, `Remote-Groups`, `Remote-Name`, `Remote-Email`. Requires `Reverse Proxy Authentication` enabled in Calibre-Web config. |
