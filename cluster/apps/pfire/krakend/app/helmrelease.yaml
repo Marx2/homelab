@@ -54,8 +54,8 @@ spec:
               FC_ENABLE: "1"
               FC_OUT: /tmp/krakend.json
               FC_TEMPLATES: /etc/krakend
-              API_AUTH_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
-              API_USERS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
+              API_AUTH_URL: http://portfoliost-backend.pfire.svc.cluster.local:3000
+              API_USERS_URL: http://portfoliost-backend.pfire.svc.cluster.local:3000
               API_PORTFOLIOS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
               API_WALLETS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010
               API_INSTRUMENTS_URL: http://stoxly-mock.pfire.svc.cluster.local:4010

@@ -7,3 +7,4 @@ resources:
   - ingress.yaml
   - ldap-sync-cronjob.yaml
   - helmrelease.yaml
+  - portfoliost-oidc-client.yaml

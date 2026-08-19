@@ -71,8 +71,6 @@ spec:
           hajimari.io/icon: mdi:briefcase-outline
           hajimari.io/group: "pfire"
           hajimari.io/info: "Investment portfolio tracker"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

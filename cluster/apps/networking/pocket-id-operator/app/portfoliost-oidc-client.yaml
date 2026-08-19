@@ -1,0 +1,13 @@
+apiVersion: pocketid.internal/v1alpha1
+kind: PocketIDOIDCClient
+metadata:
+  name: portfoliost
+  namespace: networking
+spec:
+  pocketIDInstanceRef:
+    name: pocket-id
+  name: PortfolioST
+  callbackURLs:
+    - https://portfoliost.${SECRET_DOMAIN}/auth/callback
+  logoutURLs:
+    - https://portfoliost.${SECRET_DOMAIN}/logout
