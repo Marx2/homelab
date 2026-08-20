@@ -13,7 +13,7 @@ data:
       "extra_config": {
         "router": { "auto_options": true },
         "security/cors": {
-          "allow_origins": ["http://localhost:3000", "http://localhost:8080"],
+          "allow_origins": ["http://localhost:3000", "http://localhost:8080", "https://portfoliost.${SECRET_DOMAIN}"],
           "allow_methods": ["GET", "POST", "PATCH", "PUT", "DELETE"],
           "allow_headers": ["Authorization", "Content-Type", "Accept"]
         }
@@ -38,6 +38,17 @@ data:
           "backend": [{
             "host": ["{{env "API_AUTH_URL"}}"],
             "url_pattern": "/api/auth",
+            "encoding": "no-op"
+          }]
+        },
+        {
+          "endpoint": "/api/auth/token",
+          "method": "POST",
+          "output_encoding": "no-op",
+          "input_headers": ["Authorization", "Content-Type", "Accept"],
+          "backend": [{
+            "host": ["{{env "API_AUTH_URL"}}"],
+            "url_pattern": "/api/auth/token",
             "encoding": "no-op"
           }]
         },
