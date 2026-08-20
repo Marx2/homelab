@@ -48,7 +48,7 @@ spec:
               DATABASE_URL: "file:/app/data/portfoliost.db"
               POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
-              POCKETID_TOKEN_URL: "https://pocket-id.${SECRET_DOMAIN}/oauth2/token"
+              POCKETID_TOKEN_URL: "http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token"
               POCKETID_AUDIENCE: "portfoliost"
             resources:
               requests:
