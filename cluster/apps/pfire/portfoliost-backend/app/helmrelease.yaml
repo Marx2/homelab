@@ -29,8 +29,11 @@ spec:
         target:
           kind: Pod
   values:
-    imagePullSecrets:
-      - name: regcred
+    global:
+      createDefaultServiceAccount: false
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
     controllers:
       portfoliost-backend:
         containers:
