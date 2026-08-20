@@ -6,7 +6,7 @@ metadata:
 spec:
   instanceSelector:
     matchLabels:
-      app.kubernetes.io/instance: pocket-id
+      pocketid.internal/instance: pocket-id
   name: PortfolioST
   clientID: badb965e4e0be8e26f765f192418cc0c6b2f373f272f9d4886230d3203436e61
   callbackUrls:
