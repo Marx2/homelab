@@ -49,7 +49,7 @@ spec:
               POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_TOKEN_URL: "http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token"
-              POCKETID_AUDIENCE: "portfoliost"
+              POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
             resources:
               requests:
                 cpu: 50m
