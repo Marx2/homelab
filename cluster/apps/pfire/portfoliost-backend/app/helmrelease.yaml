@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-backend
-              tag: v0.1.0
+              tag: v1.0.0
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
