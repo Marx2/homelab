@@ -4,10 +4,14 @@ metadata:
   name: portfoliost
   namespace: networking
 spec:
-  pocketIDInstanceRef:
-    name: pocket-id
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: pocket-id
   name: PortfolioST
-  callbackURLs:
+  clientID: badb965e4e0be8e26f765f192418cc0c6b2f373f272f9d4886230d3203436e61
+  callbackUrls:
     - https://portfoliost.${SECRET_DOMAIN}/auth/callback
-  logoutURLs:
+  logoutCallbackUrls:
     - https://portfoliost.${SECRET_DOMAIN}/logout
+  isPublic: true
+  pkceEnabled: true
