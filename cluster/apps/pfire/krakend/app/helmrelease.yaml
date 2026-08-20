@@ -40,6 +40,8 @@ spec:
     defaultPodOptions:
       imagePullSecrets:
         - name: regcred
+      annotations:
+        configmap.reloader.stakater.com/reload: &config krakend-config
     controllers:
       krakend:
         replicas: 1
