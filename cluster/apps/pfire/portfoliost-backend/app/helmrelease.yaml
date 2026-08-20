@@ -42,7 +42,6 @@ spec:
               NODE_ENV: production
               DATABASE_URL: "file:/app/data/portfoliost.db"
               POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
-              POCKETID_CLIENT_SECRET: "${PORTFOLIOST_OIDC_CLIENT_SECRET}"
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_TOKEN_URL: "https://pocket-id.${SECRET_DOMAIN}/oauth2/token"
               POCKETID_AUDIENCE: "portfoliost"
