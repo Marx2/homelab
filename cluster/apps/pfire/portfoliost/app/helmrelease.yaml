@@ -49,6 +49,9 @@ spec:
             image:
               repository: ghcr.io/marx2/portfoliost
               tag: v1.0.1
+            env:
+              OIDC_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
+              OIDC_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
             resources:
               requests:
                 cpu: 50m
