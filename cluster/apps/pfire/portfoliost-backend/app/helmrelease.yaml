@@ -40,12 +40,22 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-backend
-              tag: v1.0.6
+              tag: v1.0.7
+            # Override image CMD to skip db:seed — production starts empty,
+            # migrations run at boot.
+            command:
+              - /bin/sh
+              - -c
+              - npm run db:migrate && node dist/server.js
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
-              DATABASE_URL: "file:/app/data/portfoliost.db"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
               POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_TOKEN_URL: "http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token"
@@ -77,15 +87,4 @@ spec:
         ports:
           http:
             port: 3000
-    persistence:
-      data:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        advancedMounts:
-          portfoliost-backend:
-            app:
-              - path: /app/data
-                readOnly: false
 
