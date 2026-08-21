@@ -56,6 +56,13 @@ spec:
       options: "SUPERUSER"
       password:
         type: AlphaNumeric
+    # portfoliost-backend — dedicated least-privilege user, owns its own database.
+    # Operator generates secret postgres-pfire-pguser-portfoliost (host/port/dbname/user/password/uri).
+    - name: portfoliost
+      databases:
+        - portfoliost
+      password:
+        type: AlphaNumeric
   backups:
     pgbackrest:
       configuration: &backupConfig
