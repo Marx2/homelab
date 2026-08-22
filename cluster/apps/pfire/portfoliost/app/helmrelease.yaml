@@ -83,11 +83,11 @@ spec:
                   port: *port
               - path: /api/auth
                 service:
-                  name: portfoliost-backend
+                  name: portfoliost-users-auth
                   port: 3000
               - path: /api/users
                 service:
-                  name: portfoliost-backend
+                  name: portfoliost-users-auth
                   port: 3000
               - path: /api
                 service:

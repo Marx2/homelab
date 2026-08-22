@@ -22,7 +22,7 @@ resources:
   - scanst/ks.yaml
   - scorest/ks.yaml
   - portfoliost/ks.yaml
-  - portfoliost-backend/ks.yaml
+  - portfoliost-users-auth/ks.yaml
   - mocks/ks.yaml
   #  - grist
   - investbrain/ks.yaml

@@ -56,7 +56,7 @@ spec:
       options: "SUPERUSER"
       password:
         type: AlphaNumeric
-    # portfoliost-backend — dedicated least-privilege user, owns its own database.
+    # portfoliost-users-auth — dedicated least-privilege user, owns its own database.
     # Operator generates secret postgres-pfire-pguser-portfoliost (host/port/dbname/user/password/uri).
     # One-time manual step after DB creation (PG15+ public-schema lockdown; PGO leaves DB owned by
     # postgres): kubectl exec <pod> -c database -- psql -U postgres -d portfoliost \
