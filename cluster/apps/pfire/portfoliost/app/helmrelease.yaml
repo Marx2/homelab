@@ -81,10 +81,18 @@ spec:
                 service:
                   name: *app
                   port: *port
+              - path: /api/auth
+                service:
+                  name: portfoliost-backend
+                  port: 3000
+              - path: /api/users
+                service:
+                  name: portfoliost-backend
+                  port: 3000
               - path: /api
                 service:
-                  name: krakend
-                  port: 8080
+                  name: stoxly-mock
+                  port: 4010
         tls:
           - hosts:
               - *host
