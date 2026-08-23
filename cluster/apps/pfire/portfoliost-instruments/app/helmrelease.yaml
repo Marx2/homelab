@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.6
+              tag: v1.0.7
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -55,6 +55,11 @@ spec:
               CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
             resources:
               requests:
                 cpu: 50m
@@ -76,6 +81,33 @@ spec:
                   port: http
                   initialDelaySeconds: 5
                   periodSeconds: 10
+      # Weekly refresh of the ticker reference table from
+      # adanos/free-ticker-database (live GitHub data; boot seeds from the
+      # bundled snapshot with --if-empty).
+      tickersync:
+        type: cronjob
+        cronjob:
+          schedule: "30 4 * * 1"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.7
+            command: ["node", "dist/scripts/tickerref-sync.js"]
+            env:
+              NODE_ENV: production
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
     service:
       app:
         controller: *app
