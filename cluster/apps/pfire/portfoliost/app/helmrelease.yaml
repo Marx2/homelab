@@ -89,6 +89,10 @@ spec:
                 service:
                   name: portfoliost-users-auth
                   port: 3000
+              - path: /api/instruments
+                service:
+                  name: portfoliost-instruments
+                  port: 3000
               - path: /api
                 service:
                   name: stoxly-mock

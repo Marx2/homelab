@@ -1,0 +1,84 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app portfoliost-instruments
+  namespace: pfire
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: [/spec/containers/resources/limits]
+        target:
+          kind: Pod
+  values:
+    global:
+      createDefaultServiceAccount: false
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
+    controllers:
+      portfoliost-instruments:
+        replicas: 1
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.2
+            env:
+              PORT: "3000"
+              HOST: "0.0.0.0"
+              NODE_ENV: production
+              CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
+              POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
+              POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+            probes:
+              liveness:
+                enabled: true
+                spec:
+                  path: /health
+                  port: http
+                  initialDelaySeconds: 10
+                  periodSeconds: 15
+              readiness:
+                enabled: true
+                spec:
+                  path: /health
+                  port: http
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 3000

@@ -52,3 +52,89 @@ routes:
     fetch_interval: 2
     fetch_max_wait: 4
 
+# --- openst instruments surface (verified 2026-08-23, see portfoliost docs/openst-coverage.md) ---
+ (verified 2026-08-23, see portfoliost docs/openst-coverage.md) ---
+
+  - name: OPENST_PROFILE
+    path: /equity/profile/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/profile/{ticker}"
+    cache_ttl: 604800          # 7d — static company facts
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_QUOTE
+    path: /equity/quote/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/quote/{ticker}"
+    cache_ttl: 300             # 5min — live-ish quote
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_METRICS
+    path: /equity/metrics/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/metrics/{ticker}"
+    cache_ttl: 86400           # 24h
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_PROJECTIONS
+    path: /equity/projections/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/projections/{ticker}"
+    cache_ttl: 86400           # 24h — analyst targets move slowly
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_OHLCV
+    path: /ohlcv/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/price/ohlcv/{ticker}?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 21600           # 6h — today's bar keeps updating
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_FUNDAMENTALS
+    path: /fundamentals/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/fundamentals/{ticker}?statement={statement}&period={period}"
+    query_params: [statement, period]
+    cache_ttl: 86400           # 24h
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_CALENDAR_EARNINGS
+    path: /calendar/earnings
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/calendar/earnings?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 3600            # 1h — consensus figures get revised
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_CALENDAR_DIVIDEND
+    path: /calendar/dividend
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/calendar/dividend?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 3600            # 1h
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_SEARCH
+    path: /equity/search/{query}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/search/{query}"
+    cache_ttl: 604800          # 7d — universe changes rarely
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_DIVIDENDS
+    path: /dividends/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/dividend/history/{ticker}"
+    cache_ttl: 86400           # 24h — dividend history is static
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
