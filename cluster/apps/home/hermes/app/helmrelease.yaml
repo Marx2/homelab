@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: nousresearch/hermes-agent
-              tag: main@sha256:153252da346085bcd8dc4e67372a6dc0e03f7ec6871f46a9923161ff1c97d181
+              tag: main@sha256:68967c68400a8b695635a6b666f10ce22d758da05b3d838295cfac56d9f8201c
             securityContext:
               allowPrivilegeEscalation: true
               capabilities:
