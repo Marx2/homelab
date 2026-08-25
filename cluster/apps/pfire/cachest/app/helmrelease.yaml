@@ -43,7 +43,10 @@ spec:
               tag: v1.0.21
             env:
               TZ: "${TZ}"
-              REDIS_HOST: localhost
+              REDIS_HOST: redis
+              REDIS_PORT: "6379"
+              REDIS_PASSWORD: ${SECRET_REDIS_PASS}
+              REDIS_DB: "1"
             envFrom:
               - secretRef:
                   name: cachest-secrets
