@@ -137,3 +137,13 @@ routes:
     stale_ttl: 2592000
     fetch_interval: 2
     fetch_max_wait: 4
+
+  # --- logo resolution (logos.md D36) — caches the lookup only; binaries are stored by the instruments module ---
+
+  - name: OPENST_LOGO
+    path: /logo/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/logo/{ticker}"
+    cache_ttl: 21600           # 6h — resolution result is near-permanent on our side anyway
+    stale_ttl: 604800          # 7d stale fallback while openst recovers
+    fetch_interval: 2
+    fetch_max_wait: 4

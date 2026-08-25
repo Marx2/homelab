@@ -47,12 +47,13 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.11
+              tag: v1.0.13
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
               CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
+              LOGOS_DIR: /app/data/logos
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               DATABASE_URL:
@@ -93,7 +94,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.11
+              tag: v1.0.13
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -108,6 +109,18 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
+    persistence:
+      # logos.md D35 — permanent local logo store (binaries on disc)
+      logos:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+        advancedMounts:
+          portfoliost-instruments:
+            app:
+              - path: /app/data/logos
     service:
       app:
         controller: *app
