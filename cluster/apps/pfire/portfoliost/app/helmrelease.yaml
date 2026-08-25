@@ -93,6 +93,14 @@ spec:
                 service:
                   name: portfoliost-instruments
                   port: 3000
+              - path: /api/wallets
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
+              - path: /api/currencies
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
               - path: /api
                 service:
                   name: stoxly-mock
