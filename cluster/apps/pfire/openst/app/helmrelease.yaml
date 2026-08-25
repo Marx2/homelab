@@ -38,12 +38,13 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.0.23
+              tag: v1.0.24
             env:
               TZ: "${TZ}"
-              REDIS_HOST: localhost
+              REDIS_HOST: redis
               REDIS_PORT: "6379"
-              REDIS_DB: "0"
+              REDIS_PASSWORD: ${SECRET_REDIS_PASS}
+              REDIS_DB: "2"
             envFrom:
               - secretRef:
                   name: openst-secrets
@@ -53,16 +54,6 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
-          redis:
-            image:
-              repository: redis
-              tag: 8-alpine
-            resources:
-              requests:
-                cpu: 10m
-                memory: 32Mi
-              limits:
-                memory: 64Mi
     service:
       app:
         controller: *app

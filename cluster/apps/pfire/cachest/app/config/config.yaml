@@ -1,8 +1,8 @@
 redis:
-  host: redis          # override via REDIS_HOST env var
+  host: redis              # shared namespace instance (§13) — ghostfolio on db0
   port: 6379
-  password: ""
-  db: 0
+  password: ${SECRET_REDIS_PASS}
+  db: 1
 
 routes:
   - name: DIVIDENDHISTORY

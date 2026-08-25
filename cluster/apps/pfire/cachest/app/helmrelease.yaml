@@ -40,23 +40,13 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/cachest
-              tag: v1.0.20
+              tag: v1.0.21
             env:
               TZ: "${TZ}"
               REDIS_HOST: localhost
             envFrom:
               - secretRef:
                   name: cachest-secrets
-            resources:
-              requests:
-                cpu: 50m
-                memory: 64Mi
-              limits:
-                memory: 128Mi
-          redis:
-            image:
-              repository: redis
-              tag: 8-alpine
             resources:
               requests:
                 cpu: 50m
@@ -102,10 +92,3 @@ spec:
           - path: /app/config.yaml
             subPath: config.yaml
             readOnly: true
-      redis-data:
-        enabled: true
-        existingClaim: cachest-redis
-        advancedMounts:
-          cachest:
-            redis:
-              - path: /data
