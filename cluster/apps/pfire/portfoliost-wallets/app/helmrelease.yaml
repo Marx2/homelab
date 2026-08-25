@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.0.19
+              tag: v1.0.20
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -92,7 +92,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.0.19
+              tag: v1.0.20
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
