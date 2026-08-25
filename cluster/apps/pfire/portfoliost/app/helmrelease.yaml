@@ -105,6 +105,10 @@ spec:
                 service:
                   name: portfoliost-wallets
                   port: 3000
+              - path: /api/fx
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
               - path: /api
                 service:
                   name: stoxly-mock
