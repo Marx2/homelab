@@ -25,6 +25,7 @@ resources:
   - portfoliost-users-auth/ks.yaml
   - portfoliost-instruments/ks.yaml
   - portfoliost-wallets/ks.yaml
+  - portfoliost-admin/ks.yaml
   - mocks/ks.yaml
   #  - grist
   - investbrain/ks.yaml

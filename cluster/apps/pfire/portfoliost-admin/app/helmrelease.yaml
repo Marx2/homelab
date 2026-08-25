@@ -2,9 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app portfoliost-users-auth
+  name: &app portfoliost-admin
+  namespace: pfire
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -14,6 +15,7 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -22,6 +24,8 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  uninstall:
+    keepHistory: false
   driftDetection:
     mode: enabled
     ignore:
@@ -35,37 +39,34 @@ spec:
       imagePullSecrets:
         - name: regcred
     controllers:
-      portfoliost-users-auth:
+      portfoliost-admin:
+        replicas: 1
+        strategy: RollingUpdate
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-users-auth
-              tag: v1.0.9
-            # Override image CMD to skip db:seed — production starts empty,
-            # migrations run at boot.
-            command:
-              - /bin/sh
-              - -c
-              - npm run db:migrate && node dist/server.js
+              repository: ghcr.io/marx2/portfoliost-admin
+              tag: v1.0.0
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
-              DATABASE_URL:
-                valueFrom:
-                  secretKeyRef:
-                    name: postgres-pfire-pguser-portfoliost
-                    key: uri
-              POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+              # strict JWT validation (cluster)
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
-              POCKETID_TOKEN_URL: "http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+              API_USERS_AUTH_URL: http://portfoliost-users-auth.pfire.svc.cluster.local:3000
+              API_WALLETS_URL: http://portfoliost-wallets.pfire.svc.cluster.local:3000
+              API_INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # D49 — OIDC client-credentials for UserInfo enrichment (optional;
+              # unset until the portfoliost-admin PocketID client is registered)
+              # OIDC_ISSUER_URL / OIDC_CLIENT_ID / OIDC_CLIENT_SECRET come from
+              # the operator-generated secret when provisioned.
             resources:
               requests:
                 cpu: 50m
                 memory: 64Mi
               limits:
-                memory: 128Mi
+                memory: 256Mi
             probes:
               liveness:
                 enabled: true
@@ -87,4 +88,3 @@ spec:
         ports:
           http:
             port: 3000
-
