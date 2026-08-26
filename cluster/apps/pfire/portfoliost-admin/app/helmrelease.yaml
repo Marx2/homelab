@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.2
+              tag: v1.0.3
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -58,18 +58,14 @@ spec:
               API_WALLETS_URL: http://portfoliost-wallets.pfire.svc.cluster.local:3000
               API_INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
               # D48b/D49 — identity fetched live from the PocketID Admin API;
-              # nothing is stored in portfoliost. Create the API key in the
-              # PocketID UI (admin), then:
-              #   kubectl -n pfire create secret generic portfoliost-pocketid-admin \
-              #     --from-literal=POCKETID_ADMIN_API_KEY='<key>'
-              # Until then identity fields degrade to nulls.
+              # the static API key is mirrored from networking via Reflector.
+              # See portfoliost-admin/README.md for setup details.
               POCKETID_BASE_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_ADMIN_API_KEY:
                 valueFrom:
                   secretKeyRef:
-                    name: portfoliost-pocketid-admin
-                    key: POCKETID_ADMIN_API_KEY
-                    optional: true
+                    name: pocket-id-static-api-key
+                    key: token
               # D49 — OIDC client-credentials for UserInfo enrichment (optional;
               # unset until the portfoliost-admin PocketID client is registered)
               # OIDC_ISSUER_URL / OIDC_CLIENT_ID / OIDC_CLIENT_SECRET come from
