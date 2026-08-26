@@ -6,4 +6,5 @@ resources:
   #  - intel-gpu-plugin/ks.yaml
   - intel-device-plugin/ks.yaml
   - node-feature-discovery/ks.yaml
+  - reflector/ks.yaml
   - cloud-backup
