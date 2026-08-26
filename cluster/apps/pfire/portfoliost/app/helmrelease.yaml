@@ -113,6 +113,10 @@ spec:
                 service:
                   name: portfoliost-admin
                   port: 3000
+              - path: /api/portfolios
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
               - path: /api
                 service:
                   name: stoxly-mock
