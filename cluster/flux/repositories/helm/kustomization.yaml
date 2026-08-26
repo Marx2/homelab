@@ -39,3 +39,4 @@ resources:
   - emqx.yaml
   - intel.yaml
   - karpor.yaml
+  - emberstack.yaml
