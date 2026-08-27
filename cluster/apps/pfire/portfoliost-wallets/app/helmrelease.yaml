@@ -55,6 +55,7 @@ spec:
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               USERS_AUTH_URL: http://portfoliost-users-auth.pfire.svc.cluster.local:3000
+              INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
