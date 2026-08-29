@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.4
+              tag: v1.0.5
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -78,7 +78,9 @@ spec:
                 cpu: 50m
                 memory: 64Mi
               limits:
-                memory: 256Mi
+                # Raised from 256Mi: upload route streams to disk but node
+                # still needs headroom for the busboy parse buffers + app overhead.
+                memory: 512Mi
             probes:
               liveness:
                 enabled: true
