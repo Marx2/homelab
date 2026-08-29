@@ -57,6 +57,9 @@ spec:
               API_USERS_AUTH_URL: http://portfoliost-users-auth.pfire.svc.cluster.local:3000
               API_WALLETS_URL: http://portfoliost-wallets.pfire.svc.cluster.local:3000
               API_INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # N — stooq import jobs
+              API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
+              STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               # D48b/D49 — identity fetched live from the PocketID Admin API;
               # the static API key is mirrored from networking via Reflector.
               # See portfoliost-admin/README.md for setup details.
@@ -97,3 +100,10 @@ spec:
         ports:
           http:
             port: 3000
+
+    persistence:
+      stooq-upload:
+        type: persistentVolumeClaim
+        existingClaim: stooq-upload-pvc
+        globalMounts:
+          - path: /tmp/stooq-uploads

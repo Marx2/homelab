@@ -1,0 +1,17 @@
+---
+# Shared upload volume for stooq zip imports (Phase N).
+# portfoliost-admin writes the uploaded zip here; the pgloader Job pod reads it.
+# ReadWriteMany is required: both pods mount concurrently.
+# 1 Gi covers the largest expected stooq zip (~600 MB) with headroom.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stooq-upload-pvc
+  namespace: pfire
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
