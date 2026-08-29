@@ -74,6 +74,8 @@ spec:
           hajimari.io/icon: mdi:briefcase-outline
           hajimari.io/group: "pfire"
           hajimari.io/info: "Investment portfolio tracker"
+          # Allow up to 1.1 GB for stooq zip uploads (N — /api/admin/jobs/stooq-import/upload)
+          nginx.ingress.kubernetes.io/proxy-body-size: "1100m"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
