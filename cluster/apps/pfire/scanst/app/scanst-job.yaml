@@ -18,13 +18,16 @@ spec:
     spec:
       backoffLimit: 0
       template:
+        metadata:
+          labels:
+            app: scanst-otp
         spec:
           imagePullSecrets:
             - name: regcred
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx2/scanst:v1.0.31
+              image: ghcr.io/marx2/scanst:v1.0.32
               imagePullPolicy: IfNotPresent
               args: ["--headless"]
               envFrom:
@@ -41,3 +44,13 @@ spec:
                   value: "1.5"
                 - name: PUSHGATEWAY_URL
                   value: "http://pushgateway-prometheus-pushgateway.monitoring.svc.cluster.local:9091"
+                - name: OTP_HOST
+                  value: "0.0.0.0"
+                - name: OTP_PORT
+                  value: "8080"
+                - name: OTP_PUBLIC_URL
+                  value: "https://scanst-otp.${SECRET_DOMAIN}"
+                - name: OTP_TIMEOUT_SECONDS
+                  value: "840"
+                - name: PYTHONUNBUFFERED
+                  value: "1"

@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanst-otp
+  namespace: pfire
+spec:
+  type: ClusterIP
+  selector:
+    app: scanst-otp
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scanst-otp
+  namespace: pfire
+  annotations:
+    hajimari.io/enable: "true"
+    hajimari.io/appName: "Scanst OTP"
+    hajimari.io/icon: mdi:key
+    hajimari.io/group: "pfire"
+    hajimari.io/info: "Enter the Scrab 2FA code when a job prompts for it"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}/oauth2/start
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "scanst-otp.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: scanst-otp
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "scanst-otp.${SECRET_DOMAIN}"
