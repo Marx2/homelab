@@ -16,6 +16,7 @@ spec:
       labels:
         created-by: scanst
     spec:
+      backoffLimit: 0
       template:
         spec:
           imagePullSecrets:
