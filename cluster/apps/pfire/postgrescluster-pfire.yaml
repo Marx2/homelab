@@ -22,12 +22,26 @@ spec:
         parameters:
           shared_preload_libraries: "vectors.so"
           search_path: '"$user", public, vectors'
+          # Tuned for shared 32 GB RAM node (other services co-located)
+          shared_buffers: "2GB"
+          effective_cache_size: "8GB"
+          wal_buffers: "32MB"
+          max_wal_size: "4GB"
+          min_wal_size: "512MB"
+          wal_compression: "on"
+          checkpoint_completion_target: "0.9"
   instances:
     - name: postgres-pfire
       metadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres
       replicas: &replica 1
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "2Gi"
+        limits:
+          memory: "5Gi"
       dataVolumeClaimSpec:
         storageClassName: longhorn
         accessModes:
