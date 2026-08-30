@@ -1,17 +1,42 @@
 ---
 # Shared upload volume for stooq zip imports (Phase N).
-# portfoliost-admin writes the uploaded zip here; the pgloader Job pod reads it.
-# ReadWriteMany is required: both pods mount concurrently.
-# 1 Gi covers the largest expected stooq zip (~600 MB) with headroom.
+# Uses a hostPath on node "kaczka" (largest free SSD: ~122 GB) instead
+# of Longhorn for maximum I/O throughput during pgloader zip extraction.
+# Both portfoliost-admin and the pgloader Job pod are pinned to "kaczka"
+# via nodeSelector so they always see the same hostPath directory.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stooq-upload-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  hostPath:
+    path: /var/lib/stooq-uploads
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - kaczka
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: stooq-upload-pvc
   namespace: pfire
 spec:
-  storageClassName: longhorn
+  storageClassName: ""
+  volumeName: stooq-upload-pv
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi

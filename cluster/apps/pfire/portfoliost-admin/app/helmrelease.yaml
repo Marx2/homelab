@@ -38,6 +38,8 @@ spec:
     defaultPodOptions:
       imagePullSecrets:
         - name: regcred
+      nodeSelector:
+        kubernetes.io/hostname: kaczka
     controllers:
       portfoliost-admin:
         replicas: 1
