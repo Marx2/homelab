@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/jobshot
-              tag: 1.6.0
+              tag: 1.6.1
             env:
               APP_TIMEZONE: ${TZ}
             resources:
