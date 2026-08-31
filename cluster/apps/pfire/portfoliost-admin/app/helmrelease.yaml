@@ -62,6 +62,11 @@ spec:
               # N — stooq import jobs
               API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
               # D48b/D49 — identity fetched live from the PocketID Admin API;
               # the static API key is mirrored from networking via Reflector.
               # See portfoliost-admin/README.md for setup details.
