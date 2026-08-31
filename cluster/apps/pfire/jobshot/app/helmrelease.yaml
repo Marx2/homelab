@@ -29,10 +29,9 @@ spec:
   driftDetection:
     mode: enabled
     ignore:
-      - paths:
-          - /spec/replicas
+      - paths: [/spec/containers/resources/limits]
         target:
-          kind: Deployment
+          kind: Pod
   values:
     global:
       createDefaultServiceAccount: false
@@ -40,7 +39,7 @@ spec:
       automountServiceAccountToken: true
     controllers:
       jobshot:
-        replicas: 0
+        replicas: 1
         annotations:
           configmap.reloader.stakater.com/reload: &config jobshot-jobs
         containers:
@@ -78,8 +77,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: keda-http-interceptor-proxy
-                  port: 8080
+                  name: jobshot
+                  port: 3000
         tls:
           - hosts:
               - *host
