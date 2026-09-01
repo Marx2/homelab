@@ -6,6 +6,7 @@ resources:
   - rbac.yaml
   - regcred.yaml
   - crunchy-postgres-secret.yaml
+  - pfire-init-sql.yaml
   - postgrescluster-pfire.yaml
   #  - hasura
   #  - grafana

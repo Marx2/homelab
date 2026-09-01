@@ -1,0 +1,96 @@
+---
+# One-time init SQL for the postgres-pfire cluster (applied by the PostgresOperator at
+# cluster bootstrap; idempotent, so it is safe to re-run).
+#
+# Wire into PostgresCluster.spec.databaseInitSQL. Manual apply to the existing cluster:
+#   kubectl exec -n pfire <primary-pod> -c database -- psql -U postgres -f - < <(kubectl get cm pfire-init-sql -n pfire -o jsonpath='{.data.init\.sql}')
+#
+# Creates, in the `portfoliost` database:
+#   - postgres_fdw extension
+#   - `instruments` schema
+#   - foreign server `stooq_server` (local socket, peer auth over pg_hba `local all "postgres" "peer"`)
+#   - user mapping for `portfoliost` -> remote `postgres` (password_required=false, peer suffices)
+#   - foreign tables for every stooq table (daily_pl, daily_us, daily_jp, daily_world,
+#     daily_uk, daily_hk, daily_hu, daily_macro)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pfire-init-sql
+  namespace: pfire
+data:
+  init.sql: |
+    \c portfoliost
+
+    CREATE EXTENSION IF NOT EXISTS postgres_fdw;
+    CREATE SCHEMA IF NOT EXISTS instruments;
+
+    DO $$ BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_foreign_server WHERE srvname='stooq_server') THEN
+        CREATE SERVER stooq_server
+          FOREIGN DATA WRAPPER postgres_fdw
+          OPTIONS (dbname 'stooq', host '/tmp/postgres');
+      END IF;
+    END $$;
+
+    DO $$ BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_user_mappings
+                     WHERE srvname='stooq_server'
+                       AND umuser = 'portfoliost'::regrole) THEN
+        CREATE USER MAPPING FOR portfoliost
+          SERVER stooq_server
+          OPTIONS (user 'postgres', password_required 'false');
+      END IF;
+    END $$;
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_pl (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_pl');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_us (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_us');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_jp (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_jp');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_world (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_world');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_uk (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_uk');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_hk (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_hk');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_hu (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_hu');
+
+    CREATE FOREIGN TABLE IF NOT EXISTS instruments.stooq_daily_macro (
+      ticker TEXT NOT NULL, period TEXT NOT NULL, date DATE NOT NULL,
+      time TEXT NOT NULL DEFAULT '000000', open NUMERIC(20,8), high NUMERIC(20,8),
+      low NUMERIC(20,8), close NUMERIC(20,8), volume NUMERIC(28,8), openint NUMERIC(28,8)
+    ) SERVER stooq_server OPTIONS (schema_name 'public', table_name 'daily_macro');
+
+    GRANT USAGE ON SCHEMA instruments TO portfoliost;
+    GRANT SELECT ON instruments.stooq_daily_pl, instruments.stooq_daily_us, instruments.stooq_daily_jp,
+      instruments.stooq_daily_world, instruments.stooq_daily_uk, instruments.stooq_daily_hk,
+      instruments.stooq_daily_hu, instruments.stooq_daily_macro TO portfoliost;
