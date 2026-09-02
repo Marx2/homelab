@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 5.0.1
+      version: 5.1.0
       interval: 15m
       sourceRef:
         kind: HelmRepository
@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: nousresearch/hermes-agent
-              tag: main@sha256:fae1cf7fa3f67890cc1c959fff0caefd6a4593740cd78720700fb673dd82d756
+              tag: main@sha256:b7e064d8f3fc4e80b1798a74fcb7451da0277cf1f8ec24a20d04ca4e3f1363d0
             securityContext:
               allowPrivilegeEscalation: true
               capabilities:
