@@ -94,7 +94,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.15
+              tag: v1.0.16
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
