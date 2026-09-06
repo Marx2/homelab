@@ -119,10 +119,6 @@ spec:
                 service:
                   name: portfoliost-wallets
                   port: 3000
-              - path: /api
-                service:
-                  name: stoxly-mock
-                  port: 4010
         tls:
           - hosts:
               - *host
