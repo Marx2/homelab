@@ -119,6 +119,14 @@ spec:
                 service:
                   name: portfoliost-wallets
                   port: 3000
+              - path: /api/labels
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
+              - path: /api/positions
+                service:
+                  name: portfoliost-wallets
+                  port: 3000
         tls:
           - hosts:
               - *host
