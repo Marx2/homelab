@@ -147,3 +147,37 @@ routes:
     stale_ttl: 604800          # 7d stale fallback while openst recovers
     fetch_interval: 2
     fetch_max_wait: 4
+
+  # --- SEC ownership / filings surface (openbb-sec, 2026-09-07) ---
+
+  - name: OPENST_OWNERSHIP
+    path: /ownership/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/ownership/{ticker}"
+    cache_ttl: 86400           # 24h — Form 4 insider transactions
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_INSTITUTIONAL
+    path: /ownership/institutional/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/ownership/institutional/{ticker}"
+    cache_ttl: 604800          # 7d — Form 13F filings are quarterly
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_FILINGS
+    path: /filings/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/filings/{ticker}"
+    cache_ttl: 86400           # 24h — new filings arrive during the day
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_MDA
+    path: /fundamentals/{ticker}/mda
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/fundamentals/{ticker}/mda"
+    cache_ttl: 604800          # 7d — MD&A updates quarterly with 10-K/10-Q
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
