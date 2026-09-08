@@ -127,6 +127,10 @@ spec:
                 service:
                   name: portfoliost-wallets
                   port: 3000
+              - path: /api/news
+                service:
+                  name: portfoliost-instruments
+                  port: 3000
         tls:
           - hosts:
               - *host
