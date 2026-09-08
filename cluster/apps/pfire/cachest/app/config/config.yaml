@@ -181,3 +181,13 @@ routes:
     stale_ttl: 2592000
     fetch_interval: 2
     fetch_max_wait: 4
+
+  # --- company news (stock-news proposal N2/N4, 2026-09-08) ---
+  - name: OPENST_NEWS
+    path: /news/company/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/news/company/{ticker}?start_date={start_date}&limit={limit}"
+    query_params: [start_date, limit]
+    cache_ttl: 3600            # 1h fresh
+    stale_ttl: 86400           # 24h stale fallback
+    fetch_interval: 300        # 5min between upstream fetches
+    fetch_max_wait: 4
