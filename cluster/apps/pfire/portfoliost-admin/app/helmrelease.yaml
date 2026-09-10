@@ -38,6 +38,8 @@ spec:
     defaultPodOptions:
       imagePullSecrets:
         - name: regcred
+      # D46 — read CronJob/Deployment image tags live for the System tab
+      automountServiceAccountToken: true
       nodeSelector:
         kubernetes.io/hostname: kaczka
     controllers:
@@ -48,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.31
+              tag: v1.0.36
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -59,6 +61,9 @@ spec:
               API_USERS_AUTH_URL: http://portfoliost-users-auth.pfire.svc.cluster.local:3000
               API_WALLETS_URL: http://portfoliost-wallets.pfire.svc.cluster.local:3000
               API_INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # D46 — provider-tier versions in the admin System tab
+              API_OPENST_URL: http://openst.pfire.svc.cluster.local:8080
+              API_CACHEST_URL: http://cachest.pfire.svc.cluster.local:8080
               # N — stooq import jobs
               API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
