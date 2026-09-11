@@ -46,7 +46,7 @@ spec:
             command:
               - /bin/sh
               - -c
-              - npm run db:migrate && node dist/server.js
+              - npm run db:migrate && node --import ./dist/iitm.js --import ./dist/instrumentation.js dist/server.js
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
