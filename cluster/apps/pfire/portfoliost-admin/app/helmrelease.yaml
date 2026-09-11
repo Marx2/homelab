@@ -115,6 +115,17 @@ spec:
           http:
             port: 3000
 
+    serviceMonitor:
+      app:
+        enabled: true
+        service:
+          identifier: app
+        endpoints:
+          - port: http
+            path: /metrics
+            interval: 30s
+            scrapeTimeout: 10s
+
     persistence:
       stooq-upload:
         type: persistentVolumeClaim

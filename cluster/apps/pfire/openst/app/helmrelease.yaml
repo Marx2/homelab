@@ -60,6 +60,16 @@ spec:
         ports:
           http:
             port: &port 8080
+    serviceMonitor:
+      app:
+        enabled: true
+        service:
+          identifier: app
+        endpoints:
+          - port: http
+            path: /metrics
+            interval: 30s
+            scrapeTimeout: 10s
     ingress:
       app:
         enabled: true
