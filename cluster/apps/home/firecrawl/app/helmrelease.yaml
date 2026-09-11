@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/firecrawl/firecrawl
-              tag: 2.11@sha256:fe7957b4bbe67c4c56aec3520159c798fbd5c3064548a93086ba91f26575394b
+              tag: 2.11@sha256:ac6c3cfd2abd328db316038ed0ae72f034f1709acf1c98b1a60c93d94f74914e
             command: ["node", "--max-old-space-size=6144", "dist/src/index.js"]
             env:
               FLY_PROCESS_GROUP: app
@@ -111,7 +111,7 @@ spec:
           app:
             image:
               repository: ghcr.io/firecrawl/firecrawl
-              tag: 2.11@sha256:fe7957b4bbe67c4c56aec3520159c798fbd5c3064548a93086ba91f26575394b
+              tag: 2.11@sha256:ac6c3cfd2abd328db316038ed0ae72f034f1709acf1c98b1a60c93d94f74914e
             command: ["node", "--max-old-space-size=3072", "dist/src/services/queue-worker.js"]
             env:
               FLY_PROCESS_GROUP: worker
@@ -169,7 +169,7 @@ spec:
           app:
             image:
               repository: ghcr.io/firecrawl/firecrawl
-              tag: 2.11@sha256:fe7957b4bbe67c4c56aec3520159c798fbd5c3064548a93086ba91f26575394b
+              tag: 2.11@sha256:ac6c3cfd2abd328db316038ed0ae72f034f1709acf1c98b1a60c93d94f74914e
             command: ["node", "--max-old-space-size=3072", "dist/src/services/worker/nuq-worker.js"]
             env:
               FLY_PROCESS_GROUP: nuq
