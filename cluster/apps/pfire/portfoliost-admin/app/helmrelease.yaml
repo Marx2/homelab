@@ -50,14 +50,17 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.41
+              tag: v1.0.42
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
               # D55 — topology live status: query in-cluster Prometheus
-              # (kube-state-metrics k8s metrics) for replica/restart health.
+              # (kube-state-metrics k8s metrics) for replica/restart health,
+              # and the SPA's ingress virtual host for the nginx-gateway
+              # aggregate traffic (topology follow-up).
               PROMETHEUS_URL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+              INGRESS_APP_HOST: "portfoliost.k.homylab.com"
               # strict JWT validation (cluster)
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
