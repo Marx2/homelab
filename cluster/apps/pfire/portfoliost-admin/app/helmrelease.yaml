@@ -55,6 +55,9 @@ spec:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
+              # D55 — topology live status: query in-cluster Prometheus
+              # (kube-state-metrics k8s metrics) for replica/restart health.
+              PROMETHEUS_URL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
               # strict JWT validation (cluster)
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
