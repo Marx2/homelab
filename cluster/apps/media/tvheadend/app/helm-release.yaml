@@ -35,7 +35,7 @@ spec:
           tvheadend:
             image:
               repository: registry.skysolutions.fi/library/tvheadend
-              tag: 4.3.10609@sha256:3928a8c50ac98694515ffa23a8fc839dc4eeef87890fc7589773e154afe92e42
+              tag: 4.3.10639@sha256:1af75e9c21e7365b46e772fdbab9b30c6aa0dfb31287d4790caca2d54fdaba69
             command: "/entrypoint.sh"
             args: ["--noacl"]
             env:
