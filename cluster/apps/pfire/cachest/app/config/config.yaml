@@ -94,6 +94,17 @@ routes:
     stale_ttl: 2592000
     fetch_interval: 2
     fetch_max_wait: 4
+    fetch_timeout: 120         # biznesradar multi-page scrape can take ~20s
+
+  - name: OPENST_OHLCV_FUNDS
+    path: /ohlcv/fund/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/price/ohlcv/{ticker}?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 86400           # 24h — NAV updates once per business day
+    stale_ttl: 2592000
+    fetch_interval: 60         # 60s min between upstream fetches
+    fetch_max_wait: 4
+    fetch_timeout: 120         # biznesradar multi-page scrape can take ~20s
 
   - name: OPENST_FUNDAMENTALS
     path: /fundamentals/{ticker}
