@@ -85,6 +85,13 @@ spec:
         - portfoliost
       password:
         type: AlphaNumeric
+    # openst — dedicated least-privilege user for bond pricing data (CPI + bond_series).
+    # Operator generates secret postgres-pfire-pguser-openst (host/port/dbname/user/password/uri).
+    - name: openst
+      databases:
+        - openst
+      password:
+        type: AlphaNumeric
   backups:
     pgbackrest:
       configuration: &backupConfig

@@ -45,6 +45,11 @@ spec:
               REDIS_PORT: "6379"
               REDIS_PASSWORD: ${SECRET_REDIS_PASS}
               REDIS_DB: "2"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-openst
+                    key: uri
             envFrom:
               - secretRef:
                   name: openst-secrets
