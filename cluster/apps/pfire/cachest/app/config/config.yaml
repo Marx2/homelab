@@ -202,3 +202,23 @@ routes:
     stale_ttl: 86400           # 24h stale fallback
     fetch_interval: 300        # 5min between upstream fetches
     fetch_max_wait: 4
+
+  # --- crypto via openbb-crypto (D78 step 18, 2026-09-15) ---
+
+  - name: OPENST_CRYPTO_OHLCV
+    path: /crypto/ohlcv/{pair}
+    url: "http://openst.pfire.svc.cluster.local:8080/crypto/ohlcv/{pair}?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 21600           # 6h — daily bar keeps updating
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+    fetch_timeout: 120
+
+  - name: OPENST_CRYPTO_QUOTE
+    path: /crypto/quote/{pair}
+    url: "http://openst.pfire.svc.cluster.local:8080/crypto/quote/{pair}"
+    cache_ttl: 21600           # 6h — quote derived from latest OHLCV bar
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
