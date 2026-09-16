@@ -222,3 +222,22 @@ routes:
     stale_ttl: 2592000
     fetch_interval: 2
     fetch_max_wait: 4
+
+  # --- Polish retail savings bonds (D79, 2026-09-16) ---
+
+  - name: OPENST_BOND_OHLCV
+    path: /fixedincome/ohlcv/{symbol}
+    url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/ohlcv/{symbol}?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 21600           # 6h — computed daily prices
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
+  - name: OPENST_BOND_PROFILE
+    path: /fixedincome/profile/{symbol}
+    url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/profile/{symbol}"
+    cache_ttl: 86400           # 24h — static bond metadata
+    stale_ttl: 2592000
+    fetch_interval: 60
+    fetch_max_wait: 4
