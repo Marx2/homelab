@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.20
+              tag: v1.1.21
             env:
               TZ: "${TZ}"
               REDIS_HOST: redis
@@ -75,7 +75,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.20
+              tag: v1.1.21
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
