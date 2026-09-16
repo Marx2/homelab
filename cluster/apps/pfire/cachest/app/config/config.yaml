@@ -241,3 +241,11 @@ routes:
     stale_ttl: 2592000
     fetch_interval: 60
     fetch_max_wait: 4
+
+  - name: OPENST_BOND_SEARCH
+    path: /fixedincome/search/{query}
+    url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/search/{query}"
+    cache_ttl: 3600            # 1h — bond emissions catalogue lookup
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
