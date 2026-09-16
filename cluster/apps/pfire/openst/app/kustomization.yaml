@@ -5,3 +5,4 @@ resources:
   - helmrelease.yaml
   - secret.yaml
   - cpi-seed-job.yaml
+  - bond-archive-job.yaml

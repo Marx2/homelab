@@ -1,0 +1,41 @@
+---
+# One-shot bond archive backfill (D79 21.7): --mode archive fetches every
+# historical emission from /listy-emisyjne/ into openst.bond_series.
+# Idempotent (ON CONFLICT DO NOTHING); self-deletes via ttlSecondsAfterFinished.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openst-bond-archive
+  namespace: pfire
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: openst
+        job: bond-archive
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Never
+      containers:
+        - name: bond-archive
+          image: ghcr.io/marx2/openst:v1.1.22
+          command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
+          env:
+            - name: TZ
+              value: "${TZ}"
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pfire-pguser-openst
+                  key: uri
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
