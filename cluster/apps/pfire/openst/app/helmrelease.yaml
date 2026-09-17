@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.22
+              tag: v1.1.23
             env:
               TZ: "${TZ}"
               REDIS_HOST: redis
@@ -64,8 +64,8 @@ spec:
                 memory: 512Mi
       # Daily CPI import (D79): GUS publishes the 12m CPI ~mid-month; obligacje.pl
       # mirrors it shortly after. 04:30 UTC daily keeps cpi_12m fresh. The
-      # importer increments only the last 60 days; the cluster is seeded by the
-      # openst-cpi-seed Job (--mode full).
+      # importer increments only the last 60 days; the table was seeded by the
+      # suspended cpi-seed CronJob below.
       cpi-import:
         type: cronjob
         cronjob:
@@ -75,8 +75,99 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.22
+              tag: v1.1.23
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
+            env:
+              TZ: "${TZ}"
+              PYTHONUNBUFFERED: "1"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-openst
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+      # Daily savings-bond refresh (D79 22): new emissions go on sale on the 1st
+      # of each month, so a daily pass over the live offer page catches every one
+      # inside its sale window. The importer enumerates from the site (it never
+      # guesses symbols), so a run is self-discovering and idempotent — 8 rows
+      # parsed, 0 inserted on an unchanged day.
+      bond-import:
+        type: cronjob
+        cronjob:
+          schedule: "30 4 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/openst
+              tag: v1.1.23
+            command: ["python", "-m", "src.importers.bond_series", "--mode", "incremental"]
+            env:
+              TZ: "${TZ}"
+              PYTHONUNBUFFERED: "1"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-openst
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+      # Monthly full re-enumeration (D79 22): re-scrapes the whole /listy-emisyjne/
+      # catalogue (~449 pages, ~11 min) as the self-healing backstop for anything
+      # the daily pass missed (e.g. an outage over a full sale window). Runs on the
+      # 3rd, after the 1st-of-month sale is published. ON CONFLICT DO NOTHING, so a
+      # missed run converges on the next one.
+      bond-archive:
+        type: cronjob
+        cronjob:
+          schedule: "0 6 3 * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/openst
+              tag: v1.1.23
+            command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
+            env:
+              TZ: "${TZ}"
+              PYTHONUNBUFFERED: "1"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-openst
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+      # One-shot full-history CPI seed (D79 19.3), kept declarative but suspended:
+      # a Job would re-run on every Flux sync (the raw Job this replaces was
+      # recreated by kustomize after its TTL self-delete). CronJob templates are
+      # mutable, so tag bumps never wedge the HelmRelease. Run it by hand with:
+      #   kubectl -n pfire create job openst-cpi-seed-$(date +%m%d) --from=cronjob/openst-cpi-seed
+      cpi-seed:
+        type: cronjob
+        cronjob:
+          schedule: "0 5 1 1 *" # never on its own — suspended below
+          suspend: true
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/openst
+              tag: v1.1.23
+            command: ["python", "-m", "src.importers.cpi", "--mode", "full"]
             env:
               TZ: "${TZ}"
               PYTHONUNBUFFERED: "1"

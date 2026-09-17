@@ -1,8 +1,11 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+# All openst workloads — API plus the importer CronJobs (cpi-import, bond-import,
+# bond-archive, suspended cpi-seed) — are app-template controllers in
+# helmrelease.yaml. Raw one-shot Job manifests must not live here: kustomize
+# re-applies them on every sync, so a TTL self-deleted Job came back and re-ran
+# every 30m.
 resources:
   - helmrelease.yaml
   - secret.yaml
-  - cpi-seed-job.yaml
-  - bond-archive-job.yaml
