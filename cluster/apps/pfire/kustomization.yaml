@@ -27,6 +27,7 @@ resources:
   - portfoliost-instruments/ks.yaml
   - portfoliost-wallets/ks.yaml
   - portfoliost-admin/ks.yaml
+  - portfoliost-sheets-sync/ks.yaml
   #  - grist
   - investbrain/ks.yaml
   - jobshot/ks.yaml
