@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.50
+              tag: v1.0.51
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -94,10 +94,41 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.50
+              tag: v1.0.51
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+      # Daily Catalyst corp-bond catalogue sync (D80 25.3 / plan 35): scrapes the
+      # single obligacje.pl listing via cachest /corp-bond/catalogue and upserts
+      # into ticker_reference (asset_type=corp_bond, WSE:: keys only — never
+      # touches stock/ETF rows, never deletes). Staggered after the 04:30
+      # openst bond/CPI imports; the adanos tickersync (Mon 04:30) covers
+      # disjoint listing keys. Delisted bonds linger (harmless).
+      corpbondsync:
+        type: cronjob
+        cronjob:
+          schedule: "45 4 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.51
+            command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
+            env:
+              NODE_ENV: production
+              CACHEST_URL: "http://cachest:8080"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:

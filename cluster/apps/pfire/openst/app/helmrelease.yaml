@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.24
+              tag: v1.1.25
             env:
               TZ: "${TZ}"
               REDIS_HOST: redis
@@ -75,7 +75,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.24
+              tag: v1.1.25
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -105,7 +105,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.24
+              tag: v1.1.25
             command: ["python", "-m", "src.importers.bond_series", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -135,7 +135,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.24
+              tag: v1.1.25
             command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
             env:
               TZ: "${TZ}"
@@ -166,7 +166,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.24
+              tag: v1.1.25
             command: ["python", "-m", "src.importers.cpi", "--mode", "full"]
             env:
               TZ: "${TZ}"
