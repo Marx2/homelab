@@ -1,0 +1,23 @@
+---
+# Scrape the Crunchy Postgres exporter on the postgres-pfire cluster.
+#
+# The operator-managed alternative (spec.metrics on the PostgresCluster) was
+# considered but a standalone PodMonitor is more deterministic: no operator
+# RBAC / version differences, and the exporter container + `exporter` port
+# (9187) are already present on the pod via spec.monitoring.pgmonitor.exporter.
+#
+# Prometheus (kube-prometheus-stack-prometheus, ns monitoring) has an empty
+# podMonitorSelector / podMonitorNamespaceSelector → it accepts this
+# PodMonitor from any namespace, including pfire.
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: postgres-pfire-exporter
+  namespace: pfire
+spec:
+  selector:
+    matchLabels:
+      postgres-operator.crunchydata.com/cluster: postgres-pfire
+  podMetricsEndpoints:
+    - portName: exporter
+      interval: 30s

@@ -8,6 +8,7 @@ resources:
   - crunchy-postgres-secret.yaml
   - pfire-init-sql.yaml
   - postgrescluster-pfire.yaml
+  - postgres-exporter-podmonitor.yaml
   #  - hasura
   #  - grafana
   - pgadmin/ks.yaml
