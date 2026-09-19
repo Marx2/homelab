@@ -19,5 +19,5 @@ spec:
     matchLabels:
       postgres-operator.crunchydata.com/cluster: postgres-pfire
   podMetricsEndpoints:
-    - portName: exporter
+    - port: exporter
       interval: 30s
