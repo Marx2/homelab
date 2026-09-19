@@ -12,6 +12,8 @@
 #   - user mapping for `portfoliost` -> remote `postgres` (password_required=false, peer suffices)
 #   - foreign tables for every stooq table (daily_pl, daily_us, daily_jp, daily_world,
 #     daily_uk, daily_hk, daily_hu, daily_macro)
+# and, in the `stooq` database:
+#   - `daily_us_stripped_ticker_date` functional index (US branch of price_bars_all)
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -94,6 +96,14 @@ data:
     GRANT SELECT ON instruments.stooq_daily_pl, instruments.stooq_daily_us, instruments.stooq_daily_jp,
       instruments.stooq_daily_world, instruments.stooq_daily_uk, instruments.stooq_daily_hk,
       instruments.stooq_daily_hu, instruments.stooq_daily_macro TO portfoliost;
+
+    -- stooq DB: functional index for the price_bars_all US branch. The view
+    -- computes replace(ticker, '.US', ''), which the (ticker, date, time)
+    -- pkey cannot serve — without this, per-symbol US price lookups scan
+    -- ~28M rows (2026-09-19 pfire-postgres CPU saturation).
+    \c stooq
+    CREATE INDEX IF NOT EXISTS daily_us_stripped_ticker_date
+      ON public.daily_us (replace(ticker, '.US', ''), date);
 
     -- openst schema: bond pricing data (CPI + bond_series)
     \c openst
