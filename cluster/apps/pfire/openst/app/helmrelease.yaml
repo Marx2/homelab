@@ -36,7 +36,7 @@ spec:
         - name: regcred
     controllers:
       openst:
-        replicas: 1
+        replicas: 2
         containers:
           app:
             image:
