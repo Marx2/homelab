@@ -34,7 +34,6 @@ spec:
         target:
           kind: Pod
   values:
-    defaultPodOptionsStrategy: Recreate
     global:
       createDefaultServiceAccount: false
     defaultPodOptions:
@@ -43,6 +42,7 @@ spec:
     controllers:
       portfoliost-instruments:
         replicas: 1
+        strategy: Recreate
         containers:
           app:
             image:
