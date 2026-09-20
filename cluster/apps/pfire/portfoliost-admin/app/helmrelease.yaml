@@ -33,7 +33,6 @@ spec:
         target:
           kind: Pod
   values:
-    defaultPodOptionsStrategy: Recreate
     global:
       createDefaultServiceAccount: false
     defaultPodOptions:

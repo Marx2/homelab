@@ -42,7 +42,9 @@ spec:
     controllers:
       portfoliost-instruments:
         replicas: 1
-        strategy: Recreate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
         containers:
           app:
             image:
