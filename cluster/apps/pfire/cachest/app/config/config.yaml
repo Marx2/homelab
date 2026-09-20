@@ -234,6 +234,14 @@ routes:
     fetch_interval: 2
     fetch_max_wait: 4
 
+  - name: OPENST_BOND_QUOTE
+    path: /fixedincome/quote/{symbol}
+    url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/quote/{symbol}"
+    cache_ttl: 21600           # 6h — computed daily prices (plan 34.4)
+    stale_ttl: 2592000
+    fetch_interval: 2
+    fetch_max_wait: 4
+
   - name: OPENST_BOND_PROFILE
     path: /fixedincome/profile/{symbol}
     url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/profile/{symbol}"
