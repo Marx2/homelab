@@ -45,6 +45,7 @@ spec:
     controllers:
       portfoliost-admin:
         replicas: 1
+        strategy: RollingUpdate
         containers:
           app:
             image:
