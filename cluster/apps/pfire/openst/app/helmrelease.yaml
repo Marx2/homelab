@@ -61,7 +61,7 @@ spec:
                 cpu: 50m
                 memory: 128Mi
               limits:
-                memory: 512Mi
+                memory: 700Mi
       # Daily CPI import (D79): GUS publishes the 12m CPI ~mid-month; obligacje.pl
       # mirrors it shortly after. 04:30 UTC daily keeps cpi_12m fresh. The
       # importer increments only the last 60 days; the table was seeded by the
