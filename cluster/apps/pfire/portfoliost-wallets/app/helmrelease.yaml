@@ -82,33 +82,6 @@ spec:
                   port: http
                   initialDelaySeconds: 5
                   periodSeconds: 10
-      # Daily FX import (fees-and-custom-fx D25): ECB publishes ~16:00 CET;
-      # 17:10 UTC is safely after publication year-round.
-      fxsync:
-        type: cronjob
-        cronjob:
-          schedule: "10 17 * * *"
-          concurrencyPolicy: Forbid
-        containers:
-          app:
-            image:
-              repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.44
-            command: ["node", "dist/scripts/fx-sync.js"]
-            env:
-              NODE_ENV: production
-              FRANKFURTER_BASE: https://api.frankfurter.dev/v1
-              DATABASE_URL:
-                valueFrom:
-                  secretKeyRef:
-                    name: postgres-pfire-pguser-portfoliost
-                    key: uri
-            resources:
-              requests:
-                cpu: 50m
-                memory: 128Mi
-              limits:
-                memory: 512Mi
     service:
       app:
         controller: *app

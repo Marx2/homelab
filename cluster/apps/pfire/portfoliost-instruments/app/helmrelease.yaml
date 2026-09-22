@@ -140,6 +140,34 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
+      # Daily FX import (fees-and-custom-fx D25): ECB publishes ~16:00 CET;
+      # 17:10 UTC is safely after publication year-round. Moved from wallets —
+      # fx_rates now lives in instruments (plan §48.6a).
+      fxsync:
+        type: cronjob
+        cronjob:
+          schedule: "10 17 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.62
+            command: ["node", "dist/scripts/fx-sync.js"]
+            env:
+              NODE_ENV: production
+              FRANKFURTER_BASE: https://api.frankfurter.dev/v1
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
     persistence:
       # logos.md D35 — permanent local logo store (binaries on disc)
       logos:
