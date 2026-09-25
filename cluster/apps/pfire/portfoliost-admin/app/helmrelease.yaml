@@ -74,7 +74,7 @@ spec:
               API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
               # D24 f/up — Google Sheets sync Job image (plan §28.6 re-import);
               # pinned here, not in portfoliost-admin (env override of the code default)
-              SHEETS_SYNC_IMAGE: ghcr.io/marx2/portfoliost-sheets-sync:v1.0.15
+              SHEETS_SYNC_IMAGE: ghcr.io/marx2/portfoliost-sheets-sync:v1.0.16
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
