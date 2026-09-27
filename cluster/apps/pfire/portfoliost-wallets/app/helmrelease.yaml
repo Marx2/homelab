@@ -51,6 +51,8 @@ spec:
               PORT: "3000"
               HOST: "0.0.0.0"
               NODE_ENV: production
+              # temporary: per-symbol recalculation debug logs (observe 09-25→09-26 IBKR jump)
+              RECALC_DEBUG: "1"
               # strict JWT validation (cluster); dev bearer fallback never reached
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
