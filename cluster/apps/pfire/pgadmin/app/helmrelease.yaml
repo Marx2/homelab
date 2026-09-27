@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: dpage/pgadmin4
-              tag: 9.170
+              tag: 9.180
 
             env:
               PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
