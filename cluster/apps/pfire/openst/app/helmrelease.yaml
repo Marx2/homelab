@@ -58,30 +58,36 @@ spec:
                   name: openst-secrets
             # No probes existed before. /health is liveness only (it never touches
             # Redis or Postgres, so a Redis blip cannot restart-loop the pod);
-            # /ready is readiness and reports 503 when Redis is unreachable, which
-            # takes the pod out of rotation rather than serving 2-15s provider
-            # walks. The startup probe is generous because lifespan runs schema
-            # migrations before the server accepts traffic.
-            startupProbe:
-              httpGet:
+            # /ready is readiness and reports 503 when Redis is unreachable, taking
+            # the pod out of rotation rather than serving 2-15s provider walks.
+            # The startup probe is generous because lifespan runs schema migrations
+            # before the server accepts traffic. app-template 5.x nests these under
+            # containers.<name>.probes.<probe> and requires enabled: true; the port
+            # is resolved from the primary service.
+            probes:
+              startup:
+                enabled: true
+                type: HTTP
                 path: /health
-                port: http
-              periodSeconds: 5
-              failureThreshold: 30
-            livenessProbe:
-              httpGet:
+                spec:
+                  periodSeconds: 5
+                  failureThreshold: 30
+              liveness:
+                enabled: true
+                type: HTTP
                 path: /health
-                port: http
-              periodSeconds: 20
-              timeoutSeconds: 5
-              failureThreshold: 3
-            readinessProbe:
-              httpGet:
+                spec:
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                type: HTTP
                 path: /ready
-                port: http
-              periodSeconds: 10
-              timeoutSeconds: 5
-              failureThreshold: 2
+                spec:
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 2
             resources:
               requests:
                 cpu: 50m
