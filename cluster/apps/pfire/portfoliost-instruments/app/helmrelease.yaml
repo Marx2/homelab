@@ -56,6 +56,9 @@ spec:
               LOGOS_DIR: /app/data/logos
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+              # §63.10 — second accepted credential: the wallets snapshot sweep
+              # authenticates with this instead of a user JWT (serviceOrUserMiddleware).
+              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:

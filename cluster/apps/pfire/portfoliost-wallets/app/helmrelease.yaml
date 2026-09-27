@@ -58,6 +58,9 @@ spec:
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               USERS_AUTH_URL: http://portfoliost-users-auth.pfire.svc.cluster.local:3000
               INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # §63.10 — required: the sweep has no user identity, so without this
+              # every instruments call is rejected and the pass is refused.
+              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
@@ -103,6 +106,8 @@ spec:
             env:
               NODE_ENV: production
               INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # §63.10 — required: no user identity, so no service token means no prices.
+              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
@@ -128,6 +133,8 @@ spec:
             env:
               NODE_ENV: production
               INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # §63.10 — required: no user identity, so no service token means no prices.
+              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
