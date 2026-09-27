@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.62
+              tag: v1.1.63
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -84,6 +84,61 @@ spec:
                   port: http
                   initialDelaySeconds: 5
                   periodSeconds: 10
+      # Scheduled additive value-snapshot refresh (2026-09-27): re-values the
+      # last two days for every portfolio (upsert, never deletes). Twice a
+      # day — mid-day and after instruments fxsync (17:10 UTC, the ECB rate
+      # that finalizes the day's converted values). Overrides stale live-quote
+      # snapshot values while §63.2 (unified valuation) is open.
+      snapshotsync:
+        type: cronjob
+        cronjob:
+          schedule: "0 13 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-wallets
+              tag: v1.1.63
+            command: ["node", "dist/scripts/snapshots-sync.js"]
+            env:
+              NODE_ENV: production
+              INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+      snapshotsync-postfx:
+        type: cronjob
+        cronjob:
+          schedule: "20 17 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-wallets
+              tag: v1.1.63
+            command: ["node", "dist/scripts/snapshots-sync.js"]
+            env:
+              NODE_ENV: production
+              INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
     service:
       app:
         controller: *app
