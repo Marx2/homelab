@@ -40,13 +40,14 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/cachest
-              tag: v1.0.42
+              tag: v1.0.43
             env:
               TZ: "${TZ}"
-              REDIS_HOST: redis
-              REDIS_PORT: "6379"
-              REDIS_PASSWORD: ${SECRET_REDIS_PASS}
-              REDIS_DB: "1"
+              # Redis connection comes from the mounted cachest-config configmap
+              # (host/port/password/db, password via ${SECRET_REDIS_PASS}). The
+              # REDIS_HOST/PORT/DB/PASSWORD env vars that used to live here were
+              # identical to those file values, so they were a second, silently
+              # ignored source of truth — config.py never read PORT or DB at all.
             envFrom:
               - secretRef:
                   name: cachest-secrets
