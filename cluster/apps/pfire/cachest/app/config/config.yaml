@@ -1,3 +1,19 @@
+# cachest route config (cluster).
+#
+# fetch_interval / fetch_max_wait are a PAIR, and the pair sets a concurrency cap:
+# RateLimiter claims its slot as `last = now + sleep`, so the Nth waiter sleeps
+# N * fetch_interval. fetch_max_wait is therefore a *total queueing budget*, and the
+# depth it admits is
+#
+#     queue_depth = floor(fetch_max_wait / fetch_interval) + 1
+#
+# Anything past that depth is rejected with an instant 503 and NO upstream call.
+# A route's depth must exceed the widest concurrent burst its callers produce — a
+# single portfolio sweep is 175+ symbols, so the symbol-keyed openst routes sit at
+# 600 (a 175-symbol sweep then waits at most ~35s). The 2/4 default that most routes
+# used to ship is depth 3 and starves everything past the third caller; see plan §63.9.
+# Keep in sync with the cachest repo's config.yaml, which differs only in the openst
+# host (short name locally, FQDN in-cluster) — the interval/max_wait values must match.
 redis:
   host: redis              # shared namespace instance (§13) — ghostfolio on db0
   port: 6379
@@ -14,24 +30,24 @@ routes:
       field: "dd"
     cache_ttl: 86400          # seconds (24h)
     stale_ttl: 2592000        # seconds (30 days) — max age for stale fallback
-    fetch_interval: 2         # min seconds between remote fetches
-    fetch_max_wait: 4         # max queue wait before falling back to stale
+    fetch_interval: 2 # min seconds between remote fetches
+    fetch_max_wait: 120 # max queue wait before falling back to stale
 
   - name: OPENST
     path: /dy/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/dividend/yield/{ticker}"
     cache_ttl: 86400
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_PRICE_HISTORY
     path: /price/history/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/price/history/{ticker}"
     cache_ttl: 86400
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: ALPHAVANTAGE
     path: /dy3/{ticker}
@@ -41,7 +57,7 @@ routes:
     cache_ttl: 86400
     stale_ttl: 2592000
     fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_max_wait: 120
 
   - name: FMP
     path: /dy2/{ticker}
@@ -50,7 +66,7 @@ routes:
     cache_ttl: 86400
     stale_ttl: 2592000
     fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_max_wait: 120
 
 # --- openst instruments surface (verified 2026-08-23, see portfoliost docs/openst-coverage.md) ---
 
@@ -59,32 +75,32 @@ routes:
     url: "http://openst.pfire.svc.cluster.local:8080/equity/profile/{ticker}"
     cache_ttl: 604800          # 7d — static company facts
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_QUOTE
     path: /equity/quote/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/quote/{ticker}"
     cache_ttl: 300             # 5min — live-ish quote
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_METRICS
     path: /equity/metrics/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/metrics/{ticker}"
     cache_ttl: 86400           # 24h
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_PROJECTIONS
     path: /equity/projections/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/projections/{ticker}"
     cache_ttl: 86400           # 24h — analyst targets move slowly
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_OHLCV
     path: /ohlcv/{ticker}
@@ -92,8 +108,8 @@ routes:
     query_params: [start, end]
     cache_ttl: 21600           # 6h — today's bar keeps updating
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
     fetch_timeout: 120         # biznesradar multi-page scrape can take ~20s
 
   - name: OPENST_OHLCV_FUNDS
@@ -102,8 +118,8 @@ routes:
     query_params: [start, end]
     cache_ttl: 86400           # 24h — NAV updates once per business day
     stale_ttl: 2592000
-    fetch_interval: 60         # 60s min between upstream fetches
-    fetch_max_wait: 4
+    fetch_interval: 0.5 # 60s min between upstream fetches
+    fetch_max_wait: 120
     fetch_timeout: 120         # biznesradar multi-page scrape can take ~20s
 
   - name: OPENST_FUNDAMENTALS
@@ -112,8 +128,8 @@ routes:
     query_params: [statement, period]
     cache_ttl: 86400           # 24h
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_CALENDAR_EARNINGS
     path: /calendar/earnings
@@ -121,8 +137,8 @@ routes:
     query_params: [start, end]
     cache_ttl: 3600            # 1h — consensus figures get revised
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_CALENDAR_DIVIDEND
     path: /calendar/dividend
@@ -130,24 +146,24 @@ routes:
     query_params: [start, end]
     cache_ttl: 3600            # 1h
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_SEARCH
     path: /equity/search/{query}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/search/{query}"
     cache_ttl: 604800          # 7d — universe changes rarely
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_DIVIDENDS
     path: /dividends/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/dividend/history/{ticker}"
     cache_ttl: 86400           # 24h — dividend history is static
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   # --- logo resolution (logos.md D36) — caches the lookup only; binaries are stored by the instruments module ---
 
@@ -156,8 +172,8 @@ routes:
     url: "http://openst.pfire.svc.cluster.local:8080/equity/logo/{ticker}"
     cache_ttl: 21600           # 6h — resolution result is near-permanent on our side anyway
     stale_ttl: 604800          # 7d stale fallback while openst recovers
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   # --- SEC ownership / filings surface (openbb-sec, 2026-09-07) ---
 
@@ -166,32 +182,32 @@ routes:
     url: "http://openst.pfire.svc.cluster.local:8080/equity/ownership/{ticker}"
     cache_ttl: 86400           # 24h — Form 4 insider transactions
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_INSTITUTIONAL
     path: /ownership/institutional/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/ownership/institutional/{ticker}"
     cache_ttl: 604800          # 7d — Form 13F filings are quarterly
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_FILINGS
     path: /filings/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/filings/{ticker}"
     cache_ttl: 86400           # 24h — new filings arrive during the day
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_MDA
     path: /fundamentals/{ticker}/mda
     url: "http://openst.pfire.svc.cluster.local:8080/equity/fundamentals/{ticker}/mda"
     cache_ttl: 604800          # 7d — MD&A updates quarterly with 10-K/10-Q
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   # --- company news (stock-news proposal N2/N4, 2026-09-08) ---
   - name: OPENST_NEWS
@@ -211,8 +227,8 @@ routes:
     query_params: [start, end]
     cache_ttl: 21600           # 6h — daily bar keeps updating
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
     fetch_timeout: 120
 
   - name: OPENST_CRYPTO_QUOTE
@@ -220,8 +236,8 @@ routes:
     url: "http://openst.pfire.svc.cluster.local:8080/crypto/quote/{pair}"
     cache_ttl: 21600           # 6h — quote derived from latest OHLCV bar
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   # --- Polish retail savings bonds (D79, 2026-09-16) ---
 
@@ -231,32 +247,32 @@ routes:
     query_params: [start, end]
     cache_ttl: 21600           # 6h — computed daily prices
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_BOND_QUOTE
     path: /fixedincome/quote/{symbol}
     url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/quote/{symbol}"
     cache_ttl: 21600           # 6h — computed daily prices (plan 34.4)
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   - name: OPENST_BOND_PROFILE
     path: /fixedincome/profile/{symbol}
     url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/profile/{symbol}"
     cache_ttl: 86400           # 24h — static bond metadata
     stale_ttl: 2592000
-    fetch_interval: 60
-    fetch_max_wait: 4
+    fetch_interval: 2
+    fetch_max_wait: 120
 
   - name: OPENST_BOND_SEARCH
     path: /fixedincome/search/{query}
     url: "http://openst.pfire.svc.cluster.local:8080/fixedincome/search/{query}"
     cache_ttl: 3600            # 1h — bond emissions catalogue lookup
     stale_ttl: 2592000
-    fetch_interval: 2
-    fetch_max_wait: 4
+    fetch_interval: 0.2
+    fetch_max_wait: 120
 
   # --- Catalyst corporate bonds (D80, 2026-09-19) ---
 
@@ -265,8 +281,8 @@ routes:
     url: "http://openst.pfire.svc.cluster.local:8080/corp-bond/profile/{symbol}"
     cache_ttl: 86400           # 24h — static bond metadata (obligacje.pl scrape)
     stale_ttl: 2592000
-    fetch_interval: 60
-    fetch_max_wait: 4
+    fetch_interval: 2
+    fetch_max_wait: 120
     fetch_timeout: 120         # obligacje.pl scrape can take a few seconds
 
   - name: OPENST_CORP_BOND_CATALOGUE
