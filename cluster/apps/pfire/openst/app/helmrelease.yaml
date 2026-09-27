@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.35
+              tag: v1.1.36
             env:
               TZ: "${TZ}"
               REDIS_HOST: redis
@@ -56,6 +56,32 @@ spec:
             envFrom:
               - secretRef:
                   name: openst-secrets
+            # No probes existed before. /health is liveness only (it never touches
+            # Redis or Postgres, so a Redis blip cannot restart-loop the pod);
+            # /ready is readiness and reports 503 when Redis is unreachable, which
+            # takes the pod out of rotation rather than serving 2-15s provider
+            # walks. The startup probe is generous because lifespan runs schema
+            # migrations before the server accepts traffic.
+            startupProbe:
+              httpGet:
+                path: /health
+                port: http
+              periodSeconds: 5
+              failureThreshold: 30
+            livenessProbe:
+              httpGet:
+                path: /health
+                port: http
+              periodSeconds: 20
+              timeoutSeconds: 5
+              failureThreshold: 3
+            readinessProbe:
+              httpGet:
+                path: /ready
+                port: http
+              periodSeconds: 10
+              timeoutSeconds: 5
+              failureThreshold: 2
             resources:
               requests:
                 cpu: 50m
@@ -75,7 +101,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.35
+              tag: v1.1.36
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -105,7 +131,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.35
+              tag: v1.1.36
             command: ["python", "-m", "src.importers.bond_series", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -135,7 +161,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.35
+              tag: v1.1.36
             command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
             env:
               TZ: "${TZ}"
@@ -166,7 +192,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.35
+              tag: v1.1.36
             command: ["python", "-m", "src.importers.cpi", "--mode", "full"]
             env:
               TZ: "${TZ}"
