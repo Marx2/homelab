@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.55
+              tag: v1.0.56
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -79,7 +79,7 @@ spec:
               # beside valuation-audit. MUST move in step with the wallets HelmRelease
               # (cluster/apps/pfire/portfoliost-wallets): a Job on an older wallets image
               # would run an older audit, or not find the script at all.
-              WALLETS_IMAGE: ghcr.io/marx2/portfoliost-wallets:v1.1.84
+              WALLETS_IMAGE: ghcr.io/marx2/portfoliost-wallets:v1.1.85
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
