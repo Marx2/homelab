@@ -91,9 +91,26 @@ spec:
             resources:
               requests:
                 cpu: 50m
-                memory: 128Mi
+                # §73 — raised from 128Mi. The request matters as much as the
+                # limit: at 128Mi the scheduler happily packs openst beside
+                # other work, and it is then the first thing killed. Both
+                # replicas were OOMKilled (137) at 700Mi.
+                memory: 512Mi
               limits:
-                memory: 700Mi
+                # §73 — raised from 700Mi, and it is a DELAY not a fix.
+                # Prometheus (container_memory_working_set_bytes, 24h) shows a
+                # monotonic climb with no return to baseline: a fresh container
+                # floors at ~405-423Mi, then 543→692 and 613→698 over 18h until
+                # the ceiling is hit and the process is killed. Memory is
+                # retained across requests, not freed — one 30-minute step went
+                # 442→684Mi during a per-symbol /equity/logo + /fixedincome/search
+                # sweep. 2Gi buys roughly 3× the time; the leak is §73's subject.
+                #
+                # Scaling replicas does NOT fix this: each process leaks at the
+                # same rate, and 3 replicas would raise the idle floor to
+                # ~1.26Gi. An HPA on memory would be actively harmful — it would
+                # add replicas *because* memory is high and never converge.
+                memory: 2Gi
       # Daily CPI import (D79): GUS publishes the 12m CPI ~mid-month; obligacje.pl
       # mirrors it shortly after. 04:30 UTC daily keeps cpi_12m fresh. The
       # importer increments only the last 60 days; the table was seeded by the
