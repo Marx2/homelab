@@ -57,29 +57,41 @@ spec:
             # READ THIS BEFORE TRUSTING THE PROBE: it covers the static server and
             # nothing else. The container is `serve -s /app/dist -l 80` (PID 1 is
             # node, there is no nginx in the image — the plan text that said
-            # "probe nginx" was wrong, and the ingress in front is nginx but is
-            # not what this probe touches). `serve -s` is SPA-rewrite mode, so it
-            # answers 200 text/html with index.html for EVERY path. Measured in
-            # PROD 2026-09-29: / , /health, /favicon.ico and /assets/nope.css all
-            # return 200 text/html. So:
+            # "probe nginx" was wrong, and the nginx ingress in front is not what
+            # this probe touches).
+            #
+            # `serve -s` serves real files correctly, and falls back to index.html
+            # for any path that does not resolve to one. Measured in PROD
+            # 2026-09-29, in-pod and through the ingress:
+            #   /                            200 text/html   898 B
+            #   /index.html                  200 text/html   898 B
+            #   /runtime-config.js           200 application/javascript  189 B
+            #   /assets/index-BDN4ASw9.js    200 application/javascript  670094 B
+            #   /definitely-not-a-real-asset.js  200 text/html  898 B
+            # and that last one is byte-identical to / (same md5). So:
             #
             #   - this probe CAN catch: the static server wedged or not answering,
             #     and /app/dist unreadable.
             #   - this probe CANNOT catch: a missing or corrupt JS/CSS asset, a
-            #     bundle that 500s at runtime, a broken Vue app, or any API being
-            #     down. A missing asset is indistinguishable from a healthy one
-            #     here, because the catch-all returns the same 200 either way.
+            #     bundle that throws at runtime, a broken Vue app, or any API
+            #     being down. A missing asset is indistinguishable from a healthy
+            #     one to a status-only probe, because the catch-all answers 200
+            #     either way — that is a limitation of httpGet, not of this path.
             #
-            # The API is a separate Deployment and has its own real probes since
-            # §64.1. The browser-side smoke test that actually catches a broken
-            # bundle is `npm run test:e2e` in the SPA repo, not this probe.
+            # The API is a separate Deployment with its own real probes since
+            # §64.1. What actually catches a broken bundle is `npm run test:e2e`
+            # in the SPA repo, or asserting that a fetched asset is NOT
+            # byte-identical to index.html — something a probe cannot do.
             #
             # `port: http` resolves from the Service (the container declares no
             # ports:), so it lands on 80. `type` must sit at the PROBE level —
             # see §64.1 for the tcpSocket false friend this avoids.
             #
-            # No startupProbe: `serve` binds port 80 in well under a second, so
-            # there is no slow-start window for one to protect.
+            # No startupProbe: a cold pod does log one expected
+            # "Readiness probe failed: connection refused" before serve binds
+            # port 80, and liveness allows 3x20s = 60s before a kill, so a slow
+            # start cannot restart a healthy pod. Measured: that race resolves
+            # sub-second.
             probes:
               liveness:
                 enabled: true
