@@ -70,21 +70,47 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
+            # §64.1 — `type`/`path`/`port` belong at the PROBE level in
+            # app-template 5.x, not inside `spec`. These four had them under
+            # `spec`, where the chart ignores them, so the probes were false
+            # friends: rendered, accepted by the schema, and never actually
+            # probing anything. Nothing in the cluster could restart a hung pod,
+            # and readiness always passed.
+            #
+            # openst v1.1.36 is the working reference. One deliberate difference:
+            # openst has a /ready that gates on Redis, these four do not (they
+            # expose /health only), so readiness points at /health rather than at
+            # a route that would 404 and take the pod out of rotation permanently.
             probes:
+              # A cold pod's first DB and provider connect is slow, and with no
+              # startupProbe that cost counts against liveness — which is how a
+              # pod that is starting perfectly well gets killed for being slow.
+              startup:
+                enabled: true
+                type: HTTP
+                path: /health
+                spec:
+                  port: http
+                  periodSeconds: 5
+                  failureThreshold: 30
               liveness:
                 enabled: true
+                type: HTTP
+                path: /health
                 spec:
-                  path: /health
                   port: http
-                  initialDelaySeconds: 10
-                  periodSeconds: 15
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
               readiness:
                 enabled: true
+                type: HTTP
+                path: /health
                 spec:
-                  path: /health
                   port: http
-                  initialDelaySeconds: 5
                   periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 2
       # Weekly refresh of the ticker reference table from
       # adanos/free-ticker-database (live GitHub data; boot seeds from the
       # bundled snapshot with --if-empty).
