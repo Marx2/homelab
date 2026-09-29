@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.58
+              tag: v1.0.59
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -80,6 +80,12 @@ spec:
               # (cluster/apps/pfire/portfoliost-wallets): a Job on an older wallets image
               # would run an older audit, or not find the script at all.
               WALLETS_IMAGE: ghcr.io/marx2/portfoliost-wallets:v1.1.95
+              # §72.24 — the FX-backfill Job runs the INSTRUMENTS image (the
+              # `fx-backfill` script lives there, beside fx-sync). MUST move in
+              # step with the instruments HelmRelease: this Job writes the
+              # fx_rates table every converted price depends on, and an unpinned
+              # tag would let a release change what it wrote mid-run.
+              INSTRUMENTS_IMAGE: ghcr.io/marx2/portfoliost-instruments:v1.0.79
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
