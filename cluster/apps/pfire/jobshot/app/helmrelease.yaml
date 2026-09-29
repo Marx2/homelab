@@ -46,9 +46,54 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/jobshot
-              tag: 1.6.1
+              tag: 1.7.0
             env:
               APP_TIMEZONE: ${TZ}
+            # §64.4 — jobshot had no probes, and until 1.7.0 it could not have
+            # had a working one: every non-/api/ path falls through to the SPA
+            # fallback and returns dist/index.html, so /health and /ready both
+            # answered 200 with the 454-byte shell, byte-identical to /. Any
+            # HTTP probe here was a no-op that could never fail.
+            #
+            # 1.7.0 adds both routes above the fallback. /health is liveness and
+            # touches nothing — the Kubernetes API is a network dependency, and a
+            # liveness probe that fails during an API blip would restart-loop a
+            # pod whose UI is fine, and restarting it cannot fix the API server.
+            # /ready checks only local files (dist/index.html, config/jobs.yaml),
+            # so it cannot flap on an upstream.
+            #
+            # NOT on KEDA, despite the orphaned httpscaledobject.yaml and
+            # interceptor-service.yaml sitting in this directory: neither is
+            # listed in kustomization.yaml resources, so Flux never applies them,
+            # there is no ScaledObject in the cluster, replicas is 1 rather than
+            # 0, and the ingress below points at the app service rather than the
+            # interceptor proxy. Only investbrain, pgweb and scanst-ui are
+            # genuinely on KEDA. (scorest carries the same dead files.)
+            # If that is ever wired up, replicas must become 0, a startupProbe
+            # becomes mandatory, and liveness becomes near-pointless on a pod
+            # that is deleted when idle.
+            #
+            # `port: http` resolves from the Service; `type` must sit at the
+            # PROBE level — see §64.1 for the tcpSocket false friend.
+            probes:
+              liveness:
+                enabled: true
+                type: HTTP
+                path: /health
+                spec:
+                  port: http
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                type: HTTP
+                path: /ready
+                spec:
+                  port: http
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 2
             resources:
               requests:
                 cpu: 100m
