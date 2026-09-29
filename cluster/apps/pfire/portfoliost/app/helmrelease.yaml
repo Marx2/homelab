@@ -52,6 +52,53 @@ spec:
             env:
               OIDC_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               OIDC_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
+            # §64.3 — the SPA had no probes at all.
+            #
+            # READ THIS BEFORE TRUSTING THE PROBE: it covers the static server and
+            # nothing else. The container is `serve -s /app/dist -l 80` (PID 1 is
+            # node, there is no nginx in the image — the plan text that said
+            # "probe nginx" was wrong, and the ingress in front is nginx but is
+            # not what this probe touches). `serve -s` is SPA-rewrite mode, so it
+            # answers 200 text/html with index.html for EVERY path. Measured in
+            # PROD 2026-09-29: / , /health, /favicon.ico and /assets/nope.css all
+            # return 200 text/html. So:
+            #
+            #   - this probe CAN catch: the static server wedged or not answering,
+            #     and /app/dist unreadable.
+            #   - this probe CANNOT catch: a missing or corrupt JS/CSS asset, a
+            #     bundle that 500s at runtime, a broken Vue app, or any API being
+            #     down. A missing asset is indistinguishable from a healthy one
+            #     here, because the catch-all returns the same 200 either way.
+            #
+            # The API is a separate Deployment and has its own real probes since
+            # §64.1. The browser-side smoke test that actually catches a broken
+            # bundle is `npm run test:e2e` in the SPA repo, not this probe.
+            #
+            # `port: http` resolves from the Service (the container declares no
+            # ports:), so it lands on 80. `type` must sit at the PROBE level —
+            # see §64.1 for the tcpSocket false friend this avoids.
+            #
+            # No startupProbe: `serve` binds port 80 in well under a second, so
+            # there is no slow-start window for one to protect.
+            probes:
+              liveness:
+                enabled: true
+                type: HTTP
+                path: /
+                spec:
+                  port: http
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                type: HTTP
+                path: /
+                spec:
+                  port: http
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 2
             resources:
               requests:
                 cpu: 50m
