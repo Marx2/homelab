@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/cachest
-              tag: v1.0.44
+              tag: v1.0.46
             env:
               TZ: "${TZ}"
               # Redis connection comes from the mounted cachest-config configmap
@@ -51,6 +51,57 @@ spec:
             envFrom:
               - secretRef:
                   name: cachest-secrets
+            # §64.2 — cachest had no probes at all, so a wedged event loop kept
+            # serving 200s forever. openst v1.1.36 is the working reference for
+            # the shape: `type`/`path`/`port` belong at the PROBE level in
+            # app-template 5.x, not inside `spec` (see §64.1 — putting them in
+            # `spec` renders a schema-valid tcpSocket false friend).
+            #
+            # liveness is /health on purpose: cachest's /health never touches
+            # Redis, and a dependency-aware *liveness* probe would restart-loop
+            # the pod during a cache blip — which cannot fix the cache, it only
+            # removes the one pod still answering.
+            #
+            # readiness is /ready (added in cachest v1.0.45), 503 while Redis is
+            # unreachable. RedisCache.get/set degrade to cache misses, so without
+            # it the pod stays in rotation and every request pays a full upstream
+            # walk. This is the one pfire service where readiness is not a
+            # duplicate of liveness.
+            #
+            # The tag bump is load-bearing, not cosmetic: a rollback to v1.0.44 or
+            # older 404s /ready, and a probe against a 404 never passes, so the pod
+            # would sit at 0/1 forever rather than serving.
+            probes:
+              # lifespan runs stats.load_from_redis before the server accepts
+              # traffic, and a cold pod's first Redis connect is not instant.
+              # Without this, that cost counts against liveness and a pod that is
+              # starting perfectly well gets killed for being slow.
+              startup:
+                enabled: true
+                type: HTTP
+                path: /health
+                spec:
+                  port: http
+                  periodSeconds: 5
+                  failureThreshold: 30
+              liveness:
+                enabled: true
+                type: HTTP
+                path: /health
+                spec:
+                  port: http
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                type: HTTP
+                path: /ready
+                spec:
+                  port: http
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 2
             resources:
               requests:
                 cpu: 50m
