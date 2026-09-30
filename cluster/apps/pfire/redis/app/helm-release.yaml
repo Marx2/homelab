@@ -35,30 +35,40 @@ spec:
         containers:
           main:
             image:
-              repository: public.ecr.aws/docker/library/redis
-              tag: 8.10.2
+              repository: ghcr.io/dragonflydb/dragonfly
+              tag: v2.0.0
             command:
-              - sh
+              - dragonfly
             args:
-              - -c
-              - >-
-                redis-server --requirepass $REDIS_PASSWORD
+              - --requirepass=$(REDIS_PASSWORD)
+              - --bind=0.0.0.0
+              - --dir=/data
+              - --dbfilename=dump
+              # Must stay >= 256MiB x proactor_threads or Dragonfly refuses to
+              # start ("There are N threads, so X are required. Exiting...").
+              # proactor_threads is pinned so node CPU count cannot change the floor.
+              - --maxmemory=512mb
+              - --cache_mode=true
+              - --proactor_threads=2
+              - --num_shards=1
+              - --max_eviction_per_heartbeat=1000
             env:
               REDIS_REPLICATION_MODE: master
               REDIS_PASSWORD: ${SECRET_REDIS_PASS}
             resources:
               requests:
-                cpu: 10m
-                memory: 10Mi
+                cpu: 50m
+                memory: 256Mi
               limits:
-                memory: 100Mi
+                cpu: "1"
+                memory: 512Mi
     persistence:
       data:
         enabled: true
         existingClaim: redis-pvc
         globalMounts:
           - path: /data
-            subPath: ghostfolio_redis
+            subPath: dragonfly
     service:
       main:
         controller: redis
