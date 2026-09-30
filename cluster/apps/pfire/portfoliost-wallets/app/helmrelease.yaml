@@ -46,7 +46,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.106
+              tag: v1.1.107
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -129,7 +129,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.106
+              tag: v1.1.107
             command: ["node", "dist/scripts/snapshots-sync.js"]
             env:
               NODE_ENV: production
@@ -156,7 +156,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.106
+              tag: v1.1.107
             command: ["node", "dist/scripts/snapshots-sync.js"]
             env:
               NODE_ENV: production
