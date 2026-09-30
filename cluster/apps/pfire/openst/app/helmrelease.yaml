@@ -44,6 +44,16 @@ spec:
               tag: v1.1.38
             env:
               TZ: "${TZ}"
+              # §73.4 — the heap trace that makes the measurement possible.
+              # `tracemalloc` is opt-in precisely because it adds real
+              # per-allocation overhead, and it is started in the lifespan hook
+              # so the numbers cover process start rather than beginning
+              # mid-incident. With this on, GET /__mem reports `traced_bytes`
+              # next to `rss_bytes`; small traced + large rss means the
+              # retention is native (OpenBB / numpy / pandas) and NOT ours,
+              # which is the one fact §73 has been missing for three passes.
+              # Turn it back to "0" once the cause is fixed.
+              MEM_DEBUG: "1"
               REDIS_HOST: redis
               REDIS_PORT: "6379"
               REDIS_PASSWORD: ${SECRET_REDIS_PASS}
