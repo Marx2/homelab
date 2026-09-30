@@ -256,6 +256,13 @@ spec:
           hajimari.io/icon: mdi:finance
           hajimari.io/enable: "true"
           hajimari.io/info: OpenBB dividend data proxy.
+          # §63.11 — openst holds the provider API keys and has no application
+          # auth of its own. This oauth2-proxy auth subrequest gates *browser*
+          # traffic only: instruments and cachest reach it over the ClusterIP,
+          # which nginx never sees, so the scheduled sweep is unaffected. Same
+          # annotation pair cachest and pgweb use.
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
         hosts:
           - host: &host "openst.${SECRET_DOMAIN}"
             paths:

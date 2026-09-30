@@ -48,8 +48,25 @@ spec:
         http-snippet: |
           proxy_cache_path /tmp/nginx-cache levels=1:2 keys_zone=leaderboard_cache:1m max_size=10m inactive=10m;
         # proxy-real-ip-cidr: 192.168.1.210
-        # global-auth-url: "https://auth.${SECRET_DOMAIN}/api/verify"
-        # global-auth-signin: "https://auth.${SECRET_DOMAIN}"
+        # §63.11 — DELIBERATELY NOT ENABLED, and the reason is recorded so this
+        # is not re-tried as an obvious-looking win.
+        #
+        # 1. The path is wrong. Every ingress in this cluster that actually
+        #    authenticates uses `https://auth.${SECRET_DOMAIN}/oauth2/auth` +
+        #    `/oauth2/start` (pgweb, scanst-ui, scanst-otp, stooq, jobshot).
+        #    The value commented here is `/api/verify` + bare `/` — a different
+        #    endpoint. Uncommenting it as written would 302 every browser
+        #    request in every namespace to a URL that does not answer.
+        # 2. The blast radius is the whole cluster. This is a controller-wide
+        #    default, so it applies to `default`, `home` and `media` at once —
+        #    including the KEDA scale-to-zero apps in `default` and every
+        #    service that legitimately has no browser login.
+        #
+        # What §63.11 wanted is now done per app instead, on the two pfire
+        # internal tiers that hold provider keys and had no auth at all:
+        # `cluster/apps/pfire/{cachest,openst}/app/helmrelease.yaml`.
+        # global-auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+        # global-auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
       metrics:
         enabled: true
         serviceMonitor:

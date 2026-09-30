@@ -138,12 +138,15 @@ spec:
           hajimari.io/icon: mdi:cached
           hajimari.io/enable: "true"
           hajimari.io/info: HTTP caching proxy for financial data.
-          # type of authentication
-          #nginx.ingress.kubernetes.io/auth-type: basic
-          # name of the secret that contains the user/password definitions
-          #nginx.ingress.kubernetes.io/auth-secret: postgrest-basic-auth
-          # message to display with an appropriate context why the authentication is required
-          #nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - cachest'
+          # §63.11 — cachest is a pfire *internal* tier: it has no application
+          # auth of its own, and instruments -> cachest -> openst -> provider
+          # keys is a chain with exactly one check at its front. That is fine
+          # in-cluster (every caller uses the ClusterIP, which nginx never
+          # sees) and wrong from a browser. This is the same oauth2-proxy auth
+          # subrequest pgweb / scanst / stooq / jobshot already use, so browser
+          # traffic is gated and the scheduled jobs are untouched.
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}/oauth2/start"
         hosts:
           - host: &host "cachest.${SECRET_DOMAIN}"
             paths:
