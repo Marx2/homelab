@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.82
+              tag: v1.0.83
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -123,7 +123,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.82
+              tag: v1.0.83
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -153,7 +153,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.82
+              tag: v1.0.83
             command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -181,7 +181,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.82
+              tag: v1.0.83
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
