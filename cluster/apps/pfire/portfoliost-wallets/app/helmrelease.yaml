@@ -120,10 +120,33 @@ spec:
       # day — mid-day and after instruments fxsync (17:10 UTC, the ECB rate
       # that finalizes the day's converted values). Overrides stale live-quote
       # snapshot values while §63.2 (unified valuation) is open.
+      #
+      # ONE CronJob with two schedule entries, not two CronJobs (2026-10-01).
+      # They were byte-identical below `schedule` — same image, command, env,
+      # backoffLimit — and duplicated on purpose only in the sense that nobody
+      # had used the comma syntax. Three reasons to merge, in order of weight:
+      #
+      # 1. `concurrencyPolicy: Forbid` only guards within ONE object. As two
+      #    objects the two windows could not see each other, so a slow mid-day
+      #    pass still running at 15:20 would let the post-FX pass start on top of
+      #    it — both writing prices and snapshots for the same portfolio. One
+      #    object makes the guard mean what it reads as.
+      # 2. The image tag had to be bumped in two places. That is the same class
+      #    of duplication that let cachest's config drift between the repo copy
+      #    and the cluster copy (§78 step 4).
+      # 3. One object to read, suspend, or `create job --from=cronjob` against.
+      #
+      # Cost of merging: both windows share one job history, so
+      # `successfulJobsHistoryLimit: 1` keeps the latest rather than one per
+      # window. Cheap for a job that is identical either way.
       snapshotsync:
         type: cronjob
         cronjob:
-          schedule: "0 13 * * *"
+          # Mid-day, then after the 17:10 CEST fxsync settles the day's FX rate.
+          # Schedules are CONTROLLER-LOCAL (spec.timeZone unset, cluster on
+          # CEST/UTC+2), so these fire at 11:00 and 15:20 UTC — verified against
+          # status.lastScheduleTime, not inferred from the spec.
+          schedule: "0 13 * * *, 20 17 * * *"
           concurrencyPolicy: Forbid
         containers:
           app:
@@ -147,34 +170,6 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
-      snapshotsync-postfx:
-        type: cronjob
-        cronjob:
-          schedule: "20 17 * * *"
-          concurrencyPolicy: Forbid
-        containers:
-          app:
-            image:
-              repository: ghcr.io/marx2/portfoliost-wallets
-              tag: v1.1.108
-            command: ["node", "dist/scripts/snapshots-sync.js"]
-            env:
-              NODE_ENV: production
-              INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
-              # §63.10 — required: no user identity, so no service token means no prices.
-              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
-              DATABASE_URL:
-                valueFrom:
-                  secretKeyRef:
-                    name: postgres-pfire-pguser-portfoliost
-                    key: uri
-            resources:
-              requests:
-                cpu: 50m
-                memory: 128Mi
-              limits:
-                memory: 512Mi
-    service:
       app:
         controller: *app
         ports:
