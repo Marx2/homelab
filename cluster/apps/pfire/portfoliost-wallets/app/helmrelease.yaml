@@ -115,6 +115,59 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 5
                   failureThreshold: 2
+      # Scheduled additive value-snapshot refresh (2026-09-27): prices every
+      # portfolio from quotes, then re-values the last two days (upsert, never
+      # deletes). This is the ONLY writer of positions.market_value in the
+      # scheduled pipeline now that reads stopped pricing (§76.1), so if this job
+      # stops, position prices go stale until a write re-prices them.
+      #
+      # ONE CronJob, deliberately (2026-10-01). There used to be two identical
+      # objects, mid-day and post-FX, and merging them was the obvious cleanup —
+      # but this cluster's API server (k3s v1.36.2) rejects a comma-separated
+      # `schedule`:
+      #   spec.schedule: Invalid value: "0 13 * * *, 20 17 * * *":
+      #   expected exactly 5 fields, found 10
+      # so a single object could not hold both windows.
+      #
+      # The cost of dropping to one window: the post-FX pass (after the 17:10
+      # CEST fxsync settles the ECB rate that finalises the day's converted
+      # values) is gone, so day-end converted values settle on the next morning's
+      # run instead of the same evening. Accepted over the alternative, which was
+      # two objects whose `concurrencyPolicy: Forbid` never covered both windows —
+      # a slow morning pass could still be running when the evening one started,
+      # both writing prices for the same portfolio. One object makes the guard
+      # mean what it reads as.
+      #
+      # Schedules are CONTROLLER-LOCAL (spec.timeZone unset, cluster on
+      # CEST/UTC+2), so this fires at 11:00 UTC — verified against
+      # status.lastScheduleTime, not inferred from the spec.
+      snapshotsync:
+        type: cronjob
+        cronjob:
+          schedule: "0 13 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-wallets
+              tag: v1.1.108
+            command: ["node", "dist/scripts/snapshots-sync.js"]
+            env:
+              NODE_ENV: production
+              INSTRUMENTS_URL: http://portfoliost-instruments.pfire.svc.cluster.local:3000
+              # §63.10 — required: no user identity, so no service token means no prices.
+              INSTRUMENTS_SERVICE_TOKEN: "${INSTRUMENTS_SERVICE_TOKEN}"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
     service:
       app:
         controller: portfoliost-wallets
