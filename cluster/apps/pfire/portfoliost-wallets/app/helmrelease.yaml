@@ -180,6 +180,20 @@ spec:
       # Nothing rendered from it (no Deployment/Service named `app` in pfire;
       # the live one is controllers.portfoliost-wallets), so removing it is
       # purely unblocking.
+    # app-template resolves `serviceMonitor.app.service.identifier` against this
+    # map, not against the controller name. It was empty, so every upgrade died
+    # with "No enabled Service found with this identifier" once the stale
+    # controllers.app schema error was cleared — the same app -> portfoliost-wallets
+    # rename left two dangling references. Mirrors portfoliost-instruments, which
+    # declares its service the same way and renders ServiceMonitor
+    # `portfoliost-instruments` selecting instance=portfoliost-instruments, which is
+    # exactly the ServiceMonitor that already exists in pfire for wallets.
+    service:
+      app:
+        controller: portfoliost-wallets
+        ports:
+          http:
+            port: 3000
     serviceMonitor:
       app:
         enabled: true
