@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.84
+              tag: v1.0.86
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -123,7 +123,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.84
+              tag: v1.0.86
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -153,8 +153,46 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.84
+              tag: v1.0.86
             command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
+            env:
+              NODE_ENV: production
+              CACHEST_URL: "http://cachest:8080"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+      # Daily analizy.pl fund-category catalogue sync (plan §78): reads the
+      # snapshot openst serves at /fund/catalogue and upserts ticker_reference
+      # (asset_type=fund, ANALIZY:: keys only — never touches stock/ETF rows or
+      # the WSE:: corp-bond rows, never deletes). Off-peak and staggered off the
+      # 04:30 tickersync and 04:45 corpbondsync so the three upserts into one
+      # table never contend.
+      #
+      # This job is load-bearing, not housekeeping: a fund category is routed and
+      # searched by its ticker_reference row. With no ANALYZY:: row, ING01W
+      # classifies as unknown -> stock -> the equity walk -> biznesradar -> 200
+      # with zero bars. That silent shape is exactly what §72.39 was built to
+      # stop, so the row must exist before anything routes on it. Codes that
+      # leave the catalogue linger (harmless: their price fetch 404s upstream).
+      fundcategorysync:
+        type: cronjob
+        cronjob:
+          schedule: "15 5 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.86
+            command: ["node", "dist/scripts/fund-category-catalogue-sync.js"]
             env:
               NODE_ENV: production
               CACHEST_URL: "http://cachest:8080"
@@ -181,7 +219,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.84
+              tag: v1.0.86
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
