@@ -274,6 +274,52 @@ routes:
     fetch_interval: 0.2
     fetch_max_wait: 120
 
+  # --- Polish fund categories, analizy.pl (plan §72.39 step 2, §78 steps 2-4) ---
+  #
+  # FQDN host, matching every other route in this file: this copy of the config
+  # differs from the cachest repo's only in using the in-cluster service name.
+  # Keep the interval/max_wait values identical to the repo copy.
+  #
+  # The category code is the provider's own (fund, category) key, not a .TFI
+  # symbol, and it is not derivable — of ING01's nine categories only
+  # ING01/U/W/T/F resolve. An unknown code is an upstream 404, which main.py
+  # passes through uncached, so a guessed code stays a loud error rather than a
+  # cached empty series.
+
+  - name: OPENST_FUND_CATEGORY_HISTORY
+    path: /fund/history/{code}
+    url: "http://openst.pfire.svc.cluster.local:8080/fund/history/{code}?start={start}&end={end}"
+    query_params: [start, end]
+    cache_ttl: 86400           # 24h — NAV updates once per business day
+    stale_ttl: 2592000
+    fetch_interval: 0.2         # single JSON GET, no pagination to pace
+    fetch_max_wait: 120
+    fetch_timeout: 30
+
+  # Catalogue and search read openst's snapshot rather than scraping: 734 codes
+  # built by a refresh job, so there is no per-request upstream work to pace.
+  # TTLs mirror their peers by the same reasoning — CORP_BOND_CATALOGUE for the
+  # daily refresh job, OPENST_BOND_SEARCH for the per-keystroke search. Not the
+  # 7d of the crypto universe search, which would leave a new fund unfindable.
+
+  - name: OPENST_FUND_CATALOGUE
+    path: /fund/catalogue
+    url: "http://openst.pfire.svc.cluster.local:8080/fund/catalogue"
+    cache_ttl: 43200           # 12h — daily refresh job must see a new snapshot
+    stale_ttl: 2592000
+    fetch_interval: 0.2
+    fetch_max_wait: 120
+    fetch_timeout: 30
+
+  - name: OPENST_FUND_SEARCH
+    path: /fund/search/{query}
+    url: "http://openst.pfire.svc.cluster.local:8080/fund/search/{query}"
+    cache_ttl: 3600            # 1h — catalogue moves daily
+    stale_ttl: 2592000
+    fetch_interval: 0.2
+    fetch_max_wait: 120
+    fetch_timeout: 30
+
   # --- Catalyst corporate bonds (D80, 2026-09-19) ---
 
   - name: OPENST_CORP_BOND_PROFILE
