@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.43
+              tag: v1.1.44
             env:
               TZ: "${TZ}"
               # §73.4 — the heap trace that makes the measurement possible.
@@ -134,7 +134,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.43
+              tag: v1.1.44
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -164,7 +164,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.43
+              tag: v1.1.44
             command: ["python", "-m", "src.importers.bond_series", "--mode", "incremental"]
             env:
               TZ: "${TZ}"
@@ -194,7 +194,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.43
+              tag: v1.1.44
             command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
             env:
               TZ: "${TZ}"
@@ -225,7 +225,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/openst
-              tag: v1.1.43
+              tag: v1.1.44
             command: ["python", "-m", "src.importers.cpi", "--mode", "full"]
             env:
               TZ: "${TZ}"
