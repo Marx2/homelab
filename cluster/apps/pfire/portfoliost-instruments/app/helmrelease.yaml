@@ -22,6 +22,14 @@ spec:
       retries: 3
   upgrade:
     cleanupOnFail: true
+    # 10m, not the chart's 5m default. This pod mounts a ReadWriteOnce PVC, so a
+    # deploy has to stop the old pod, wait for the volume to detach, then pull the
+    # image and run `db:migrate` before it can report Ready. Observed 2026-10-06:
+    # the v1.0.106 upgrade failed with `timeout waiting for:
+    # [Deployment/pfire/portfoliost-instruments status: 'InProgress']`, which left
+    # the Deployment on the previous strategy — a timeout here does not just fail
+    # the deploy, it silently discards the fix you were deploying.
+    timeout: 10m
     remediation:
       strategy: rollback
       retries: 3
