@@ -42,7 +42,15 @@ spec:
     controllers:
       portfoliost-instruments:
         replicas: 1
-        strategy: RollingUpdate
+        # Recreate, not RollingUpdate: this pod mounts the `logos` PVC, which is
+        # ReadWriteOnce. A rolling update deadlocks on that — the new pod cannot
+        # attach a volume the old pod still holds, and Kubernetes will not stop
+        # the old pod until the new one is Ready. Observed on the v1.0.106 deploy
+        # (2026-10-06): the new pod sat in Pending for 4+ minutes with
+        # `FailedAttachVolume: Multi-Attach error`, needing a manual
+        # `kubectl delete pod` to release the claim. Recreate stops the old pod
+        # first, so every deploy costs one brief gap instead of a stuck rollout.
+        strategy: Recreate
         containers:
           app:
             image:
