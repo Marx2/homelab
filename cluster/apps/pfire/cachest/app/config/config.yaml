@@ -160,7 +160,12 @@ routes:
   - name: OPENST_DIVIDENDS
     path: /dividends/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/dividend/history/{ticker}"
-    cache_ttl: 86400           # 24h — dividend history is static
+    # 7d, was 24h. The instruments Postgres store owns dividend freshness: it
+    # persists history + predicted rows and only asks again when its 7d
+    # history/prediction windows or the 7d empty backoff say so
+    # (pfire-docs #71). This TTL no longer decides how fresh the data is, only
+    # how often a cold cache re-walks the providers.
+    cache_ttl: 604800
     stale_ttl: 2592000
     fetch_interval: 0.2
     fetch_max_wait: 120
