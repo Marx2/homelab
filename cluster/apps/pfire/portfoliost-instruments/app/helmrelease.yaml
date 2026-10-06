@@ -25,7 +25,7 @@ spec:
     # 10m, not the chart's 5m default. This pod mounts a ReadWriteOnce PVC, so a
     # deploy has to stop the old pod, wait for the volume to detach, then pull the
     # image and run `db:migrate` before it can report Ready. Observed 2026-10-06:
-    # the v1.0.113 upgrade failed with `timeout waiting for:
+    # the v1.0.114 upgrade failed with `timeout waiting for:
     # [Deployment/pfire/portfoliost-instruments status: 'InProgress']`, which left
     # the Deployment on the previous strategy — a timeout here does not just fail
     # the deploy, it silently discards the fix you were deploying.
@@ -62,7 +62,7 @@ spec:
         # Why maxSurge 0: this pod mounts the `logos` PVC, which is
         # ReadWriteOnce. A default rolling update deadlocks on that — the new pod
         # cannot attach a volume the old pod still holds, and Kubernetes will not
-        # stop the old pod until the new one is Ready. Observed on the v1.0.113
+        # stop the old pod until the new one is Ready. Observed on the v1.0.114
         # deploy: the new pod sat Pending for 4+ minutes on
         # `FailedAttachVolume: Multi-Attach error` until a manual
         # `kubectl delete pod` released the claim.
@@ -78,7 +78,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.113
+              tag: v1.0.114
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -154,7 +154,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.113
+              tag: v1.0.114
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -184,7 +184,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.113
+              tag: v1.0.114
             command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -222,7 +222,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.113
+              tag: v1.0.114
             command: ["node", "dist/scripts/fund-category-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -250,7 +250,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.113
+              tag: v1.0.114
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
