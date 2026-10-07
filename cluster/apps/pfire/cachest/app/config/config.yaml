@@ -94,6 +94,14 @@ routes:
     fetch_interval: 0.2
     fetch_max_wait: 120
 
+  - name: OPENST_SPLITS
+    path: /splits/{ticker}
+    url: "http://openst.pfire.svc.cluster.local:8080/equity/splits/{ticker}"
+    cache_ttl: 86400
+    stale_ttl: 2592000
+    fetch_interval: 0.2
+    fetch_max_wait: 120
+
   - name: OPENST_PROJECTIONS
     path: /equity/projections/{ticker}
     url: "http://openst.pfire.svc.cluster.local:8080/equity/projections/{ticker}"
