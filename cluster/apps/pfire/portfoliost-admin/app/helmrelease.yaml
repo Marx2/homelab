@@ -85,7 +85,7 @@ spec:
               # step with the instruments HelmRelease: this Job writes the
               # fx_rates table every converted price depends on, and an unpinned
               # tag would let a release change what it wrote mid-run.
-              INSTRUMENTS_IMAGE: ghcr.io/marx2/portfoliost-instruments:v1.0.120
+              INSTRUMENTS_IMAGE: ghcr.io/marx2/portfoliost-instruments:v1.0.121
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
