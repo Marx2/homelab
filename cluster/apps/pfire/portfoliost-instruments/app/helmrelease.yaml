@@ -238,6 +238,35 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 512Mi
+      # Daily provider-backed stock split scan. It reads distinct open STOCK
+      # positions, stages unsupported/ambiguous results for manual review, and
+      # applies only confirmed OpenST events idempotently.
+      splitsync:
+        type: cronjob
+        cronjob:
+          schedule: "0 6 * * *"
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/marx2/portfoliost-instruments
+              tag: v1.0.115
+            command: ["node", "dist/scripts/split-sync.js"]
+            env:
+              NODE_ENV: production
+              API_CACHEST_URL: "http://cachest:8080"
+              API_WALLETS_URL: "http://portfoliost-wallets:3000"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-portfoliost
+                    key: uri
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
       # Daily FX import (fees-and-custom-fx D25): ECB publishes ~16:00 CET;
       # 17:10 UTC is safely after publication year-round. Moved from wallets —
       # fx_rates now lives in instruments (plan §48.6a).
