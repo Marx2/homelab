@@ -79,7 +79,7 @@ spec:
               # beside valuation-audit. MUST move in step with the wallets HelmRelease
               # (cluster/apps/pfire/portfoliost-wallets): a Job on an older wallets image
               # would run an older audit, or not find the script at all.
-              WALLETS_IMAGE: ghcr.io/marx2/portfoliost-wallets:v1.1.146
+              WALLETS_IMAGE: ghcr.io/marx2/portfoliost-wallets:v1.1.147
               # §72.24 — the FX-backfill Job runs the INSTRUMENTS image (the
               # `fx-backfill` script lives there, beside fx-sync). MUST move in
               # step with the instruments HelmRelease: this Job writes the
