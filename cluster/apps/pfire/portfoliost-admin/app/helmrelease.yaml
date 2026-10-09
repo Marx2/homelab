@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx2/portfoliost-admin
-              tag: v1.0.70
+              tag: v1.0.71
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -74,7 +74,7 @@ spec:
               API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
               # D24 f/up — Google Sheets sync Job image (plan §28.6 re-import);
               # pinned here, not in portfoliost-admin (env override of the code default)
-              SHEETS_SYNC_IMAGE: ghcr.io/marx2/portfoliost-sheets-sync:v1.0.42
+              SHEETS_SYNC_IMAGE: ghcr.io/marx2/portfoliost-sheets-sync:v1.0.43
               # §72 — the price-audit Job runs the WALLETS image, since the script lives
               # beside valuation-audit. MUST move in step with the wallets HelmRelease
               # (cluster/apps/pfire/portfoliost-wallets): a Job on an older wallets image
