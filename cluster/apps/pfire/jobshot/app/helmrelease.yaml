@@ -37,6 +37,8 @@ spec:
       createDefaultServiceAccount: false
     defaultPodOptions:
       automountServiceAccountToken: true
+      imagePullSecrets:
+        - name: regcred
     controllers:
       jobshot:
         replicas: 1

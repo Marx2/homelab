@@ -31,6 +31,9 @@ spec:
   values:
     global:
       createDefaultServiceAccount: false
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: regcred
     controllers:
       cachest:
         replicas: 1
