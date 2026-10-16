@@ -77,8 +77,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -153,8 +153,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -183,8 +183,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -221,8 +221,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             command: ["node", "dist/scripts/fund-category-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -249,8 +249,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             command: ["node", "dist/scripts/split-sync.js"]
             env:
               NODE_ENV: production
@@ -278,8 +278,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/portfoliost-instruments
-              tag: v1.0.127
+              repository: ghcr.io/marx-org/portfoliost-instruments
+              tag: v1.0.128
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
