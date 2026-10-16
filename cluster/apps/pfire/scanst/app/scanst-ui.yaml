@@ -46,7 +46,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/scanst-ui
+              repository: ghcr.io/marx-org/scanst-ui
               tag: v1.0.6
             env:
               POSTGREST_URL: http://postgrest-attr:80/

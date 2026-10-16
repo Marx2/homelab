@@ -45,7 +45,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/jobshot
+              repository: ghcr.io/marx-org/jobshot
               tag: 1.7.0
             env:
               APP_TIMEZONE: ${TZ}

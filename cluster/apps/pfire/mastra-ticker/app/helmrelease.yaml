@@ -39,7 +39,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/mastra-ticker
+              repository: ghcr.io/marx-org/mastra-ticker
               tag: latest
             env:
               TZ: "${TZ}"

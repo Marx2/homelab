@@ -40,7 +40,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/openst
+              repository: ghcr.io/marx-org/openst
               tag: v1.1.54
             env:
               TZ: "${TZ}"
@@ -133,7 +133,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/openst
+              repository: ghcr.io/marx-org/openst
               tag: v1.1.54
             command: ["python", "-m", "src.importers.cpi", "--mode", "incremental"]
             env:
@@ -163,7 +163,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/openst
+              repository: ghcr.io/marx-org/openst
               tag: v1.1.54
             command: ["python", "-m", "src.importers.bond_series", "--mode", "incremental"]
             env:
@@ -193,7 +193,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/openst
+              repository: ghcr.io/marx-org/openst
               tag: v1.1.54
             command: ["python", "-m", "src.importers.bond_series", "--mode", "archive"]
             env:
@@ -224,7 +224,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/openst
+              repository: ghcr.io/marx-org/openst
               tag: v1.1.54
             command: ["python", "-m", "src.importers.cpi", "--mode", "full"]
             env:

@@ -39,7 +39,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/marx2/cachest
+              repository: ghcr.io/marx-org/cachest
               tag: v1.0.54
             env:
               TZ: "${TZ}"
