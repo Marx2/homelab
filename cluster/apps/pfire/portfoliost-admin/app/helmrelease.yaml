@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -50,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-admin
-              tag: v1.0.75
+              tag: v1.0.76
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -92,6 +92,11 @@ spec:
                   secretKeyRef:
                     name: postgres-pfire-pguser-portfoliost
                     key: uri
+              OPENST_DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pfire-pguser-openst
+                    key: uri
               # D48b/D49 — identity fetched live from the PocketID Admin API;
               # the static API key is mirrored from networking via Reflector.
               # See portfoliost-admin/README.md for setup details.
@@ -101,10 +106,10 @@ spec:
                   secretKeyRef:
                     name: pocket-id-static-api-key
                     key: token
-              # D49 — OIDC client-credentials for UserInfo enrichment (optional;
-              # unset until the portfoliost-admin PocketID client is registered)
-              # OIDC_ISSUER_URL / OIDC_CLIENT_ID / OIDC_CLIENT_SECRET come from
-              # the operator-generated secret when provisioned.
+            # D49 — OIDC client-credentials for UserInfo enrichment (optional;
+            # unset until the portfoliost-admin PocketID client is registered)
+            # OIDC_ISSUER_URL / OIDC_CLIENT_ID / OIDC_CLIENT_SECRET come from
+            # the operator-generated secret when provisioned.
             resources:
               requests:
                 cpu: 50m
