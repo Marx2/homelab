@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-users-auth
-              tag: v1.0.31
+              tag: v1.0.32
             # Override image CMD to skip db:seed — production starts empty,
             # migrations run at boot.
             command:
@@ -123,4 +123,3 @@ spec:
             path: /metrics
             interval: 30s
             scrapeTimeout: 10s
-
