@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/mastra-ticker
-              tag: latest
+              tag: v1.0.5
             env:
               TZ: "${TZ}"
               TICKER_SYMBOL: SAP
