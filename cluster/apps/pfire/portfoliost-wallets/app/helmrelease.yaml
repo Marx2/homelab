@@ -1,4 +1,7 @@
+---
+# yamllint disable rule:line-length
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yamllint enable rule:line-length
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -46,7 +49,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-wallets
-              tag: v1.1.178
+              tag: v1.1.179
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -150,7 +153,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-wallets
-              tag: v1.1.178
+              tag: v1.1.179
             command: ["node", "dist/scripts/snapshots-sync.js"]
             env:
               NODE_ENV: production
