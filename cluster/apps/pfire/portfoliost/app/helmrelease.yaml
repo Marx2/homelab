@@ -1,5 +1,7 @@
 ---
+# yamllint disable rule:line-length
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yamllint enable rule:line-length
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -48,7 +50,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost
-              tag: v1.0.430
+              tag: v1.0.431
             env:
               OIDC_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               OIDC_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
