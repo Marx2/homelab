@@ -1,7 +1,7 @@
 jobs:
   - name: "Scan single ticker scanst"
     description: "Run scan of single ticker."
-    container: "ghcr.io/marx-org/scanst:latest"
+    container: "ghcr.io/marx-org/scanst:v1.0.39"
     entrypoint: ["python", "main.py"]
     parameters:
       - "MSFT"

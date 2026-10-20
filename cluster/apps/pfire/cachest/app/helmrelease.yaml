@@ -43,7 +43,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/cachest
-              tag: v1.0.54
+              tag: v1.0.55
             env:
               TZ: "${TZ}"
               # Redis connection comes from the mounted cachest-config configmap

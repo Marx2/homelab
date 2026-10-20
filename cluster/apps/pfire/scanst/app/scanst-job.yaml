@@ -27,7 +27,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: scanst
-              image: ghcr.io/marx-org/scanst:v1.0.37
+              image: ghcr.io/marx-org/scanst:v1.0.39
               imagePullPolicy: IfNotPresent
               args: ["--headless"]
               envFrom:
