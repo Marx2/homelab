@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/scorest
-              tag: v1.0.37
+              tag: v1.0.38
             env:
               POSTGREST_URL: http://postgrest-attr:80/
               POSTGREST_USER: ""
