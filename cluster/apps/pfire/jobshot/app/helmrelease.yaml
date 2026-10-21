@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/jobshot
-              tag: v1.7.6
+              tag: v1.7.8
             env:
               APP_TIMEZONE: ${TZ}
             # §64.4 — jobshot had no probes, and until 1.7.0 it could not have
