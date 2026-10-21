@@ -141,7 +141,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/redis
-              tag: 8.10.2@sha256:e5235e6c61f17150352c9185380591aa887001a4a748a081dcf656ed2b170538
+              tag: 8.10.2@sha256:5c02d7c0f8d75af45958c0294a8004f2e14b42df98a1103e3a669aa7ec787be6
 
     service:
       immich:
