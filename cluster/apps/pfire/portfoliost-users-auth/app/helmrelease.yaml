@@ -1,3 +1,4 @@
+---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -59,6 +60,10 @@ spec:
               POCKETID_CLIENT_ID: "${PORTFOLIOST_OIDC_CLIENT_ID}"
               POCKETID_ISSUER_URL: "https://pocket-id.${SECRET_DOMAIN}"
               POCKETID_TOKEN_URL: "http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token"
+              POCKETID_ALLOWED_TOKEN_URLS: >-
+                http://pocket-id.networking.svc.cluster.local:1411/api/oidc/token
+              POCKETID_ALLOWED_REDIRECT_URIS: >-
+                https://portfoliost.${SECRET_DOMAIN}/auth/callback
               POCKETID_AUDIENCE: "${PORTFOLIOST_OIDC_CLIENT_ID}"
             resources:
               requests:
