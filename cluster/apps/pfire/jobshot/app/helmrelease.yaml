@@ -143,13 +143,13 @@ spec:
           rules:
             - apiGroups: ["batch"]
               resources: ["jobs"]
-              verbs: ["create","get","list","watch","delete"]
+              verbs: ["create", "get", "list", "watch", "delete"]
             - apiGroups: [""]
               resources: ["pods"]
-              verbs: ["get","list","watch"]
+              verbs: ["get", "list", "watch"]
             - apiGroups: [""]
               resources: ["namespaces"]
-              verbs: ["get","list"]
+              verbs: ["get", "list"]
       bindings:
         jobshot:
           # -- Enables or disables the Role. Can be templated.
