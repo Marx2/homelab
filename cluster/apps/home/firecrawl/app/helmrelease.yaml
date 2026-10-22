@@ -40,7 +40,7 @@ spec:
 
     controllers:
       api:
-        replicas: 1
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -104,7 +104,7 @@ spec:
                 memory: 6Gi
 
       worker:
-        replicas: 1
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -162,7 +162,7 @@ spec:
                 memory: 4Gi
 
       nuq-worker:
-        replicas: 1
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -220,7 +220,7 @@ spec:
                 memory: 4Gi
 
       playwright-service:
-        replicas: 1
+        replicas: 0
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
