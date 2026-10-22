@@ -32,7 +32,7 @@ spec:
       instance:
         enabled: true
         spec:
-          image: ghcr.io/pocket-id/pocket-id:v2.18.0-distroless@sha256:138d106737498f6c20d0bec854b872bc77ec520d7a9b54502444a260a49c41cb
+          image: ghcr.io/pocket-id/pocket-id:v2.19.1-distroless@sha256:d035c9c229304cfd25f97a79b2da00bde9cf942abbd70430d452a95420e2836b
           encryptionKey:
             valueFrom:
               secretKeyRef:
