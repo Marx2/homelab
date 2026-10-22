@@ -43,7 +43,7 @@ spec:
       autoCleanupSystemGeneratedSnapshot: true
       autoCleanupRecurringJobBackupSnapshot: true
       orphanAutoDeletion: true
-      snapshotDataIntegrity: enable
+      snapshotDataIntegrity: fast-check
       snapshotDataIntegrityImmediateCheckAfterSnapshotCreation: false
       snapshotDataIntegrityCronjob: "0 4 * * *"
       fastReplicaRebuildEnabled: true
@@ -51,7 +51,7 @@ spec:
       v1DataEngine: true
       v2DataEngine: false
       allowCollectingLonghornUsageMetrics: false
-      freezeFilesystemForSnapshot: enabled
+      freezeFilesystemForSnapshot: false
       autoCleanupSnapshotWhenDeleteBackup: true
       rwxVolumeFastFailover: true
     ingress:
