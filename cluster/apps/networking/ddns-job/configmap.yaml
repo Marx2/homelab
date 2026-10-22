@@ -10,46 +10,68 @@ metadata:
 data:
   dyndns-updater.sh: |
     #!/bin/sh
-    # Get your WAN IP
-    IP4NEW=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
-    # IP4NEW=$(dig +short @1.1.1.1 whoami.cloudflare ch txt | sed "s/\"//g")
-    echo "new IP:" $IP4NEW
-    #IP4CUR=$(dig @1.1.1.1 +short marxhome.marx.katowice.pl A)
-    zone_id="e24e4482459427c92358a4906ee5a2c8"
+    set -eu
+
+    : "${TOKEN:?TOKEN is required}"
+    : "${ZONE_ID:?ZONE_ID is required}"
+
+    # Get the WAN address, but never let a broken upstream leave the Job running.
+    if ! IP4NEW=$(curl -fsS --connect-timeout 5 --max-time 15 https://api.ipify.org); then
+      echo "Failed to determine the public IPv4 address" >&2
+      exit 1
+    fi
+    case "$IP4NEW" in
+      *[!0-9.]*|*[!.0-9]*)
+        echo "Invalid public IPv4 address: $IP4NEW" >&2
+        exit 1
+        ;;
+    esac
+    echo "new IP: $IP4NEW"
+
     dns_record="marxhome"
     dns_domain="homylab.com"
 
-    # echo token: $TOKEN
-    # echo zone_id: $ZONE_ID
-    # echo curl -s -X GET \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain\" -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\"
-
-    dns_record_info=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$dns_record.$dns_domain" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
-    echo $dns_record_info
-    if [[ $dns_record_info == *"\"success\":false"* ]]; then
-      echo "Failed to read CF data:" $dns_record_info
-      exit
-    else
-      echo "DNS Record in CF found"
+    if ! dns_record_info=$(curl -sS --connect-timeout 5 --max-time 20 \
+      -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?type=A&name=$dns_record.$dns_domain" \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-Type: application/json"); then
+      echo "Failed to query Cloudflare" >&2
+      exit 1
     fi
 
-    dns_record_id=$(echo $dns_record_info | grep -o '"id":"[^"]*' | cut -d'"' -f4)
-    echo "record_id:" $dns_record_id
-    IP4CUR=$(echo $dns_record_info | grep -o '"content":"[^"]*' | cut -d'"' -f4)
-    echo "IP in CF DNS Record:" $IP4CUR
+    case "$dns_record_info" in
+      *'"success":true'*) ;;
+      *)
+        echo "Cloudflare rejected the DNS lookup" >&2
+        exit 1
+        ;;
+    esac
 
-    if [ $IP4CUR == $IP4NEW ]; then
+    dns_record_id=$(printf '%s' "$dns_record_info" | grep -o '"id":"[^"]*"' | head -n 1 | cut -d'"' -f4)
+    IP4CUR=$(printf '%s' "$dns_record_info" | grep -o '"content":"[^"]*"' | head -n 1 | cut -d'"' -f4)
+    if [ -z "$dns_record_id" ] || [ -z "$IP4CUR" ]; then
+      echo "Cloudflare returned no A record for $dns_record.$dns_domain" >&2
+      exit 1
+    fi
+    echo "IP in Cloudflare DNS record: $IP4CUR"
+
+    if [ "$IP4CUR" = "$IP4NEW" ]; then
       echo "==> No changes needed! DNS Record currently is set to $IP4CUR"
       exit
     else
-      echo "==> DNS Record currently is set to $IP4CUR". Updating!!!
+      echo "==> DNS Record currently is set to $IP4CUR. Updating."
     fi
 
-    ##### updates the dns record
-    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$dns_record_id" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$IP4NEW\",\"ttl\":120,\"proxied\":false}")
-
-    if [[ $update == *"\"success\":false"* ]]; then
-      echo -e "==> FAILED:\n$update"
+    if ! update=$(curl -sS --connect-timeout 5 --max-time 20 \
+      -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$dns_record_id" \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-Type: application/json" \
+      --data "{\"type\":\"A\",\"name\":\"$dns_record\",\"content\":\"$IP4NEW\",\"ttl\":120,\"proxied\":false}"); then
+      echo "Failed to update Cloudflare" >&2
       exit 1
-    else
-      echo "==> $dns_record DNS Record Updated To: $IP4NEW"
     fi
+
+    case "$update" in
+      *'"success":true'*) echo "==> $dns_record DNS record updated to $IP4NEW" ;;
+      *) echo "Cloudflare rejected the DNS update" >&2; exit 1 ;;
+    esac

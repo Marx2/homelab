@@ -6,6 +6,7 @@ metadata:
   name: dyndns-updater
 spec:
   schedule: "0 * * * *"
+  startingDeadlineSeconds: 300
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
@@ -14,6 +15,8 @@ spec:
       labels:
         created-by: dyndns-updater
     spec:
+      activeDeadlineSeconds: 90
+      backoffLimit: 0
       template:
         spec:
           restartPolicy: Never
