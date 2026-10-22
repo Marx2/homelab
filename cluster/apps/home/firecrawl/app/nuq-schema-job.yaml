@@ -5,6 +5,7 @@ metadata:
   name: firecrawl-nuq-schema
   namespace: home
 spec:
+  suspend: true
   schedule: "0 3 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
