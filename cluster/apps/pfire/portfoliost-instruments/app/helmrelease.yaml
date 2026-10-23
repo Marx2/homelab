@@ -101,7 +101,6 @@ spec:
                 cpu: 50m
                 memory: 128Mi
               limits:
-                cpu: 250m
                 memory: 512Mi
             # §64.1 — `type`/`path`/`port` belong at the PROBE level in
             # app-template 5.x, not inside `spec`. These four had them under
