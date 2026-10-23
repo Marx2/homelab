@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: nfs-prometheus-pv
   labels:
-    app.kubernetes.io/name: nfs-prometheus-pv
+    app.kubernetes.io/name: kube-prometheus-stack
 spec:
   storageClassName: prometheus-omv
   capacity:

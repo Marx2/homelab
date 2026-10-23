@@ -6,6 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   interval: 15m
+  timeout: 15m
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -30,6 +31,29 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
+        retention: 168h
+        retentionSize: 40GiB
+        walCompression: true
+        nodeSelector:
+          feature.node.kubernetes.io/cpu-pstate.scaling_governor: performance
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2Gi
+          limits:
+            cpu: 1500m
+            memory: 4Gi
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: prometheus-omv
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 50Gi
+              selector:
+                matchLabels:
+                  app.kubernetes.io/name: kube-prometheus-stack
     #        thanos:
     #          # ObjectStorageConfig configures object storage in Thanos.
     #          objectStorageConfig:
@@ -107,19 +131,3 @@ spec:
       enabled: true
     kubeProxy:
       enabled: false
-
-    prometheusSpec:
-      retention: 672h
-      enableAdminAPI: true
-      walCompression: true
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: prometheus-omv
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 50Gi
-            selector:
-              matchLabels:
-                app.kubernetes.io/name: nfs-prometheus-pv
