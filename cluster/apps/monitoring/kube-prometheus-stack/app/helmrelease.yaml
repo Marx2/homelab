@@ -35,7 +35,7 @@ spec:
         retentionSize: 40GiB
         walCompression: true
         nodeSelector:
-          feature.node.kubernetes.io/cpu-pstate.scaling_governor: performance
+          kubernetes.io/hostname: kura
         resources:
           requests:
             cpu: 500m
