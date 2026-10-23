@@ -88,10 +88,14 @@ spec:
               severity: warning
             target_match_re:
               severity: info
-    alertmanagerSpec:
-      replicas: 1
+      alertmanagerSpec:
+        replicas: 1
+        nodeSelector:
+          kubernetes.io/hostname: indyk
     grafana:
       enabled: true
+      nodeSelector:
+        kubernetes.io/hostname: indyk
       defaultDashboardsTimezone: Europe/Warsaw
       grafana.ini:
         auth.basic:
@@ -123,6 +127,12 @@ spec:
           isDefault: false
           type: loki
           url: http://loki:3100
+    kube-state-metrics:
+      nodeSelector:
+        kubernetes.io/hostname: kura
+    prometheusOperator:
+      nodeSelector:
+        kubernetes.io/hostname: indyk
     serviceMonitor:
       scrapeTimeout: 60s
     kubeControllerManager:
