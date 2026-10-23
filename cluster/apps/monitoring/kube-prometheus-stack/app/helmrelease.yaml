@@ -35,7 +35,7 @@ spec:
         retentionSize: 40GiB
         walCompression: true
         nodeSelector:
-          kubernetes.io/hostname: kura
+          kubernetes.io/hostname: indyk
         resources:
           requests:
             cpu: 500m
