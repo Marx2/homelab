@@ -100,6 +100,7 @@ spec:
                 cpu: 50m
                 memory: 128Mi
               limits:
+                cpu: 250m
                 memory: 512Mi
             # §64.1 — `type`/`path`/`port` belong at the PROBE level in
             # app-template 5.x, not inside `spec`. These four had them under
@@ -168,6 +169,7 @@ spec:
                 cpu: 50m
                 memory: 128Mi
               limits:
+                cpu: 250m
                 memory: 512Mi
       # Daily Catalyst corp-bond catalogue sync (D80 25.3 / plan 35): scrapes the
       # single obligacje.pl listing via cachest /corp-bond/catalogue and upserts
@@ -196,9 +198,10 @@ spec:
                     key: uri
             resources:
               requests:
-                cpu: 50m
+                cpu: 100m
                 memory: 128Mi
               limits:
+                cpu: 500m
                 memory: 512Mi
       # Daily analizy.pl fund-category catalogue sync (plan §78): reads the
       # snapshot openst serves at /fund/catalogue and upserts ticker_reference
@@ -237,6 +240,7 @@ spec:
                 cpu: 50m
                 memory: 128Mi
               limits:
+                cpu: 250m
                 memory: 512Mi
       # Daily provider-backed stock split scan. It reads distinct historical STOCK
       # positions (open and closed), stages unsupported/ambiguous results for
@@ -263,9 +267,10 @@ spec:
                     key: uri
             resources:
               requests:
-                cpu: 50m
+                cpu: 100m
                 memory: 128Mi
               limits:
+                cpu: 750m
                 memory: 512Mi
       # Daily FX import (fees-and-custom-fx D25): ECB publishes ~16:00 CET;
       # 17:10 UTC is safely after publication year-round. Moved from wallets —
@@ -291,9 +296,10 @@ spec:
                     key: uri
             resources:
               requests:
-                cpu: 50m
+                cpu: 100m
                 memory: 128Mi
               limits:
+                cpu: 500m
                 memory: 512Mi
     persistence:
       # logos.md D35 — permanent local logo store (binaries on disc)
