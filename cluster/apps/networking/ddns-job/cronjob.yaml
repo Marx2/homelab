@@ -6,6 +6,7 @@ metadata:
   name: dyndns-updater
 spec:
   schedule: "0 * * * *"
+  suspend: true
   startingDeadlineSeconds: 300
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
