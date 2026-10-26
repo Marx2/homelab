@@ -79,7 +79,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -155,7 +155,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             command: ["node", "dist/scripts/tickerref-sync.js"]
             env:
               NODE_ENV: production
@@ -186,7 +186,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             command: ["node", "dist/scripts/corp-bond-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -225,7 +225,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             command: ["node", "dist/scripts/fund-category-catalogue-sync.js"]
             env:
               NODE_ENV: production
@@ -254,7 +254,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             command: ["node", "dist/scripts/split-sync.js"]
             env:
               NODE_ENV: production
@@ -284,7 +284,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-instruments
-              tag: v1.0.140
+              tag: v1.0.141
             command: ["node", "dist/scripts/fx-sync.js"]
             env:
               NODE_ENV: production
