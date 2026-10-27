@@ -65,6 +65,7 @@ spec:
       expiry:
         signingKeys: "6h"
         idTokens: "24h"
+        authRequests: "4h"
 
       logger:
         level: debug
