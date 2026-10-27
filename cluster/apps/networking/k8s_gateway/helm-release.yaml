@@ -6,41 +6,69 @@ metadata:
   namespace: networking
 spec:
   interval: 15m
-  chart:
-    spec:
-      # renovate: https://ori-edge.github.io/k8s_gateway/
-      # renovate: registryUrl=https://ori-edge.github.io/k8s_gateway/
-      chart: k8s-gateway
-      version: 2.4.0
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-gateway-charts
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: k8s-gateway
+    namespace: flux-system
   timeout: 20m
   values:
     fullnameOverride: k8s-gateway
+    replicaCount: 1
+    rollingUpdate:
+      maxUnavailable: "25%"
+      maxSurge: "25%"
     image:
-      registry: codeberg.org
-      repository: k8s-gateway/k8s_gateway
+      repository: codeberg.org/k8s-gateway/k8s_gateway
       tag: 1.9.2
-#      pullPolicy: IfNotPresent
-
-    # Delegated domain
-    domain: "${SECRET_DOMAIN} ${SECRET_DOMAIN_OAW}"
-
-    # Name to use for apex records
-    # apex: "dns1"
-
-    # TTL for non-apex responses (in seconds)
-    # ttl: 300
-
-    # Limit what kind of resources to watch, e.g. resources: ["Ingress"]
-    # watchedResources: ["Ingress","Service"]
-
-    #serviceAccount:
-    #  create: true
-    #  name: "excoredns"
+      pullPolicy: IfNotPresent
+    resources: {}
+    securityContext:
+      runAsUser: 1000
+    deployment:
+      dnsPolicy: ClusterFirst
+    livenessProbe:
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 1
+    readinessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+      successThreshold: 1
+    servers:
+      - zones:
+          - zone: .
+            use_tcp: false
+        port: 1053
+        servicePort: 53
+        plugins:
+          - name: k8s_gateway
+            parameters: "${SECRET_DOMAIN} ${SECRET_DOMAIN_OAW}"
+            configBlock: |-
+              apex k8s-gateway.networking
+              ttl 300
+              resources Ingress Service
+          - name: log
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          - name: ready
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: loop
+          - name: reload
+          - name: loadbalance
+    serviceType: LoadBalancer
     service:
-      type: LoadBalancer
-      port: 53
       loadBalancerIP: 192.168.1.214
+    prometheus:
+      service:
+        enabled: true
+        annotations:
+          prometheus.io/scrape: "true"
