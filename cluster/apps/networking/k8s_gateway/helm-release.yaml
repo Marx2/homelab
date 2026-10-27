@@ -20,9 +20,9 @@ spec:
   values:
     fullnameOverride: k8s-gateway
     image:
-      registry: quay.io
-      repository: oriedge/k8s_gateway
-      tag: v0.4.0
+      registry: codeberg.org
+      repository: k8s-gateway/k8s_gateway
+      tag: 1.9.2
 #      pullPolicy: IfNotPresent
 
     # Delegated domain
