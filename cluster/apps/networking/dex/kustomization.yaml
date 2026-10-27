@@ -1,4 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: networking
 resources:
 - helm-release.yaml
+- authrequest-gc.yaml
+configMapGenerator:
+- name: dex-authrequest-gc-script
+  files:
+  - authrequest_gc.py
+generatorOptions:
+  disableNameSuffixHash: true
