@@ -40,8 +40,6 @@ spec:
         - name: regcred
       # D46 — read CronJob/Deployment image tags live for the System tab
       automountServiceAccountToken: true
-      nodeSelector:
-        kubernetes.io/hostname: kaczka
     controllers:
       portfoliost-admin:
         replicas: 1
@@ -50,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-admin
-              tag: v1.0.87
+              tag: v1.0.88
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -180,6 +178,7 @@ spec:
     persistence:
       stooq-upload:
         type: persistentVolumeClaim
-        existingClaim: stooq-upload-pvc
+        # Shared RWX NFS storage; pgloader Jobs use this same claim.
+        existingClaim: nfs-pfire-stooq-rw-pvc
         globalMounts:
           - path: /tmp/stooq-uploads
