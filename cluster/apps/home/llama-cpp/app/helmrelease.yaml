@@ -1,3 +1,5 @@
+---
+# yamllint disable-line rule:line-length
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -31,6 +33,7 @@ spec:
   values:
     controllers:
       llama-cpp:
+        replicas: 1
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -49,16 +52,12 @@ spec:
                 uv pip install --system --no-cache huggingface_hub
                 python3 -c "
                 from huggingface_hub import hf_hub_download
-                import os, glob
+                import os
                 model_dir = '/models'
-                repo = 'Qwen/Qwen2.5-7B-Instruct-GGUF'
+                repo = 'LiquidAI/LFM3-1.7B-GGUF'
                 files = [
-                  'qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf',
-                  'qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf',
+                  'LFM3-1.7B-Q4_K_M.gguf',
                 ]
-                for old in glob.glob(os.path.join(model_dir, 'qwen2.5-14b*')):
-                    print(f'Removing old: {old}')
-                    os.remove(old)
                 for f in files:
                     dest = os.path.join(model_dir, f)
                     if os.path.exists(dest):
@@ -72,19 +71,23 @@ spec:
           app:
             image:
               repository: ghcr.io/ggml-org/llama.cpp
-              tag: server-vulkan
+              tag: server-vulkan-b11960
             env:
               TZ: ${TZ}
               LLAMA_ARG_HOST: "0.0.0.0"
               LLAMA_ARG_PORT: "8080"
-              LLAMA_ARG_MODEL: /models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf
+              LLAMA_ARG_MODEL: /models/LFM3-1.7B-Q4_K_M.gguf
               LLAMA_ARG_CTX_SIZE: "4096"
               LLAMA_ARG_N_PREDICT: "2048"
               LLAMA_ARG_THREADS: "4"
-              LLAMA_ARG_PARALLEL: "2"
-              LLAMA_ARG_BATCH_SIZE: "512"
-              LLAMA_ARG_UBATCH_SIZE: "256"
-              LLAMA_ARG_N_GPU_LAYERS: "33"
+              LLAMA_ARG_N_PARALLEL: "2"
+              LLAMA_ARG_BATCH: "512"
+              LLAMA_ARG_UBATCH: "256"
+              LLAMA_ARG_N_GPU_LAYERS: "99"
+              LLAMA_ARG_JINJA: "1"
+              LLAMA_ARG_TEMPERATURE: "0.1"
+              LLAMA_ARG_TOP_K: "50"
+              LLAMA_ARG_REPEAT_PENALTY: "1.1"
               LLAMA_OFFLINE: "1"
             probes:
               liveness:
