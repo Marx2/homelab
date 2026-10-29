@@ -1,3 +1,4 @@
+---
 jobs:
   - name: "Scan single ticker scanst"
     description: "Run scan of single ticker."

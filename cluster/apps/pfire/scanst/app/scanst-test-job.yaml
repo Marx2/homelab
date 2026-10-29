@@ -28,7 +28,15 @@ spec:
             - name: scanst
               image: ghcr.io/marx-org/scanst:v1.0.43
               imagePullPolicy: IfNotPresent
-              args: ["--headless", "--metric", "Revenue (TTM)", "MSFT", "NVDA", "GOOG"]
+              args:
+                [
+                  "--headless",
+                  "--metric",
+                  "Revenue (TTM)",
+                  "MSFT",
+                  "NVDA",
+                  "GOOG",
+                ]
               envFrom:
                 - secretRef:
                     name: scanst-secrets
