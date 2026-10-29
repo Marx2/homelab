@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: stooq-downloader
-              image: ghcr.io/marx-org/stooq-downloader:v1.0.10
+              image: ghcr.io/marx-org/stooq-downloader:v1.0.12
               imagePullPolicy: IfNotPresent
               env:
                 - name: OUTPUT_DIR

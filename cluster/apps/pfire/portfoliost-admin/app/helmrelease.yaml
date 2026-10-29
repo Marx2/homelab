@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-admin
-              tag: v1.0.88
+              tag: v1.0.91
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -72,18 +72,18 @@ spec:
               API_JOBSHOT_URL: http://jobshot.pfire.svc.cluster.local:3000
               # D24 f/up — Google Sheets sync Job image (plan §28.6 re-import);
               # pinned here, not in portfoliost-admin (env override of the code default)
-              SHEETS_SYNC_IMAGE: ghcr.io/marx-org/portfoliost-sheets-sync:v1.0.67
+              SHEETS_SYNC_IMAGE: ghcr.io/marx-org/portfoliost-sheets-sync:v1.0.68
               # §72 — the price-audit Job runs the WALLETS image, since the script lives
               # beside valuation-audit. MUST move in step with the wallets HelmRelease
               # (cluster/apps/pfire/portfoliost-wallets): a Job on an older wallets image
               # would run an older audit, or not find the script at all.
-              WALLETS_IMAGE: ghcr.io/marx-org/portfoliost-wallets:v1.1.195
+              WALLETS_IMAGE: ghcr.io/marx-org/portfoliost-wallets:v1.1.196
               # §72.24 — the FX-backfill Job runs the INSTRUMENTS image (the
               # `fx-backfill` script lives there, beside fx-sync). MUST move in
               # step with the instruments HelmRelease: this Job writes the
               # fx_rates table every converted price depends on, and an unpinned
               # tag would let a release change what it wrote mid-run.
-              INSTRUMENTS_IMAGE: ghcr.io/marx-org/portfoliost-instruments:v1.0.141
+              INSTRUMENTS_IMAGE: ghcr.io/marx-org/portfoliost-instruments:v1.0.142
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
