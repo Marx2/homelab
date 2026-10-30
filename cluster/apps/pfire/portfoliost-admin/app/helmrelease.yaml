@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/portfoliost-admin
-              tag: v1.0.91
+              tag: v1.0.92
             env:
               PORT: "3000"
               HOST: "0.0.0.0"
@@ -83,7 +83,7 @@ spec:
               # step with the instruments HelmRelease: this Job writes the
               # fx_rates table every converted price depends on, and an unpinned
               # tag would let a release change what it wrote mid-run.
-              INSTRUMENTS_IMAGE: ghcr.io/marx-org/portfoliost-instruments:v1.0.142
+              INSTRUMENTS_IMAGE: ghcr.io/marx-org/portfoliost-instruments:v1.0.143
               STOOQ_UPLOAD_DIR: /tmp/stooq-uploads
               DATABASE_URL:
                 valueFrom:
