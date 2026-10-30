@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: ghcr.io/marx-org/scanst-ui
-              tag: v1.0.14
+              tag: v1.0.15
             env:
               POSTGREST_URL: http://postgrest-attr:80/
             resources:
