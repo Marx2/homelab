@@ -21,10 +21,10 @@ resources:
   - nfs-media-reframe-pvc.yaml
   #  - podsync/ks.yaml
   - jellyfin/ks.yaml
-  #- jackett
-  #- sonarr
-  #- radarr
-  #- qbittorrent
+  # - jackett
+  # - sonarr
+  # - radarr
+  # - qbittorrent
   - tvheadend/ks.yaml
   - calibre/ks.yaml
   - calibre-web/ks.yaml
@@ -36,7 +36,7 @@ resources:
   - immich/ks.yaml
   - stirling-pdf/ks.yaml
   - bentopdf/ks.yaml
-  #- tubearchivist
+  # - tubearchivist
   - pinchflat/ks.yaml
   #  - threadfin
   - streammaster/ks.yaml
