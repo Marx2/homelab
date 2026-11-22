@@ -35,6 +35,7 @@ resources:
   - postgrescluster-media.yaml
   - immich/ks.yaml
   - stirling-pdf/ks.yaml
+  - bentopdf/ks.yaml
   #- tubearchivist
   - pinchflat/ks.yaml
   #  - threadfin
