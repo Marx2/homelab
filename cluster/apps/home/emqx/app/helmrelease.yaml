@@ -28,8 +28,20 @@ spec:
   values:
     image:
       repository: public.ecr.aws/emqx/emqx
-    replicaCount: 3
+    # Two healthy hosts; an even-sized cluster may need manual partition recovery.
+    replicaCount: 2
     recreatePods: true
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: emqx
+                app.kubernetes.io/instance: emqx
+            topologyKey: kubernetes.io/hostname
+    pdb:
+      enabled: true
+      maxUnavailable: 1
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
