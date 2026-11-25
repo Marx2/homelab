@@ -47,7 +47,7 @@ spec:
           app:
             image:
               repository: investbrainapp/investbrain
-              tag: 1.4.3
+              tag: 1.4.4
             ports:
               - name: http
                 containerPort: 80
