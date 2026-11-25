@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: docker.io/zefhemel/silverbullet
-              tag: '2.12.1'
+              tag: '3.0.0'
             env:
               TZ: ${TZ}
             probes:
