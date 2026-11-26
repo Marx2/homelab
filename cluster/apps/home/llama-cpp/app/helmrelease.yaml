@@ -6,6 +6,7 @@ kind: HelmRelease
 metadata:
   name: &app llama-cpp
 spec:
+  suspend: false
   interval: 15m
   chart:
     spec:
@@ -54,9 +55,9 @@ spec:
                 from huggingface_hub import hf_hub_download
                 import os
                 model_dir = '/models'
-                repo = 'LiquidAI/LFM3-1.7B-GGUF'
+                repo = 'LiquidAI/LFM2.5-1.2B-Instruct-GGUF'
                 files = [
-                  'LFM3-1.7B-Q4_K_M.gguf',
+                  'LFM2.5-1.2B-Instruct-Q4_K_M.gguf',
                 ]
                 for f in files:
                     dest = os.path.join(model_dir, f)
@@ -71,19 +72,19 @@ spec:
           app:
             image:
               repository: ghcr.io/ggml-org/llama.cpp
-              tag: server-vulkan-b11960
+              tag: server-openvino-b12723
             env:
               TZ: ${TZ}
               LLAMA_ARG_HOST: "0.0.0.0"
               LLAMA_ARG_PORT: "8080"
-              LLAMA_ARG_MODEL: /models/LFM3-1.7B-Q4_K_M.gguf
+              LLAMA_ARG_MODEL: /models/LFM2.5-1.2B-Instruct-Q4_K_M.gguf
+              GGML_OPENVINO_DEVICE: "GPU"
               LLAMA_ARG_CTX_SIZE: "65536"
               LLAMA_ARG_N_PREDICT: "2048"
               LLAMA_ARG_THREADS: "4"
               LLAMA_ARG_N_PARALLEL: "1"
               LLAMA_ARG_BATCH: "512"
               LLAMA_ARG_UBATCH: "256"
-              LLAMA_ARG_N_GPU_LAYERS: "99"
               LLAMA_ARG_JINJA: "1"
               LLAMA_ARG_TEMPERATURE: "0.1"
               LLAMA_ARG_TOP_K: "50"
